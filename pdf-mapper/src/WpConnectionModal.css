@@ -1,0 +1,204 @@
+.wp-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(14, 25, 23, 0.6);
+    backdrop-filter: blur(2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.wp-modal-dialog {
+    background: white;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 580px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.25);
+    border: 1px solid #c9ded5;
+    display: flex;
+    flex-direction: column;
+}
+
+.wp-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid #e1ebe6;
+    background: #f7faf8;
+}
+
+.wp-modal-header h2 {
+    margin: 4px 0 0;
+    font: 600 18px Georgia, serif;
+    color: #172c26;
+}
+
+.wp-modal-close {
+    background: transparent;
+    border: 0;
+    font-size: 18px;
+    color: #5c756e;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.wp-modal-close:hover {
+    background: #e4eee9;
+    color: #172c26;
+}
+
+.wp-modal-body {
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.wp-modal-desc {
+    margin: 0;
+    font-size: 13px;
+    color: #4b665c;
+    line-height: 1.5;
+}
+
+.wp-modal-desc code {
+    background: #edf5f1;
+    padding: 2px 5px;
+    border-radius: 3px;
+    color: #166147;
+    font-family: monospace;
+}
+
+.wp-modal-warning {
+    padding: 12px 14px;
+    background: #fff8eb;
+    border: 1px solid #f6d8a7;
+    border-radius: 4px;
+    font-size: 12px;
+    line-height: 1.5;
+    color: #8c5310;
+}
+
+.wp-modal-warning code {
+    background: #fbeacf;
+    padding: 1px 4px;
+    border-radius: 2px;
+}
+
+.wp-modal-field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.wp-modal-field span {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: #1e3630;
+}
+
+.wp-modal-field input {
+    padding: 8px 12px;
+    border: 1px solid #b8cfc5;
+    border-radius: 4px;
+    font-size: 13px;
+    background: white;
+    color: #152723;
+}
+
+.wp-modal-field input:focus {
+    outline: none;
+    border-color: #176b50;
+    box-shadow: 0 0 0 2px rgba(23, 107, 80, 0.15);
+}
+
+.wp-modal-field small {
+    font-size: 11px;
+    color: #6a8279;
+}
+
+.wp-modal-auth-box {
+    padding: 14px;
+    background: #f5f9f7;
+    border: 1px solid #d3e4dc;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.wp-auth-box-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #176b50;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.wp-auth-box-desc {
+    margin: 0;
+    font-size: 11.5px;
+    color: #556e65;
+}
+
+.wp-auth-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.wp-auth-grid label {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.wp-auth-grid span {
+    font-size: 11px;
+    font-weight: 600;
+    color: #3b574e;
+}
+
+.wp-auth-grid input {
+    padding: 6px 10px;
+    border: 1px solid #c2d8cd;
+    border-radius: 3px;
+    font-size: 12px;
+}
+
+.wp-status-box {
+    padding: 10px 14px;
+    border-radius: 4px;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.wp-status-box.success {
+    background: #edf9f2;
+    border: 1px solid #b2e4c8;
+    color: #125e43;
+}
+
+.wp-status-box.notice {
+    background: #f4f7f6;
+    border: 1px solid #d4dfdb;
+    color: #4b665c;
+}
+
+.wp-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #e1ebe6;
+}
+
+.wp-submit-btn {
+    min-width: 170px;
+}

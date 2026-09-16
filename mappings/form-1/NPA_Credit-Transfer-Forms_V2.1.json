@@ -1,0 +1,275 @@
+{
+  "formId": "1",
+  "formTitle": "Credit Transfer Application Form",
+  "templateId": "NPA_Credit-Transfer-Forms_V2.1",
+  "templateFilename": "NPA_Credit Transfer Forms_V2.1.pdf",
+  "source": "gravity_forms",
+  "mappings": [
+    {
+      "type": "direct",
+      "sourceFieldId": "1",
+      "sourceInputId": "1.3",
+      "gravityFieldId": "1",
+      "gravityFieldLabel": "Student Name (First)",
+      "inputLabel": "First Name",
+      "source": {
+        "kind": "gravity_field",
+        "fieldId": "1",
+        "inputId": "1.3"
+      },
+      "target": {
+        "kind": "pdf_field",
+        "fieldName": "First Name"
+      },
+      "pdfField": "First Name",
+      "targetField": "First Name",
+      "pdfFieldType": "PDFTextField"
+    },
+    {
+      "type": "direct",
+      "sourceFieldId": "1",
+      "sourceInputId": "1.6",
+      "gravityFieldId": "1",
+      "gravityFieldLabel": "Student Name (Last)",
+      "inputLabel": "Last Name",
+      "source": {
+        "kind": "gravity_field",
+        "fieldId": "1",
+        "inputId": "1.6"
+      },
+      "target": {
+        "kind": "pdf_field",
+        "fieldName": "Last Name"
+      },
+      "pdfField": "Last Name",
+      "targetField": "Last Name",
+      "pdfFieldType": "PDFTextField"
+    },
+    {
+      "type": "direct",
+      "sourceFieldId": "3",
+      "gravityFieldId": "3",
+      "gravityFieldLabel": "Date of Birth",
+      "gravityFieldType": "date",
+      "source": {
+        "kind": "gravity_field",
+        "fieldId": "3"
+      },
+      "target": {
+        "kind": "pdf_field",
+        "fieldName": "Date of Birth"
+      },
+      "pdfField": "Date of Birth",
+      "targetField": "Date of Birth",
+      "pdfFieldType": "PDFTextField"
+    },
+    {
+      "type": "direct",
+      "sourceFieldId": "19",
+      "sourceInputId": "19.1",
+      "gravityFieldId": "19",
+      "gravityFieldLabel": "Address",
+      "gravityFieldType": "address",
+      "inputLabel": "Street Address",
+      "source": {
+        "kind": "gravity_field",
+        "fieldId": "19",
+        "inputId": "19.1"
+      },
+      "target": {
+        "kind": "pdf_field",
+        "fieldName": "Address"
+      },
+      "pdfField": "Address",
+      "targetField": "Address",
+      "pdfFieldType": "PDFTextField"
+    },
+    {
+      "type": "direct",
+      "sourceFieldId": "4",
+      "gravityFieldId": "4",
+      "gravityFieldLabel": "Email Address",
+      "gravityFieldType": "email",
+      "source": {
+        "kind": "gravity_field",
+        "fieldId": "4"
+      },
+      "target": {
+        "kind": "pdf_field",
+        "fieldName": "Email"
+      },
+      "pdfField": "Email",
+      "targetField": "Email",
+      "pdfFieldType": "PDFTextField"
+    },
+    {
+      "type": "direct",
+      "sourceFieldId": "5",
+      "gravityFieldId": "5",
+      "gravityFieldLabel": "Mobile Number",
+      "gravityFieldType": "phone",
+      "source": {
+        "kind": "gravity_field",
+        "fieldId": "5"
+      },
+      "target": {
+        "kind": "pdf_field",
+        "fieldName": "Phone Number"
+      },
+      "pdfField": "Phone Number",
+      "targetField": "Phone Number",
+      "pdfFieldType": "PDFTextField"
+    },
+    {
+      "type": "direct",
+      "sourceFieldId": "26",
+      "gravityFieldId": "26",
+      "gravityFieldLabel": "Student ID / USI",
+      "gravityFieldType": "text",
+      "source": {
+        "kind": "gravity_field",
+        "fieldId": "26"
+      },
+      "target": {
+        "kind": "pdf_field",
+        "fieldName": "Unique Student Identifier USI Number"
+      },
+      "pdfField": "Unique Student Identifier USI Number",
+      "targetField": "Unique Student Identifier USI Number",
+      "pdfFieldType": "PDFTextField"
+    },
+    {
+      "type": "repeat",
+      "sourceFieldId": "8",
+      "gravityFieldId": "8",
+      "gravityFieldLabel": "List your units of competency",
+      "gravityFieldType": "list",
+      "source": {
+        "kind": "gravity_field",
+        "fieldId": "8",
+        "mode": "repeat"
+      },
+      "repeatCountFieldId": "21",
+      "capacity": 5,
+      "children": [
+        {
+          "sourceInputId": "8.1",
+          "inputLabel": "Unit Code",
+          "targetPattern": "Unit CodeRow{index}",
+          "familyKey": "Unit Code::",
+          "target": {
+            "kind": "pdf_field_family",
+            "pattern": "Unit CodeRow{index}",
+            "capacity": 5
+          }
+        },
+        {
+          "sourceInputId": "8.2",
+          "inputLabel": "Unit Title",
+          "targetPattern": "Unit TitleRow{index}",
+          "familyKey": "Unit Title::",
+          "target": {
+            "kind": "pdf_field_family",
+            "pattern": "Unit TitleRow{index}",
+            "capacity": 5
+          }
+        },
+        {
+          "sourceInputId": "8.3",
+          "inputLabel": "Evidence Provided",
+          "targetPattern": "Evidence ProvidedRow{index}",
+          "familyKey": "Evidence Provided::",
+          "target": {
+            "kind": "pdf_field_family",
+            "pattern": "Evidence ProvidedRow{index}",
+            "capacity": 5
+          }
+        },
+        {
+          "sourceInputId": "8.4",
+          "inputLabel": "Unit Code Row 1_2",
+          "targetPattern": "Unit CodeRow{index}_2",
+          "familyKey": "Unit Code::2",
+          "target": {
+            "kind": "pdf_field_family",
+            "pattern": "Unit CodeRow{index}_2",
+            "capacity": 5
+          }
+        },
+        {
+          "sourceInputId": "8.5",
+          "inputLabel": "Unit Title Row 1_2",
+          "targetPattern": "Unit TitleRow{index}_2",
+          "familyKey": "Unit Title::2",
+          "target": {
+            "kind": "pdf_field_family",
+            "pattern": "Unit TitleRow{index}_2",
+            "capacity": 5
+          }
+        }
+      ],
+      "target": {
+        "kind": "pdf_field_family",
+        "children": [
+          {
+            "sourceInputId": "8.1",
+            "inputLabel": "Unit Code",
+            "targetPattern": "Unit CodeRow{index}",
+            "familyKey": "Unit Code::",
+            "target": {
+              "kind": "pdf_field_family",
+              "pattern": "Unit CodeRow{index}",
+              "capacity": 5
+            }
+          },
+          {
+            "sourceInputId": "8.2",
+            "inputLabel": "Unit Title",
+            "targetPattern": "Unit TitleRow{index}",
+            "familyKey": "Unit Title::",
+            "target": {
+              "kind": "pdf_field_family",
+              "pattern": "Unit TitleRow{index}",
+              "capacity": 5
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "direct",
+      "sourceFieldId": "16",
+      "gravityFieldId": "16",
+      "gravityFieldLabel": "Student Signature",
+      "gravityFieldType": "text",
+      "source": {
+        "kind": "gravity_field",
+        "fieldId": "16"
+      },
+      "target": {
+        "kind": "pdf_field",
+        "fieldName": "Signature1_es_:signer:signature"
+      },
+      "pdfField": "Signature1_es_:signer:signature",
+      "targetField": "Signature1_es_:signer:signature",
+      "pdfFieldType": "PDFTextField"
+    },
+    {
+      "type": "system",
+      "sourceFieldId": "",
+      "gravityFieldLabel": "Submission Date",
+      "source": {
+        "kind": "system",
+        "systemKey": "submission.date_created",
+        "format": "DD/MM/YYYY"
+      },
+      "target": {
+        "kind": "pdf_field",
+        "fieldName": "Date"
+      },
+      "pdfField": "Date",
+      "targetField": "Date",
+      "pdfFieldType": "PDFTextField"
+    }
+  ]
+}

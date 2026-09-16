@@ -1,0 +1,97 @@
+Release Notes -- Apache PDFBox -- Version 3.0.8
+
+Introduction
+------------
+
+The Apache PDFBox library is an open source Java tool for working with PDF documents.
+
+This is an incremental bugfix release based on the earlier 3.0.7 release. It contains
+a couple of fixes and small improvements.
+
+A migration guide is available at https://pdfbox.apache.org/3.0/migration.html. It is
+still a work in progress and we are happy to include any valuable feedback from our 
+community. 
+
+For more details on these changes and all the other fixes and improvements
+included in this release, please refer to the following issues on the
+PDFBox issue tracker at https://issues.apache.org/jira/browse/PDFBOX.
+
+Bug
+
+[PDFBOX-4076] - PDFBox cannot properly handle PDF Name objects containing bytes with values outside the US_ASCII range
+[PDFBOX-6150] - PDComboBox constructAppearances wrong text
+[PDFBOX-6173] - NullPointerException while merging PDFs with output intents
+[PDFBOX-6176] - reported number of objects (7412) is not one plus the highest object number (7410)
+[PDFBOX-6178] - PdfBox renames RadioButton with Umlaut
+[PDFBOX-6179] - Removing fields not possible
+[PDFBOX-6186] - IllegalArgumentException when calling PDDocumentCatalog.setThreads(null)
+[PDFBOX-6187] - NullPointerException in AppearanceGeneratorHelper when PDFont.getName() returns null
+[PDFBOX-6189] - Usage of PDF Controlled dimension may cause OOM
+[PDFBOX-6191] - Print border doesn't work if using rastering
+[PDFBOX-6193] - TrueTypeEmbedder.getTag() throws StringIndexOutOfBoundsException for negative Map.hashCode()
+[PDFBOX-6194] - COSStream becomes COSDictionary after save — shared XObject reference replaced by Font
+[PDFBOX-6202] - Possible regression when combining multiple PDFs
+[PDFBOX-6203] - Splitter.split() corrupts result PDFs
+[PDFBOX-6204] - PDType1FontEmbedder sets /Length to uncompressed PFB size
+[PDFBOX-6206] - Rendering fails when bad annotations array
+[PDFBOX-6209] - Regression in v3.0.7 causes Splitter to extract pages with text converted to symbols
+[PDFBOX-6210] - Incorrect CJK Character Extraction for Shared Glyphs
+[PDFBOX-6214] - PDDocument static AWT warm-up fails hard when AWT native libs are unavailable (GraalVM native-image)
+[PDFBOX-6216] - Reject OpenType fonts using CFF2 outlines
+
+New Feature
+
+[PDFBOX-6198] - Disable deployment of submodule pdfbox-examples
+
+Improvement
+
+[PDFBOX-6166] - Improve some implementation flaws in NonSeekableRandomAccessReadInputStream
+[PDFBOX-6180] - Improve directory boundary check in ExtractEmbeddedFiles example
+[PDFBOX-6181] - Create SecureRandom object only once
+[PDFBOX-6185] - Fix handling of files in temp directory
+[PDFBOX-6207] - Setting checkbox value fails when field has an invalid /Opt entry
+[PDFBOX-6208] - Create support files for AI tooling
+[PDFBOX-6211] - Add test for PDFBOX-6172
+
+Wish
+
+[PDFBOX-6192] - PDIndexed() no-arg constructor, setBaseColorSpace(), and setHighValue() all deprecated in 3.x with no usable replacement for incremental construction
+
+Task
+
+[PDFBOX-6213] - Run regression tests for 3.0.8
+
+Release Contents
+----------------
+
+This release consists of a single source archive packaged as a zip file.
+The archive can be unpacked with the jar tool from your JDK installation.
+See the README.txt file for instructions on how to build this release.
+
+The source archive is accompanied by SHA512 checksums and a PGP signature
+that you can use to verify the authenticity of your download.
+The public key used for the PGP signature can be found at
+https://www.apache.org/dist/pdfbox/KEYS.
+
+About Apache PDFBox
+-------------------
+
+Apache PDFBox is an open source Java library for working with PDF documents.
+This project allows creation of new PDF documents, manipulation of existing
+documents and the ability to extract content from documents. Apache PDFBox
+also includes several command line utilities. Apache PDFBox is published
+under the Apache License, Version 2.0.
+
+For more information, visit https://pdfbox.apache.org/
+
+About The Apache Software Foundation
+------------------------------------
+
+Established in 1999, The Apache Software Foundation provides organizational,
+legal, and financial support for more than 100 freely-available,
+collaboratively-developed Open Source projects. The pragmatic Apache License
+enables individual and commercial users to easily deploy Apache software;
+the Foundation's intellectual property framework limits the legal exposure
+of its 2,500+ contributors.
+
+For more information, visit https://www.apache.org/

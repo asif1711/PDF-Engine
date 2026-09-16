@@ -1,0 +1,2392 @@
+=================================
+PDF TEMPLATE ANALYSIS
+=================================
+
+=== LAYER 1: TECHNICAL ===
+PDF Type: PDF
+Pages: 2
+AcroForm: Yes
+
+Field: First Name
+Type: Tx
+Position: x=198.84, y=518.64, width=323.63998, height=15.119995
+
+Field: Last Name
+Type: Tx
+Position: x=198.84, y=502.2, width=323.63998, height=15.23999
+
+Field: Date of Birth
+Type: Tx
+Position: x=198.84, y=485.88, width=323.63998, height=15.119995
+
+Field: Address
+Type: Tx
+Position: x=198.84, y=469.44, width=323.63998, height=15.23999
+
+Field: Email
+Type: Tx
+Position: x=198.84, y=453.12, width=323.63998, height=15.119995
+
+Field: Phone Number
+Type: Tx
+Position: x=198.84, y=436.8, width=323.63998, height=15.120026
+
+Field: Unique Student Identifier USI Number
+Type: Tx
+Position: x=199.2, y=407.16, width=322.91998, height=28.799988
+
+Field: Unit CodeRow1
+Type: Tx
+Position: x=72.96, y=285.6, width=43.200005, height=14.040009
+
+Field: Unit TitleRow1
+Type: Tx
+Position: x=117.48, y=285.6, width=156.72, height=14.040009
+
+Field: Evidence ProvidedRow1
+Type: Tx
+Position: x=275.52, y=285.6, width=60.600006, height=14.040009
+
+Field: Unit CodeRow1_2
+Type: Tx
+Position: x=337.44, y=285.6, width=40.079987, height=14.040009
+
+Field: Unit TitleRow1_2
+Type: Tx
+Position: x=378.84, y=285.6, width=143.75998, height=14.040009
+
+Field: Unit CodeRow2
+Type: Tx
+Position: x=72.96, y=270.6, width=43.200005, height=13.919983
+
+Field: Unit TitleRow2
+Type: Tx
+Position: x=117.48, y=270.6, width=156.72, height=13.919983
+
+Field: Evidence ProvidedRow2
+Type: Tx
+Position: x=275.52, y=270.6, width=60.600006, height=13.919983
+
+Field: Unit CodeRow2_2
+Type: Tx
+Position: x=337.44, y=270.6, width=40.079987, height=13.919983
+
+Field: Unit TitleRow2_2
+Type: Tx
+Position: x=378.84, y=270.6, width=143.75998, height=13.919983
+
+Field: Unit CodeRow3
+Type: Tx
+Position: x=72.96, y=255.48, width=43.200005, height=14.039993
+
+Field: Unit TitleRow3
+Type: Tx
+Position: x=117.48, y=255.48, width=156.72, height=14.039993
+
+Field: Evidence ProvidedRow3
+Type: Tx
+Position: x=275.52, y=255.48, width=60.600006, height=14.039993
+
+Field: Unit CodeRow3_2
+Type: Tx
+Position: x=337.44, y=255.48, width=40.079987, height=14.039993
+
+Field: Unit TitleRow3_2
+Type: Tx
+Position: x=378.84, y=255.48, width=143.75998, height=14.039993
+
+Field: Unit CodeRow4
+Type: Tx
+Position: x=72.96, y=240.48, width=43.200005, height=13.919998
+
+Field: Unit TitleRow4
+Type: Tx
+Position: x=117.48, y=240.48, width=156.72, height=13.919998
+
+Field: Evidence ProvidedRow4
+Type: Tx
+Position: x=275.52, y=240.48, width=60.600006, height=13.919998
+
+Field: Unit CodeRow4_2
+Type: Tx
+Position: x=337.44, y=240.48, width=40.079987, height=13.919998
+
+Field: Unit TitleRow4_2
+Type: Tx
+Position: x=378.84, y=240.48, width=143.75998, height=13.919998
+
+Field: Unit CodeRow5
+Type: Tx
+Position: x=72.96, y=225.48, width=43.200005, height=13.919998
+
+Field: Unit TitleRow5
+Type: Tx
+Position: x=117.48, y=225.48, width=156.72, height=13.919998
+
+Field: Evidence ProvidedRow5
+Type: Tx
+Position: x=275.52, y=225.48, width=60.600006, height=13.919998
+
+Field: Unit CodeRow5_2
+Type: Tx
+Position: x=337.44, y=225.48, width=40.079987, height=13.919998
+
+Field: Unit TitleRow5_2
+Type: Tx
+Position: x=378.84, y=225.48, width=143.75998, height=13.919998
+
+Field: Additional Comments
+Type: Tx
+Position: x=175.44, y=295.2, width=335.4, height=21.23999
+
+Field: Date
+Type: Tx
+Position: x=98.64, y=246.48, width=104.520004, height=21.240005
+
+Field: Granted
+Type: Btn
+Position: x=212.491, y=319.034, width=8.938004, height=7.8460083
+
+Field: Not Granted
+Type: Btn
+Position: x=325.7, y=320.086, width=7.8799744, height=6.7940063
+
+Field: Signature1_es_:signer:signature
+Type: Tx
+Position: x=154.56, y=272.64, width=82.56, height=21.23999
+
+Field: Check Box2
+Type: Btn
+Position: x=456.177, y=435.013, width=8.540009, height=8.540985
+
+Field: Check Box3
+Type: Btn
+Position: x=497.17, y=435.014, width=8.539978, height=8.539978
+
+Field: Check Box4
+Type: Btn
+Position: x=456.702, y=405.057, width=8.540009, height=8.539978
+
+Field: Check Box5
+Type: Btn
+Position: x=456.177, y=388.24, width=9.065002, height=9.591003
+
+Field: Check Box6
+Type: Btn
+Position: x=455.651, y=370.371, width=9.0660095, height=9.591003
+
+Field: Check Box7
+Type: Btn
+Position: x=496.644, y=405.057, width=9.065979, height=9.591003
+
+Field: Check Box8
+Type: Btn
+Position: x=497.17, y=388.24, width=8.539978, height=9.065002
+
+Field: Check Box9
+Type: Btn
+Position: x=496.644, y=370.896, width=9.065002, height=9.5920105
+
+Field: Date10_es_:signer:date
+Type: Tx
+Position: x=98.8033, y=571.335, width=87.984695, height=18.320984
+
+Field: Text11
+Type: Tx
+Position: x=163.971, y=597.613, width=198.351, height=17.27002
+
+Field: Text12
+Type: Tx
+Position: x=80.9346, y=742.139, width=241.9714, height=14.642029
+
+Field: Text13
+Type: Tx
+Position: x=128.76, y=728.474, width=22.291, height=11.489014
+
+Field Count: 49
+
+=== LAYER 2: CONTEXT ===
+
+--- PAGE 1 ---
+Width: 595.32
+Height: 841.92
+Text: C | x=72.024 | y=792.696 | width=7.363678 | height=5.0176797
+Text: r | x=79.343475 | y=792.696 | width=3.676323 | height=5.0176797
+Text: e | x=83.05299 | y=792.696 | width=4.901764 | height=5.0176797
+Text: d | x=87.95476 | y=792.696 | width=5.5199966 | height=5.0176797
+Text: i | x=93.474754 | y=792.696 | width=3.0691223 | height=5.0176797
+Text: t | x=96.48868 | y=792.696 | width=3.0691223 | height=5.0176797
+Text: T | x=102.36191 | y=792.696 | width=6.7454376 | height=5.0176797
+Text: r | x=109.107346 | y=792.696 | width=3.676323 | height=5.0176797
+Text: a | x=112.684364 | y=792.696 | width=4.9017563 | height=5.0176797
+Text: n | x=117.58612 | y=792.696 | width=5.5199966 | height=5.0176797
+Text: s | x=123.10612 | y=792.696 | width=4.2945633 | height=5.0176797
+Text: f | x=127.32338 | y=792.696 | width=3.6763153 | height=5.0176797
+Text: e | x=131.03279 | y=792.696 | width=4.901764 | height=5.0176797
+Text: r | x=135.93456 | y=792.696 | width=3.6763153 | height=5.0176797
+Text: F | x=142.31566 | y=792.696 | width=6.1382446 | height=5.0176797
+Text: o | x=148.4539 | y=792.696 | width=5.5200043 | height=5.0176797
+Text: r | x=153.9739 | y=792.696 | width=3.6763153 | height=5.0176797
+Text: m | x=157.55081 | y=792.696 | width=8.589127 | height=5.0176797
+Text: _ | x=166.18414 | y=792.696 | width=5.5200043 | height=5.0176797
+Text: V | x=171.70415 | y=792.696 | width=7.970886 | height=5.0176797
+Text: 2 | x=179.61983 | y=792.696 | width=5.5200043 | height=5.0176797
+Text: . | x=185.13983 | y=792.696 | width=2.7599945 | height=5.0176797
+Text: 1 | x=187.97 | y=792.696 | width=5.5200043 | height=5.0176797
+Text: P | x=473.62 | y=792.696 | width=6.1382446 | height=5.0176797
+Text: a | x=479.75824 | y=792.696 | width=4.901764 | height=5.0176797
+Text: g | x=484.66 | y=792.696 | width=5.519989 | height=5.0176797
+Text: e | x=490.18 | y=792.696 | width=4.901764 | height=5.0176797
+Text: 1 | x=497.86 | y=792.696 | width=5.519989 | height=4.92936
+Text: o | x=506.14 | y=792.696 | width=5.519989 | height=5.0176797
+Text: f | x=511.5386 | y=792.696 | width=3.6763 | height=5.0176797
+Text: 2 | x=518.02 | y=792.696 | width=5.5200195 | height=4.92936
+Text: C | x=231.65 | y=97.099976 | width=10.136887 | height=6.26886
+Text: r | x=241.82898 | y=97.099976 | width=6.2337646 | height=6.26886
+Text: e | x=248.06274 | y=97.099976 | width=6.2337646 | height=6.26886
+Text: d | x=254.29651 | y=97.099976 | width=7.806244 | height=6.26886
+Text: i | x=261.99045 | y=97.099976 | width=3.9031067 | height=6.26886
+Text: t | x=265.93567 | y=97.099976 | width=4.6753235 | height=6.26886
+Text: T | x=274.121 | y=97.099976 | width=9.364685 | height=6.26886
+Text: r | x=283.4857 | y=97.099976 | width=6.2337646 | height=6.26886
+Text: a | x=289.57904 | y=97.099976 | width=7.019989 | height=6.26886
+Text: n | x=296.64114 | y=97.099976 | width=7.806244 | height=6.26886
+Text: s | x=304.32108 | y=97.099976 | width=5.461548 | height=6.26886
+Text: f | x=309.82474 | y=97.099976 | width=4.6753235 | height=6.26886
+Text: e | x=314.50006 | y=97.099976 | width=6.2337646 | height=6.26886
+Text: r | x=320.73383 | y=97.099976 | width=6.2337646 | height=6.26886
+Text: F | x=330.43 | y=97.099976 | width=8.57843 | height=6.26886
+Text: o | x=339.05054 | y=97.099976 | width=7.019989 | height=6.26886
+Text: r | x=346.01443 | y=97.099976 | width=6.2337646 | height=6.26886
+Text: m | x=352.1358 | y=97.099976 | width=11.6953125 | height=6.26886
+Text: H | x=72.024 | y=135.01996 | width=9.335999 | height=5.358
+Text: o | x=81.36 | y=135.01996 | width=6.0 | height=5.358
+Text: w | x=87.36 | y=135.01996 | width=8.664001 | height=5.358
+Text: t | x=99.024 | y=135.01996 | width=3.9960022 | height=5.358
+Text: o | x=102.984 | y=135.01996 | width=6.0 | height=5.358
+Text: U | x=111.984 | y=135.01996 | width=8.664001 | height=5.358
+Text: s | x=120.648 | y=135.01996 | width=4.6679993 | height=5.358
+Text: e | x=125.316 | y=135.01996 | width=5.3279953 | height=5.358
+Text: C | x=133.58 | y=135.01996 | width=8.664001 | height=5.358
+Text: r | x=142.244 | y=135.01996 | width=5.328003 | height=5.358
+Text: e | x=147.608 | y=135.01996 | width=5.328003 | height=5.358
+Text: d | x=152.888 | y=135.01996 | width=6.671997 | height=5.358
+Text: i | x=159.596 | y=135.01996 | width=3.3359985 | height=5.358
+Text: t | x=162.93199 | y=135.01996 | width=3.9960022 | height=5.358
+Text: T | x=169.928 | y=135.01996 | width=8.003998 | height=5.358
+Text: r | x=177.93199 | y=135.01996 | width=5.328003 | height=5.358
+Text: a | x=183.26 | y=135.01996 | width=6.0 | height=5.358
+Text: n | x=189.344 | y=135.01996 | width=6.671997 | height=5.358
+Text: s | x=196.05199 | y=135.01996 | width=4.6679993 | height=5.358
+Text: f | x=200.71999 | y=135.01996 | width=3.9960022 | height=5.358
+Text: e | x=204.71599 | y=135.01996 | width=5.328003 | height=5.358
+Text: r | x=209.97198 | y=135.01996 | width=5.328003 | height=5.358
+Text: F | x=218.25198 | y=135.01996 | width=7.3320007 | height=5.358
+Text: o | x=225.58398 | y=135.01996 | width=6.0 | height=5.358
+Text: r | x=231.58398 | y=135.01996 | width=5.328003 | height=5.358
+Text: m | x=236.85199 | y=135.01996 | width=9.996002 | height=5.358
+Text: � | x=69.384 | y=158.77997 | width=5.0783997 | height=5.0176797
+Text: T | x=87.384 | y=158.77997 | width=6.7454376 | height=5.0176797
+Text: h | x=94.12944 | y=158.77997 | width=5.5199966 | height=5.0176797
+Text: i | x=99.64944 | y=158.77997 | width=3.0691223 | height=5.0176797
+Text: s | x=102.71856 | y=158.77997 | width=4.2945633 | height=5.0176797
+Text: f | x=109.69583 | y=158.77997 | width=3.676323 | height=5.0176797
+Text: o | x=113.40525 | y=158.77997 | width=5.5199966 | height=5.0176797
+Text: r | x=118.92525 | y=158.77997 | width=3.676323 | height=5.0176797
+Text: m | x=122.52437 | y=158.77997 | width=8.589127 | height=5.0176797
+Text: w | x=133.91759 | y=158.77997 | width=7.970886 | height=5.0176797
+Text: i | x=141.83327 | y=158.77997 | width=3.0691223 | height=5.0176797
+Text: l | x=144.8362 | y=158.77997 | width=3.0691223 | height=5.0176797
+Text: l | x=147.94942 | y=158.77997 | width=3.0691223 | height=5.0176797
+Text: o | x=153.70134 | y=158.77997 | width=5.5200043 | height=5.0176797
+Text: n | x=159.22134 | y=158.77997 | width=5.5200043 | height=5.0176797
+Text: l | x=164.74135 | y=158.77997 | width=3.0691223 | height=5.0176797
+Text: y | x=167.85457 | y=158.77997 | width=5.5200043 | height=5.0176797
+Text: b | x=176.01317 | y=158.77997 | width=5.5200043 | height=5.0176797
+Text: e | x=181.53317 | y=158.77997 | width=4.901764 | height=5.0176797
+Text: c | x=189.19493 | y=158.77997 | width=4.901764 | height=5.0176797
+Text: o | x=194.00839 | y=158.77997 | width=5.5200043 | height=5.0176797
+Text: n | x=199.5284 | y=158.77997 | width=5.5200043 | height=5.0176797
+Text: s | x=205.0484 | y=158.77997 | width=4.2945557 | height=5.0176797
+Text: i | x=209.24355 | y=158.77997 | width=3.0691223 | height=5.0176797
+Text: d | x=212.35687 | y=158.77997 | width=5.5200043 | height=5.0176797
+Text: e | x=217.87688 | y=158.77997 | width=4.901764 | height=5.0176797
+Text: r | x=222.77864 | y=158.77997 | width=3.6763153 | height=5.0176797
+Text: e | x=226.39975 | y=158.77997 | width=4.901764 | height=5.0176797
+Text: d | x=231.30151 | y=158.77997 | width=5.5200043 | height=5.0176797
+Text: f | x=239.4821 | y=158.77997 | width=3.6763153 | height=5.0176797
+Text: o | x=243.19151 | y=158.77997 | width=5.5200043 | height=5.0176797
+Text: r | x=248.71152 | y=158.77997 | width=3.6763153 | height=5.0176797
+Text: c | x=255.05952 | y=158.77997 | width=4.9017487 | height=5.0176797
+Text: u | x=259.96127 | y=158.77997 | width=5.519989 | height=5.0176797
+Text: r | x=265.48126 | y=158.77997 | width=3.6763306 | height=5.0176797
+Text: r | x=269.1024 | y=158.77997 | width=3.6763306 | height=5.0176797
+Text: e | x=272.81183 | y=158.77997 | width=4.901764 | height=5.0176797
+Text: n | x=277.7136 | y=158.77997 | width=5.519989 | height=5.0176797
+Text: t | x=283.13428 | y=158.77997 | width=3.0691223 | height=5.0176797
+Text: l | x=286.2475 | y=158.77997 | width=3.0691223 | height=5.0176797
+Text: y | x=289.3608 | y=158.77997 | width=5.519989 | height=5.0176797
+Text: e | x=297.51932 | y=158.77997 | width=4.901764 | height=5.0176797
+Text: n | x=302.42108 | y=158.77997 | width=5.519989 | height=5.0176797
+Text: r | x=307.94107 | y=158.77997 | width=3.6763306 | height=5.0176797
+Text: o | x=311.5622 | y=158.77997 | width=5.519989 | height=5.0176797
+Text: l | x=317.08218 | y=158.77997 | width=3.0691223 | height=5.0176797
+Text: l | x=320.0851 | y=158.77997 | width=3.0691223 | height=5.0176797
+Text: e | x=323.19843 | y=158.77997 | width=4.901764 | height=5.0176797
+Text: d | x=328.0008 | y=158.77997 | width=5.519989 | height=5.0176797
+Text: s | x=336.2808 | y=158.77997 | width=4.2945557 | height=5.0176797
+Text: t | x=340.57535 | y=158.77997 | width=3.0691223 | height=5.0176797
+Text: u | x=343.71066 | y=158.77997 | width=5.519989 | height=5.0176797
+Text: d | x=349.23065 | y=158.77997 | width=5.519989 | height=5.0176797
+Text: e | x=354.62924 | y=158.77997 | width=4.901764 | height=5.0176797
+Text: n | x=359.531 | y=158.77997 | width=5.519989 | height=5.0176797
+Text: t | x=365.051 | y=158.77997 | width=3.0691223 | height=5.0176797
+Text: ( | x=368.0649 | y=158.77997 | width=3.6763306 | height=5.0176797
+Text: s | x=371.77435 | y=158.77997 | width=4.2945557 | height=5.0176797
+Text: ) | x=375.9696 | y=158.77997 | width=3.6763306 | height=5.0176797
+Text: . | x=379.67905 | y=158.77997 | width=2.7600098 | height=5.0176797
+Text: � | x=69.384 | y=174.13995 | width=5.0783997 | height=5.0176797
+Text: T | x=87.384 | y=174.13995 | width=6.7454376 | height=5.0176797
+Text: h | x=94.12944 | y=174.13995 | width=5.5199966 | height=5.0176797
+Text: e | x=99.64944 | y=174.13995 | width=4.9017563 | height=5.0176797
+Text: s | x=107.89629 | y=174.13995 | width=4.2945633 | height=5.0176797
+Text: t | x=112.19086 | y=174.13995 | width=3.0691223 | height=5.0176797
+Text: u | x=115.32627 | y=174.13995 | width=5.5199966 | height=5.0176797
+Text: d | x=120.84627 | y=174.13995 | width=5.5199966 | height=5.0176797
+Text: e | x=126.24477 | y=174.13995 | width=4.901764 | height=5.0176797
+Text: n | x=131.14653 | y=174.13995 | width=5.5200043 | height=5.0176797
+Text: t | x=136.66653 | y=174.13995 | width=3.0691223 | height=5.0176797
+Text: ( | x=139.68045 | y=174.13995 | width=3.6763153 | height=5.0176797
+Text: s | x=143.38986 | y=174.13995 | width=4.2945557 | height=5.0176797
+Text: ) | x=147.58511 | y=174.13995 | width=3.6763153 | height=5.0176797
+Text: w | x=154.63962 | y=174.13995 | width=7.970886 | height=5.0176797
+Text: i | x=162.5553 | y=174.13995 | width=3.0691223 | height=5.0176797
+Text: l | x=165.66862 | y=174.13995 | width=3.0691223 | height=5.0176797
+Text: l | x=168.67145 | y=174.13995 | width=3.0691223 | height=5.0176797
+Text: b | x=175.12987 | y=174.13995 | width=5.5200043 | height=5.0176797
+Text: e | x=180.64987 | y=174.13995 | width=4.901764 | height=5.0176797
+Text: r | x=188.91882 | y=174.13995 | width=3.6763153 | height=5.0176797
+Text: e | x=192.62823 | y=174.13995 | width=4.901764 | height=5.0176797
+Text: q | x=197.53 | y=174.13995 | width=5.5200043 | height=5.0176797
+Text: u | x=202.9507 | y=174.13995 | width=5.5200043 | height=5.0176797
+Text: i | x=208.34921 | y=174.13995 | width=3.0691223 | height=5.0176797
+Text: r | x=211.46254 | y=174.13995 | width=3.6763153 | height=5.0176797
+Text: e | x=215.17195 | y=174.13995 | width=4.901764 | height=5.0176797
+Text: d | x=220.07372 | y=174.13995 | width=5.5200043 | height=5.0176797
+Text: t | x=228.83952 | y=174.13995 | width=3.0691223 | height=5.0176797
+Text: o | x=231.95274 | y=174.13995 | width=5.5200043 | height=5.0176797
+Text: a | x=240.81793 | y=174.13995 | width=4.901764 | height=5.0176797
+Text: t | x=245.7197 | y=174.13995 | width=3.0691223 | height=5.0176797
+Text: t | x=248.73361 | y=174.13995 | width=3.0691223 | height=5.0176797
+Text: a | x=251.84683 | y=174.13995 | width=4.901764 | height=5.0176797
+Text: c | x=256.6493 | y=174.13995 | width=4.901764 | height=5.0176797
+Text: h | x=261.55106 | y=174.13995 | width=5.519989 | height=5.0176797
+Text: t | x=270.43826 | y=174.13995 | width=3.0691223 | height=5.0176797
+Text: h | x=273.55148 | y=174.13995 | width=5.519989 | height=5.0176797
+Text: e | x=279.07147 | y=174.13995 | width=4.901764 | height=5.0176797
+Text: o | x=287.34045 | y=174.13995 | width=5.519989 | height=5.0176797
+Text: r | x=292.73904 | y=174.13995 | width=3.6763306 | height=5.0176797
+Text: i | x=296.4485 | y=174.13995 | width=3.0691223 | height=5.0176797
+Text: g | x=299.5618 | y=174.13995 | width=5.519989 | height=5.0176797
+Text: i | x=304.9603 | y=174.13995 | width=3.0691223 | height=5.0176797
+Text: n | x=308.0736 | y=174.13995 | width=5.519989 | height=5.0176797
+Text: a | x=313.5936 | y=174.13995 | width=4.901764 | height=5.0176797
+Text: l | x=318.39597 | y=174.13995 | width=3.0691223 | height=5.0176797
+Text: a | x=324.85437 | y=174.13995 | width=4.901764 | height=5.0176797
+Text: n | x=329.65674 | y=174.13995 | width=5.519989 | height=5.0176797
+Text: d | x=335.17673 | y=174.13995 | width=5.519989 | height=5.0176797
+Text: / | x=340.69672 | y=174.13995 | width=3.0691223 | height=5.0176797
+Text: o | x=343.81003 | y=174.13995 | width=5.519989 | height=5.0176797
+Text: r | x=349.33002 | y=174.13995 | width=3.6763306 | height=5.0176797
+Text: a | x=356.38455 | y=174.13995 | width=4.901764 | height=5.0176797
+Text: c | x=364.65353 | y=174.13995 | width=4.901764 | height=5.0176797
+Text: o | x=369.456 | y=174.13995 | width=5.519989 | height=5.0176797
+Text: p | x=374.97598 | y=174.13995 | width=5.519989 | height=5.0176797
+Text: y | x=380.49597 | y=174.13995 | width=5.519989 | height=5.0176797
+Text: o | x=389.36105 | y=174.13995 | width=5.519989 | height=5.0176797
+Text: f | x=394.88104 | y=174.13995 | width=3.6763306 | height=5.0176797
+Text: t | x=402.31 | y=174.13995 | width=3.0691223 | height=5.0176797
+Text: h | x=405.31293 | y=174.13995 | width=5.519989 | height=5.0176797
+Text: e | x=410.83292 | y=174.13995 | width=4.901764 | height=5.0176797
+Text: e | x=419.11 | y=174.13995 | width=4.901764 | height=5.0176797
+Text: v | x=424.01175 | y=174.13995 | width=5.519989 | height=5.0176797
+Text: i | x=429.43234 | y=174.13995 | width=3.0691223 | height=5.0176797
+Text: d | x=432.54565 | y=174.13995 | width=5.519989 | height=5.0176797
+Text: e | x=438.06564 | y=174.13995 | width=4.901764 | height=5.0176797
+Text: n | x=442.9674 | y=174.13995 | width=5.519989 | height=5.0176797
+Text: c | x=448.388 | y=174.13995 | width=4.901764 | height=5.0176797
+Text: e | x=453.28976 | y=174.13995 | width=4.901764 | height=5.0176797
+Text: m | x=461.55872 | y=174.13995 | width=8.589111 | height=5.0176797
+Text: e | x=470.19202 | y=174.13995 | width=4.901764 | height=5.0176797
+Text: n | x=475.09378 | y=174.13995 | width=5.519989 | height=5.0176797
+Text: t | x=480.51437 | y=174.13995 | width=3.0691223 | height=5.0176797
+Text: i | x=483.5173 | y=174.13995 | width=3.0691223 | height=5.0176797
+Text: o | x=486.6306 | y=174.13995 | width=5.519989 | height=5.0176797
+Text: n | x=492.1506 | y=174.13995 | width=5.519989 | height=5.0176797
+Text: e | x=497.6706 | y=174.13995 | width=4.901764 | height=5.0176797
+Text: d | x=502.57236 | y=174.13995 | width=5.519989 | height=5.0176797
+Text: i | x=511.33807 | y=174.13995 | width=3.0690918 | height=5.0176797
+Text: n | x=514.45135 | y=174.13995 | width=5.5200195 | height=5.0176797
+Text: t | x=87.384 | y=188.77997 | width=3.0691223 | height=5.0176797
+Text: h | x=90.49733 | y=188.77997 | width=5.5199966 | height=5.0176797
+Text: i | x=96.01733 | y=188.77997 | width=3.0691223 | height=5.0176797
+Text: s | x=99.02016 | y=188.77997 | width=4.2945633 | height=5.0176797
+Text: f | x=106.07472 | y=188.77997 | width=3.676323 | height=5.0176797
+Text: o | x=109.806244 | y=188.77997 | width=5.5199966 | height=5.0176797
+Text: r | x=115.20484 | y=188.77997 | width=3.676323 | height=5.0176797
+Text: m | x=118.91426 | y=188.77997 | width=8.589119 | height=5.0176797
+Text: . | x=127.43719 | y=188.77997 | width=2.7600021 | height=5.0176797
+Text: � | x=69.384 | y=204.01996 | width=5.0783997 | height=5.0176797
+Text: S | x=87.384 | y=204.01996 | width=6.138237 | height=5.0176797
+Text: t | x=93.52224 | y=204.01996 | width=3.0691223 | height=5.0176797
+Text: u | x=96.59136 | y=204.01996 | width=5.5199966 | height=5.0176797
+Text: d | x=102.11136 | y=204.01996 | width=5.5199966 | height=5.0176797
+Text: e | x=107.631355 | y=204.01996 | width=4.9017563 | height=5.0176797
+Text: n | x=112.57732 | y=204.01996 | width=5.5199966 | height=5.0176797
+Text: t | x=117.975815 | y=204.01996 | width=3.0691223 | height=5.0176797
+Text: ( | x=121.08914 | y=204.01996 | width=3.676323 | height=5.0176797
+Text: s | x=124.68816 | y=204.01996 | width=4.2945633 | height=5.0176797
+Text: ) | x=128.98273 | y=204.01996 | width=3.6763153 | height=5.0176797
+Text: i | x=135.58464 | y=204.01996 | width=3.0691223 | height=5.0176797
+Text: s | x=138.69797 | y=204.01996 | width=4.2945557 | height=5.0176797
+Text: e | x=145.88492 | y=204.01996 | width=4.901764 | height=5.0176797
+Text: n | x=150.78668 | y=204.01996 | width=5.5200043 | height=5.0176797
+Text: c | x=156.30669 | y=204.01996 | width=4.901764 | height=5.0176797
+Text: o | x=161.23055 | y=204.01996 | width=5.5200043 | height=5.0176797
+Text: u | x=166.75055 | y=204.01996 | width=5.5200043 | height=5.0176797
+Text: r | x=172.14915 | y=204.01996 | width=3.6763153 | height=5.0176797
+Text: a | x=175.85857 | y=204.01996 | width=4.901764 | height=5.0176797
+Text: g | x=180.76033 | y=204.01996 | width=5.5200043 | height=5.0176797
+Text: e | x=186.18092 | y=204.01996 | width=4.901764 | height=5.0176797
+Text: d | x=191.08269 | y=204.01996 | width=5.5200043 | height=5.0176797
+Text: t | x=199.60559 | y=204.01996 | width=3.0691223 | height=5.0176797
+Text: o | x=202.60852 | y=204.01996 | width=5.5200043 | height=5.0176797
+Text: f | x=210.99892 | y=204.01996 | width=3.6763153 | height=5.0176797
+Text: i | x=214.70833 | y=204.01996 | width=3.0691223 | height=5.0176797
+Text: l | x=217.71126 | y=204.01996 | width=3.0691223 | height=5.0176797
+Text: l | x=220.82448 | y=204.01996 | width=3.0691223 | height=5.0176797
+Text: s | x=226.97 | y=204.01996 | width=4.2945557 | height=5.0176797
+Text: e | x=231.26456 | y=204.01996 | width=4.901764 | height=5.0176797
+Text: c | x=236.19942 | y=204.01996 | width=4.901764 | height=5.0176797
+Text: t | x=241.00188 | y=204.01996 | width=3.0691223 | height=5.0176797
+Text: i | x=244.1151 | y=204.01996 | width=3.0691223 | height=5.0176797
+Text: o | x=247.22842 | y=204.01996 | width=5.5200043 | height=5.0176797
+Text: n | x=252.62694 | y=204.01996 | width=5.5200043 | height=5.0176797
+Text: s | x=258.14694 | y=204.01996 | width=4.2945557 | height=5.0176797
+Text: A | x=264.7379 | y=204.01996 | width=7.970886 | height=5.0176797
+Text: , | x=272.6536 | y=204.01996 | width=2.7600098 | height=5.0176797
+Text: B | x=278.4054 | y=204.01996 | width=7.363678 | height=5.0176797
+Text: , | x=285.72488 | y=204.01996 | width=2.7600098 | height=5.0176797
+Text: a | x=291.4768 | y=204.01996 | width=4.901764 | height=5.0176797
+Text: n | x=296.37857 | y=204.01996 | width=5.519989 | height=5.0176797
+Text: d | x=301.89856 | y=204.01996 | width=5.519989 | height=5.0176797
+Text: C | x=310.42145 | y=204.01996 | width=7.363678 | height=5.0176797
+Text: i | x=320.61136 | y=204.01996 | width=3.0691223 | height=5.0176797
+Text: n | x=323.72467 | y=204.01996 | width=5.519989 | height=5.0176797
+Text: t | x=332.11508 | y=204.01996 | width=3.0691223 | height=5.0176797
+Text: h | x=335.2283 | y=204.01996 | width=5.519989 | height=5.0176797
+Text: i | x=340.7483 | y=204.01996 | width=3.0691223 | height=5.0176797
+Text: s | x=343.75122 | y=204.01996 | width=4.2945557 | height=5.0176797
+Text: f | x=351.0597 | y=204.01996 | width=3.6763306 | height=5.0176797
+Text: o | x=354.76913 | y=204.01996 | width=5.519989 | height=5.0176797
+Text: r | x=360.16772 | y=204.01996 | width=3.6763306 | height=5.0176797
+Text: m | x=363.76675 | y=204.01996 | width=8.589111 | height=5.0176797
+Text: a | x=375.55 | y=204.01996 | width=4.901764 | height=5.0176797
+Text: n | x=380.45175 | y=204.01996 | width=5.519989 | height=5.0176797
+Text: d | x=385.97174 | y=204.01996 | width=5.519989 | height=5.0176797
+Text: s | x=394.38425 | y=204.01996 | width=4.2945557 | height=5.0176797
+Text: u | x=398.6788 | y=204.01996 | width=5.519989 | height=5.0176797
+Text: b | x=404.1988 | y=204.01996 | width=5.519989 | height=5.0176797
+Text: m | x=409.6194 | y=204.01996 | width=8.589111 | height=5.0176797
+Text: i | x=418.2527 | y=204.01996 | width=3.0691223 | height=5.0176797
+Text: t | x=421.25552 | y=204.01996 | width=3.0691223 | height=5.0176797
+Text: t | x=427.36063 | y=204.01996 | width=3.0691223 | height=5.0176797
+Text: h | x=430.36356 | y=204.01996 | width=5.519989 | height=5.0176797
+Text: i | x=435.88354 | y=204.01996 | width=3.0691223 | height=5.0176797
+Text: s | x=438.99686 | y=204.01996 | width=4.2945557 | height=5.0176797
+Text: f | x=446.1838 | y=204.01996 | width=3.6763306 | height=5.0176797
+Text: o | x=449.78293 | y=204.01996 | width=5.519989 | height=5.0176797
+Text: r | x=455.30292 | y=204.01996 | width=3.6763306 | height=5.0176797
+Text: m | x=459.01236 | y=204.01996 | width=8.589111 | height=5.0176797
+Text: p | x=470.516 | y=204.01996 | width=5.519989 | height=5.0176797
+Text: r | x=476.03598 | y=204.01996 | width=3.6763306 | height=5.0176797
+Text: i | x=479.6351 | y=204.01996 | width=3.0691223 | height=5.0176797
+Text: o | x=482.74832 | y=204.01996 | width=5.519989 | height=5.0176797
+Text: r | x=488.2683 | y=204.01996 | width=3.6763306 | height=5.0176797
+Text: t | x=494.84818 | y=204.01996 | width=3.0691223 | height=5.0176797
+Text: o | x=497.9615 | y=204.01996 | width=5.519989 | height=5.0176797
+Text: t | x=506.3519 | y=204.01996 | width=3.0691223 | height=5.0176797
+Text: h | x=509.4652 | y=204.01996 | width=5.5200195 | height=5.0176797
+Text: e | x=514.9852 | y=204.01996 | width=4.9017334 | height=5.0176797
+Text: c | x=87.384 | y=218.65997 | width=4.901764 | height=5.0176797
+Text: o | x=92.28577 | y=218.65997 | width=5.5199966 | height=5.0176797
+Text: m | x=97.80576 | y=218.65997 | width=8.589119 | height=5.0176797
+Text: m | x=106.33968 | y=218.65997 | width=8.589119 | height=5.0176797
+Text: e | x=114.97301 | y=218.65997 | width=4.901764 | height=5.0176797
+Text: n | x=119.87477 | y=218.65997 | width=5.5199966 | height=5.0176797
+Text: c | x=125.295364 | y=218.65997 | width=4.901764 | height=5.0176797
+Text: e | x=130.19713 | y=218.65997 | width=4.901764 | height=5.0176797
+Text: m | x=135.01059 | y=218.65997 | width=8.589127 | height=5.0176797
+Text: e | x=143.64381 | y=218.65997 | width=4.901764 | height=5.0176797
+Text: n | x=148.54558 | y=218.65997 | width=5.5200043 | height=5.0176797
+Text: t | x=153.96628 | y=218.65997 | width=3.0691223 | height=5.0176797
+Text: o | x=159.8395 | y=218.65997 | width=5.5200043 | height=5.0176797
+Text: f | x=165.3595 | y=218.65997 | width=3.6763153 | height=5.0176797
+Text: t | x=171.70752 | y=218.65997 | width=3.0691223 | height=5.0176797
+Text: r | x=174.82085 | y=218.65997 | width=3.6763153 | height=5.0176797
+Text: a | x=178.41986 | y=218.65997 | width=4.901764 | height=5.0176797
+Text: i | x=183.32162 | y=218.65997 | width=3.0691223 | height=5.0176797
+Text: n | x=186.44595 | y=218.65997 | width=5.5200043 | height=5.0176797
+Text: i | x=191.84456 | y=218.65997 | width=3.0691223 | height=5.0176797
+Text: n | x=194.95778 | y=218.65997 | width=5.5200043 | height=5.0176797
+Text: g | x=200.47778 | y=218.65997 | width=5.5200043 | height=5.0176797
+Text: a | x=208.63638 | y=218.65997 | width=4.901764 | height=5.0176797
+Text: n | x=213.53815 | y=218.65997 | width=5.5200043 | height=5.0176797
+Text: d | x=219.05815 | y=218.65997 | width=5.5200043 | height=5.0176797
+Text: a | x=227.33815 | y=218.65997 | width=4.901764 | height=5.0176797
+Text: s | x=232.26201 | y=218.65997 | width=4.2945557 | height=5.0176797
+Text: s | x=236.45715 | y=218.65997 | width=4.2945557 | height=5.0176797
+Text: e | x=240.75171 | y=218.65997 | width=4.901764 | height=5.0176797
+Text: s | x=245.68657 | y=218.65997 | width=4.2945557 | height=5.0176797
+Text: s | x=249.88182 | y=218.65997 | width=4.2945557 | height=5.0176797
+Text: m | x=254.17638 | y=218.65997 | width=8.589127 | height=5.0176797
+Text: e | x=262.7213 | y=218.65997 | width=4.901764 | height=5.0176797
+Text: n | x=267.62308 | y=218.65997 | width=5.519989 | height=5.0176797
+Text: t | x=273.14307 | y=218.65997 | width=3.0691223 | height=5.0176797
+Text: . | x=276.2674 | y=218.65997 | width=2.7600098 | height=5.0176797
+Text: � | x=69.384 | y=233.89996 | width=5.0783997 | height=5.0176797
+Text: O | x=87.384 | y=233.89996 | width=7.9708786 | height=5.0176797
+Text: v | x=95.29968 | y=233.89996 | width=5.5199966 | height=5.0176797
+Text: e | x=100.81968 | y=233.89996 | width=4.9017563 | height=5.0176797
+Text: r | x=105.721436 | y=233.89996 | width=3.676323 | height=5.0176797
+Text: s | x=109.45296 | y=233.89996 | width=4.2945633 | height=5.0176797
+Text: e | x=113.74752 | y=233.89996 | width=4.9017563 | height=5.0176797
+Text: a | x=118.571976 | y=233.89996 | width=4.901764 | height=5.0176797
+Text: s | x=123.47374 | y=233.89996 | width=4.2945633 | height=5.0176797
+Text: s | x=130.5614 | y=233.89996 | width=4.2945557 | height=5.0176797
+Text: t | x=134.75665 | y=233.89996 | width=3.0691223 | height=5.0176797
+Text: u | x=137.86987 | y=233.89996 | width=5.5200043 | height=5.0176797
+Text: d | x=143.38988 | y=233.89996 | width=5.5200043 | height=5.0176797
+Text: e | x=148.78848 | y=233.89996 | width=4.901764 | height=5.0176797
+Text: n | x=153.69025 | y=233.89996 | width=5.5200043 | height=5.0176797
+Text: t | x=159.21025 | y=233.89996 | width=3.0691223 | height=5.0176797
+Text: ( | x=162.22417 | y=233.89996 | width=3.6763153 | height=5.0176797
+Text: s | x=165.93358 | y=233.89996 | width=4.2945557 | height=5.0176797
+Text: ) | x=170.12883 | y=233.89996 | width=3.6763153 | height=5.0176797
+Text: i | x=176.59824 | y=233.89996 | width=3.0691223 | height=5.0176797
+Text: s | x=179.71146 | y=233.89996 | width=4.2945557 | height=5.0176797
+Text: a | x=186.6667 | y=233.89996 | width=4.901764 | height=5.0176797
+Text: l | x=191.56847 | y=233.89996 | width=3.0691223 | height=5.0176797
+Text: l | x=194.58238 | y=233.89996 | width=3.0691223 | height=5.0176797
+Text: o | x=197.6956 | y=233.89996 | width=5.5200043 | height=5.0176797
+Text: w | x=203.09421 | y=233.89996 | width=7.970886 | height=5.0176797
+Text: e | x=211.00989 | y=233.89996 | width=4.901764 | height=5.0176797
+Text: d | x=215.91165 | y=233.89996 | width=5.5200043 | height=5.0176797
+Text: t | x=224.19165 | y=233.89996 | width=3.0691223 | height=5.0176797
+Text: o | x=227.31598 | y=233.89996 | width=5.5200043 | height=5.0176797
+Text: a | x=235.59598 | y=233.89996 | width=4.901764 | height=5.0176797
+Text: p | x=240.39833 | y=233.89996 | width=5.5200043 | height=5.0176797
+Text: p | x=245.91833 | y=233.89996 | width=5.5200043 | height=5.0176797
+Text: l | x=251.43834 | y=233.89996 | width=3.0691223 | height=5.0176797
+Text: y | x=254.55167 | y=233.89996 | width=5.519989 | height=5.0176797
+Text: f | x=262.71027 | y=233.89996 | width=3.6763306 | height=5.0176797
+Text: o | x=266.4197 | y=233.89996 | width=5.519989 | height=5.0176797
+Text: r | x=271.8182 | y=233.89996 | width=3.6763306 | height=5.0176797
+Text: c | x=278.28775 | y=233.89996 | width=4.901764 | height=5.0176797
+Text: r | x=283.09012 | y=233.89996 | width=3.6763306 | height=5.0176797
+Text: e | x=286.79956 | y=233.89996 | width=4.901764 | height=5.0176797
+Text: d | x=291.70132 | y=233.89996 | width=5.519989 | height=5.0176797
+Text: i | x=297.122 | y=233.89996 | width=3.0691223 | height=5.0176797
+Text: t | x=300.23523 | y=233.89996 | width=3.0691223 | height=5.0176797
+Text: t | x=305.98706 | y=233.89996 | width=3.0691223 | height=5.0176797
+Text: r | x=309.10037 | y=233.89996 | width=3.6763306 | height=5.0176797
+Text: a | x=312.8098 | y=233.89996 | width=4.901764 | height=5.0176797
+Text: n | x=317.61227 | y=233.89996 | width=5.519989 | height=5.0176797
+Text: s | x=323.01077 | y=233.89996 | width=4.2945557 | height=5.0176797
+Text: f | x=327.30533 | y=233.89996 | width=3.6763306 | height=5.0176797
+Text: e | x=331.03687 | y=233.89996 | width=4.901764 | height=5.0176797
+Text: r | x=335.83932 | y=233.89996 | width=3.6763306 | height=5.0176797
+Text: b | x=342.30878 | y=233.89996 | width=5.519989 | height=5.0176797
+Text: e | x=347.82877 | y=233.89996 | width=4.901764 | height=5.0176797
+Text: f | x=352.63113 | y=233.89996 | width=3.6763306 | height=5.0176797
+Text: o | x=356.34058 | y=233.89996 | width=5.519989 | height=5.0176797
+Text: r | x=361.86057 | y=233.89996 | width=3.6763306 | height=5.0176797
+Text: e | x=365.4597 | y=233.89996 | width=4.901764 | height=5.0176797
+Text: o | x=373.12146 | y=233.89996 | width=5.519989 | height=5.0176797
+Text: r | x=378.64145 | y=233.89996 | width=3.6763306 | height=5.0176797
+Text: a | x=385.0115 | y=233.89996 | width=4.901764 | height=5.0176797
+Text: f | x=389.91327 | y=233.89996 | width=3.6763306 | height=5.0176797
+Text: t | x=393.5344 | y=233.89996 | width=3.0691223 | height=5.0176797
+Text: e | x=396.6477 | y=233.89996 | width=4.901764 | height=5.0176797
+Text: r | x=401.54947 | y=233.89996 | width=3.6763306 | height=5.0176797
+Text: v | x=407.9306 | y=233.89996 | width=5.519989 | height=5.0176797
+Text: i | x=413.4506 | y=233.89996 | width=3.0691223 | height=5.0176797
+Text: s | x=416.45343 | y=233.89996 | width=4.2945557 | height=5.0176797
+Text: a | x=420.748 | y=233.89996 | width=4.901764 | height=5.0176797
+Text: a | x=428.44296 | y=233.89996 | width=4.901764 | height=5.0176797
+Text: p | x=433.34473 | y=233.89996 | width=5.519989 | height=5.0176797
+Text: p | x=438.76532 | y=233.89996 | width=5.519989 | height=5.0176797
+Text: r | x=444.1639 | y=233.89996 | width=3.6763306 | height=5.0176797
+Text: o | x=447.87335 | y=233.89996 | width=5.519989 | height=5.0176797
+Text: v | x=453.39334 | y=233.89996 | width=5.519989 | height=5.0176797
+Text: a | x=458.91333 | y=233.89996 | width=4.901764 | height=5.0176797
+Text: l | x=463.7157 | y=233.89996 | width=3.0691223 | height=5.0176797
+Text: s | x=466.829 | y=233.89996 | width=4.2945557 | height=5.0176797
+Text: . | x=471.12357 | y=233.89996 | width=2.7600098 | height=5.0176797
+Text: � | x=69.384 | y=249.26001 | width=5.0783997 | height=5.0176797
+Text: T | x=87.384 | y=249.26001 | width=6.7454376 | height=5.0176797
+Text: h | x=94.12944 | y=249.26001 | width=5.5199966 | height=5.0176797
+Text: i | x=99.64944 | y=249.26001 | width=3.0691223 | height=5.0176797
+Text: s | x=102.71856 | y=249.26001 | width=4.2945633 | height=5.0176797
+Text: f | x=111.02064 | y=249.26001 | width=3.676323 | height=5.0176797
+Text: o | x=114.73006 | y=249.26001 | width=5.5199966 | height=5.0176797
+Text: r | x=120.128654 | y=249.26001 | width=3.676323 | height=5.0176797
+Text: m | x=123.83807 | y=249.26001 | width=8.589127 | height=5.0176797
+Text: a | x=136.43471 | y=249.26001 | width=4.901764 | height=5.0176797
+Text: l | x=141.23717 | y=249.26001 | width=3.0691223 | height=5.0176797
+Text: s | x=144.35039 | y=249.26001 | width=4.2945557 | height=5.0176797
+Text: o | x=148.64494 | y=249.26001 | width=5.5200043 | height=5.0176797
+Text: c | x=158.13934 | y=249.26001 | width=4.901764 | height=5.0176797
+Text: o | x=163.0411 | y=249.26001 | width=5.5200043 | height=5.0176797
+Text: n | x=168.4618 | y=249.26001 | width=5.5200043 | height=5.0176797
+Text: s | x=173.98181 | y=249.26001 | width=4.2945557 | height=5.0176797
+Text: i | x=178.27637 | y=249.26001 | width=3.0691223 | height=5.0176797
+Text: s | x=181.30128 | y=249.26001 | width=4.2945557 | height=5.0176797
+Text: t | x=185.59584 | y=249.26001 | width=3.0691223 | height=5.0176797
+Text: s | x=188.62086 | y=249.26001 | width=4.2945557 | height=5.0176797
+Text: o | x=197.01122 | y=249.26001 | width=5.5200043 | height=5.0176797
+Text: f | x=202.40982 | y=249.26001 | width=3.6763153 | height=5.0176797
+Text: s | x=210.07152 | y=249.26001 | width=4.2945557 | height=5.0176797
+Text: t | x=214.36607 | y=249.26001 | width=3.0691223 | height=5.0176797
+Text: u | x=217.50139 | y=249.26001 | width=5.5200043 | height=5.0176797
+Text: d | x=223.0214 | y=249.26001 | width=5.5200043 | height=5.0176797
+Text: e | x=228.5414 | y=249.26001 | width=4.901764 | height=5.0176797
+Text: n | x=233.34386 | y=249.26001 | width=5.5200043 | height=5.0176797
+Text: t | x=238.86386 | y=249.26001 | width=3.0691223 | height=5.0176797
+Text: d | x=245.94048 | y=249.26001 | width=5.5200043 | height=5.0176797
+Text: o | x=251.46048 | y=249.26001 | width=5.519989 | height=5.0176797
+Text: c | x=256.98047 | y=249.26001 | width=4.901764 | height=5.0176797
+Text: u | x=261.78284 | y=249.26001 | width=5.519989 | height=5.0176797
+Text: m | x=267.30283 | y=249.26001 | width=8.589111 | height=5.0176797
+Text: e | x=275.82574 | y=249.26001 | width=4.901764 | height=5.0176797
+Text: n | x=280.7275 | y=249.26001 | width=5.519989 | height=5.0176797
+Text: t | x=286.2475 | y=249.26001 | width=3.0691223 | height=5.0176797
+Text: c | x=293.33524 | y=249.26001 | width=4.901764 | height=5.0176797
+Text: h | x=298.237 | y=249.26001 | width=5.519989 | height=5.0176797
+Text: e | x=303.6576 | y=249.26001 | width=4.901764 | height=5.0176797
+Text: c | x=308.55936 | y=249.26001 | width=4.901764 | height=5.0176797
+Text: k | x=313.48322 | y=249.26001 | width=5.519989 | height=5.0176797
+Text: l | x=318.8817 | y=249.26001 | width=3.0691223 | height=5.0176797
+Text: i | x=321.99503 | y=249.26001 | width=3.0691223 | height=5.0176797
+Text: s | x=325.10834 | y=249.26001 | width=4.2945557 | height=5.0176797
+Text: t | x=329.3035 | y=249.26001 | width=3.0691223 | height=5.0176797
+Text: s | x=332.30643 | y=249.26001 | width=4.2945557 | height=5.0176797
+Text: t | x=340.69678 | y=249.26001 | width=3.0691223 | height=5.0176797
+Text: h | x=343.6997 | y=249.26001 | width=5.519989 | height=5.0176797
+Text: a | x=349.2197 | y=249.26001 | width=4.901764 | height=5.0176797
+Text: t | x=354.12146 | y=249.26001 | width=3.0691223 | height=5.0176797
+Text: w | x=361.20908 | y=249.26001 | width=7.970886 | height=5.0176797
+Text: i | x=369.12476 | y=249.26001 | width=3.0691223 | height=5.0176797
+Text: l | x=372.1277 | y=249.26001 | width=3.0691223 | height=5.0176797
+Text: l | x=375.2409 | y=249.26001 | width=3.0691223 | height=5.0176797
+Text: b | x=382.31766 | y=249.26001 | width=5.519989 | height=5.0176797
+Text: e | x=387.83765 | y=249.26001 | width=4.901764 | height=5.0176797
+Text: r | x=396.59232 | y=249.26001 | width=3.6763306 | height=5.0176797
+Text: e | x=400.30176 | y=249.26001 | width=4.901764 | height=5.0176797
+Text: v | x=405.20352 | y=249.26001 | width=5.519989 | height=5.0176797
+Text: i | x=410.6242 | y=249.26001 | width=3.0691223 | height=5.0176797
+Text: e | x=413.73743 | y=249.26001 | width=4.901764 | height=5.0176797
+Text: w | x=418.6392 | y=249.26001 | width=7.970886 | height=5.0176797
+Text: e | x=426.61008 | y=249.26001 | width=4.901764 | height=5.0176797
+Text: d | x=431.51184 | y=249.26001 | width=5.519989 | height=5.0176797
+Text: b | x=440.97314 | y=249.26001 | width=5.519989 | height=5.0176797
+Text: y | x=446.49313 | y=249.26001 | width=5.519989 | height=5.0176797
+Text: t | x=455.96542 | y=249.26001 | width=3.0691223 | height=5.0176797
+Text: h | x=459.07874 | y=249.26001 | width=5.519989 | height=5.0176797
+Text: e | x=464.47733 | y=249.26001 | width=4.901764 | height=5.0176797
+Text: E | x=473.4639 | y=249.26001 | width=6.745453 | height=5.0176797
+Text: n | x=480.20935 | y=249.26001 | width=5.519989 | height=5.0176797
+Text: r | x=485.58575 | y=249.26001 | width=3.6763306 | height=5.0176797
+Text: o | x=489.2953 | y=249.26001 | width=5.519989 | height=5.0176797
+Text: l | x=494.81528 | y=249.26001 | width=3.0691223 | height=5.0176797
+Text: m | x=497.8181 | y=249.26001 | width=8.589111 | height=5.0176797
+Text: e | x=506.45142 | y=249.26001 | width=4.901764 | height=5.0176797
+Text: n | x=511.25378 | y=249.26001 | width=5.5200195 | height=5.0176797
+Text: t | x=516.6524 | y=249.26001 | width=3.0690918 | height=5.0176797
+Text: O | x=87.384 | y=263.93 | width=7.9708786 | height=5.0176797
+Text: f | x=95.29968 | y=263.93 | width=3.676323 | height=5.0176797
+Text: f | x=98.777306 | y=263.93 | width=3.676323 | height=5.0176797
+Text: i | x=102.486725 | y=263.93 | width=3.0691223 | height=5.0176797
+Text: c | x=105.60005 | y=263.93 | width=4.901764 | height=5.0176797
+Text: e | x=110.40241 | y=263.93 | width=4.9017563 | height=5.0176797
+Text: r | x=115.30417 | y=263.93 | width=3.676323 | height=5.0176797
+Text: t | x=121.67429 | y=263.93 | width=3.0691223 | height=5.0176797
+Text: o | x=124.78752 | y=263.93 | width=5.5200043 | height=5.0176797
+Text: c | x=133.06752 | y=263.93 | width=4.901764 | height=5.0176797
+Text: h | x=137.96928 | y=263.93 | width=5.5200043 | height=5.0176797
+Text: e | x=143.38998 | y=263.93 | width=4.901764 | height=5.0176797
+Text: c | x=148.29175 | y=263.93 | width=4.901764 | height=5.0176797
+Text: k | x=153.21552 | y=263.93 | width=5.5200043 | height=5.0176797
+Text: t | x=161.37411 | y=263.93 | width=3.0691223 | height=5.0176797
+Text: h | x=164.48744 | y=263.93 | width=5.5200043 | height=5.0176797
+Text: e | x=170.00745 | y=263.93 | width=4.901764 | height=5.0176797
+Text: a | x=177.5698 | y=263.93 | width=4.901764 | height=5.0176797
+Text: u | x=182.47156 | y=263.93 | width=5.5200043 | height=5.0176797
+Text: t | x=187.99156 | y=263.93 | width=3.0691223 | height=5.0176797
+Text: h | x=191.11589 | y=263.93 | width=5.5200043 | height=5.0176797
+Text: e | x=196.5145 | y=263.93 | width=4.901764 | height=5.0176797
+Text: n | x=201.41626 | y=263.93 | width=5.5200043 | height=5.0176797
+Text: t | x=206.93626 | y=263.93 | width=3.0691223 | height=5.0176797
+Text: i | x=209.95018 | y=263.93 | width=3.0691223 | height=5.0176797
+Text: c | x=213.0634 | y=263.93 | width=4.901764 | height=5.0176797
+Text: i | x=217.96516 | y=263.93 | width=3.0691223 | height=5.0176797
+Text: t | x=220.97908 | y=263.93 | width=3.0691223 | height=5.0176797
+Text: y | x=224.0924 | y=263.93 | width=5.5200043 | height=5.0176797
+Text: o | x=232.3724 | y=263.93 | width=5.5200043 | height=5.0176797
+Text: f | x=237.77092 | y=263.93 | width=3.6763153 | height=5.0176797
+Text: t | x=244.24043 | y=263.93 | width=3.0691223 | height=5.0176797
+Text: h | x=247.24326 | y=263.93 | width=5.5200043 | height=5.0176797
+Text: e | x=252.76326 | y=263.93 | width=4.9017487 | height=5.0176797
+Text: s | x=260.42502 | y=263.93 | width=4.2945557 | height=5.0176797
+Text: t | x=264.64227 | y=263.93 | width=3.0691223 | height=5.0176797
+Text: u | x=267.75558 | y=263.93 | width=5.519989 | height=5.0176797
+Text: d | x=273.27557 | y=263.93 | width=5.519989 | height=5.0176797
+Text: e | x=278.79556 | y=263.93 | width=4.901764 | height=5.0176797
+Text: n | x=283.59793 | y=263.93 | width=5.519989 | height=5.0176797
+Text: t | x=289.11792 | y=263.93 | width=3.0691223 | height=5.0176797
+Text: � | x=292.12085 | y=263.93 | width=3.6763306 | height=5.0176797
+Text: s | x=295.24518 | y=263.93 | width=4.2945557 | height=5.0176797
+Text: c | x=302.29974 | y=263.93 | width=4.901764 | height=5.0176797
+Text: r | x=307.1242 | y=263.93 | width=3.6763306 | height=5.0176797
+Text: e | x=310.83365 | y=263.93 | width=4.901764 | height=5.0176797
+Text: d | x=315.7354 | y=263.93 | width=5.519989 | height=5.0176797
+Text: e | x=321.1561 | y=263.93 | width=4.901764 | height=5.0176797
+Text: n | x=326.05786 | y=263.93 | width=5.519989 | height=5.0176797
+Text: t | x=331.47845 | y=263.93 | width=3.0691223 | height=5.0176797
+Text: i | x=334.59177 | y=263.93 | width=3.0691223 | height=5.0176797
+Text: a | x=337.705 | y=263.93 | width=4.901764 | height=5.0176797
+Text: l | x=342.50745 | y=263.93 | width=3.0691223 | height=5.0176797
+Text: s | x=345.62067 | y=263.93 | width=4.2945557 | height=5.0176797
+Text: . | x=349.91522 | y=263.93 | width=2.7600098 | height=5.0176797
+Text: A | x=68.184 | y=302.08997 | width=7.9708786 | height=4.92936
+Text: . | x=76.10398 | y=302.08997 | width=2.7600021 | height=4.92936
+Text: S | x=86.184 | y=302.08997 | width=6.671997 | height=5.358
+Text: t | x=92.892 | y=302.08997 | width=3.9960022 | height=5.358
+Text: u | x=96.888 | y=302.08997 | width=6.671997 | height=5.358
+Text: d | x=103.56 | y=302.08997 | width=6.671997 | height=5.358
+Text: e | x=110.27999 | y=302.08997 | width=5.328003 | height=5.358
+Text: n | x=115.56 | y=302.08997 | width=6.671997 | height=5.358
+Text: t | x=122.268 | y=302.08997 | width=3.9960022 | height=5.358
+Text: D | x=129.264 | y=302.08997 | width=8.664001 | height=5.358
+Text: e | x=137.86801 | y=302.08997 | width=5.328003 | height=5.358
+Text: t | x=143.14801 | y=302.08997 | width=3.9960022 | height=5.358
+Text: a | x=147.14401 | y=302.08997 | width=6.0 | height=5.358
+Text: i | x=153.14401 | y=302.08997 | width=3.3359985 | height=5.358
+Text: l | x=156.48001 | y=302.08997 | width=3.3359985 | height=5.358
+Text: s | x=159.81601 | y=302.08997 | width=4.6679993 | height=5.358
+Text: : | x=164.48401 | y=302.08997 | width=3.9960022 | height=5.358
+Text: F | x=77.664 | y=317.81 | width=6.138237 | height=5.0176797
+Text: i | x=83.80224 | y=317.81 | width=3.0691223 | height=5.0176797
+Text: r | x=86.87136 | y=317.81 | width=3.676323 | height=5.0176797
+Text: s | x=90.61388 | y=317.81 | width=4.2945633 | height=5.0176797
+Text: t | x=94.809135 | y=317.81 | width=3.0691223 | height=5.0176797
+Text: N | x=100.682365 | y=317.81 | width=7.9708786 | height=5.0176797
+Text: a | x=108.598045 | y=317.81 | width=4.9017563 | height=5.0176797
+Text: m | x=113.4005 | y=317.81 | width=8.589119 | height=5.0176797
+Text: e | x=122.03372 | y=317.81 | width=4.901764 | height=5.0176797
+Text: : | x=126.86 | y=317.81 | width=3.0691223 | height=5.0176797
+Text: L | x=77.664 | y=334.24997 | width=6.7454376 | height=5.0176797
+Text: a | x=84.40944 | y=334.24997 | width=4.901764 | height=5.0176797
+Text: s | x=89.3112 | y=334.24997 | width=4.2945633 | height=5.0176797
+Text: t | x=93.60577 | y=334.24997 | width=3.0691223 | height=5.0176797
+Text: N | x=99.49009 | y=334.24997 | width=7.9708786 | height=5.0176797
+Text: a | x=107.40577 | y=334.24997 | width=4.9017563 | height=5.0176797
+Text: m | x=112.20812 | y=334.24997 | width=8.589119 | height=5.0176797
+Text: e | x=120.841446 | y=334.24997 | width=4.901764 | height=5.0176797
+Text: : | x=125.66 | y=334.24997 | width=3.0691223 | height=5.0176797
+Text: D | x=77.664 | y=350.56998 | width=7.9708786 | height=5.0176797
+Text: a | x=85.57968 | y=350.56998 | width=4.901764 | height=5.0176797
+Text: t | x=90.481445 | y=350.56998 | width=3.0691223 | height=5.0176797
+Text: e | x=93.60577 | y=350.56998 | width=4.9017563 | height=5.0176797
+Text: o | x=101.267525 | y=350.56998 | width=5.5199966 | height=5.0176797
+Text: f | x=106.68812 | y=350.56998 | width=3.676323 | height=5.0176797
+Text: B | x=113.15764 | y=350.56998 | width=7.363678 | height=5.0176797
+Text: i | x=120.47711 | y=350.56998 | width=3.0691223 | height=5.0176797
+Text: r | x=123.48004 | y=350.56998 | width=3.676323 | height=5.0176797
+Text: t | x=127.18946 | y=350.56998 | width=3.0691147 | height=5.0176797
+Text: h | x=130.30267 | y=350.56998 | width=5.5200043 | height=5.0176797
+Text: : | x=135.70128 | y=350.56998 | width=3.0691223 | height=5.0176797
+Text: A | x=77.664 | y=366.88998 | width=7.9708786 | height=5.0176797
+Text: d | x=85.57968 | y=366.88998 | width=5.5199966 | height=5.0176797
+Text: d | x=91.09968 | y=366.88998 | width=5.5199966 | height=5.0176797
+Text: r | x=96.619675 | y=366.88998 | width=3.676323 | height=5.0176797
+Text: e | x=100.329094 | y=366.88998 | width=4.9017563 | height=5.0176797
+Text: s | x=105.23085 | y=366.88998 | width=4.2945633 | height=5.0176797
+Text: s | x=109.44811 | y=366.88998 | width=4.2945633 | height=5.0176797
+Text: : | x=113.78 | y=366.88998 | width=3.0691223 | height=5.0176797
+Text: E | x=77.664 | y=383.33 | width=6.7454376 | height=5.0176797
+Text: m | x=84.40944 | y=383.33 | width=8.589119 | height=5.0176797
+Text: a | x=92.99856 | y=383.33 | width=4.9017563 | height=5.0176797
+Text: i | x=97.82301 | y=383.33 | width=3.0691223 | height=5.0176797
+Text: l | x=100.93634 | y=383.33 | width=3.0691223 | height=5.0176797
+Text: : | x=103.93917 | y=383.33 | width=3.0691223 | height=5.0176797
+Text: P | x=77.664 | y=399.65 | width=6.138237 | height=5.0176797
+Text: h | x=83.80224 | y=399.65 | width=5.5199966 | height=5.0176797
+Text: o | x=89.322235 | y=399.65 | width=5.5199966 | height=5.0176797
+Text: n | x=94.84223 | y=399.65 | width=5.5199966 | height=5.0176797
+Text: e | x=100.36223 | y=399.65 | width=4.901764 | height=5.0176797
+Text: N | x=108.023994 | y=399.65 | width=7.9708786 | height=5.0176797
+Text: u | x=115.939674 | y=399.65 | width=5.5199966 | height=5.0176797
+Text: m | x=121.33827 | y=399.65 | width=8.589127 | height=5.0176797
+Text: b | x=129.9715 | y=399.65 | width=5.5200043 | height=5.0176797
+Text: e | x=135.4915 | y=399.65 | width=4.901764 | height=5.0176797
+Text: r | x=140.39326 | y=399.65 | width=3.6763153 | height=5.0176797
+Text: : | x=144.01437 | y=399.65 | width=3.0691223 | height=5.0176797
+Text: U | x=77.664 | y=416.09 | width=7.9708786 | height=5.0176797
+Text: n | x=85.57968 | y=416.09 | width=5.5199966 | height=5.0176797
+Text: i | x=91.09968 | y=416.09 | width=3.0691223 | height=5.0176797
+Text: q | x=94.213005 | y=416.09 | width=5.5199966 | height=5.0176797
+Text: u | x=99.733 | y=416.09 | width=5.5199966 | height=5.0176797
+Text: e | x=105.253 | y=416.09 | width=4.9017563 | height=5.0176797
+Text: S | x=112.91476 | y=416.09 | width=6.138237 | height=5.0176797
+Text: t | x=118.931496 | y=416.09 | width=3.0691223 | height=5.0176797
+Text: u | x=122.04482 | y=416.09 | width=5.5199966 | height=5.0176797
+Text: d | x=127.56482 | y=416.09 | width=5.5200043 | height=5.0176797
+Text: e | x=133.08482 | y=416.09 | width=4.901764 | height=5.0176797
+Text: n | x=137.88718 | y=416.09 | width=5.5200043 | height=5.0176797
+Text: t | x=143.40718 | y=416.09 | width=3.0691223 | height=5.0176797
+Text: I | x=149.2805 | y=416.09 | width=3.6763153 | height=5.0176797
+Text: d | x=152.87952 | y=416.09 | width=5.5200043 | height=5.0176797
+Text: e | x=158.39952 | y=416.09 | width=4.901764 | height=5.0176797
+Text: n | x=163.30128 | y=416.09 | width=5.5200043 | height=5.0176797
+Text: t | x=168.72188 | y=416.09 | width=3.0691223 | height=5.0176797
+Text: i | x=171.8352 | y=416.09 | width=3.0691223 | height=5.0176797
+Text: f | x=174.83813 | y=416.09 | width=3.6763153 | height=5.0176797
+Text: i | x=178.54755 | y=416.09 | width=3.0691223 | height=5.0176797
+Text: e | x=181.55037 | y=416.09 | width=4.901764 | height=5.0176797
+Text: r | x=186.45213 | y=416.09 | width=3.6763153 | height=5.0176797
+Text: ( | x=77.664 | y=430.61 | width=3.676323 | height=5.0176797
+Text: U | x=81.37342 | y=430.61 | width=7.9708786 | height=5.0176797
+Text: S | x=89.2891 | y=430.61 | width=6.138237 | height=5.0176797
+Text: I | x=95.42734 | y=430.61 | width=3.676323 | height=5.0176797
+Text: ) | x=99.00436 | y=430.61 | width=3.676323 | height=5.0176797
+Text: N | x=105.5 | y=430.61 | width=7.9708786 | height=5.0176797
+Text: u | x=113.41568 | y=430.61 | width=5.5199966 | height=5.0176797
+Text: m | x=118.93568 | y=430.61 | width=8.589119 | height=5.0176797
+Text: b | x=127.569 | y=430.61 | width=5.5200043 | height=5.0176797
+Text: e | x=133.089 | y=430.61 | width=4.901764 | height=5.0176797
+Text: r | x=137.89136 | y=430.61 | width=3.6763153 | height=5.0176797
+Text: : | x=141.62 | y=430.61 | width=3.0691223 | height=5.0176797
+Text: B | x=68.184 | y=491.59 | width=7.363678 | height=4.92936
+Text: . | x=75.503975 | y=491.59 | width=2.7600021 | height=4.92936
+Text: C | x=86.184 | y=491.59 | width=8.664001 | height=5.358
+Text: r | x=94.848 | y=491.59 | width=5.328003 | height=5.358
+Text: e | x=99.984 | y=491.59 | width=5.328003 | height=5.358
+Text: d | x=105.26401 | y=491.59 | width=6.671997 | height=5.358
+Text: i | x=111.97201 | y=491.59 | width=3.3359985 | height=5.358
+Text: t | x=115.30801 | y=491.59 | width=3.9960022 | height=5.358
+Text: T | x=122.05201 | y=491.59 | width=8.004005 | height=5.358
+Text: r | x=129.13202 | y=491.59 | width=5.328003 | height=5.358
+Text: a | x=134.41202 | y=491.59 | width=6.0 | height=5.358
+Text: n | x=140.41202 | y=491.59 | width=6.671997 | height=5.358
+Text: s | x=147.12001 | y=491.59 | width=4.6679993 | height=5.358
+Text: f | x=151.78801 | y=491.59 | width=3.9960022 | height=5.358
+Text: e | x=155.78401 | y=491.59 | width=5.328003 | height=5.358
+Text: r | x=161.04001 | y=491.59 | width=5.328003 | height=5.358
+Text: R | x=169.20001 | y=491.59 | width=8.664001 | height=5.358
+Text: e | x=177.86401 | y=491.59 | width=5.328003 | height=5.358
+Text: q | x=183.12001 | y=491.59 | width=6.671997 | height=5.358
+Text: u | x=189.828 | y=491.59 | width=6.671997 | height=5.358
+Text: e | x=196.536 | y=491.59 | width=5.328003 | height=5.358
+Text: s | x=201.816 | y=491.59 | width=4.6679993 | height=5.358
+Text: t | x=206.60399 | y=491.59 | width=3.9960022 | height=5.358
+Text: : | x=210.59999 | y=491.59 | width=3.9960022 | height=5.358
+Text: P | x=111.5 | y=507.43 | width=6.7454376 | height=4.92936
+Text: r | x=118.24544 | y=507.43 | width=4.901764 | height=4.92936
+Text: e | x=123.1472 | y=507.43 | width=4.901764 | height=4.92936
+Text: v | x=128.04897 | y=507.43 | width=5.5200043 | height=4.92936
+Text: i | x=133.56897 | y=507.43 | width=3.0691223 | height=4.92936
+Text: o | x=136.6933 | y=507.43 | width=5.5200043 | height=4.92936
+Text: u | x=142.2133 | y=507.43 | width=6.1382446 | height=4.92936
+Text: s | x=148.20805 | y=507.43 | width=4.2945557 | height=4.92936
+Text: u | x=155.2626 | y=507.43 | width=6.1382446 | height=4.92936
+Text: n | x=161.40085 | y=507.43 | width=6.1382446 | height=4.92936
+Text: i | x=167.5391 | y=507.43 | width=3.0691223 | height=4.92936
+Text: t | x=170.53091 | y=507.43 | width=3.6763153 | height=4.92936
+Text: ( | x=174.24033 | y=507.43 | width=3.6763153 | height=4.92936
+Text: s | x=177.83934 | y=507.43 | width=4.2945557 | height=4.92936
+Text: ) | x=182.1339 | y=507.43 | width=3.6763153 | height=4.92936
+Text: s | x=188.50401 | y=507.43 | width=4.2945557 | height=4.92936
+Text: u | x=192.79857 | y=507.43 | width=6.1382446 | height=4.92936
+Text: c | x=198.93681 | y=507.43 | width=4.901764 | height=4.92936
+Text: c | x=203.83858 | y=507.43 | width=4.901764 | height=4.92936
+Text: e | x=208.66304 | y=507.43 | width=4.901764 | height=4.92936
+Text: s | x=213.5648 | y=507.43 | width=4.2945557 | height=4.92936
+Text: s | x=217.89246 | y=507.43 | width=4.2945557 | height=4.92936
+Text: f | x=222.0877 | y=507.43 | width=3.6763153 | height=4.92936
+Text: u | x=225.79712 | y=507.43 | width=6.1382446 | height=4.92936
+Text: l | x=231.79187 | y=507.43 | width=3.0691223 | height=4.92936
+Text: l | x=234.90509 | y=507.43 | width=3.0691223 | height=4.92936
+Text: y | x=238.01842 | y=507.43 | width=5.5200043 | height=4.92936
+Text: c | x=246.17702 | y=507.43 | width=4.901764 | height=4.92936
+Text: o | x=251.07878 | y=507.43 | width=5.5200043 | height=4.92936
+Text: m | x=256.5988 | y=507.43 | width=9.19632 | height=4.92936
+Text: p | x=265.8503 | y=507.43 | width=6.1382446 | height=4.92936
+Text: l | x=271.84497 | y=507.43 | width=3.0691223 | height=4.92936
+Text: e | x=274.95828 | y=507.43 | width=4.901764 | height=4.92936
+Text: t | x=279.76065 | y=507.43 | width=3.6763306 | height=4.92936
+Text: e | x=283.47018 | y=507.43 | width=4.901764 | height=4.92936
+Text: d | x=288.37195 | y=507.43 | width=6.1382446 | height=4.92936
+Text: U | x=346.27 | y=507.43 | width=7.970886 | height=4.92936
+Text: n | x=354.18567 | y=507.43 | width=6.1382446 | height=4.92936
+Text: i | x=360.3239 | y=507.43 | width=3.0691223 | height=4.92936
+Text: t | x=363.39304 | y=507.43 | width=3.6763306 | height=4.92936
+Text: ( | x=367.13556 | y=507.43 | width=3.6763306 | height=4.92936
+Text: s | x=370.73468 | y=507.43 | width=4.2945557 | height=4.92936
+Text: ) | x=375.02924 | y=507.43 | width=3.6763306 | height=4.92936
+Text: a | x=381.52078 | y=507.43 | width=5.519989 | height=4.92936
+Text: p | x=387.04077 | y=507.43 | width=6.1382446 | height=4.92936
+Text: p | x=393.17902 | y=507.43 | width=6.1382446 | height=4.92936
+Text: l | x=399.16266 | y=507.43 | width=3.0691223 | height=4.92936
+Text: i | x=402.31 | y=507.43 | width=3.0691223 | height=4.92936
+Text: e | x=405.31293 | y=507.43 | width=4.901764 | height=4.92936
+Text: d | x=410.2147 | y=507.43 | width=6.1382446 | height=4.92936
+Text: f | x=419.11 | y=507.43 | width=3.6763306 | height=4.92936
+Text: o | x=422.81943 | y=507.43 | width=5.519989 | height=4.92936
+Text: r | x=428.21802 | y=507.43 | width=4.901764 | height=4.92936
+Text: C | x=435.8798 | y=507.43 | width=7.970886 | height=4.92936
+Text: r | x=443.85068 | y=507.43 | width=4.901764 | height=4.92936
+Text: e | x=448.75244 | y=507.43 | width=4.901764 | height=4.92936
+Text: d | x=453.6542 | y=507.43 | width=6.1382446 | height=4.92936
+Text: i | x=459.65994 | y=507.43 | width=3.0691223 | height=4.92936
+Text: t | x=462.77325 | y=507.43 | width=3.6763306 | height=4.92936
+Text: T | x=469.1323 | y=507.43 | width=7.363678 | height=4.92936
+Text: r | x=476.45178 | y=507.43 | width=4.901764 | height=4.92936
+Text: a | x=481.35355 | y=507.43 | width=5.519989 | height=4.92936
+Text: n | x=486.87354 | y=507.43 | width=6.1382446 | height=4.92936
+Text: s | x=493.01178 | y=507.43 | width=4.2945557 | height=4.92936
+Text: f | x=497.30634 | y=507.43 | width=3.6763306 | height=4.92936
+Text: e | x=500.92746 | y=507.43 | width=4.901764 | height=4.92936
+Text: r | x=505.82922 | y=507.43 | width=4.901764 | height=4.92936
+Text: U | x=82.704 | y=522.43 | width=7.9708786 | height=4.92936
+Text: n | x=90.61968 | y=522.43 | width=6.138237 | height=4.92936
+Text: i | x=96.75792 | y=522.43 | width=3.0691223 | height=4.92936
+Text: t | x=99.82704 | y=522.43 | width=3.676323 | height=4.92936
+Text: C | x=80.904 | y=536.94995 | width=7.9708786 | height=4.92936
+Text: o | x=88.81968 | y=536.94995 | width=5.5199966 | height=4.92936
+Text: d | x=94.339676 | y=536.94995 | width=6.138237 | height=4.92936
+Text: e | x=100.47791 | y=536.94995 | width=4.9017563 | height=4.92936
+Text: U | x=171.62 | y=522.43 | width=7.970886 | height=4.92936
+Text: n | x=179.53568 | y=522.43 | width=6.1382446 | height=4.92936
+Text: i | x=185.67392 | y=522.43 | width=3.0691223 | height=4.92936
+Text: t | x=188.74304 | y=522.43 | width=3.6763153 | height=4.92936
+Text: T | x=195.24554 | y=522.43 | width=7.363678 | height=4.92936
+Text: i | x=202.56512 | y=522.43 | width=3.0691223 | height=4.92936
+Text: t | x=205.56795 | y=522.43 | width=3.6763153 | height=4.92936
+Text: l | x=209.27747 | y=522.43 | width=3.0691223 | height=4.92936
+Text: e | x=212.28029 | y=522.43 | width=4.901764 | height=4.92936
+Text: E | x=283.01 | y=522.43 | width=7.363678 | height=4.92936
+Text: v | x=290.3295 | y=522.43 | width=5.519989 | height=4.92936
+Text: i | x=295.8495 | y=522.43 | width=3.0691223 | height=4.92936
+Text: d | x=298.9628 | y=522.43 | width=6.1382446 | height=4.92936
+Text: e | x=305.10104 | y=522.43 | width=4.901764 | height=4.92936
+Text: n | x=310.0028 | y=522.43 | width=6.1382446 | height=4.92936
+Text: c | x=316.14105 | y=522.43 | width=4.901764 | height=4.92936
+Text: e | x=320.92142 | y=522.43 | width=4.901764 | height=4.92936
+Text: P | x=280.25 | y=536.94995 | width=6.745453 | height=4.92936
+Text: r | x=286.99545 | y=536.94995 | width=4.901764 | height=4.92936
+Text: o | x=291.89722 | y=536.94995 | width=5.519989 | height=4.92936
+Text: v | x=297.4172 | y=536.94995 | width=5.519989 | height=4.92936
+Text: i | x=302.9372 | y=536.94995 | width=3.0691223 | height=4.92936
+Text: d | x=306.03943 | y=536.94995 | width=6.1382446 | height=4.92936
+Text: e | x=312.17767 | y=536.94995 | width=4.901764 | height=4.92936
+Text: d | x=316.95804 | y=536.94995 | width=6.1382446 | height=4.92936
+Text: * | x=323.09628 | y=536.94995 | width=5.519989 | height=4.92936
+Text: U | x=345.55 | y=522.43 | width=7.970886 | height=4.92936
+Text: n | x=353.46567 | y=522.43 | width=6.1382446 | height=4.92936
+Text: i | x=359.6039 | y=522.43 | width=3.0691223 | height=4.92936
+Text: t | x=362.67303 | y=522.43 | width=3.6763306 | height=4.92936
+Text: C | x=343.75 | y=536.94995 | width=7.970886 | height=4.92936
+Text: o | x=351.66568 | y=536.94995 | width=5.519989 | height=4.92936
+Text: d | x=357.18567 | y=536.94995 | width=6.1382446 | height=4.92936
+Text: e | x=363.3239 | y=536.94995 | width=4.901764 | height=4.92936
+Text: U | x=426.43 | y=522.43 | width=7.970886 | height=4.92936
+Text: n | x=434.34567 | y=522.43 | width=6.1382446 | height=4.92936
+Text: i | x=440.48392 | y=522.43 | width=3.0691223 | height=4.92936
+Text: t | x=443.55304 | y=522.43 | width=3.6763306 | height=4.92936
+Text: T | x=450.05557 | y=522.43 | width=7.363678 | height=4.92936
+Text: i | x=457.37515 | y=522.43 | width=3.0691223 | height=4.92936
+Text: t | x=460.378 | y=522.43 | width=3.6763306 | height=4.92936
+Text: l | x=464.08752 | y=522.43 | width=3.0691223 | height=4.92936
+Text: e | x=467.09036 | y=522.43 | width=4.901764 | height=4.92936
+Text: ( | x=71.784 | y=624.45996 | width=2.6773224 | height=3.6541798
+Text: * | x=74.42112 | y=624.45996 | width=4.0199966 | height=3.6541798
+Text: ) | x=78.38482 | y=624.45996 | width=2.6773224 | height=3.6541798
+Text: S | x=83.53045 | y=624.45996 | width=4.4702377 | height=3.6541798
+Text: t | x=87.96848 | y=624.45996 | width=2.2351227 | height=3.6541798
+Text: u | x=90.243805 | y=624.45996 | width=4.0199966 | height=3.6541798
+Text: d | x=94.312096 | y=624.45996 | width=4.0199966 | height=3.6541798
+Text: e | x=98.275795 | y=624.45996 | width=3.5697632 | height=3.6541798
+Text: n | x=101.86966 | y=624.45996 | width=4.0199966 | height=3.6541798
+Text: t | x=105.83336 | y=624.45996 | width=2.2351227 | height=3.6541798
+Text: ( | x=108.10868 | y=624.45996 | width=2.6773224 | height=3.6541798
+Text: s | x=110.745804 | y=624.45996 | width=3.1275635 | height=3.6541798
+Text: ) | x=113.87337 | y=624.45996 | width=2.6773224 | height=3.6541798
+Text: w | x=119.06 | y=624.45996 | width=5.804878 | height=3.6541798
+Text: i | x=124.81667 | y=624.45996 | width=2.2351227 | height=3.6541798
+Text: l | x=126.97939 | y=624.45996 | width=2.235115 | height=3.6541798
+Text: l | x=129.25471 | y=624.45996 | width=2.2351227 | height=3.6541798
+Text: b | x=133.92593 | y=624.45996 | width=4.0200043 | height=3.6541798
+Text: e | x=137.88965 | y=624.45996 | width=3.5697632 | height=3.6541798
+Text: r | x=143.992 | y=624.45996 | width=2.6773224 | height=3.6541798
+Text: e | x=146.62912 | y=624.45996 | width=3.5697632 | height=3.6541798
+Text: q | x=150.11049 | y=624.45996 | width=4.0200043 | height=3.6541798
+Text: u | x=154.0742 | y=624.45996 | width=4.0200043 | height=3.6541798
+Text: i | x=158.1425 | y=624.45996 | width=2.2351227 | height=3.6541798
+Text: r | x=160.41783 | y=624.45996 | width=2.6773224 | height=3.6541798
+Text: e | x=163.05495 | y=624.45996 | width=3.5697632 | height=3.6541798
+Text: d | x=166.53621 | y=624.45996 | width=4.0200043 | height=3.6541798
+Text: t | x=173.00842 | y=624.45996 | width=2.2351227 | height=3.6541798
+Text: o | x=175.17125 | y=624.45996 | width=4.0200043 | height=3.6541798
+Text: p | x=181.63536 | y=624.45996 | width=4.0200043 | height=3.6541798
+Text: r | x=185.70366 | y=624.45996 | width=2.6773224 | height=3.6541798
+Text: o | x=188.34077 | y=624.45996 | width=4.0200043 | height=3.6541798
+Text: v | x=192.30449 | y=624.45996 | width=4.0200043 | height=3.6541798
+Text: i | x=196.3727 | y=624.45996 | width=2.2351227 | height=3.6541798
+Text: d | x=198.53552 | y=624.45996 | width=4.0200043 | height=3.6541798
+Text: e | x=202.60373 | y=624.45996 | width=3.5697632 | height=3.6541798
+Text: s | x=208.59349 | y=624.45996 | width=3.1275635 | height=3.6541798
+Text: u | x=211.72105 | y=624.45996 | width=4.0200043 | height=3.6541798
+Text: p | x=215.67676 | y=624.45996 | width=4.0200043 | height=3.6541798
+Text: p | x=219.64047 | y=624.45996 | width=4.0200043 | height=3.6541798
+Text: o | x=223.70877 | y=624.45996 | width=4.0200043 | height=3.6541798
+Text: r | x=227.77698 | y=624.45996 | width=2.6773224 | height=3.6541798
+Text: t | x=230.2935 | y=624.45996 | width=2.2351227 | height=3.6541798
+Text: i | x=232.56883 | y=624.45996 | width=2.2351227 | height=3.6541798
+Text: n | x=234.73166 | y=624.45996 | width=4.0200043 | height=3.6541798
+Text: g | x=238.79987 | y=624.45996 | width=4.0200043 | height=3.6541798
+Text: e | x=245.27208 | y=624.45996 | width=3.5697632 | height=3.6541798
+Text: v | x=248.75345 | y=624.45996 | width=4.0200043 | height=3.6541798
+Text: i | x=252.82166 | y=624.45996 | width=2.2351227 | height=3.6541798
+Text: d | x=254.98438 | y=624.45996 | width=4.019989 | height=3.6541798
+Text: e | x=259.05267 | y=624.45996 | width=3.5697632 | height=3.6541798
+Text: n | x=262.53394 | y=624.45996 | width=4.019989 | height=3.6541798
+Text: c | x=266.4977 | y=624.45996 | width=3.5697632 | height=3.6541798
+Text: e | x=270.09158 | y=624.45996 | width=3.5697632 | height=3.6541798
+Text: ( | x=276.19397 | y=624.45996 | width=2.6773071 | height=3.6541798
+Text: e | x=278.71048 | y=624.45996 | width=3.5697632 | height=3.6541798
+Text: . | x=282.30435 | y=624.45996 | width=2.0100098 | height=3.6541798
+Text: g | x=284.22595 | y=624.45996 | width=4.019989 | height=3.6541798
+Text: . | x=288.29413 | y=624.45996 | width=2.0100098 | height=3.6541798
+Text: , | x=290.32825 | y=624.45996 | width=2.0100098 | height=3.6541798
+Text: C | x=295.01 | y=624.45996 | width=5.362671 | height=3.6541798
+Text: e | x=300.29227 | y=624.45996 | width=3.5697632 | height=3.6541798
+Text: r | x=303.88614 | y=624.45996 | width=2.6773071 | height=3.6541798
+Text: t | x=306.52325 | y=624.45996 | width=2.2351074 | height=3.6541798
+Text: i | x=308.79855 | y=624.45996 | width=2.2351074 | height=3.6541798
+Text: f | x=311.07385 | y=624.45996 | width=2.6773071 | height=3.6541798
+Text: i | x=313.59036 | y=624.45996 | width=2.2351074 | height=3.6541798
+Text: c | x=315.86566 | y=624.45996 | width=3.5697632 | height=3.6541798
+Text: a | x=319.45953 | y=624.45996 | width=3.5697632 | height=3.6541798
+Text: t | x=322.9409 | y=624.45996 | width=2.2351074 | height=3.6541798
+Text: e | x=325.2162 | y=624.45996 | width=3.5697632 | height=3.6541798
+Text: , | x=328.75 | y=624.45996 | width=2.0100098 | height=3.6541798
+Text: S | x=333.29263 | y=624.45996 | width=4.4702454 | height=3.6541798
+Text: t | x=337.73068 | y=624.45996 | width=2.2351074 | height=3.6541798
+Text: a | x=339.8935 | y=624.45996 | width=3.5697632 | height=3.6541798
+Text: t | x=343.48737 | y=624.45996 | width=2.2351074 | height=3.6541798
+Text: e | x=345.6501 | y=624.45996 | width=3.5697632 | height=3.6541798
+Text: m | x=349.24405 | y=624.45996 | width=6.255127 | height=3.6541798
+Text: e | x=355.49918 | y=624.45996 | width=3.5697632 | height=3.6541798
+Text: n | x=358.96432 | y=624.45996 | width=4.019989 | height=3.6541798
+Text: t | x=363.03262 | y=624.45996 | width=2.2351074 | height=3.6541798
+Text: o | x=367.70386 | y=624.45996 | width=4.019989 | height=3.6541798
+Text: f | x=371.77203 | y=624.45996 | width=2.6773071 | height=3.6541798
+Text: A | x=376.79706 | y=624.45996 | width=5.8048706 | height=3.6541798
+Text: t | x=382.55374 | y=624.45996 | width=2.2351074 | height=3.6541798
+Text: t | x=384.82904 | y=624.45996 | width=2.2351074 | height=3.6541798
+Text: a | x=386.99176 | y=624.45996 | width=3.5697632 | height=3.6541798
+Text: i | x=390.58563 | y=624.45996 | width=2.2351074 | height=3.6541798
+Text: n | x=392.74844 | y=624.45996 | width=4.019989 | height=3.6541798
+Text: m | x=396.81662 | y=624.45996 | width=6.255127 | height=3.6541798
+Text: e | x=402.93503 | y=624.45996 | width=3.5697632 | height=3.6541798
+Text: n | x=406.529 | y=624.45996 | width=4.019989 | height=3.6541798
+Text: t | x=410.49268 | y=624.45996 | width=2.2351074 | height=3.6541798
+Text: ( | x=415.2765 | y=624.45996 | width=2.6773071 | height=3.6541798
+Text: S | x=417.9136 | y=624.45996 | width=4.4702454 | height=3.6541798
+Text: O | x=422.35165 | y=624.45996 | width=5.8048706 | height=3.6541798
+Text: A | x=428.10834 | y=624.45996 | width=5.8048706 | height=3.6541798
+Text: ) | x=433.74432 | y=624.45996 | width=2.6773071 | height=3.6541798
+Text: a | x=438.88995 | y=624.45996 | width=3.5697632 | height=3.6541798
+Text: n | x=442.48383 | y=624.45996 | width=4.019989 | height=3.6541798
+Text: d | x=446.4475 | y=624.45996 | width=4.019989 | height=3.6541798
+Text: / | x=450.5158 | y=624.45996 | width=2.2351074 | height=3.6541798
+Text: o | x=452.67853 | y=624.45996 | width=4.019989 | height=3.6541798
+Text: r | x=456.74683 | y=624.45996 | width=2.6773071 | height=3.6541798
+Text: a | x=461.77985 | y=624.45996 | width=3.5697632 | height=3.6541798
+Text: n | x=465.37372 | y=624.45996 | width=4.019989 | height=3.6541798
+Text: y | x=469.3374 | y=624.45996 | width=4.019989 | height=3.6541798
+Text: o | x=475.8016 | y=624.45996 | width=4.019989 | height=3.6541798
+Text: t | x=479.7653 | y=624.45996 | width=2.2351074 | height=3.6541798
+Text: h | x=482.0406 | y=624.45996 | width=4.019989 | height=3.6541798
+Text: e | x=486.00427 | y=624.45996 | width=3.5697632 | height=3.6541798
+Text: r | x=489.59814 | y=624.45996 | width=2.6773071 | height=3.6541798
+Text: r | x=494.74377 | y=624.45996 | width=2.6773071 | height=3.6541798
+Text: e | x=497.3809 | y=624.45996 | width=3.5697632 | height=3.6541798
+Text: l | x=500.86224 | y=624.45996 | width=2.2351074 | height=3.6541798
+Text: e | x=503.13754 | y=624.45996 | width=3.5697632 | height=3.6541798
+Text: v | x=506.6188 | y=624.45996 | width=4.019989 | height=3.6541798
+Text: a | x=510.6871 | y=624.45996 | width=3.5697327 | height=3.6541798
+Text: n | x=514.16833 | y=624.45996 | width=4.0200195 | height=3.6541798
+Text: t | x=518.23663 | y=624.45996 | width=2.2351074 | height=3.6541798
+Text: e | x=71.784 | y=635.14 | width=3.5697632 | height=3.6541798
+Text: v | x=75.37786 | y=635.14 | width=4.0199966 | height=3.6541798
+Text: i | x=79.34156 | y=635.14 | width=2.2351227 | height=3.6541798
+Text: d | x=81.61688 | y=635.14 | width=4.0199966 | height=3.6541798
+Text: e | x=85.58068 | y=635.14 | width=3.5697632 | height=3.6541798
+Text: n | x=89.174545 | y=635.14 | width=4.0199966 | height=3.6541798
+Text: c | x=93.138245 | y=635.14 | width=3.5697632 | height=3.6541798
+Text: e | x=96.73211 | y=635.14 | width=3.5697632 | height=3.6541798
+Text: ( | x=102.360176 | y=635.14 | width=2.6773224 | height=3.6541798
+Text: s | x=104.9973 | y=635.14 | width=3.1275635 | height=3.6541798
+Text: ) | x=108.12486 | y=635.14 | width=2.6773224 | height=3.6541798
+Text: ) | x=110.78 | y=635.14 | width=2.6773224 | height=3.6541798
+Text: t | x=115.34 | y=635.14 | width=2.2351227 | height=3.6541798
+Text: o | x=117.61532 | y=635.14 | width=4.0199966 | height=3.6541798
+Text: s | x=123.61312 | y=635.14 | width=3.1275635 | height=3.6541798
+Text: u | x=126.740685 | y=635.14 | width=4.0199966 | height=3.6541798
+Text: p | x=130.69638 | y=635.14 | width=4.0200043 | height=3.6541798
+Text: p | x=134.6601 | y=635.14 | width=4.0200043 | height=3.6541798
+Text: o | x=138.7284 | y=635.14 | width=4.0200043 | height=3.6541798
+Text: r | x=142.7966 | y=635.14 | width=2.6773224 | height=3.6541798
+Text: t | x=145.31313 | y=635.14 | width=2.2351227 | height=3.6541798
+Text: t | x=149.66 | y=635.14 | width=2.2351227 | height=3.6541798
+Text: h | x=151.82272 | y=635.14 | width=4.0200043 | height=3.6541798
+Text: e | x=155.78653 | y=635.14 | width=3.5697632 | height=3.6541798
+Text: r | x=161.42 | y=635.14 | width=2.6773224 | height=3.6541798
+Text: e | x=164.05711 | y=635.14 | width=3.5697632 | height=3.6541798
+Text: q | x=167.53848 | y=635.14 | width=4.0200043 | height=3.6541798
+Text: u | x=171.60669 | y=635.14 | width=4.0200043 | height=3.6541798
+Text: e | x=175.5704 | y=635.14 | width=3.5697632 | height=3.6541798
+Text: s | x=179.16428 | y=635.14 | width=3.1275635 | height=3.6541798
+Text: t | x=182.29184 | y=635.14 | width=2.2351227 | height=3.6541798
+Text: f | x=186.53 | y=635.14 | width=2.6773224 | height=3.6541798
+Text: o | x=189.16711 | y=635.14 | width=4.0200043 | height=3.6541798
+Text: r | x=193.13083 | y=635.14 | width=2.6773224 | height=3.6541798
+Text: a | x=197.81 | y=635.14 | width=3.5697632 | height=3.6541798
+Text: c | x=203.43797 | y=635.14 | width=3.5697632 | height=3.6541798
+Text: r | x=207.03194 | y=635.14 | width=2.6773224 | height=3.6541798
+Text: e | x=209.66905 | y=635.14 | width=3.5697632 | height=3.6541798
+Text: d | x=213.15031 | y=635.14 | width=4.0200043 | height=3.6541798
+Text: i | x=217.11403 | y=635.14 | width=2.2351227 | height=3.6541798
+Text: t | x=219.38936 | y=635.14 | width=2.2351227 | height=3.6541798
+Text: t | x=223.58629 | y=635.14 | width=2.2351227 | height=3.6541798
+Text: r | x=225.86162 | y=635.14 | width=2.6773224 | height=3.6541798
+Text: a | x=228.49873 | y=635.14 | width=3.5697632 | height=3.6541798
+Text: n | x=231.9801 | y=635.14 | width=4.0200043 | height=3.6541798
+Text: s | x=236.04831 | y=635.14 | width=3.1275635 | height=3.6541798
+Text: f | x=239.17587 | y=635.14 | width=2.6773224 | height=3.6541798
+Text: e | x=241.805 | y=635.14 | width=3.5697632 | height=3.6541798
+Text: r | x=245.39886 | y=635.14 | width=2.6773224 | height=3.6541798
+Text: . | x=248.03598 | y=635.14 | width=2.0099945 | height=3.6541798
+--- FORM WIDGETS ---
+Widget: x=198.84 | y=518.64 | width=323.63998 | height=15.119995
+Widget: x=198.84 | y=502.2 | width=323.63998 | height=15.23999
+Widget: x=198.84 | y=485.88 | width=323.63998 | height=15.119995
+Widget: x=198.84 | y=469.44 | width=323.63998 | height=15.23999
+Widget: x=198.84 | y=453.12 | width=323.63998 | height=15.119995
+Widget: x=198.84 | y=436.8 | width=323.63998 | height=15.120026
+Widget: x=199.2 | y=407.16 | width=322.91998 | height=28.799988
+Widget: x=72.96 | y=285.6 | width=43.200005 | height=14.040009
+Widget: x=117.48 | y=285.6 | width=156.72 | height=14.040009
+Widget: x=275.52 | y=285.6 | width=60.600006 | height=14.040009
+Widget: x=337.44 | y=285.6 | width=40.079987 | height=14.040009
+Widget: x=378.84 | y=285.6 | width=143.75998 | height=14.040009
+Widget: x=72.96 | y=270.6 | width=43.200005 | height=13.919983
+Widget: x=117.48 | y=270.6 | width=156.72 | height=13.919983
+Widget: x=275.52 | y=270.6 | width=60.600006 | height=13.919983
+Widget: x=337.44 | y=270.6 | width=40.079987 | height=13.919983
+Widget: x=378.84 | y=270.6 | width=143.75998 | height=13.919983
+Widget: x=72.96 | y=255.48 | width=43.200005 | height=14.039993
+Widget: x=117.48 | y=255.48 | width=156.72 | height=14.039993
+Widget: x=275.52 | y=255.48 | width=60.600006 | height=14.039993
+Widget: x=337.44 | y=255.48 | width=40.079987 | height=14.039993
+Widget: x=378.84 | y=255.48 | width=143.75998 | height=14.039993
+Widget: x=72.96 | y=240.48 | width=43.200005 | height=13.919998
+Widget: x=117.48 | y=240.48 | width=156.72 | height=13.919998
+Widget: x=275.52 | y=240.48 | width=60.600006 | height=13.919998
+Widget: x=337.44 | y=240.48 | width=40.079987 | height=13.919998
+Widget: x=378.84 | y=240.48 | width=143.75998 | height=13.919998
+Widget: x=72.96 | y=225.48 | width=43.200005 | height=13.919998
+Widget: x=117.48 | y=225.48 | width=156.72 | height=13.919998
+Widget: x=275.52 | y=225.48 | width=60.600006 | height=13.919998
+Widget: x=337.44 | y=225.48 | width=40.079987 | height=13.919998
+Widget: x=378.84 | y=225.48 | width=143.75998 | height=13.919998
+
+--- PAGE 2 ---
+Width: 595.32
+Height: 841.92
+Sept 11, 2026 3:04:29 PM org.apache.fontbox.ttf.CmapSubtable processSubtype14
+WARNING: Format 14 cmap table is not supported and will be ignored
+Text: C | x=72.024 | y=792.696 | width=7.363678 | height=5.0176797
+Text: r | x=79.343475 | y=792.696 | width=3.676323 | height=5.0176797
+Text: e | x=83.05299 | y=792.696 | width=4.901764 | height=5.0176797
+Text: d | x=87.95476 | y=792.696 | width=5.5199966 | height=5.0176797
+Text: i | x=93.474754 | y=792.696 | width=3.0691223 | height=5.0176797
+Text: t | x=96.48868 | y=792.696 | width=3.0691223 | height=5.0176797
+Text: T | x=102.36191 | y=792.696 | width=6.7454376 | height=5.0176797
+Text: r | x=109.107346 | y=792.696 | width=3.676323 | height=5.0176797
+Text: a | x=112.684364 | y=792.696 | width=4.9017563 | height=5.0176797
+Text: n | x=117.58612 | y=792.696 | width=5.5199966 | height=5.0176797
+Text: s | x=123.10612 | y=792.696 | width=4.2945633 | height=5.0176797
+Text: f | x=127.32338 | y=792.696 | width=3.6763153 | height=5.0176797
+Text: e | x=131.03279 | y=792.696 | width=4.901764 | height=5.0176797
+Text: r | x=135.93456 | y=792.696 | width=3.6763153 | height=5.0176797
+Text: F | x=142.31566 | y=792.696 | width=6.1382446 | height=5.0176797
+Text: o | x=148.4539 | y=792.696 | width=5.5200043 | height=5.0176797
+Text: r | x=153.9739 | y=792.696 | width=3.6763153 | height=5.0176797
+Text: m | x=157.55081 | y=792.696 | width=8.589127 | height=5.0176797
+Text: _ | x=166.18414 | y=792.696 | width=5.5200043 | height=5.0176797
+Text: V | x=171.70415 | y=792.696 | width=7.970886 | height=5.0176797
+Text: 2 | x=179.61983 | y=792.696 | width=5.5200043 | height=5.0176797
+Text: . | x=185.13983 | y=792.696 | width=2.7599945 | height=5.0176797
+Text: 1 | x=187.97 | y=792.696 | width=5.5200043 | height=5.0176797
+Text: P | x=473.62 | y=792.696 | width=6.1382446 | height=5.0176797
+Text: a | x=479.75824 | y=792.696 | width=4.901764 | height=5.0176797
+Text: g | x=484.66 | y=792.696 | width=5.519989 | height=5.0176797
+Text: e | x=490.18 | y=792.696 | width=4.901764 | height=5.0176797
+Text: 2 | x=497.86 | y=792.696 | width=5.519989 | height=4.92936
+Text: o | x=506.14 | y=792.696 | width=5.519989 | height=5.0176797
+Text: f | x=511.5386 | y=792.696 | width=3.6763 | height=5.0176797
+Text: 2 | x=518.02 | y=792.696 | width=5.5200195 | height=4.92936
+Text: C | x=68.184 | y=83.15997 | width=7.9708786 | height=4.92936
+Text: . | x=76.10398 | y=83.15997 | width=2.7600021 | height=4.92936
+Text: D | x=86.184 | y=83.15997 | width=8.664001 | height=5.358
+Text: e | x=94.848 | y=83.15997 | width=5.328003 | height=5.358
+Text: c | x=100.104004 | y=83.15997 | width=5.328003 | height=5.358
+Text: l | x=105.38401 | y=83.15997 | width=3.3359985 | height=5.358
+Text: a | x=108.72001 | y=83.15997 | width=6.0 | height=5.358
+Text: r | x=114.72001 | y=83.15997 | width=5.328003 | height=5.358
+Text: a | x=120.04801 | y=83.15997 | width=6.0 | height=5.358
+Text: t | x=126.04801 | y=83.15997 | width=3.9959946 | height=5.358
+Text: i | x=129.98401 | y=83.15997 | width=3.3359985 | height=5.358
+Text: o | x=133.32 | y=83.15997 | width=6.0 | height=5.358
+Text: n | x=139.32 | y=83.15997 | width=6.671997 | height=5.358
+Text: : | x=146.052 | y=83.15997 | width=3.9960022 | height=5.358
+Text: I | x=71.784 | y=98.41998 | width=3.676323 | height=5.0176797
+Text: , | x=75.38302 | y=98.41998 | width=2.7600021 | height=5.0176797
+Text: _ | x=80.90302 | y=98.41998 | width=5.5199966 | height=5.0176797
+Text: _ | x=86.42302 | y=98.41998 | width=5.5199966 | height=5.0176797
+Text: _ | x=91.943016 | y=98.41998 | width=5.5199966 | height=5.0176797
+Text: _ | x=97.46301 | y=98.41998 | width=5.5199966 | height=5.0176797
+Text: _ | x=102.98301 | y=98.41998 | width=5.5199966 | height=5.0176797
+Text: _ | x=108.503006 | y=98.41998 | width=5.5199966 | height=5.0176797
+Text: _ | x=114.023 | y=98.41998 | width=5.5199966 | height=5.0176797
+Text: _ | x=119.543 | y=98.41998 | width=5.5199966 | height=5.0176797
+Text: _ | x=125.062996 | y=98.41998 | width=5.5199966 | height=5.0176797
+Text: _ | x=130.583 | y=98.41998 | width=5.5200043 | height=5.0176797
+Text: _ | x=136.103 | y=98.41998 | width=5.5200043 | height=5.0176797
+Text: _ | x=141.5016 | y=98.41998 | width=5.5200043 | height=5.0176797
+Text: _ | x=147.0216 | y=98.41998 | width=5.5200043 | height=5.0176797
+Text: _ | x=152.54161 | y=98.41998 | width=5.5200043 | height=5.0176797
+Text: _ | x=158.06161 | y=98.41998 | width=5.5200043 | height=5.0176797
+Text: _ | x=163.58162 | y=98.41998 | width=5.5200043 | height=5.0176797
+Text: _ | x=169.10162 | y=98.41998 | width=5.5200043 | height=5.0176797
+Text: _ | x=174.50014 | y=98.41998 | width=5.5200043 | height=5.0176797
+Text: _ | x=180.02014 | y=98.41998 | width=5.5200043 | height=5.0176797
+Text: _ | x=185.54015 | y=98.41998 | width=5.5200043 | height=5.0176797
+Text: _ | x=190.93875 | y=98.41998 | width=5.5200043 | height=5.0176797
+Text: _ | x=196.45876 | y=98.41998 | width=5.5200043 | height=5.0176797
+Text: _ | x=201.97876 | y=98.41998 | width=5.5200043 | height=5.0176797
+Text: _ | x=207.49876 | y=98.41998 | width=5.5200043 | height=5.0176797
+Text: _ | x=213.01877 | y=98.41998 | width=5.5200043 | height=5.0176797
+Text: _ | x=218.53877 | y=98.41998 | width=5.5200043 | height=5.0176797
+Text: _ | x=224.05878 | y=98.41998 | width=5.5200043 | height=5.0176797
+Text: _ | x=229.57878 | y=98.41998 | width=5.5200043 | height=5.0176797
+Text: _ | x=235.09879 | y=98.41998 | width=5.5200043 | height=5.0176797
+Text: _ | x=240.49739 | y=98.41998 | width=5.5200043 | height=5.0176797
+Text: _ | x=246.0174 | y=98.41998 | width=5.5200043 | height=5.0176797
+Text: _ | x=251.5374 | y=98.41998 | width=5.5200043 | height=5.0176797
+Text: _ | x=257.0574 | y=98.41998 | width=5.519989 | height=5.0176797
+Text: _ | x=262.5774 | y=98.41998 | width=5.519989 | height=5.0176797
+Text: _ | x=268.09738 | y=98.41998 | width=5.519989 | height=5.0176797
+Text: _ | x=273.49588 | y=98.41998 | width=5.519989 | height=5.0176797
+Text: _ | x=279.01587 | y=98.41998 | width=5.519989 | height=5.0176797
+Text: _ | x=284.53586 | y=98.41998 | width=5.519989 | height=5.0176797
+Text: _ | x=290.05585 | y=98.41998 | width=5.519989 | height=5.0176797
+Text: _ | x=295.57584 | y=98.41998 | width=5.519989 | height=5.0176797
+Text: _ | x=301.09583 | y=98.41998 | width=5.519989 | height=5.0176797
+Text: _ | x=306.49442 | y=98.41998 | width=5.519989 | height=5.0176797
+Text: _ | x=311.8929 | y=98.41998 | width=5.519989 | height=5.0176797
+Text: _ | x=317.4129 | y=98.41998 | width=5.519989 | height=5.0176797
+Text: d | x=322.9329 | y=98.41998 | width=5.519989 | height=5.0176797
+Text: e | x=328.45288 | y=98.41998 | width=4.901764 | height=5.0176797
+Text: c | x=333.35464 | y=98.41998 | width=4.901764 | height=5.0176797
+Text: l | x=338.16812 | y=98.41998 | width=3.0691223 | height=5.0176797
+Text: a | x=341.28143 | y=98.41998 | width=4.901764 | height=5.0176797
+Text: r | x=346.1832 | y=98.41998 | width=3.6763306 | height=5.0176797
+Text: e | x=349.80432 | y=98.41998 | width=4.901764 | height=5.0176797
+Text: t | x=357.4661 | y=98.41998 | width=3.0691223 | height=5.0176797
+Text: h | x=360.48 | y=98.41998 | width=5.519989 | height=5.0176797
+Text: a | x=366.0 | y=98.41998 | width=4.901764 | height=5.0176797
+Text: t | x=370.90176 | y=98.41998 | width=3.0691223 | height=5.0176797
+Text: I | x=376.7861 | y=98.41998 | width=3.6763306 | height=5.0176797
+Text: h | x=383.14514 | y=98.41998 | width=5.519989 | height=5.0176797
+Text: a | x=388.66513 | y=98.41998 | width=4.901764 | height=5.0176797
+Text: v | x=393.4675 | y=98.41998 | width=5.519989 | height=5.0176797
+Text: e | x=398.9875 | y=98.41998 | width=4.901764 | height=5.0176797
+Text: r | x=406.64926 | y=98.41998 | width=3.6763306 | height=5.0176797
+Text: e | x=410.2704 | y=98.41998 | width=4.901764 | height=5.0176797
+Text: q | x=415.17215 | y=98.41998 | width=5.519989 | height=5.0176797
+Text: u | x=420.69214 | y=98.41998 | width=5.519989 | height=5.0176797
+Text: e | x=426.21213 | y=98.41998 | width=4.901764 | height=5.0176797
+Text: s | x=431.0256 | y=98.41998 | width=4.2945557 | height=5.0176797
+Text: t | x=435.32016 | y=98.41998 | width=3.0691223 | height=5.0176797
+Text: e | x=438.45557 | y=98.41998 | width=4.901764 | height=5.0176797
+Text: d | x=443.35733 | y=98.41998 | width=5.519989 | height=5.0176797
+Text: a | x=451.53793 | y=98.41998 | width=4.901764 | height=5.0176797
+Text: c | x=459.1997 | y=98.41998 | width=4.901764 | height=5.0176797
+Text: r | x=464.01318 | y=98.41998 | width=3.6763306 | height=5.0176797
+Text: e | x=467.72263 | y=98.41998 | width=4.901764 | height=5.0176797
+Text: d | x=472.6244 | y=98.41998 | width=5.519989 | height=5.0176797
+Text: i | x=478.04498 | y=98.41998 | width=3.0691223 | height=5.0176797
+Text: t | x=481.1583 | y=98.41998 | width=3.0691223 | height=5.0176797
+Text: t | x=486.91013 | y=98.41998 | width=3.0691223 | height=5.0176797
+Text: r | x=490.02344 | y=98.41998 | width=3.6763306 | height=5.0176797
+Text: a | x=493.73288 | y=98.41998 | width=4.901764 | height=5.0176797
+Text: n | x=498.53525 | y=98.41998 | width=5.519989 | height=5.0176797
+Text: s | x=504.05524 | y=98.41998 | width=4.2945557 | height=5.0176797
+Text: f | x=508.3498 | y=98.41998 | width=3.6763306 | height=5.0176797
+Text: e | x=511.97092 | y=98.41998 | width=4.901764 | height=5.0176797
+Text: r | x=516.8727 | y=98.41998 | width=3.6763306 | height=5.0176797
+Text: f | x=71.784 | y=113.06 | width=3.676323 | height=5.0176797
+Text: o | x=75.493416 | y=113.06 | width=5.5199966 | height=5.0176797
+Text: r | x=81.01341 | y=113.06 | width=3.676323 | height=5.0176797
+Text: a | x=87.482834 | y=113.06 | width=4.901764 | height=5.0176797
+Text: t | x=95.045296 | y=113.06 | width=3.0691223 | height=5.0176797
+Text: o | x=98.15852 | y=113.06 | width=5.5199966 | height=5.0176797
+Text: t | x=103.55712 | y=113.06 | width=3.0691223 | height=5.0176797
+Text: a | x=106.67045 | y=113.06 | width=4.9017563 | height=5.0176797
+Text: l | x=111.4728 | y=113.06 | width=3.0691223 | height=5.0176797
+Text: o | x=117.34613 | y=113.06 | width=5.5199966 | height=5.0176797
+Text: f | x=122.86613 | y=113.06 | width=3.676323 | height=5.0176797
+Text: _ | x=129.21405 | y=113.06 | width=5.5200043 | height=5.0176797
+Text: _ | x=134.73405 | y=113.06 | width=5.5200043 | height=5.0176797
+Text: _ | x=140.25406 | y=113.06 | width=5.5200043 | height=5.0176797
+Text: _ | x=145.77406 | y=113.06 | width=5.5200043 | height=5.0176797
+Text: u | x=154.05406 | y=113.06 | width=5.5200043 | height=5.0176797
+Text: n | x=159.45267 | y=113.06 | width=5.5200043 | height=5.0176797
+Text: i | x=164.97267 | y=113.06 | width=3.0691223 | height=5.0176797
+Text: t | x=167.9756 | y=113.06 | width=3.0691223 | height=5.0176797
+Text: s | x=171.08882 | y=113.06 | width=4.2945557 | height=5.0176797
+Text: o | x=178.14337 | y=113.06 | width=5.5200043 | height=5.0176797
+Text: f | x=183.56407 | y=113.06 | width=3.6763153 | height=5.0176797
+Text: c | x=189.91199 | y=113.06 | width=4.901764 | height=5.0176797
+Text: o | x=194.81375 | y=113.06 | width=5.5200043 | height=5.0176797
+Text: m | x=200.33376 | y=113.06 | width=8.589127 | height=5.0176797
+Text: p | x=208.97809 | y=113.06 | width=5.5200043 | height=5.0176797
+Text: e | x=214.3767 | y=113.06 | width=4.901764 | height=5.0176797
+Text: t | x=219.27846 | y=113.06 | width=3.0691223 | height=5.0176797
+Text: e | x=222.40279 | y=113.06 | width=4.901764 | height=5.0176797
+Text: n | x=227.20514 | y=113.06 | width=5.5200043 | height=5.0176797
+Text: c | x=232.72514 | y=113.06 | width=4.901764 | height=5.0176797
+Text: y | x=237.6269 | y=113.06 | width=5.5200043 | height=5.0176797
+Text: . | x=243.14691 | y=113.06 | width=2.7599945 | height=5.0176797
+Text: A | x=71.784 | y=135.5 | width=7.9708786 | height=5.0176797
+Text: d | x=79.69968 | y=135.5 | width=5.5199966 | height=5.0176797
+Text: d | x=85.21967 | y=135.5 | width=5.5199966 | height=5.0176797
+Text: i | x=90.73967 | y=135.5 | width=3.0691223 | height=5.0176797
+Text: t | x=93.853 | y=135.5 | width=3.0691223 | height=5.0176797
+Text: i | x=96.85583 | y=135.5 | width=3.0691223 | height=5.0176797
+Text: o | x=99.969154 | y=135.5 | width=5.5199966 | height=5.0176797
+Text: n | x=105.48915 | y=135.5 | width=5.5199966 | height=5.0176797
+Text: a | x=111.00915 | y=135.5 | width=4.9017563 | height=5.0176797
+Text: l | x=115.8115 | y=135.5 | width=3.0691223 | height=5.0176797
+Text: l | x=118.92483 | y=135.5 | width=3.0691223 | height=5.0176797
+Text: y | x=121.92766 | y=135.5 | width=5.5199966 | height=5.0176797
+Text: , | x=127.447655 | y=135.5 | width=2.7600021 | height=5.0176797
+Text: I | x=132.96765 | y=135.5 | width=3.6763153 | height=5.0176797
+Text: a | x=139.32675 | y=135.5 | width=4.901764 | height=5.0176797
+Text: m | x=144.22852 | y=135.5 | width=8.589127 | height=5.0176797
+Text: w | x=155.63284 | y=135.5 | width=7.970886 | height=5.0176797
+Text: i | x=163.43813 | y=135.5 | width=3.0691223 | height=5.0176797
+Text: l | x=166.55135 | y=135.5 | width=3.0691223 | height=5.0176797
+Text: l | x=169.55428 | y=135.5 | width=3.0691223 | height=5.0176797
+Text: i | x=172.6675 | y=135.5 | width=3.0691223 | height=5.0176797
+Text: n | x=175.78082 | y=135.5 | width=5.5200043 | height=5.0176797
+Text: g | x=181.17943 | y=135.5 | width=5.5200043 | height=5.0176797
+Text: t | x=189.45943 | y=135.5 | width=3.0691223 | height=5.0176797
+Text: o | x=192.46225 | y=135.5 | width=5.5200043 | height=5.0176797
+Text: m | x=200.74225 | y=135.5 | width=8.589127 | height=5.0176797
+Text: a | x=209.37567 | y=135.5 | width=4.901764 | height=5.0176797
+Text: k | x=214.27744 | y=135.5 | width=5.5200043 | height=5.0176797
+Text: e | x=219.69794 | y=135.5 | width=4.901764 | height=5.0176797
+Text: a | x=227.3597 | y=135.5 | width=4.901764 | height=5.0176797
+Text: d | x=235.04355 | y=135.5 | width=5.5200043 | height=5.0176797
+Text: e | x=240.44226 | y=135.5 | width=4.901764 | height=5.0176797
+Text: c | x=245.34402 | y=135.5 | width=4.901764 | height=5.0176797
+Text: l | x=250.1574 | y=135.5 | width=3.0691223 | height=5.0176797
+Text: a | x=253.27072 | y=135.5 | width=4.901764 | height=5.0176797
+Text: r | x=258.1725 | y=135.5 | width=3.6763306 | height=5.0176797
+Text: a | x=261.7936 | y=135.5 | width=4.901764 | height=5.0176797
+Text: t | x=266.69537 | y=135.5 | width=3.0691223 | height=5.0176797
+Text: i | x=269.7093 | y=135.5 | width=3.0691223 | height=5.0176797
+Text: o | x=272.8226 | y=135.5 | width=5.519989 | height=5.0176797
+Text: n | x=278.3426 | y=135.5 | width=5.519989 | height=5.0176797
+Text: f | x=286.5011 | y=135.5 | width=3.6763306 | height=5.0176797
+Text: o | x=290.21054 | y=135.5 | width=5.519989 | height=5.0176797
+Text: r | x=295.73053 | y=135.5 | width=3.6763306 | height=5.0176797
+Text: t | x=302.07858 | y=135.5 | width=3.0691223 | height=5.0176797
+Text: h | x=305.1919 | y=135.5 | width=5.519989 | height=5.0176797
+Text: e | x=310.5904 | y=135.5 | width=4.901764 | height=5.0176797
+Text: f | x=318.25217 | y=135.5 | width=3.6763306 | height=5.0176797
+Text: o | x=321.9837 | y=135.5 | width=5.519989 | height=5.0176797
+Text: l | x=327.3823 | y=135.5 | width=3.0691223 | height=5.0176797
+Text: l | x=330.4956 | y=135.5 | width=3.0691223 | height=5.0176797
+Text: o | x=333.60883 | y=135.5 | width=5.519989 | height=5.0176797
+Text: w | x=339.1288 | y=135.5 | width=7.970886 | height=5.0176797
+Text: i | x=346.9341 | y=135.5 | width=3.0691223 | height=5.0176797
+Text: n | x=350.04742 | y=135.5 | width=5.519989 | height=5.0176797
+Text: g | x=355.5674 | y=135.5 | width=5.519989 | height=5.0176797
+Text: p | x=363.8474 | y=135.5 | width=5.519989 | height=5.0176797
+Text: o | x=369.3674 | y=135.5 | width=5.519989 | height=5.0176797
+Text: i | x=374.7659 | y=135.5 | width=3.0691223 | height=5.0176797
+Text: n | x=377.8792 | y=135.5 | width=5.519989 | height=5.0176797
+Text: t | x=383.2778 | y=135.5 | width=3.0691223 | height=5.0176797
+Text: s | x=386.39102 | y=135.5 | width=4.2945557 | height=5.0176797
+Text: : | x=390.68558 | y=135.5 | width=3.0691223 | height=5.0176797
+Text: � | x=89.784 | y=158.06 | width=4.581604 | height=4.5268197
+Text: I | x=107.78 | y=158.06 | width=3.676323 | height=5.0176797
+Text: c | x=114.24942 | y=158.06 | width=4.901764 | height=5.0176797
+Text: e | x=119.151184 | y=158.06 | width=4.901764 | height=5.0176797
+Text: r | x=123.96465 | y=158.06 | width=3.676323 | height=5.0176797
+Text: t | x=127.67407 | y=158.06 | width=3.0691223 | height=5.0176797
+Text: i | x=130.677 | y=158.06 | width=3.0691223 | height=5.0176797
+Text: f | x=133.79022 | y=158.06 | width=3.6763153 | height=5.0176797
+Text: y | x=137.49974 | y=158.06 | width=5.5200043 | height=5.0176797
+Text: t | x=145.65825 | y=158.06 | width=3.0691223 | height=5.0176797
+Text: h | x=148.77158 | y=158.06 | width=5.5200043 | height=5.0176797
+Text: a | x=154.29158 | y=158.06 | width=4.901764 | height=5.0176797
+Text: t | x=159.09393 | y=158.06 | width=3.0691223 | height=5.0176797
+Text: a | x=164.96725 | y=158.06 | width=4.901764 | height=5.0176797
+Text: l | x=169.7696 | y=158.06 | width=3.0691223 | height=5.0176797
+Text: l | x=172.88293 | y=158.06 | width=3.0691223 | height=5.0176797
+Text: s | x=178.63475 | y=158.06 | width=4.2945557 | height=5.0176797
+Text: u | x=182.9293 | y=158.06 | width=5.5200043 | height=5.0176797
+Text: p | x=188.44931 | y=158.06 | width=5.5200043 | height=5.0176797
+Text: p | x=193.96931 | y=158.06 | width=5.5200043 | height=5.0176797
+Text: o | x=199.48932 | y=158.06 | width=5.5200043 | height=5.0176797
+Text: r | x=204.90991 | y=158.06 | width=3.6763153 | height=5.0176797
+Text: t | x=208.61943 | y=158.06 | width=3.0691223 | height=5.0176797
+Text: i | x=211.62225 | y=158.06 | width=3.0691223 | height=5.0176797
+Text: n | x=214.73558 | y=158.06 | width=5.5200043 | height=5.0176797
+Text: g | x=220.25558 | y=158.06 | width=5.5200043 | height=5.0176797
+Text: e | x=228.4141 | y=158.06 | width=4.901764 | height=5.0176797
+Text: v | x=233.31586 | y=158.06 | width=5.5200043 | height=5.0176797
+Text: i | x=238.83586 | y=158.06 | width=3.0691223 | height=5.0176797
+Text: d | x=241.96019 | y=158.06 | width=5.5200043 | height=5.0176797
+Text: e | x=247.4802 | y=158.06 | width=4.901764 | height=5.0176797
+Text: n | x=252.28265 | y=158.06 | width=5.519989 | height=5.0176797
+Text: c | x=257.80264 | y=158.06 | width=4.901764 | height=5.0176797
+Text: e | x=262.7044 | y=158.06 | width=4.901764 | height=5.0176797
+Text: a | x=270.26678 | y=158.06 | width=4.901764 | height=5.0176797
+Text: t | x=275.16855 | y=158.06 | width=3.0691223 | height=5.0176797
+Text: t | x=278.18246 | y=158.06 | width=3.0691223 | height=5.0176797
+Text: a | x=281.29578 | y=158.06 | width=4.901764 | height=5.0176797
+Text: c | x=286.19754 | y=158.06 | width=4.901764 | height=5.0176797
+Text: h | x=291.1214 | y=158.06 | width=5.519989 | height=5.0176797
+Text: e | x=296.5199 | y=158.06 | width=4.901764 | height=5.0176797
+Text: d | x=301.42166 | y=158.06 | width=5.519989 | height=5.0176797
+Text: t | x=309.60236 | y=158.06 | width=3.0691223 | height=5.0176797
+Text: o | x=312.71558 | y=158.06 | width=5.519989 | height=5.0176797
+Text: t | x=320.99557 | y=158.06 | width=3.0691223 | height=5.0176797
+Text: h | x=323.9986 | y=158.06 | width=5.519989 | height=5.0176797
+Text: i | x=329.5186 | y=158.06 | width=3.0691223 | height=5.0176797
+Text: s | x=332.6318 | y=158.06 | width=4.2945557 | height=5.0176797
+Text: f | x=339.58707 | y=158.06 | width=3.6763306 | height=5.0176797
+Text: o | x=343.2964 | y=158.06 | width=5.519989 | height=5.0176797
+Text: r | x=348.69507 | y=158.06 | width=3.6763306 | height=5.0176797
+Text: m | x=352.4045 | y=158.06 | width=8.589111 | height=5.0176797
+Text: i | x=363.67633 | y=158.06 | width=3.0691223 | height=5.0176797
+Text: s | x=366.78964 | y=158.06 | width=4.2945557 | height=5.0176797
+Text: a | x=373.8442 | y=158.06 | width=4.901764 | height=5.0176797
+Text: u | x=378.66867 | y=158.06 | width=5.519989 | height=5.0176797
+Text: t | x=384.18866 | y=158.06 | width=3.0691223 | height=5.0176797
+Text: h | x=387.30188 | y=158.06 | width=5.519989 | height=5.0176797
+Text: e | x=392.70047 | y=158.06 | width=4.901764 | height=5.0176797
+Text: n | x=397.60223 | y=158.06 | width=5.519989 | height=5.0176797
+Text: t | x=403.12222 | y=158.06 | width=3.0691223 | height=5.0176797
+Text: i | x=406.13614 | y=158.06 | width=3.0691223 | height=5.0176797
+Text: c | x=409.24945 | y=158.06 | width=4.901764 | height=5.0176797
+Text: a | x=416.81183 | y=158.06 | width=4.901764 | height=5.0176797
+Text: n | x=421.7136 | y=158.06 | width=5.519989 | height=5.0176797
+Text: d | x=427.23358 | y=158.06 | width=5.519989 | height=5.0176797
+Text: t | x=435.41418 | y=158.06 | width=3.0691223 | height=5.0176797
+Text: r | x=438.5275 | y=158.06 | width=3.6763306 | height=5.0176797
+Text: u | x=442.23694 | y=158.06 | width=5.519989 | height=5.0176797
+Text: t | x=447.63553 | y=158.06 | width=3.0691223 | height=5.0176797
+Text: h | x=450.74875 | y=158.06 | width=5.519989 | height=5.0176797
+Text: f | x=456.26874 | y=158.06 | width=3.6763306 | height=5.0176797
+Text: u | x=459.97827 | y=158.06 | width=5.519989 | height=5.0176797
+Text: l | x=465.37677 | y=158.06 | width=3.0691223 | height=5.0176797
+Text: . | x=468.49008 | y=158.06 | width=2.7600098 | height=5.0176797
+Text: � | x=89.784 | y=172.70001 | width=4.581604 | height=4.5268197
+Text: I | x=107.78 | y=172.70001 | width=3.676323 | height=5.0176797
+Text: a | x=114.006516 | y=172.70001 | width=4.901764 | height=5.0176797
+Text: g | x=118.90828 | y=172.70001 | width=5.5199966 | height=5.0176797
+Text: r | x=124.428276 | y=172.70001 | width=3.676323 | height=5.0176797
+Text: e | x=128.1598 | y=172.70001 | width=4.901764 | height=5.0176797
+Text: e | x=132.96227 | y=172.70001 | width=4.901764 | height=5.0176797
+Text: t | x=140.40323 | y=172.70001 | width=3.0691223 | height=5.0176797
+Text: o | x=143.51645 | y=172.70001 | width=5.5200043 | height=5.0176797
+Text: c | x=151.55365 | y=172.70001 | width=4.901764 | height=5.0176797
+Text: o | x=156.45541 | y=172.70001 | width=5.5200043 | height=5.0176797
+Text: o | x=161.97542 | y=172.70001 | width=5.5200043 | height=5.0176797
+Text: p | x=167.49542 | y=172.70001 | width=5.5200043 | height=5.0176797
+Text: e | x=172.91602 | y=172.70001 | width=4.901764 | height=5.0176797
+Text: r | x=177.81778 | y=172.70001 | width=3.6763153 | height=5.0176797
+Text: a | x=181.43889 | y=172.70001 | width=4.901764 | height=5.0176797
+Text: t | x=186.34065 | y=172.70001 | width=3.0691223 | height=5.0176797
+Text: e | x=189.46498 | y=172.70001 | width=4.901764 | height=5.0176797
+Text: w | x=196.90594 | y=172.70001 | width=7.970886 | height=5.0176797
+Text: i | x=204.82162 | y=172.70001 | width=3.0691223 | height=5.0176797
+Text: t | x=207.82455 | y=172.70001 | width=3.0691223 | height=5.0176797
+Text: h | x=210.93777 | y=172.70001 | width=5.5200043 | height=5.0176797
+Text: t | x=218.97487 | y=172.70001 | width=3.0691223 | height=5.0176797
+Text: h | x=222.0882 | y=172.70001 | width=5.5200043 | height=5.0176797
+Text: e | x=227.4868 | y=172.70001 | width=4.901764 | height=5.0176797
+Text: c | x=234.92776 | y=172.70001 | width=4.901764 | height=5.0176797
+Text: o | x=239.82953 | y=172.70001 | width=5.5200043 | height=5.0176797
+Text: l | x=245.34953 | y=172.70001 | width=3.0691223 | height=5.0176797
+Text: l | x=248.47386 | y=172.70001 | width=3.0691223 | height=5.0176797
+Text: e | x=251.47668 | y=172.70001 | width=4.901764 | height=5.0176797
+Text: g | x=256.37845 | y=172.70001 | width=5.519989 | height=5.0176797
+Text: e | x=261.89844 | y=172.70001 | width=4.901764 | height=5.0176797
+Text: d | x=269.33942 | y=172.70001 | width=5.519989 | height=5.0176797
+Text: u | x=274.8594 | y=172.70001 | width=5.519989 | height=5.0176797
+Text: r | x=280.258 | y=172.70001 | width=3.6763306 | height=5.0176797
+Text: i | x=283.96744 | y=172.70001 | width=3.0691223 | height=5.0176797
+Text: n | x=287.08075 | y=172.70001 | width=5.519989 | height=5.0176797
+Text: g | x=292.47925 | y=172.70001 | width=5.519989 | height=5.0176797
+Text: t | x=300.51636 | y=172.70001 | width=3.0691223 | height=5.0176797
+Text: h | x=303.62967 | y=172.70001 | width=5.519989 | height=5.0176797
+Text: e | x=309.14966 | y=172.70001 | width=4.901764 | height=5.0176797
+Text: v | x=316.59064 | y=172.70001 | width=5.519989 | height=5.0176797
+Text: e | x=322.11063 | y=172.70001 | width=4.901764 | height=5.0176797
+Text: r | x=326.913 | y=172.70001 | width=3.6763306 | height=5.0176797
+Text: i | x=330.62253 | y=172.70001 | width=3.0691223 | height=5.0176797
+Text: f | x=333.62537 | y=172.70001 | width=3.6763306 | height=5.0176797
+Text: i | x=337.3348 | y=172.70001 | width=3.0691223 | height=5.0176797
+Text: c | x=340.33774 | y=172.70001 | width=4.901764 | height=5.0176797
+Text: a | x=345.2395 | y=172.70001 | width=4.901764 | height=5.0176797
+Text: t | x=350.05298 | y=172.70001 | width=3.0691223 | height=5.0176797
+Text: i | x=353.1662 | y=172.70001 | width=3.0691223 | height=5.0176797
+Text: o | x=356.2795 | y=172.70001 | width=5.519989 | height=5.0176797
+Text: n | x=361.7995 | y=172.70001 | width=5.519989 | height=5.0176797
+Text: p | x=369.8366 | y=172.70001 | width=5.519989 | height=5.0176797
+Text: r | x=375.2352 | y=172.70001 | width=3.6763306 | height=5.0176797
+Text: o | x=378.94464 | y=172.70001 | width=5.519989 | height=5.0176797
+Text: c | x=384.46463 | y=172.70001 | width=4.901764 | height=5.0176797
+Text: e | x=389.3664 | y=172.70001 | width=4.901764 | height=5.0176797
+Text: s | x=394.17987 | y=172.70001 | width=4.2945557 | height=5.0176797
+Text: s | x=398.47443 | y=172.70001 | width=4.2945557 | height=5.0176797
+Text: o | x=405.3303 | y=172.70001 | width=5.519989 | height=5.0176797
+Text: f | x=410.85028 | y=172.70001 | width=3.6763306 | height=5.0176797
+Text: e | x=417.07684 | y=172.70001 | width=4.901764 | height=5.0176797
+Text: v | x=421.9786 | y=172.70001 | width=5.519989 | height=5.0176797
+Text: i | x=427.3992 | y=172.70001 | width=3.0691223 | height=5.0176797
+Text: d | x=430.5125 | y=172.70001 | width=5.519989 | height=5.0176797
+Text: e | x=436.0325 | y=172.70001 | width=4.901764 | height=5.0176797
+Text: n | x=440.83487 | y=172.70001 | width=5.519989 | height=5.0176797
+Text: c | x=446.35486 | y=172.70001 | width=4.901764 | height=5.0176797
+Text: e | x=451.25662 | y=172.70001 | width=4.901764 | height=5.0176797
+Text: ( | x=458.6976 | y=172.70001 | width=3.6763306 | height=5.0176797
+Text: i | x=462.29672 | y=172.70001 | width=3.0691223 | height=5.0176797
+Text: f | x=465.40994 | y=172.70001 | width=3.6763306 | height=5.0176797
+Text: a | x=471.5151 | y=172.70001 | width=4.901764 | height=5.0176797
+Text: p | x=476.41687 | y=172.70001 | width=5.519989 | height=5.0176797
+Text: p | x=481.93686 | y=172.70001 | width=5.519989 | height=5.0176797
+Text: l | x=487.45685 | y=172.70001 | width=3.0691223 | height=5.0176797
+Text: i | x=490.47076 | y=172.70001 | width=3.0691223 | height=5.0176797
+Text: c | x=493.58408 | y=172.70001 | width=4.901764 | height=5.0176797
+Text: a | x=498.48584 | y=172.70001 | width=4.901764 | height=5.0176797
+Text: b | x=503.4097 | y=172.70001 | width=5.519989 | height=5.0176797
+Text: l | x=508.8082 | y=172.70001 | width=3.0691223 | height=5.0176797
+Text: e | x=511.92163 | y=172.70001 | width=4.9017334 | height=5.0176797
+Text: ) | x=516.7239 | y=172.70001 | width=3.6763306 | height=5.0176797
+Text: � | x=89.784 | y=187.21997 | width=4.581604 | height=4.5268197
+Text: I | x=107.78 | y=187.21997 | width=3.676323 | height=5.0176797
+Text: a | x=115.67362 | y=187.21997 | width=4.9017563 | height=5.0176797
+Text: g | x=120.57538 | y=187.21997 | width=5.5199966 | height=5.0176797
+Text: r | x=125.99597 | y=187.21997 | width=3.6763153 | height=5.0176797
+Text: e | x=129.70538 | y=187.21997 | width=4.901764 | height=5.0176797
+Text: e | x=134.60715 | y=187.21997 | width=4.901764 | height=5.0176797
+Text: t | x=143.60481 | y=187.21997 | width=3.0691223 | height=5.0176797
+Text: o | x=146.71803 | y=187.21997 | width=5.5200043 | height=5.0176797
+Text: p | x=156.30084 | y=187.21997 | width=5.5200043 | height=5.0176797
+Text: r | x=161.82085 | y=187.21997 | width=3.6763153 | height=5.0176797
+Text: o | x=165.53026 | y=187.21997 | width=5.5200043 | height=5.0176797
+Text: v | x=170.92877 | y=187.21997 | width=5.5200043 | height=5.0176797
+Text: i | x=176.44878 | y=187.21997 | width=3.0691223 | height=5.0176797
+Text: d | x=179.5621 | y=187.21997 | width=5.5200043 | height=5.0176797
+Text: e | x=184.96071 | y=187.21997 | width=4.901764 | height=5.0176797
+Text: a | x=194.06866 | y=187.21997 | width=4.901764 | height=5.0176797
+Text: n | x=198.97043 | y=187.21997 | width=5.5200043 | height=5.0176797
+Text: y | x=204.49043 | y=187.21997 | width=5.5200043 | height=5.0176797
+Text: p | x=214.09523 | y=187.21997 | width=5.5200043 | height=5.0176797
+Text: e | x=219.61523 | y=187.21997 | width=4.901764 | height=5.0176797
+Text: r | x=224.41759 | y=187.21997 | width=3.6763153 | height=5.0176797
+Text: s | x=228.0167 | y=187.21997 | width=4.2945557 | height=5.0176797
+Text: o | x=232.31125 | y=187.21997 | width=5.5200043 | height=5.0176797
+Text: n | x=237.83125 | y=187.21997 | width=5.5200043 | height=5.0176797
+Text: a | x=243.35126 | y=187.21997 | width=4.901764 | height=5.0176797
+Text: l | x=248.28612 | y=187.21997 | width=3.0691223 | height=5.0176797
+Text: i | x=255.47314 | y=187.21997 | width=3.0691223 | height=5.0176797
+Text: n | x=258.58646 | y=187.21997 | width=5.519989 | height=5.0176797
+Text: f | x=263.98495 | y=187.21997 | width=3.6763306 | height=5.0176797
+Text: o | x=267.6944 | y=187.21997 | width=5.519989 | height=5.0176797
+Text: r | x=273.093 | y=187.21997 | width=3.6763306 | height=5.0176797
+Text: m | x=276.80243 | y=187.21997 | width=8.589111 | height=5.0176797
+Text: a | x=285.32535 | y=187.21997 | width=4.901764 | height=5.0176797
+Text: t | x=290.2271 | y=187.21997 | width=3.0691223 | height=5.0176797
+Text: i | x=293.24103 | y=187.21997 | width=3.0691223 | height=5.0176797
+Text: o | x=296.35425 | y=187.21997 | width=5.519989 | height=5.0176797
+Text: n | x=301.87424 | y=187.21997 | width=5.519989 | height=5.0176797
+Text: r | x=311.46805 | y=187.21997 | width=3.6763306 | height=5.0176797
+Text: e | x=315.1775 | y=187.21997 | width=4.901764 | height=5.0176797
+Text: l | x=319.97995 | y=187.21997 | width=3.0691223 | height=5.0176797
+Text: a | x=323.09317 | y=187.21997 | width=4.901764 | height=5.0176797
+Text: t | x=327.99493 | y=187.21997 | width=3.0691223 | height=5.0176797
+Text: e | x=331.00885 | y=187.21997 | width=4.901764 | height=5.0176797
+Text: d | x=335.9106 | y=187.21997 | width=5.519989 | height=5.0176797
+Text: t | x=345.5154 | y=187.21997 | width=3.0691223 | height=5.0176797
+Text: o | x=348.51834 | y=187.21997 | width=5.519989 | height=5.0176797
+Text: t | x=358.22244 | y=187.21997 | width=3.0691223 | height=5.0176797
+Text: h | x=361.33588 | y=187.21997 | width=5.519989 | height=5.0176797
+Text: e | x=366.85587 | y=187.21997 | width=4.901764 | height=5.0176797
+Text: U | x=375.84244 | y=187.21997 | width=7.970886 | height=5.0176797
+Text: S | x=383.75812 | y=187.21997 | width=6.1382446 | height=5.0176797
+Text: I | x=389.89636 | y=187.21997 | width=3.6763306 | height=5.0176797
+Text: ( | x=397.6684 | y=187.21997 | width=3.6763306 | height=5.0176797
+Text: U | x=401.37793 | y=187.21997 | width=7.970886 | height=5.0176797
+Text: n | x=409.2936 | y=187.21997 | width=5.519989 | height=5.0176797
+Text: i | x=414.8136 | y=187.21997 | width=3.0691223 | height=5.0176797
+Text: q | x=417.92682 | y=187.21997 | width=5.519989 | height=5.0176797
+Text: u | x=423.3255 | y=187.21997 | width=5.519989 | height=5.0176797
+Text: e | x=428.8455 | y=187.21997 | width=4.901764 | height=5.0176797
+Text: S | x=437.95337 | y=187.21997 | width=6.1382446 | height=5.0176797
+Text: t | x=443.9482 | y=187.21997 | width=3.0691223 | height=5.0176797
+Text: u | x=447.06152 | y=187.21997 | width=5.519989 | height=5.0176797
+Text: d | x=452.5815 | y=187.21997 | width=5.519989 | height=5.0176797
+Text: e | x=458.1015 | y=187.21997 | width=4.901764 | height=5.0176797
+Text: n | x=462.90387 | y=187.21997 | width=5.519989 | height=5.0176797
+Text: t | x=468.30246 | y=187.21997 | width=3.0691223 | height=5.0176797
+Text: I | x=475.59988 | y=187.21997 | width=3.6763306 | height=5.0176797
+Text: d | x=479.30933 | y=187.21997 | width=5.519989 | height=5.0176797
+Text: e | x=484.70792 | y=187.21997 | width=4.901764 | height=5.0176797
+Text: n | x=489.60968 | y=187.21997 | width=5.519989 | height=5.0176797
+Text: t | x=495.12967 | y=187.21997 | width=3.0691223 | height=5.0176797
+Text: i | x=498.1436 | y=187.21997 | width=3.0691223 | height=5.0176797
+Text: f | x=501.2568 | y=187.21997 | width=3.6763306 | height=5.0176797
+Text: i | x=504.85583 | y=187.21997 | width=3.0691223 | height=5.0176797
+Text: e | x=507.96915 | y=187.21997 | width=4.901764 | height=5.0176797
+Text: r | x=512.7715 | y=187.21997 | width=3.6763306 | height=5.0176797
+Text: ) | x=516.481 | y=187.21997 | width=3.6763306 | height=5.0176797
+Text: r | x=107.78 | y=201.73999 | width=3.676323 | height=5.0176797
+Text: e | x=111.48942 | y=201.73999 | width=4.9017563 | height=5.0176797
+Text: g | x=116.391174 | y=201.73999 | width=5.5199966 | height=5.0176797
+Text: i | x=121.91117 | y=201.73999 | width=3.0691223 | height=5.0176797
+Text: s | x=124.925095 | y=201.73999 | width=4.2945557 | height=5.0176797
+Text: t | x=129.21965 | y=201.73999 | width=3.0691223 | height=5.0176797
+Text: e | x=132.24467 | y=201.73999 | width=4.901764 | height=5.0176797
+Text: r | x=137.14644 | y=201.73999 | width=3.6763153 | height=5.0176797
+Text: f | x=143.51646 | y=201.73999 | width=3.6763153 | height=5.0176797
+Text: o | x=147.22588 | y=201.73999 | width=5.5200043 | height=5.0176797
+Text: r | x=152.74588 | y=201.73999 | width=3.6763153 | height=5.0176797
+Text: t | x=159.0939 | y=201.73999 | width=3.0691223 | height=5.0176797
+Text: h | x=162.20723 | y=201.73999 | width=5.5200043 | height=5.0176797
+Text: e | x=167.72723 | y=201.73999 | width=4.901764 | height=5.0176797
+Text: p | x=175.28958 | y=201.73999 | width=5.5200043 | height=5.0176797
+Text: u | x=180.80959 | y=201.73999 | width=5.5200043 | height=5.0176797
+Text: r | x=186.32959 | y=201.73999 | width=3.6763153 | height=5.0176797
+Text: p | x=190.039 | y=201.73999 | width=5.5200043 | height=5.0176797
+Text: o | x=195.4376 | y=201.73999 | width=5.5200043 | height=5.0176797
+Text: s | x=200.95761 | y=201.73999 | width=4.2945557 | height=5.0176797
+Text: e | x=205.25217 | y=201.73999 | width=4.901764 | height=5.0176797
+Text: o | x=212.94702 | y=201.73999 | width=5.5200043 | height=5.0176797
+Text: f | x=218.34563 | y=201.73999 | width=3.6763153 | height=5.0176797
+Text: c | x=224.93 | y=201.73999 | width=4.901764 | height=5.0176797
+Text: r | x=229.73 | y=201.73999 | width=3.6763153 | height=5.0176797
+Text: e | x=233.4394 | y=201.73999 | width=4.901764 | height=5.0176797
+Text: d | x=238.34117 | y=201.73999 | width=5.5200043 | height=5.0176797
+Text: i | x=243.86118 | y=201.73999 | width=3.0691223 | height=5.0176797
+Text: t | x=246.87509 | y=201.73999 | width=3.0691223 | height=5.0176797
+Text: t | x=252.65 | y=201.73999 | width=3.0691223 | height=5.0176797
+Text: r | x=255.77 | y=201.73999 | width=3.6763153 | height=5.0176797
+Text: a | x=259.47943 | y=201.73999 | width=4.901764 | height=5.0176797
+Text: n | x=264.2819 | y=201.73999 | width=5.519989 | height=5.0176797
+Text: s | x=269.80188 | y=201.73999 | width=4.2945557 | height=5.0176797
+Text: f | x=274.09644 | y=201.73999 | width=3.6763306 | height=5.0176797
+Text: e | x=277.71756 | y=201.73999 | width=4.901764 | height=5.0176797
+Text: r | x=282.61932 | y=201.73999 | width=3.6763306 | height=5.0176797
+Text: o | x=289.11087 | y=201.73999 | width=5.519989 | height=5.0176797
+Text: f | x=294.50937 | y=201.73999 | width=3.6763306 | height=5.0176797
+Text: t | x=300.97882 | y=201.73999 | width=3.0691223 | height=5.0176797
+Text: h | x=303.98175 | y=201.73999 | width=5.519989 | height=5.0176797
+Text: e | x=309.50174 | y=201.73999 | width=4.901764 | height=5.0176797
+Text: u | x=317.1635 | y=201.73999 | width=5.519989 | height=5.0176797
+Text: n | x=322.6835 | y=201.73999 | width=5.519989 | height=5.0176797
+Text: i | x=328.1041 | y=201.73999 | width=3.0691223 | height=5.0176797
+Text: t | x=331.2174 | y=201.73999 | width=3.0691223 | height=5.0176797
+Text: s | x=334.22034 | y=201.73999 | width=4.2945557 | height=5.0176797
+Text: m | x=341.1755 | y=201.73999 | width=8.589111 | height=5.0176797
+Text: e | x=349.69843 | y=201.73999 | width=4.901764 | height=5.0176797
+Text: n | x=354.6002 | y=201.73999 | width=5.519989 | height=5.0176797
+Text: t | x=360.12018 | y=201.73999 | width=3.0691223 | height=5.0176797
+Text: i | x=363.1341 | y=201.73999 | width=3.0691223 | height=5.0176797
+Text: o | x=366.2473 | y=201.73999 | width=5.519989 | height=5.0176797
+Text: n | x=371.7673 | y=201.73999 | width=5.519989 | height=5.0176797
+Text: e | x=377.2873 | y=201.73999 | width=4.901764 | height=5.0176797
+Text: d | x=382.18906 | y=201.73999 | width=5.519989 | height=5.0176797
+Text: i | x=390.36975 | y=201.73999 | width=3.0691223 | height=5.0176797
+Text: n | x=393.48297 | y=201.73999 | width=5.519989 | height=5.0176797
+Text: t | x=401.64157 | y=201.73999 | width=3.0691223 | height=5.0176797
+Text: h | x=404.7548 | y=201.73999 | width=5.519989 | height=5.0176797
+Text: i | x=410.27478 | y=201.73999 | width=3.0691223 | height=5.0176797
+Text: s | x=413.2777 | y=201.73999 | width=4.2945557 | height=5.0176797
+Text: f | x=420.33228 | y=201.73999 | width=3.6763306 | height=5.0176797
+Text: o | x=424.0638 | y=201.73999 | width=5.519989 | height=5.0176797
+Text: r | x=429.4624 | y=201.73999 | width=3.6763306 | height=5.0176797
+Text: m | x=433.06143 | y=201.73999 | width=8.589111 | height=5.0176797
+Text: . | x=441.69464 | y=201.73999 | width=2.7600098 | height=5.0176797
+Text: S | x=72.024 | y=242.65997 | width=6.138237 | height=5.0176797
+Text: t | x=78.16224 | y=242.65997 | width=3.0691223 | height=5.0176797
+Text: u | x=81.23136 | y=242.65997 | width=5.5199966 | height=5.0176797
+Text: d | x=86.75136 | y=242.65997 | width=5.5199966 | height=5.0176797
+Text: e | x=92.271355 | y=242.65997 | width=4.9017563 | height=5.0176797
+Text: n | x=97.217316 | y=242.65997 | width=5.5199966 | height=5.0176797
+Text: t | x=102.615814 | y=242.65997 | width=3.0691223 | height=5.0176797
+Text: � | x=105.72914 | y=242.65997 | width=3.676323 | height=5.0176797
+Text: s | x=109.32816 | y=242.65997 | width=4.2945633 | height=5.0176797
+Text: S | x=116.42 | y=242.65997 | width=6.138237 | height=5.0176797
+Text: i | x=122.558235 | y=242.65997 | width=3.0691223 | height=5.0176797
+Text: g | x=125.62736 | y=242.65997 | width=5.5199966 | height=5.0176797
+Text: n | x=131.05905 | y=242.65997 | width=5.5200043 | height=5.0176797
+Text: a | x=136.57906 | y=242.65997 | width=4.901764 | height=5.0176797
+Text: t | x=141.48082 | y=242.65997 | width=3.0691223 | height=5.0176797
+Text: u | x=144.49474 | y=242.65997 | width=5.5200043 | height=5.0176797
+Text: r | x=150.01474 | y=242.65997 | width=3.6763153 | height=5.0176797
+Text: e | x=153.72415 | y=242.65997 | width=4.901764 | height=5.0176797
+Text: : | x=158.5265 | y=242.65997 | width=3.0691223 | height=5.0176797
+Text: _ | x=164.39983 | y=242.65997 | width=5.5200043 | height=5.0176797
+Text: _ | x=169.91983 | y=242.65997 | width=5.5200043 | height=5.0176797
+Text: _ | x=175.31844 | y=242.65997 | width=5.5200043 | height=5.0176797
+Text: _ | x=180.83844 | y=242.65997 | width=5.5200043 | height=5.0176797
+Text: _ | x=186.35844 | y=242.65997 | width=5.5200043 | height=5.0176797
+Text: _ | x=191.75696 | y=242.65997 | width=5.5200043 | height=5.0176797
+Text: _ | x=197.27696 | y=242.65997 | width=5.5200043 | height=5.0176797
+Text: _ | x=202.79697 | y=242.65997 | width=5.5200043 | height=5.0176797
+Text: _ | x=208.31697 | y=242.65997 | width=5.5200043 | height=5.0176797
+Text: _ | x=213.83698 | y=242.65997 | width=5.5200043 | height=5.0176797
+Text: _ | x=219.35698 | y=242.65997 | width=5.5200043 | height=5.0176797
+Text: _ | x=224.87698 | y=242.65997 | width=5.5200043 | height=5.0176797
+Text: _ | x=230.39699 | y=242.65997 | width=5.5200043 | height=5.0176797
+Text: _ | x=235.91699 | y=242.65997 | width=5.5200043 | height=5.0176797
+Text: _ | x=241.3156 | y=242.65997 | width=5.5200043 | height=5.0176797
+Text: _ | x=246.8356 | y=242.65997 | width=5.5200043 | height=5.0176797
+Text: _ | x=252.3556 | y=242.65997 | width=5.5200043 | height=5.0176797
+Text: _ | x=257.8756 | y=242.65997 | width=5.519989 | height=5.0176797
+Text: _ | x=263.3956 | y=242.65997 | width=5.519989 | height=5.0176797
+Text: _ | x=268.9156 | y=242.65997 | width=5.519989 | height=5.0176797
+Text: _ | x=274.3141 | y=242.65997 | width=5.519989 | height=5.0176797
+Text: _ | x=279.83408 | y=242.65997 | width=5.519989 | height=5.0176797
+Text: _ | x=285.35406 | y=242.65997 | width=5.519989 | height=5.0176797
+Text: _ | x=290.87405 | y=242.65997 | width=5.519989 | height=5.0176797
+Text: _ | x=296.39404 | y=242.65997 | width=5.519989 | height=5.0176797
+Text: _ | x=301.91403 | y=242.65997 | width=5.519989 | height=5.0176797
+Text: _ | x=307.31262 | y=242.65997 | width=5.519989 | height=5.0176797
+Text: _ | x=312.7112 | y=242.65997 | width=5.519989 | height=5.0176797
+Text: _ | x=318.2312 | y=242.65997 | width=5.519989 | height=5.0176797
+Text: _ | x=323.7512 | y=242.65997 | width=5.519989 | height=5.0176797
+Text: _ | x=329.27118 | y=242.65997 | width=5.519989 | height=5.0176797
+Text: _ | x=334.79117 | y=242.65997 | width=5.519989 | height=5.0176797
+Text: _ | x=340.31116 | y=242.65997 | width=5.519989 | height=5.0176797
+Text: _ | x=345.83115 | y=242.65997 | width=5.519989 | height=5.0176797
+Text: _ | x=351.35114 | y=242.65997 | width=5.519989 | height=5.0176797
+Text: _ | x=356.87112 | y=242.65997 | width=5.519989 | height=5.0176797
+Text: D | x=72.024 | y=268.84998 | width=7.9708786 | height=5.0176797
+Text: a | x=79.93968 | y=268.84998 | width=4.901764 | height=5.0176797
+Text: t | x=84.841446 | y=268.84998 | width=3.0691223 | height=5.0176797
+Text: e | x=87.96577 | y=268.84998 | width=4.9017563 | height=5.0176797
+Text: : | x=92.86752 | y=268.84998 | width=3.0691223 | height=5.0176797
+Text: _ | x=98.64145 | y=268.84998 | width=5.5199966 | height=5.0176797
+Text: _ | x=104.161446 | y=268.84998 | width=5.5199966 | height=5.0176797
+Text: _ | x=109.68144 | y=268.84998 | width=5.5199966 | height=5.0176797
+Text: _ | x=115.20144 | y=268.84998 | width=5.5199966 | height=5.0176797
+Text: _ | x=120.721436 | y=268.84998 | width=5.5199966 | height=5.0176797
+Text: _ | x=126.12003 | y=268.84998 | width=5.5199966 | height=5.0176797
+Text: _ | x=131.64003 | y=268.84998 | width=5.5200043 | height=5.0176797
+Text: _ | x=137.16003 | y=268.84998 | width=5.5200043 | height=5.0176797
+Text: _ | x=142.68004 | y=268.84998 | width=5.5200043 | height=5.0176797
+Text: _ | x=148.20004 | y=268.84998 | width=5.5200043 | height=5.0176797
+Text: _ | x=153.72005 | y=268.84998 | width=5.5200043 | height=5.0176797
+Text: _ | x=159.11856 | y=268.84998 | width=5.5200043 | height=5.0176797
+Text: _ | x=164.63857 | y=268.84998 | width=5.5200043 | height=5.0176797
+Text: _ | x=170.15857 | y=268.84998 | width=5.5200043 | height=5.0176797
+Text: _ | x=175.67857 | y=268.84998 | width=5.5200043 | height=5.0176797
+Text: _ | x=181.19858 | y=268.84998 | width=5.5200043 | height=5.0176797
+Text: S | x=71.784 | y=367.24997 | width=6.671997 | height=5.358
+Text: t | x=78.492 | y=367.24997 | width=3.9960022 | height=5.358
+Text: u | x=82.488 | y=367.24997 | width=6.671997 | height=5.358
+Text: d | x=89.159996 | y=367.24997 | width=6.671997 | height=5.358
+Text: e | x=95.87999 | y=367.24997 | width=5.328003 | height=5.358
+Text: n | x=101.159996 | y=367.24997 | width=6.671997 | height=5.358
+Text: t | x=107.868 | y=367.24997 | width=3.9960022 | height=5.358
+Text: D | x=114.864 | y=367.24997 | width=8.664001 | height=5.358
+Text: o | x=123.468 | y=367.24997 | width=6.0 | height=5.358
+Text: c | x=129.468 | y=367.24997 | width=5.328003 | height=5.358
+Text: u | x=134.748 | y=367.24997 | width=6.671997 | height=5.358
+Text: m | x=141.456 | y=367.24997 | width=9.996002 | height=5.358
+Text: e | x=151.524 | y=367.24997 | width=5.328003 | height=5.358
+Text: n | x=156.804 | y=367.24997 | width=6.671997 | height=5.358
+Text: t | x=163.512 | y=367.24997 | width=3.9960022 | height=5.358
+Text: C | x=170.54 | y=367.24997 | width=8.664001 | height=5.358
+Text: h | x=179.204 | y=367.24997 | width=6.671997 | height=5.358
+Text: e | x=185.87599 | y=367.24997 | width=5.328003 | height=5.358
+Text: c | x=191.204 | y=367.24997 | width=5.328003 | height=5.358
+Text: k | x=196.45999 | y=367.24997 | width=6.671997 | height=5.358
+Text: l | x=203.16798 | y=367.24997 | width=3.3359985 | height=5.358
+Text: i | x=206.50398 | y=367.24997 | width=3.3359985 | height=5.358
+Text: s | x=209.87598 | y=367.24997 | width=4.6679993 | height=5.358
+Text: t | x=214.54398 | y=367.24997 | width=3.9960022 | height=5.358
+Text: ( | x=221.57 | y=367.24997 | width=3.9960022 | height=5.358
+Text: f | x=225.56601 | y=367.24997 | width=3.9960022 | height=5.358
+Text: o | x=229.49 | y=367.24997 | width=6.0 | height=5.358
+Text: r | x=235.49 | y=367.24997 | width=5.328003 | height=5.358
+Text: o | x=243.77 | y=367.24997 | width=6.0 | height=5.358
+Text: f | x=249.77 | y=367.24997 | width=3.9960022 | height=5.358
+Text: f | x=253.766 | y=367.24997 | width=3.995987 | height=5.358
+Text: i | x=257.69 | y=367.24997 | width=3.3359985 | height=5.358
+Text: c | x=261.158 | y=367.24997 | width=5.328003 | height=5.358
+Text: e | x=266.438 | y=367.24997 | width=5.328003 | height=5.358
+Text: p | x=274.73 | y=367.24997 | width=6.671997 | height=5.358
+Text: u | x=281.45 | y=367.24997 | width=6.671997 | height=5.358
+Text: r | x=288.15802 | y=367.24997 | width=5.328003 | height=5.358
+Text: p | x=293.43802 | y=367.24997 | width=6.671997 | height=5.358
+Text: o | x=300.14603 | y=367.24997 | width=6.0 | height=5.358
+Text: s | x=306.14603 | y=367.24997 | width=4.6679993 | height=5.358
+Text: e | x=310.81403 | y=367.24997 | width=5.328003 | height=5.358
+Text: s | x=316.15 | y=367.24997 | width=4.6679993 | height=5.358
+Text: o | x=323.83 | y=367.24997 | width=6.0 | height=5.358
+Text: n | x=329.83 | y=367.24997 | width=6.671997 | height=5.358
+Text: l | x=336.538 | y=367.24997 | width=3.3359985 | height=5.358
+Text: y | x=339.874 | y=367.24997 | width=6.0 | height=5.358
+Text: ) | x=345.874 | y=367.24997 | width=3.9960022 | height=5.358
+Text: : | x=349.87 | y=367.24997 | width=3.9960022 | height=5.358
+Text: Y | x=450.1 | y=390.88998 | width=7.970886 | height=5.0176797
+Text: E | x=458.0157 | y=390.88998 | width=6.745453 | height=5.0176797
+Text: S | x=464.76114 | y=390.88998 | width=6.1382446 | height=5.0176797
+Text: N | x=493.9 | y=390.88998 | width=7.970886 | height=5.0176797
+Text: O | x=501.81998 | y=390.88998 | width=7.970886 | height=5.0176797
+Text: S | x=77.664 | y=405.88998 | width=6.138237 | height=5.0176797
+Text: t | x=83.80224 | y=405.88998 | width=3.0691223 | height=5.0176797
+Text: u | x=86.87136 | y=405.88998 | width=5.5199966 | height=5.0176797
+Text: d | x=92.39136 | y=405.88998 | width=5.5199966 | height=5.0176797
+Text: e | x=97.911354 | y=405.88998 | width=4.9017563 | height=5.0176797
+Text: n | x=102.857315 | y=405.88998 | width=5.5199966 | height=5.0176797
+Text: t | x=108.25581 | y=405.88998 | width=3.0691223 | height=5.0176797
+Text: ( | x=111.36914 | y=405.88998 | width=3.676323 | height=5.0176797
+Text: s | x=114.96816 | y=405.88998 | width=4.2945633 | height=5.0176797
+Text: ) | x=119.262726 | y=405.88998 | width=3.676323 | height=5.0176797
+Text: a | x=126.21795 | y=405.88998 | width=4.9017563 | height=5.0176797
+Text: t | x=131.0203 | y=405.88998 | width=3.0691223 | height=5.0176797
+Text: t | x=134.13362 | y=405.88998 | width=3.0691223 | height=5.0176797
+Text: a | x=137.24684 | y=405.88998 | width=4.901764 | height=5.0176797
+Text: c | x=142.0493 | y=405.88998 | width=4.901764 | height=5.0176797
+Text: h | x=146.95107 | y=405.88998 | width=5.5200043 | height=5.0176797
+Text: e | x=152.47107 | y=405.88998 | width=4.901764 | height=5.0176797
+Text: d | x=157.39493 | y=405.88998 | width=5.5200043 | height=5.0176797
+Text: a | x=166.13853 | y=405.88998 | width=4.901764 | height=5.0176797
+Text: n | x=170.941 | y=405.88998 | width=5.5200043 | height=5.0176797
+Text: y | x=176.461 | y=405.88998 | width=5.5200043 | height=5.0176797
+Text: s | x=185.2047 | y=405.88998 | width=4.2945557 | height=5.0176797
+Text: u | x=189.49925 | y=405.88998 | width=5.5200043 | height=5.0176797
+Text: p | x=194.91985 | y=405.88998 | width=5.5200043 | height=5.0176797
+Text: p | x=200.43985 | y=405.88998 | width=5.5200043 | height=5.0176797
+Text: o | x=205.95985 | y=405.88998 | width=5.5200043 | height=5.0176797
+Text: r | x=211.47986 | y=405.88998 | width=3.6763153 | height=5.0176797
+Text: t | x=215.18927 | y=405.88998 | width=3.0691223 | height=5.0176797
+Text: i | x=218.1922 | y=405.88998 | width=3.0691223 | height=5.0176797
+Text: n | x=221.30542 | y=405.88998 | width=5.5200043 | height=5.0176797
+Text: g | x=226.82542 | y=405.88998 | width=5.5200043 | height=5.0176797
+Text: e | x=235.56912 | y=405.88998 | width=4.901764 | height=5.0176797
+Text: v | x=240.47089 | y=405.88998 | width=5.5200043 | height=5.0176797
+Text: i | x=245.89159 | y=405.88998 | width=3.0691223 | height=5.0176797
+Text: d | x=249.0048 | y=405.88998 | width=5.5200043 | height=5.0176797
+Text: e | x=254.52481 | y=405.88998 | width=4.901764 | height=5.0176797
+Text: n | x=259.32727 | y=405.88998 | width=5.519989 | height=5.0176797
+Text: c | x=264.84726 | y=405.88998 | width=4.901764 | height=5.0176797
+Text: e | x=269.74902 | y=405.88998 | width=4.901764 | height=5.0176797
+Text: a | x=277.8965 | y=405.88998 | width=4.901764 | height=5.0176797
+Text: s | x=282.69897 | y=405.88998 | width=4.2945557 | height=5.0176797
+Text: r | x=290.25034 | y=405.88998 | width=3.6763306 | height=5.0176797
+Text: e | x=293.95978 | y=405.88998 | width=4.901764 | height=5.0176797
+Text: q | x=298.86154 | y=405.88998 | width=5.519989 | height=5.0176797
+Text: u | x=304.38153 | y=405.88998 | width=5.519989 | height=5.0176797
+Text: e | x=309.80212 | y=405.88998 | width=4.901764 | height=5.0176797
+Text: s | x=314.60458 | y=405.88998 | width=4.2945557 | height=5.0176797
+Text: t | x=318.89914 | y=405.88998 | width=3.0691223 | height=5.0176797
+Text: e | x=322.03445 | y=405.88998 | width=4.901764 | height=5.0176797
+Text: d | x=326.93622 | y=405.88998 | width=5.519989 | height=5.0176797
+Text: t | x=335.5805 | y=405.88998 | width=3.0691223 | height=5.0176797
+Text: o | x=338.69382 | y=405.88998 | width=5.519989 | height=5.0176797
+Text: s | x=347.43753 | y=405.88998 | width=4.2945557 | height=5.0176797
+Text: u | x=351.7321 | y=405.88998 | width=5.519989 | height=5.0176797
+Text: p | x=357.25208 | y=405.88998 | width=5.519989 | height=5.0176797
+Text: p | x=362.77206 | y=405.88998 | width=5.519989 | height=5.0176797
+Text: o | x=368.29205 | y=405.88998 | width=5.519989 | height=5.0176797
+Text: r | x=373.71265 | y=405.88998 | width=3.6763306 | height=5.0176797
+Text: t | x=377.4221 | y=405.88998 | width=3.0691223 | height=5.0176797
+Text: t | x=383.6487 | y=405.88998 | width=3.0691223 | height=5.0176797
+Text: h | x=386.76193 | y=405.88998 | width=5.519989 | height=5.0176797
+Text: e | x=392.28192 | y=405.88998 | width=4.901764 | height=5.0176797
+Text: r | x=400.4295 | y=405.88998 | width=3.6763306 | height=5.0176797
+Text: e | x=404.13895 | y=405.88998 | width=4.901764 | height=5.0176797
+Text: q | x=408.9413 | y=405.88998 | width=5.519989 | height=5.0176797
+Text: u | x=414.4613 | y=405.88998 | width=5.519989 | height=5.0176797
+Text: e | x=419.9813 | y=405.88998 | width=4.901764 | height=5.0176797
+Text: s | x=424.88306 | y=405.88998 | width=4.2945557 | height=5.0176797
+Text: t | x=429.1004 | y=405.88998 | width=3.0691223 | height=5.0176797
+Text: f | x=77.664 | y=420.40997 | width=3.676323 | height=5.0176797
+Text: o | x=81.37342 | y=420.40997 | width=5.5199966 | height=5.0176797
+Text: r | x=86.89342 | y=420.40997 | width=3.676323 | height=5.0176797
+Text: a | x=93.36284 | y=420.40997 | width=4.901764 | height=5.0176797
+Text: c | x=100.9253 | y=420.40997 | width=4.9017563 | height=5.0176797
+Text: r | x=105.82706 | y=420.40997 | width=3.676323 | height=5.0176797
+Text: e | x=109.44818 | y=420.40997 | width=4.901764 | height=5.0176797
+Text: d | x=114.349945 | y=420.40997 | width=5.5199966 | height=5.0176797
+Text: i | x=119.86994 | y=420.40997 | width=3.0691223 | height=5.0176797
+Text: t | x=122.883865 | y=420.40997 | width=3.0691223 | height=5.0176797
+Text: t | x=128.6357 | y=420.40997 | width=3.0691223 | height=5.0176797
+Text: r | x=131.74902 | y=420.40997 | width=3.6763153 | height=5.0176797
+Text: a | x=135.45844 | y=420.40997 | width=4.901764 | height=5.0176797
+Text: n | x=140.3602 | y=420.40997 | width=5.5200043 | height=5.0176797
+Text: s | x=145.78079 | y=420.40997 | width=4.2945557 | height=5.0176797
+Text: f | x=150.07535 | y=420.40997 | width=3.6763153 | height=5.0176797
+Text: e | x=153.69646 | y=420.40997 | width=4.901764 | height=5.0176797
+Text: r | x=158.59822 | y=420.40997 | width=3.6763153 | height=5.0176797
+Text: . | x=162.32974 | y=420.40997 | width=2.7599945 | height=5.0176797
+Text: ? | x=455.02 | y=406.72998 | width=11.040009 | height=5.52
+Text: ? | x=496.3 | y=406.72998 | width=11.040009 | height=5.52
+Text: S | x=77.664 | y=435.52997 | width=6.138237 | height=5.0176797
+Text: t | x=83.80224 | y=435.52997 | width=3.0691223 | height=5.0176797
+Text: u | x=86.87136 | y=435.52997 | width=5.5199966 | height=5.0176797
+Text: d | x=92.39136 | y=435.52997 | width=5.5199966 | height=5.0176797
+Text: e | x=97.911354 | y=435.52997 | width=4.9017563 | height=5.0176797
+Text: n | x=102.857315 | y=435.52997 | width=5.5199966 | height=5.0176797
+Text: t | x=108.25581 | y=435.52997 | width=3.0691223 | height=5.0176797
+Text: ( | x=111.36914 | y=435.52997 | width=3.676323 | height=5.0176797
+Text: s | x=114.96816 | y=435.52997 | width=4.2945633 | height=5.0176797
+Text: ) | x=119.262726 | y=435.52997 | width=3.676323 | height=5.0176797
+Text: p | x=125.75425 | y=435.52997 | width=5.5199966 | height=5.0176797
+Text: r | x=131.15285 | y=435.52997 | width=3.6763153 | height=5.0176797
+Text: o | x=134.86226 | y=435.52997 | width=5.5200043 | height=5.0176797
+Text: v | x=140.38226 | y=435.52997 | width=5.5200043 | height=5.0176797
+Text: i | x=145.78078 | y=435.52997 | width=3.0691223 | height=5.0176797
+Text: d | x=148.8941 | y=435.52997 | width=5.5200043 | height=5.0176797
+Text: e | x=154.41411 | y=435.52997 | width=4.901764 | height=5.0176797
+Text: d | x=159.31587 | y=435.52997 | width=5.5200043 | height=5.0176797
+Text: s | x=167.49646 | y=435.52997 | width=4.2945557 | height=5.0176797
+Text: u | x=171.79102 | y=435.52997 | width=5.5200043 | height=5.0176797
+Text: p | x=177.31102 | y=435.52997 | width=5.5200043 | height=5.0176797
+Text: p | x=182.83102 | y=435.52997 | width=5.5200043 | height=5.0176797
+Text: o | x=188.35103 | y=435.52997 | width=5.5200043 | height=5.0176797
+Text: r | x=193.77173 | y=435.52997 | width=3.6763153 | height=5.0176797
+Text: t | x=197.37074 | y=435.52997 | width=3.0691223 | height=5.0176797
+Text: i | x=200.48407 | y=435.52997 | width=3.0691223 | height=5.0176797
+Text: n | x=203.59729 | y=435.52997 | width=5.5200043 | height=5.0176797
+Text: g | x=209.1173 | y=435.52997 | width=5.5200043 | height=5.0176797
+Text: e | x=217.2759 | y=435.52997 | width=4.901764 | height=5.0176797
+Text: v | x=222.17766 | y=435.52997 | width=5.5200043 | height=5.0176797
+Text: i | x=227.69766 | y=435.52997 | width=3.0691223 | height=5.0176797
+Text: d | x=230.71158 | y=435.52997 | width=5.5200043 | height=5.0176797
+Text: e | x=236.23158 | y=435.52997 | width=4.901764 | height=5.0176797
+Text: n | x=241.13335 | y=435.52997 | width=5.5200043 | height=5.0176797
+Text: c | x=246.65335 | y=435.52997 | width=4.901764 | height=5.0176797
+Text: e | x=251.46681 | y=435.52997 | width=4.9017487 | height=5.0176797
+Text: t | x=259.12857 | y=435.52997 | width=3.0691223 | height=5.0176797
+Text: h | x=262.1425 | y=435.52997 | width=5.519989 | height=5.0176797
+Text: a | x=267.66248 | y=435.52997 | width=4.901764 | height=5.0176797
+Text: t | x=272.56424 | y=435.52997 | width=3.0691223 | height=5.0176797
+Text: i | x=278.3271 | y=435.52997 | width=3.0691223 | height=5.0176797
+Text: s | x=281.4404 | y=435.52997 | width=4.2945557 | height=5.0176797
+Text: a | x=288.39557 | y=435.52997 | width=4.901764 | height=5.0176797
+Text: u | x=293.29733 | y=435.52997 | width=5.519989 | height=5.0176797
+Text: t | x=298.81732 | y=435.52997 | width=3.0691223 | height=5.0176797
+Text: h | x=301.83124 | y=435.52997 | width=5.519989 | height=5.0176797
+Text: e | x=307.35123 | y=435.52997 | width=4.901764 | height=5.0176797
+Text: n | x=312.253 | y=435.52997 | width=5.519989 | height=5.0176797
+Text: t | x=317.67368 | y=435.52997 | width=3.0691223 | height=5.0176797
+Text: i | x=320.7869 | y=435.52997 | width=3.0691223 | height=5.0176797
+Text: c | x=323.9002 | y=435.52997 | width=4.901764 | height=5.0176797
+Text: a | x=331.4626 | y=435.52997 | width=4.901764 | height=5.0176797
+Text: n | x=336.36435 | y=435.52997 | width=5.519989 | height=5.0176797
+Text: d | x=341.88434 | y=435.52997 | width=5.519989 | height=5.0176797
+Text: t | x=350.06503 | y=435.52997 | width=3.0691223 | height=5.0176797
+Text: r | x=353.17825 | y=435.52997 | width=3.6763306 | height=5.0176797
+Text: u | x=356.8877 | y=435.52997 | width=5.519989 | height=5.0176797
+Text: t | x=362.2863 | y=435.52997 | width=3.0691223 | height=5.0176797
+Text: h | x=365.3996 | y=435.52997 | width=5.519989 | height=5.0176797
+Text: f | x=370.7981 | y=435.52997 | width=3.6763306 | height=5.0176797
+Text: u | x=374.50754 | y=435.52997 | width=5.519989 | height=5.0176797
+Text: l | x=380.02753 | y=435.52997 | width=3.0691223 | height=5.0176797
+Text: . | x=383.14084 | y=435.52997 | width=2.7600098 | height=5.0176797
+Text: ? | x=455.02 | y=436.37 | width=11.040009 | height=5.52
+Text: ? | x=496.3 | y=436.37 | width=11.040009 | height=5.52
+Text: S | x=77.664 | y=452.34998 | width=6.138237 | height=5.0176797
+Text: t | x=83.80224 | y=452.34998 | width=3.0691223 | height=5.0176797
+Text: u | x=86.87136 | y=452.34998 | width=5.5199966 | height=5.0176797
+Text: d | x=92.39136 | y=452.34998 | width=5.5199966 | height=5.0176797
+Text: e | x=97.911354 | y=452.34998 | width=4.9017563 | height=5.0176797
+Text: n | x=102.857315 | y=452.34998 | width=5.5199966 | height=5.0176797
+Text: t | x=108.25581 | y=452.34998 | width=3.0691223 | height=5.0176797
+Text: ( | x=111.36914 | y=452.34998 | width=3.676323 | height=5.0176797
+Text: s | x=114.96816 | y=452.34998 | width=4.2945633 | height=5.0176797
+Text: ) | x=119.262726 | y=452.34998 | width=3.676323 | height=5.0176797
+Text: p | x=125.75425 | y=452.34998 | width=5.5199966 | height=5.0176797
+Text: r | x=131.15285 | y=452.34998 | width=3.6763153 | height=5.0176797
+Text: o | x=134.86226 | y=452.34998 | width=5.5200043 | height=5.0176797
+Text: v | x=140.38226 | y=452.34998 | width=5.5200043 | height=5.0176797
+Text: i | x=145.78078 | y=452.34998 | width=3.0691223 | height=5.0176797
+Text: d | x=148.8941 | y=452.34998 | width=5.5200043 | height=5.0176797
+Text: e | x=154.41411 | y=452.34998 | width=4.901764 | height=5.0176797
+Text: d | x=159.31587 | y=452.34998 | width=5.5200043 | height=5.0176797
+Text: i | x=167.49646 | y=452.34998 | width=3.0691223 | height=5.0176797
+Text: n | x=170.60979 | y=452.34998 | width=5.5200043 | height=5.0176797
+Text: f | x=176.00839 | y=452.34998 | width=3.6763153 | height=5.0176797
+Text: o | x=179.7178 | y=452.34998 | width=5.5200043 | height=5.0176797
+Text: r | x=185.23781 | y=452.34998 | width=3.6763153 | height=5.0176797
+Text: m | x=188.83682 | y=452.34998 | width=8.589127 | height=5.0176797
+Text: a | x=197.35976 | y=452.34998 | width=4.901764 | height=5.0176797
+Text: t | x=202.26152 | y=452.34998 | width=3.0691223 | height=5.0176797
+Text: i | x=205.38585 | y=452.34998 | width=3.0691223 | height=5.0176797
+Text: o | x=208.38867 | y=452.34998 | width=5.5200043 | height=5.0176797
+Text: n | x=213.90868 | y=452.34998 | width=5.5200043 | height=5.0176797
+Text: f | x=222.18867 | y=452.34998 | width=3.6763153 | height=5.0176797
+Text: o | x=225.89809 | y=452.34998 | width=5.5200043 | height=5.0176797
+Text: r | x=231.29669 | y=452.34998 | width=3.6763153 | height=5.0176797
+Text: t | x=237.7661 | y=452.34998 | width=3.0691223 | height=5.0176797
+Text: h | x=240.76903 | y=452.34998 | width=5.5200043 | height=5.0176797
+Text: e | x=246.28903 | y=452.34998 | width=4.901764 | height=5.0176797
+Text: i | x=251.09138 | y=452.34998 | width=3.0691223 | height=5.0176797
+Text: r | x=254.20471 | y=452.34998 | width=3.6763306 | height=5.0176797
+Text: U | x=260.67416 | y=452.34998 | width=7.970886 | height=5.0176797
+Text: S | x=268.58984 | y=452.34998 | width=6.1382446 | height=5.0176797
+Text: I | x=274.7281 | y=452.34998 | width=3.6763306 | height=5.0176797
+Text: . | x=278.30502 | y=452.34998 | width=2.7600098 | height=5.0176797
+Text: ? | x=455.02 | y=453.18997 | width=11.040009 | height=5.52
+Text: ? | x=496.3 | y=453.18997 | width=11.040009 | height=5.52
+Text: S | x=77.664 | y=469.27 | width=6.138237 | height=5.0176797
+Text: t | x=83.80224 | y=469.27 | width=3.0691223 | height=5.0176797
+Text: u | x=86.87136 | y=469.27 | width=5.5199966 | height=5.0176797
+Text: d | x=92.39136 | y=469.27 | width=5.5199966 | height=5.0176797
+Text: e | x=97.911354 | y=469.27 | width=4.9017563 | height=5.0176797
+Text: n | x=102.857315 | y=469.27 | width=5.5199966 | height=5.0176797
+Text: t | x=108.25581 | y=469.27 | width=3.0691223 | height=5.0176797
+Text: ( | x=111.36914 | y=469.27 | width=3.676323 | height=5.0176797
+Text: s | x=114.96816 | y=469.27 | width=4.2945633 | height=5.0176797
+Text: ) | x=119.262726 | y=469.27 | width=3.676323 | height=5.0176797
+Text: h | x=125.87565 | y=469.27 | width=5.5199966 | height=5.0176797
+Text: a | x=131.39565 | y=469.27 | width=4.901764 | height=5.0176797
+Text: s | x=136.29741 | y=469.27 | width=4.2945557 | height=5.0176797
+Text: f | x=143.50655 | y=469.27 | width=3.6763153 | height=5.0176797
+Text: u | x=147.10556 | y=469.27 | width=5.5200043 | height=5.0176797
+Text: l | x=152.62556 | y=469.27 | width=3.0691223 | height=5.0176797
+Text: f | x=155.6285 | y=469.27 | width=3.6763153 | height=5.0176797
+Text: i | x=159.3379 | y=469.27 | width=3.0691223 | height=5.0176797
+Text: l | x=162.34084 | y=469.27 | width=3.0691223 | height=5.0176797
+Text: l | x=165.45406 | y=469.27 | width=3.0691223 | height=5.0176797
+Text: e | x=168.45699 | y=469.27 | width=4.901764 | height=5.0176797
+Text: d | x=173.35875 | y=469.27 | width=5.5200043 | height=5.0176797
+Text: t | x=181.77126 | y=469.27 | width=3.0691223 | height=5.0176797
+Text: h | x=184.88448 | y=469.27 | width=5.5200043 | height=5.0176797
+Text: e | x=190.40448 | y=469.27 | width=4.901764 | height=5.0176797
+Text: r | x=198.07733 | y=469.27 | width=3.6763153 | height=5.0176797
+Text: e | x=201.78674 | y=469.27 | width=4.901764 | height=5.0176797
+Text: q | x=206.6885 | y=469.27 | width=5.5200043 | height=5.0176797
+Text: u | x=212.20851 | y=469.27 | width=5.5200043 | height=5.0176797
+Text: i | x=217.6291 | y=469.27 | width=3.0691223 | height=5.0176797
+Text: r | x=220.74243 | y=469.27 | width=3.6763153 | height=5.0176797
+Text: e | x=224.45184 | y=469.27 | width=4.901764 | height=5.0176797
+Text: m | x=229.2542 | y=469.27 | width=8.589127 | height=5.0176797
+Text: e | x=237.88753 | y=469.27 | width=4.901764 | height=5.0176797
+Text: n | x=242.68988 | y=469.27 | width=5.5200043 | height=5.0176797
+Text: t | x=248.20988 | y=469.27 | width=3.0691223 | height=5.0176797
+Text: s | x=251.32321 | y=469.27 | width=4.2945557 | height=5.0176797
+Text: o | x=258.51025 | y=469.27 | width=5.519989 | height=5.0176797
+Text: f | x=263.90875 | y=469.27 | width=3.6763306 | height=5.0176797
+Text: t | x=270.4887 | y=469.27 | width=3.0691223 | height=5.0176797
+Text: h | x=273.60193 | y=469.27 | width=5.519989 | height=5.0176797
+Text: e | x=279.12192 | y=469.27 | width=4.901764 | height=5.0176797
+Text: t | x=286.91617 | y=469.27 | width=3.0691223 | height=5.0176797
+Text: r | x=289.9191 | y=469.27 | width=3.6763306 | height=5.0176797
+Text: a | x=293.62854 | y=469.27 | width=4.901764 | height=5.0176797
+Text: i | x=298.5303 | y=469.27 | width=3.0691223 | height=5.0176797
+Text: n | x=301.54422 | y=469.27 | width=5.519989 | height=5.0176797
+Text: i | x=307.0642 | y=469.27 | width=3.0691223 | height=5.0176797
+Text: n | x=310.17743 | y=469.27 | width=5.519989 | height=5.0176797
+Text: g | x=315.57602 | y=469.27 | width=5.519989 | height=5.0176797
+Text: p | x=324.0878 | y=469.27 | width=5.519989 | height=5.0176797
+Text: a | x=329.6078 | y=469.27 | width=4.901764 | height=5.0176797
+Text: c | x=334.50955 | y=469.27 | width=4.901764 | height=5.0176797
+Text: k | x=339.32303 | y=469.27 | width=5.519989 | height=5.0176797
+Text: a | x=344.84302 | y=469.27 | width=4.901764 | height=5.0176797
+Text: g | x=349.74478 | y=469.27 | width=5.519989 | height=5.0176797
+Text: e | x=355.26477 | y=469.27 | width=4.901764 | height=5.0176797
+Text: o | x=363.07004 | y=469.27 | width=5.519989 | height=5.0176797
+Text: f | x=368.46863 | y=469.27 | width=3.6763306 | height=5.0176797
+Text: t | x=375.0485 | y=469.27 | width=3.0691223 | height=5.0176797
+Text: h | x=378.1618 | y=469.27 | width=5.519989 | height=5.0176797
+Text: e | x=383.6818 | y=469.27 | width=4.901764 | height=5.0176797
+Text: u | x=391.47607 | y=469.27 | width=5.519989 | height=5.0176797
+Text: n | x=396.99606 | y=469.27 | width=5.519989 | height=5.0176797
+Text: i | x=402.51605 | y=469.27 | width=3.0691223 | height=5.0176797
+Text: t | x=405.5189 | y=469.27 | width=3.0691223 | height=5.0176797
+Text: ( | x=408.6322 | y=469.27 | width=3.6763306 | height=5.0176797
+Text: s | x=412.23123 | y=469.27 | width=4.2945557 | height=5.0176797
+Text: ) | x=416.5258 | y=469.27 | width=3.6763306 | height=5.0176797
+Text: o | x=423.1387 | y=469.27 | width=5.519989 | height=5.0176797
+Text: f | x=428.6587 | y=469.27 | width=3.6763306 | height=5.0176797
+Text: c | x=77.664 | y=483.78998 | width=4.901764 | height=5.0176797
+Text: o | x=82.565765 | y=483.78998 | width=5.5199966 | height=5.0176797
+Text: m | x=88.08576 | y=483.78998 | width=8.589119 | height=5.0176797
+Text: p | x=96.73008 | y=483.78998 | width=5.5199966 | height=5.0176797
+Text: e | x=102.12868 | y=483.78998 | width=4.901764 | height=5.0176797
+Text: t | x=107.03044 | y=483.78998 | width=3.0691223 | height=5.0176797
+Text: e | x=110.15476 | y=483.78998 | width=4.9017563 | height=5.0176797
+Text: n | x=114.957115 | y=483.78998 | width=5.5199966 | height=5.0176797
+Text: c | x=120.47711 | y=483.78998 | width=4.901764 | height=5.0176797
+Text: y | x=125.378876 | y=483.78998 | width=5.5200043 | height=5.0176797
+Text: f | x=133.55946 | y=483.78998 | width=3.6763153 | height=5.0176797
+Text: o | x=137.26898 | y=483.78998 | width=5.5200043 | height=5.0176797
+Text: r | x=142.78899 | y=483.78998 | width=3.6763153 | height=5.0176797
+Text: a | x=149.1369 | y=483.78998 | width=4.901764 | height=5.0176797
+Text: c | x=156.79866 | y=483.78998 | width=4.901764 | height=5.0176797
+Text: r | x=161.61212 | y=483.78998 | width=3.6763153 | height=5.0176797
+Text: e | x=165.32153 | y=483.78998 | width=4.901764 | height=5.0176797
+Text: d | x=170.2233 | y=483.78998 | width=5.5200043 | height=5.0176797
+Text: i | x=175.644 | y=483.78998 | width=3.0691223 | height=5.0176797
+Text: t | x=178.75722 | y=483.78998 | width=3.0691223 | height=5.0176797
+Text: t | x=184.50914 | y=483.78998 | width=3.0691223 | height=5.0176797
+Text: r | x=187.62236 | y=483.78998 | width=3.6763153 | height=5.0176797
+Text: a | x=191.33177 | y=483.78998 | width=4.901764 | height=5.0176797
+Text: n | x=196.13423 | y=483.78998 | width=5.5200043 | height=5.0176797
+Text: s | x=201.65424 | y=483.78998 | width=4.2945557 | height=5.0176797
+Text: f | x=205.94879 | y=483.78998 | width=3.6763153 | height=5.0176797
+Text: e | x=209.68031 | y=483.78998 | width=4.901764 | height=5.0176797
+Text: r | x=214.48267 | y=483.78998 | width=3.6763153 | height=5.0176797
+Text: . | x=218.19208 | y=483.78998 | width=2.7599945 | height=5.0176797
+Text: ? | x=455.02 | y=470.11 | width=11.040009 | height=5.52
+Text: ? | x=496.3 | y=470.11 | width=11.040009 | height=5.52
+Text: O | x=71.784 | y=522.31 | width=8.589119 | height=4.92936
+Text: u | x=80.41732 | y=522.31 | width=6.138237 | height=4.92936
+Text: t | x=86.55556 | y=522.31 | width=3.676323 | height=4.92936
+Text: c | x=90.23188 | y=522.31 | width=4.9017563 | height=4.92936
+Text: o | x=95.056335 | y=522.31 | width=5.5199966 | height=4.92936
+Text: m | x=100.57633 | y=522.31 | width=9.19632 | height=4.92936
+Text: e | x=109.69535 | y=522.31 | width=4.9017563 | height=4.92936
+Text: o | x=117.35711 | y=522.31 | width=5.5199966 | height=4.92936
+Text: f | x=122.877106 | y=522.31 | width=3.676323 | height=4.92936
+Text: a | x=129.24722 | y=522.31 | width=5.5200043 | height=4.92936
+Text: c | x=137.52722 | y=522.31 | width=4.901764 | height=4.92936
+Text: r | x=142.42899 | y=522.31 | width=4.901764 | height=4.92936
+Text: e | x=147.24236 | y=522.31 | width=4.901764 | height=4.92936
+Text: d | x=152.14412 | y=522.31 | width=6.1382446 | height=4.92936
+Text: i | x=158.28236 | y=522.31 | width=3.0691223 | height=4.92936
+Text: t | x=161.2853 | y=522.31 | width=3.6763153 | height=4.92936
+Text: t | x=167.7547 | y=522.31 | width=3.6763153 | height=4.92936
+Text: r | x=171.46411 | y=522.31 | width=4.901764 | height=4.92936
+Text: a | x=176.26657 | y=522.31 | width=5.5200043 | height=4.92936
+Text: n | x=181.78658 | y=522.31 | width=6.1382446 | height=4.92936
+Text: s | x=187.92482 | y=522.31 | width=4.2945557 | height=4.92936
+Text: f | x=192.10898 | y=522.31 | width=3.6763153 | height=4.92936
+Text: e | x=195.81839 | y=522.31 | width=4.901764 | height=4.92936
+Text: r | x=200.72015 | y=522.31 | width=4.901764 | height=4.92936
+Text: : | x=205.61 | y=522.31 | width=3.0691223 | height=5.0176797
+Text: ? | x=211.49 | y=522.31 | width=11.039993 | height=5.52
+Text: G | x=225.29 | y=522.31 | width=7.970886 | height=5.0176797
+Text: r | x=233.20567 | y=522.31 | width=3.6763153 | height=5.0176797
+Text: a | x=236.80469 | y=522.31 | width=4.901764 | height=5.0176797
+Text: n | x=241.70645 | y=522.31 | width=5.5200043 | height=5.0176797
+Text: t | x=247.22646 | y=522.31 | width=3.0691223 | height=5.0176797
+Text: e | x=250.24037 | y=522.31 | width=4.901764 | height=5.0176797
+Text: d | x=255.14214 | y=522.31 | width=5.5200043 | height=5.0176797
+Text: ? | x=324.07 | y=522.31 | width=11.040009 | height=5.52
+Text: N | x=337.87 | y=522.31 | width=7.970886 | height=5.0176797
+Text: o | x=345.78568 | y=522.31 | width=5.519989 | height=5.0176797
+Text: t | x=351.30566 | y=522.31 | width=3.0691223 | height=5.0176797
+Text: G | x=357.179 | y=522.31 | width=7.970886 | height=5.0176797
+Text: r | x=365.09467 | y=522.31 | width=3.6763306 | height=5.0176797
+Text: a | x=368.6937 | y=522.31 | width=4.901764 | height=5.0176797
+Text: n | x=373.59546 | y=522.31 | width=5.519989 | height=5.0176797
+Text: t | x=379.11545 | y=522.31 | width=3.0691223 | height=5.0176797
+Text: e | x=382.12936 | y=522.31 | width=4.901764 | height=5.0176797
+Text: d | x=387.03113 | y=522.31 | width=5.519989 | height=5.0176797
+Text: A | x=72.024 | y=545.82996 | width=7.9708786 | height=5.0176797
+Text: d | x=79.93968 | y=545.82996 | width=5.5199966 | height=5.0176797
+Text: d | x=85.45968 | y=545.82996 | width=5.5199966 | height=5.0176797
+Text: i | x=90.979675 | y=545.82996 | width=3.0691223 | height=5.0176797
+Text: t | x=94.093 | y=545.82996 | width=3.0691223 | height=5.0176797
+Text: i | x=97.09583 | y=545.82996 | width=3.0691223 | height=5.0176797
+Text: o | x=100.20916 | y=545.82996 | width=5.5199966 | height=5.0176797
+Text: n | x=105.72916 | y=545.82996 | width=5.5199966 | height=5.0176797
+Text: a | x=111.24915 | y=545.82996 | width=4.9017563 | height=5.0176797
+Text: l | x=116.051506 | y=545.82996 | width=3.0691223 | height=5.0176797
+Text: C | x=121.924835 | y=545.82996 | width=7.363678 | height=5.0176797
+Text: o | x=129.24431 | y=545.82996 | width=5.5200043 | height=5.0176797
+Text: m | x=134.64291 | y=545.82996 | width=8.589127 | height=5.0176797
+Text: m | x=143.27614 | y=545.82996 | width=8.589127 | height=5.0176797
+Text: e | x=151.79907 | y=545.82996 | width=4.901764 | height=5.0176797
+Text: n | x=156.70084 | y=545.82996 | width=5.5200043 | height=5.0176797
+Text: t | x=162.22084 | y=545.82996 | width=3.0691223 | height=5.0176797
+Text: s | x=165.23476 | y=545.82996 | width=4.2945557 | height=5.0176797
+Text: : | x=169.52931 | y=545.82996 | width=3.0691223 | height=5.0176797
+Text: _ | x=175.42462 | y=545.82996 | width=5.5200043 | height=5.0176797
+Text: _ | x=180.82323 | y=545.82996 | width=5.5200043 | height=5.0176797
+Text: _ | x=186.34323 | y=545.82996 | width=5.5200043 | height=5.0176797
+Text: _ | x=191.74184 | y=545.82996 | width=5.5200043 | height=5.0176797
+Text: _ | x=197.26184 | y=545.82996 | width=5.5200043 | height=5.0176797
+Text: _ | x=202.78185 | y=545.82996 | width=5.5200043 | height=5.0176797
+Text: _ | x=208.30185 | y=545.82996 | width=5.5200043 | height=5.0176797
+Text: _ | x=213.82185 | y=545.82996 | width=5.5200043 | height=5.0176797
+Text: _ | x=219.34186 | y=545.82996 | width=5.5200043 | height=5.0176797
+Text: _ | x=224.86186 | y=545.82996 | width=5.5200043 | height=5.0176797
+Text: _ | x=230.38187 | y=545.82996 | width=5.5200043 | height=5.0176797
+Text: _ | x=235.90187 | y=545.82996 | width=5.5200043 | height=5.0176797
+Text: _ | x=241.30038 | y=545.82996 | width=5.5200043 | height=5.0176797
+Text: _ | x=246.82039 | y=545.82996 | width=5.5200043 | height=5.0176797
+Text: _ | x=252.3404 | y=545.82996 | width=5.519989 | height=5.0176797
+Text: _ | x=257.86038 | y=545.82996 | width=5.519989 | height=5.0176797
+Text: _ | x=263.38037 | y=545.82996 | width=5.519989 | height=5.0176797
+Text: _ | x=268.90036 | y=545.82996 | width=5.519989 | height=5.0176797
+Text: _ | x=274.29895 | y=545.82996 | width=5.519989 | height=5.0176797
+Text: _ | x=279.81894 | y=545.82996 | width=5.519989 | height=5.0176797
+Text: _ | x=285.33893 | y=545.82996 | width=5.519989 | height=5.0176797
+Text: _ | x=290.85892 | y=545.82996 | width=5.519989 | height=5.0176797
+Text: _ | x=296.3789 | y=545.82996 | width=5.519989 | height=5.0176797
+Text: _ | x=301.8989 | y=545.82996 | width=5.519989 | height=5.0176797
+Text: _ | x=307.2974 | y=545.82996 | width=5.519989 | height=5.0176797
+Text: _ | x=312.69598 | y=545.82996 | width=5.519989 | height=5.0176797
+Text: _ | x=318.21597 | y=545.82996 | width=5.519989 | height=5.0176797
+Text: _ | x=323.73596 | y=545.82996 | width=5.519989 | height=5.0176797
+Text: _ | x=329.25595 | y=545.82996 | width=5.519989 | height=5.0176797
+Text: _ | x=334.77594 | y=545.82996 | width=5.519989 | height=5.0176797
+Text: _ | x=340.29593 | y=545.82996 | width=5.519989 | height=5.0176797
+Text: _ | x=345.81592 | y=545.82996 | width=5.519989 | height=5.0176797
+Text: _ | x=351.3359 | y=545.82996 | width=5.519989 | height=5.0176797
+Text: _ | x=356.8559 | y=545.82996 | width=5.519989 | height=5.0176797
+Text: _ | x=362.25458 | y=545.82996 | width=5.519989 | height=5.0176797
+Text: _ | x=367.77457 | y=545.82996 | width=5.519989 | height=5.0176797
+Text: _ | x=373.29456 | y=545.82996 | width=5.519989 | height=5.0176797
+Text: _ | x=378.81454 | y=545.82996 | width=5.519989 | height=5.0176797
+Text: _ | x=384.33453 | y=545.82996 | width=5.519989 | height=5.0176797
+Text: _ | x=389.85452 | y=545.82996 | width=5.519989 | height=5.0176797
+Text: _ | x=395.25302 | y=545.82996 | width=5.519989 | height=5.0176797
+Text: _ | x=400.773 | y=545.82996 | width=5.519989 | height=5.0176797
+Text: _ | x=406.293 | y=545.82996 | width=5.519989 | height=5.0176797
+Text: _ | x=411.813 | y=545.82996 | width=5.519989 | height=5.0176797
+Text: _ | x=417.33298 | y=545.82996 | width=5.519989 | height=5.0176797
+Text: _ | x=422.85297 | y=545.82996 | width=5.519989 | height=5.0176797
+Text: _ | x=428.25156 | y=545.82996 | width=5.519989 | height=5.0176797
+Text: _ | x=433.65005 | y=545.82996 | width=5.519989 | height=5.0176797
+Text: _ | x=439.17004 | y=545.82996 | width=5.519989 | height=5.0176797
+Text: _ | x=444.69003 | y=545.82996 | width=5.519989 | height=5.0176797
+Text: _ | x=450.21002 | y=545.82996 | width=5.519989 | height=5.0176797
+Text: _ | x=455.73 | y=545.82996 | width=5.519989 | height=5.0176797
+Text: _ | x=461.25 | y=545.82996 | width=5.519989 | height=5.0176797
+Text: _ | x=466.77 | y=545.82996 | width=5.519989 | height=5.0176797
+Text: _ | x=472.28998 | y=545.82996 | width=5.519989 | height=5.0176797
+Text: _ | x=477.80997 | y=545.82996 | width=5.519989 | height=5.0176797
+Text: _ | x=483.20856 | y=545.82996 | width=5.519989 | height=5.0176797
+Text: _ | x=488.72855 | y=545.82996 | width=5.519989 | height=5.0176797
+Text: _ | x=494.24854 | y=545.82996 | width=5.519989 | height=5.0176797
+Text: _ | x=499.76852 | y=545.82996 | width=5.519989 | height=5.0176797
+Text: _ | x=505.2885 | y=545.82996 | width=5.519989 | height=5.0176797
+Text: O | x=72.024 | y=568.39 | width=7.9708786 | height=5.0176797
+Text: f | x=79.93968 | y=568.39 | width=3.676323 | height=5.0176797
+Text: f | x=83.6491 | y=568.39 | width=3.676323 | height=5.0176797
+Text: i | x=87.35852 | y=568.39 | width=3.0691223 | height=5.0176797
+Text: c | x=90.36145 | y=568.39 | width=4.901764 | height=5.0176797
+Text: e | x=95.263214 | y=568.39 | width=4.901764 | height=5.0176797
+Text: r | x=100.18708 | y=568.39 | width=3.676323 | height=5.0176797
+Text: S | x=106.7 | y=568.39 | width=6.138237 | height=5.0176797
+Text: i | x=112.69473 | y=568.39 | width=3.0691223 | height=5.0176797
+Text: g | x=115.80796 | y=568.39 | width=5.5199966 | height=5.0176797
+Text: n | x=121.32796 | y=568.39 | width=5.5199966 | height=5.0176797
+Text: a | x=126.726555 | y=568.39 | width=4.9017563 | height=5.0176797
+Text: t | x=131.62831 | y=568.39 | width=3.0691223 | height=5.0176797
+Text: u | x=134.75264 | y=568.39 | width=5.5200043 | height=5.0176797
+Text: r | x=140.15125 | y=568.39 | width=3.6763153 | height=5.0176797
+Text: e | x=143.86066 | y=568.39 | width=4.901764 | height=5.0176797
+Text: : | x=148.66301 | y=568.39 | width=3.0691223 | height=5.0176797
+Text: _ | x=154.53633 | y=568.39 | width=5.5200043 | height=5.0176797
+Text: _ | x=160.05634 | y=568.39 | width=5.5200043 | height=5.0176797
+Text: _ | x=165.57634 | y=568.39 | width=5.5200043 | height=5.0176797
+Text: _ | x=171.09634 | y=568.39 | width=5.5200043 | height=5.0176797
+Text: _ | x=176.49486 | y=568.39 | width=5.5200043 | height=5.0176797
+Text: _ | x=182.01486 | y=568.39 | width=5.5200043 | height=5.0176797
+Text: _ | x=187.53487 | y=568.39 | width=5.5200043 | height=5.0176797
+Text: _ | x=192.93347 | y=568.39 | width=5.5200043 | height=5.0176797
+Text: _ | x=198.45348 | y=568.39 | width=5.5200043 | height=5.0176797
+Text: _ | x=203.97348 | y=568.39 | width=5.5200043 | height=5.0176797
+Text: _ | x=209.49348 | y=568.39 | width=5.5200043 | height=5.0176797
+Text: _ | x=215.01349 | y=568.39 | width=5.5200043 | height=5.0176797
+Text: _ | x=220.61 | y=568.39 | width=5.5200043 | height=5.0176797
+Text: _ | x=226.13 | y=568.39 | width=5.5200043 | height=5.0176797
+Text: _ | x=231.65001 | y=568.39 | width=5.5200043 | height=5.0176797
+Text: D | x=72.024 | y=594.55 | width=7.9708786 | height=5.0176797
+Text: a | x=79.93968 | y=594.55 | width=4.901764 | height=5.0176797
+Text: t | x=84.841446 | y=594.55 | width=3.0691223 | height=5.0176797
+Text: e | x=87.96577 | y=594.55 | width=4.9017563 | height=5.0176797
+Text: : | x=92.86752 | y=594.55 | width=3.0691223 | height=5.0176797
+Text: _ | x=98.64145 | y=594.55 | width=5.5199966 | height=5.0176797
+Text: _ | x=104.161446 | y=594.55 | width=5.5199966 | height=5.0176797
+Text: _ | x=109.68144 | y=594.55 | width=5.5199966 | height=5.0176797
+Text: _ | x=115.20144 | y=594.55 | width=5.5199966 | height=5.0176797
+Text: _ | x=120.721436 | y=594.55 | width=5.5199966 | height=5.0176797
+Text: _ | x=126.12003 | y=594.55 | width=5.5199966 | height=5.0176797
+Text: _ | x=131.64003 | y=594.55 | width=5.5200043 | height=5.0176797
+Text: _ | x=137.16003 | y=594.55 | width=5.5200043 | height=5.0176797
+Text: _ | x=142.68004 | y=594.55 | width=5.5200043 | height=5.0176797
+Text: _ | x=148.20004 | y=594.55 | width=5.5200043 | height=5.0176797
+Text: _ | x=153.72005 | y=594.55 | width=5.5200043 | height=5.0176797
+Text: _ | x=159.11856 | y=594.55 | width=5.5200043 | height=5.0176797
+Text: _ | x=164.63857 | y=594.55 | width=5.5200043 | height=5.0176797
+Text: _ | x=170.15857 | y=594.55 | width=5.5200043 | height=5.0176797
+Text: _ | x=175.67857 | y=594.55 | width=5.5200043 | height=5.0176797
+Text: _ | x=181.19858 | y=594.55 | width=5.5200043 | height=5.0176797
+Text: _ | x=186.77 | y=594.55 | width=5.5200043 | height=5.0176797
+Text: _ | x=192.16861 | y=594.55 | width=5.5200043 | height=5.0176797
+Text: _ | x=197.68861 | y=594.55 | width=5.5200043 | height=5.0176797
+--- FORM WIDGETS ---
+Widget: x=175.44 | y=295.2 | width=335.4 | height=21.23999
+Widget: x=98.64 | y=246.48 | width=104.520004 | height=21.240005
+Widget: x=212.491 | y=319.034 | width=8.938004 | height=7.8460083
+Widget: x=325.7 | y=320.086 | width=7.8799744 | height=6.7940063
+Widget: x=154.56 | y=272.64 | width=82.56 | height=21.23999
+Widget: x=456.177 | y=435.013 | width=8.540009 | height=8.540985
+Widget: x=497.17 | y=435.014 | width=8.539978 | height=8.539978
+Widget: x=456.702 | y=405.057 | width=8.540009 | height=8.539978
+Widget: x=456.177 | y=388.24 | width=9.065002 | height=9.591003
+Widget: x=455.651 | y=370.371 | width=9.0660095 | height=9.591003
+Widget: x=496.644 | y=405.057 | width=9.065979 | height=9.591003
+Widget: x=497.17 | y=388.24 | width=8.539978 | height=9.065002
+Widget: x=496.644 | y=370.896 | width=9.065002 | height=9.5920105
+Widget: x=98.8033 | y=571.335 | width=87.984695 | height=18.320984
+Widget: x=163.971 | y=597.613 | width=198.351 | height=17.27002
+Widget: x=80.9346 | y=742.139 | width=241.9714 | height=14.642029
+Widget: x=128.76 | y=728.474 | width=22.291 | height=11.489014
+
+=================================
+ANALYSIS COMPLETE
+=================================

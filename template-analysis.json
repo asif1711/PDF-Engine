@@ -1,0 +1,1258 @@
+{
+  "template": {
+    "filename": "NPA_Credit Transfer Forms_V2.1.pdf",
+    "path": "NPA_Credit Transfer Forms_V2.1.pdf"
+  },
+  "technical": {
+    "pdfType": "PDF",
+    "pages": 2,
+    "hasAcroForm": true,
+    "fieldCount": 49,
+    "fields": [
+      {
+        "name": "First Name",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Last Name",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Date of Birth",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Address",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Email",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Phone Number",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Unique Student Identifier USI Number",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Unit CodeRow1",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Unit TitleRow1",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Evidence ProvidedRow1",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Unit CodeRow1_2",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Unit TitleRow1_2",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Unit CodeRow2",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Unit TitleRow2",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Evidence ProvidedRow2",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Unit CodeRow2_2",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Unit TitleRow2_2",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Unit CodeRow3",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Unit TitleRow3",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Evidence ProvidedRow3",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Unit CodeRow3_2",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Unit TitleRow3_2",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Unit CodeRow4",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Unit TitleRow4",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Evidence ProvidedRow4",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Unit CodeRow4_2",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Unit TitleRow4_2",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Unit CodeRow5",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Unit TitleRow5",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Evidence ProvidedRow5",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Unit CodeRow5_2",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Unit TitleRow5_2",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Additional Comments",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Date",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Granted",
+        "type": "PDFCheckBox"
+      },
+      {
+        "name": "Not Granted",
+        "type": "PDFCheckBox"
+      },
+      {
+        "name": "Signature1_es_:signer:signature",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Check Box2",
+        "type": "PDFCheckBox"
+      },
+      {
+        "name": "Check Box3",
+        "type": "PDFCheckBox"
+      },
+      {
+        "name": "Check Box4",
+        "type": "PDFCheckBox"
+      },
+      {
+        "name": "Check Box5",
+        "type": "PDFCheckBox"
+      },
+      {
+        "name": "Check Box6",
+        "type": "PDFCheckBox"
+      },
+      {
+        "name": "Check Box7",
+        "type": "PDFCheckBox"
+      },
+      {
+        "name": "Check Box8",
+        "type": "PDFCheckBox"
+      },
+      {
+        "name": "Check Box9",
+        "type": "PDFCheckBox"
+      },
+      {
+        "name": "Date10_es_:signer:date",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Text11",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Text12",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Text13",
+        "type": "PDFTextField"
+      }
+    ]
+  },
+  "context": {
+    "pages": [
+      {
+        "page": 1,
+        "size": {
+          "width": 595.32,
+          "height": 841.92
+        },
+        "text": [
+          {
+            "text": "Credit Transfer Form_V2.1",
+            "x": 72.024,
+            "y": 792.6959999999999,
+            "width": 121.46599999999995,
+            "height": 11.04
+          },
+          {
+            "text": "Page",
+            "x": 473.62,
+            "y": 792.6959999999999,
+            "width": 21.461759999999998,
+            "height": 11.04
+          },
+          {
+            "text": "1",
+            "x": 497.86,
+            "y": 792.6959999999999,
+            "width": 5.52,
+            "height": 11.04
+          },
+          {
+            "text": "of",
+            "x": 506.14,
+            "y": 792.6959999999999,
+            "width": 9.074924160000009,
+            "height": 11.04
+          },
+          {
+            "text": "2",
+            "x": 518.02,
+            "y": 792.6959999999999,
+            "width": 5.52,
+            "height": 11.04
+          },
+          {
+            "text": "Credit Transfer Form",
+            "x": 231.65,
+            "y": 97.09999999999991,
+            "width": 132.18111788000002,
+            "height": 14.04
+          },
+          {
+            "text": "How to Use Credit Transfer Form",
+            "x": 72.024,
+            "y": 135.01999999999998,
+            "width": 174.824,
+            "height": 12
+          },
+          {
+            "text": "•",
+            "x": 69.384,
+            "y": 158.77999999999997,
+            "width": 5.078399999999999,
+            "height": 11.04
+          },
+          {
+            "text": "This form will only be considered for currently enrolled student(s).",
+            "x": 87.384,
+            "y": 158.77999999999997,
+            "width": 295.05509519999976,
+            "height": 11.04
+          },
+          {
+            "text": "•",
+            "x": 69.384,
+            "y": 174.14,
+            "width": 5.078399999999999,
+            "height": 11.04
+          },
+          {
+            "text": "The student(s) will be required to attach the original and/or a copy of the evidence mentioned in",
+            "x": 87.384,
+            "y": 174.14,
+            "width": 432.5874731200001,
+            "height": 11.04
+          },
+          {
+            "text": "this form.",
+            "x": 87.384,
+            "y": 188.77999999999997,
+            "width": 42.8131752,
+            "height": 11.04
+          },
+          {
+            "text": "•",
+            "x": 69.384,
+            "y": 204.01999999999998,
+            "width": 5.078399999999999,
+            "height": 11.04
+          },
+          {
+            "text": "Student(s) is encouraged to fill sections A, B, and C in this form and submit this form prior to the",
+            "x": 87.384,
+            "y": 204.01999999999998,
+            "width": 432.50301519999977,
+            "height": 11.04
+          },
+          {
+            "text": "commencement of training and assessment.",
+            "x": 87.384,
+            "y": 218.65999999999997,
+            "width": 191.64337103999995,
+            "height": 11.04
+          },
+          {
+            "text": "•",
+            "x": 69.384,
+            "y": 233.89999999999998,
+            "width": 5.078399999999999,
+            "height": 11.04
+          },
+          {
+            "text": "Overseas student(s) is allowed to apply for credit transfer before or after visa approvals.",
+            "x": 87.384,
+            "y": 233.89999999999998,
+            "width": 386.49938207999963,
+            "height": 11.04
+          },
+          {
+            "text": "•",
+            "x": 69.384,
+            "y": 249.26,
+            "width": 5.078399999999999,
+            "height": 11.04
+          },
+          {
+            "text": "This form also consists of student document checklists that will be reviewed by the Enrolment",
+            "x": 87.384,
+            "y": 249.26,
+            "width": 432.33751727999993,
+            "height": 11.04
+          },
+          {
+            "text": "Officer to check the authenticity of the student’s credentials.",
+            "x": 87.384,
+            "y": 263.92999999999995,
+            "width": 265.2911889599999,
+            "height": 11.04
+          },
+          {
+            "text": "A.",
+            "x": 68.184,
+            "y": 302.0899999999999,
+            "width": 10.67998,
+            "height": 11.04
+          },
+          {
+            "text": "Student Details:",
+            "x": 86.184,
+            "y": 302.0899999999999,
+            "width": 82.296,
+            "height": 12
+          },
+          {
+            "text": "First Name:",
+            "x": 77.664,
+            "y": 317.80999999999995,
+            "width": 52.265120000000024,
+            "height": 11.04
+          },
+          {
+            "text": "Last Name:",
+            "x": 77.664,
+            "y": 334.24999999999994,
+            "width": 51.06512000000002,
+            "height": 11.04
+          },
+          {
+            "text": "Date of Birth:",
+            "x": 77.664,
+            "y": 350.56999999999994,
+            "width": 61.10640000000001,
+            "height": 11.04
+          },
+          {
+            "text": "Address:",
+            "x": 77.664,
+            "y": 366.89,
+            "width": 39.185120000000005,
+            "height": 11.04
+          },
+          {
+            "text": "Email:",
+            "x": 77.664,
+            "y": 383.33,
+            "width": 29.344286880000006,
+            "height": 11.04
+          },
+          {
+            "text": "Phone Number:",
+            "x": 77.664,
+            "y": 399.65,
+            "width": 69.41950896,
+            "height": 11.04
+          },
+          {
+            "text": "Unique Student Identifier",
+            "x": 77.664,
+            "y": 416.09,
+            "width": 112.46445791999992,
+            "height": 11.04
+          },
+          {
+            "text": "(USI) Number:",
+            "x": 77.664,
+            "y": 430.60999999999996,
+            "width": 67.02512000000002,
+            "height": 11.04
+          },
+          {
+            "text": "B.",
+            "x": 68.184,
+            "y": 491.59,
+            "width": 10.079979999999999,
+            "height": 11.04
+          },
+          {
+            "text": "Credit Transfer Request:",
+            "x": 86.184,
+            "y": 491.59,
+            "width": 128.412,
+            "height": 12
+          },
+          {
+            "text": "Previous unit(s) successfully completed",
+            "x": 111.5,
+            "y": 507.42999999999995,
+            "width": 183.01012416,
+            "height": 11.04
+          },
+          {
+            "text": "Unit(s) applied for Credit Transfer",
+            "x": 346.27,
+            "y": 507.42999999999995,
+            "width": 164.46093792000005,
+            "height": 11.04
+          },
+          {
+            "text": "Unit",
+            "x": 82.704,
+            "y": 522.43,
+            "width": 20.79936,
+            "height": 11.04
+          },
+          {
+            "text": "Code",
+            "x": 80.904,
+            "y": 536.9499999999999,
+            "width": 24.47568,
+            "height": 11.04
+          },
+          {
+            "text": "Unit Title",
+            "x": 171.62,
+            "y": 522.43,
+            "width": 45.56205791999993,
+            "height": 11.04
+          },
+          {
+            "text": "Evidence",
+            "x": 283.01,
+            "y": 522.43,
+            "width": 42.81316416,
+            "height": 11.04
+          },
+          {
+            "text": "Provided*",
+            "x": 280.25,
+            "y": 536.9499999999999,
+            "width": 48.366262079999984,
+            "height": 11.04
+          },
+          {
+            "text": "Unit",
+            "x": 345.55,
+            "y": 522.43,
+            "width": 20.799359999999986,
+            "height": 11.04
+          },
+          {
+            "text": "Code",
+            "x": 343.75,
+            "y": 536.9499999999999,
+            "width": 24.475679999999986,
+            "height": 11.04
+          },
+          {
+            "text": "Unit Title",
+            "x": 426.43,
+            "y": 522.43,
+            "width": 45.56205791999993,
+            "height": 11.04
+          },
+          {
+            "text": "(*) Student(s) will be required to provide supporting evidence (e.g., Certificate, Statement of Attainment (SOA) and/or any other relevant",
+            "x": 71.784,
+            "y": 624.4599999999999,
+            "width": 448.6879123599999,
+            "height": 8.04
+          },
+          {
+            "text": "evidence (s)) to support the request for a credit transfer.",
+            "x": 71.784,
+            "y": 635.14,
+            "width": 178.2619201999999,
+            "height": 8.04
+          }
+        ],
+        "fields": [
+          {
+            "name": "First Name",
+            "type": "Tx",
+            "x": 198.84,
+            "y": 308.15999999999997,
+            "width": 323.64,
+            "height": 15.120000000000005
+          },
+          {
+            "name": "Last Name",
+            "type": "Tx",
+            "x": 198.84,
+            "y": 324.4799999999999,
+            "width": 323.64,
+            "height": 15.240000000000066
+          },
+          {
+            "name": "Date of Birth",
+            "type": "Tx",
+            "x": 198.84,
+            "y": 340.91999999999996,
+            "width": 323.64,
+            "height": 15.120000000000005
+          },
+          {
+            "name": "Address",
+            "type": "Tx",
+            "x": 198.84,
+            "y": 357.23999999999995,
+            "width": 323.64,
+            "height": 15.240000000000009
+          },
+          {
+            "name": "Email",
+            "type": "Tx",
+            "x": 198.84,
+            "y": 373.67999999999995,
+            "width": 323.64,
+            "height": 15.120000000000005
+          },
+          {
+            "name": "Phone Number",
+            "type": "Tx",
+            "x": 198.84,
+            "y": 389.99999999999994,
+            "width": 323.64,
+            "height": 15.120000000000005
+          },
+          {
+            "name": "Unique Student Identifier USI Number",
+            "type": "Tx",
+            "x": 199.2,
+            "y": 405.96,
+            "width": 322.92,
+            "height": 28.799999999999955
+          },
+          {
+            "name": "Unit CodeRow1",
+            "type": "Tx",
+            "x": 72.96,
+            "y": 542.28,
+            "width": 43.2,
+            "height": 14.039999999999964
+          },
+          {
+            "name": "Unit TitleRow1",
+            "type": "Tx",
+            "x": 117.48,
+            "y": 542.28,
+            "width": 156.71999999999997,
+            "height": 14.039999999999964
+          },
+          {
+            "name": "Evidence ProvidedRow1",
+            "type": "Tx",
+            "x": 275.52,
+            "y": 542.28,
+            "width": 60.60000000000002,
+            "height": 14.039999999999964
+          },
+          {
+            "name": "Unit CodeRow1_2",
+            "type": "Tx",
+            "x": 337.44,
+            "y": 542.28,
+            "width": 40.079999999999984,
+            "height": 14.039999999999964
+          },
+          {
+            "name": "Unit TitleRow1_2",
+            "type": "Tx",
+            "x": 378.84,
+            "y": 542.28,
+            "width": 143.76000000000005,
+            "height": 14.039999999999964
+          },
+          {
+            "name": "Unit CodeRow2",
+            "type": "Tx",
+            "x": 72.96,
+            "y": 557.4,
+            "width": 43.2,
+            "height": 13.919999999999959
+          },
+          {
+            "name": "Unit TitleRow2",
+            "type": "Tx",
+            "x": 117.48,
+            "y": 557.4,
+            "width": 156.71999999999997,
+            "height": 13.919999999999959
+          },
+          {
+            "name": "Evidence ProvidedRow2",
+            "type": "Tx",
+            "x": 275.52,
+            "y": 557.4,
+            "width": 60.60000000000002,
+            "height": 13.919999999999959
+          },
+          {
+            "name": "Unit CodeRow2_2",
+            "type": "Tx",
+            "x": 337.44,
+            "y": 557.4,
+            "width": 40.079999999999984,
+            "height": 13.919999999999959
+          },
+          {
+            "name": "Unit TitleRow2_2",
+            "type": "Tx",
+            "x": 378.84,
+            "y": 557.4,
+            "width": 143.76000000000005,
+            "height": 13.919999999999959
+          },
+          {
+            "name": "Unit CodeRow3",
+            "type": "Tx",
+            "x": 72.96,
+            "y": 572.4,
+            "width": 43.2,
+            "height": 14.039999999999992
+          },
+          {
+            "name": "Unit TitleRow3",
+            "type": "Tx",
+            "x": 117.48,
+            "y": 572.4,
+            "width": 156.71999999999997,
+            "height": 14.039999999999992
+          },
+          {
+            "name": "Evidence ProvidedRow3",
+            "type": "Tx",
+            "x": 275.52,
+            "y": 572.4,
+            "width": 60.60000000000002,
+            "height": 14.039999999999992
+          },
+          {
+            "name": "Unit CodeRow3_2",
+            "type": "Tx",
+            "x": 337.44,
+            "y": 572.4,
+            "width": 40.079999999999984,
+            "height": 14.039999999999992
+          },
+          {
+            "name": "Unit TitleRow3_2",
+            "type": "Tx",
+            "x": 378.84,
+            "y": 572.4,
+            "width": 143.76000000000005,
+            "height": 14.039999999999992
+          },
+          {
+            "name": "Unit CodeRow4",
+            "type": "Tx",
+            "x": 72.96,
+            "y": 587.52,
+            "width": 43.2,
+            "height": 13.920000000000016
+          },
+          {
+            "name": "Unit TitleRow4",
+            "type": "Tx",
+            "x": 117.48,
+            "y": 587.52,
+            "width": 156.71999999999997,
+            "height": 13.920000000000016
+          },
+          {
+            "name": "Evidence ProvidedRow4",
+            "type": "Tx",
+            "x": 275.52,
+            "y": 587.52,
+            "width": 60.60000000000002,
+            "height": 13.920000000000016
+          },
+          {
+            "name": "Unit CodeRow4_2",
+            "type": "Tx",
+            "x": 337.44,
+            "y": 587.52,
+            "width": 40.079999999999984,
+            "height": 13.920000000000016
+          },
+          {
+            "name": "Unit TitleRow4_2",
+            "type": "Tx",
+            "x": 378.84,
+            "y": 587.52,
+            "width": 143.76000000000005,
+            "height": 13.920000000000016
+          },
+          {
+            "name": "Unit CodeRow5",
+            "type": "Tx",
+            "x": 72.96,
+            "y": 602.52,
+            "width": 43.2,
+            "height": 13.920000000000016
+          },
+          {
+            "name": "Unit TitleRow5",
+            "type": "Tx",
+            "x": 117.48,
+            "y": 602.52,
+            "width": 156.71999999999997,
+            "height": 13.920000000000016
+          },
+          {
+            "name": "Evidence ProvidedRow5",
+            "type": "Tx",
+            "x": 275.52,
+            "y": 602.52,
+            "width": 60.60000000000002,
+            "height": 13.920000000000016
+          },
+          {
+            "name": "Unit CodeRow5_2",
+            "type": "Tx",
+            "x": 337.44,
+            "y": 602.52,
+            "width": 40.079999999999984,
+            "height": 13.920000000000016
+          },
+          {
+            "name": "Unit TitleRow5_2",
+            "type": "Tx",
+            "x": 378.84,
+            "y": 602.52,
+            "width": 143.76000000000005,
+            "height": 13.920000000000016
+          }
+        ]
+      },
+      {
+        "page": 2,
+        "size": {
+          "width": 595.32,
+          "height": 841.92
+        },
+        "text": [
+          {
+            "text": "Credit Transfer Form_V2.1",
+            "x": 72.024,
+            "y": 792.6959999999999,
+            "width": 121.46599999999995,
+            "height": 11.04
+          },
+          {
+            "text": "Page",
+            "x": 473.62,
+            "y": 792.6959999999999,
+            "width": 21.461759999999998,
+            "height": 11.04
+          },
+          {
+            "text": "2",
+            "x": 497.86,
+            "y": 792.6959999999999,
+            "width": 5.52,
+            "height": 11.04
+          },
+          {
+            "text": "of",
+            "x": 506.14,
+            "y": 792.6959999999999,
+            "width": 9.074924160000009,
+            "height": 11.04
+          },
+          {
+            "text": "2",
+            "x": 518.02,
+            "y": 792.6959999999999,
+            "width": 5.52,
+            "height": 11.04
+          },
+          {
+            "text": "C.",
+            "x": 68.184,
+            "y": 83.15999999999997,
+            "width": 10.67998,
+            "height": 11.04
+          },
+          {
+            "text": "Declaration:",
+            "x": 86.184,
+            "y": 83.15999999999997,
+            "width": 63.864,
+            "height": 12
+          },
+          {
+            "text": "I, ____________________________________________declare that I have requested a credit transfer",
+            "x": 71.784,
+            "y": 98.41999999999996,
+            "width": 448.76494896,
+            "height": 11.04
+          },
+          {
+            "text": "for a total of ____ units of competency.",
+            "x": 71.784,
+            "y": 113.05999999999995,
+            "width": 174.12285792000003,
+            "height": 11.04
+          },
+          {
+            "text": "Additionally, I am willing to make a declaration for the following points:",
+            "x": 71.784,
+            "y": 135.5,
+            "width": 321.9707476799998,
+            "height": 11.04
+          },
+          {
+            "text": "•",
+            "x": 89.784,
+            "y": 158.05999999999995,
+            "width": 4.581600000000001,
+            "height": 9.96
+          },
+          {
+            "text": "I certify that all supporting evidence attached to this form is authentic and truthful.",
+            "x": 107.78,
+            "y": 158.05999999999995,
+            "width": 363.4701187199999,
+            "height": 11.04
+          },
+          {
+            "text": "•",
+            "x": 89.784,
+            "y": 172.69999999999993,
+            "width": 4.581600000000001,
+            "height": 9.96
+          },
+          {
+            "text": "I agree to cooperate with the college during the verification process of evidence (if applicable)",
+            "x": 107.78,
+            "y": 172.69999999999993,
+            "width": 412.62002208000007,
+            "height": 11.04
+          },
+          {
+            "text": "•",
+            "x": 89.784,
+            "y": 187.2199999999999,
+            "width": 4.581600000000001,
+            "height": 9.96
+          },
+          {
+            "text": "I agree to provide any personal information related to the USI (Unique Student Identifier)",
+            "x": 107.78,
+            "y": 187.2199999999999,
+            "width": 412.3773297599999,
+            "height": 11.04
+          },
+          {
+            "text": "register for the purpose of credit transfer of the units mentioned in this form.",
+            "x": 107.78,
+            "y": 201.74,
+            "width": 336.67462895999984,
+            "height": 11.04
+          },
+          {
+            "text": "Student’s",
+            "x": 72.024,
+            "y": 242.65999999999997,
+            "width": 41.59873104000001,
+            "height": 11.04
+          },
+          {
+            "text": "Signature: ____________________________________",
+            "x": 116.42,
+            "y": 242.65999999999997,
+            "width": 245.97126624000012,
+            "height": 11.04
+          },
+          {
+            "text": "Date: ________________",
+            "x": 72.024,
+            "y": 268.8499999999999,
+            "width": 114.69454895999993,
+            "height": 11.04
+          },
+          {
+            "text": "Student Document Checklist (for office purposes only):",
+            "x": 71.784,
+            "y": 367.24999999999994,
+            "width": 282.08200000000005,
+            "height": 12
+          },
+          {
+            "text": "YES",
+            "x": 450.1,
+            "y": 390.89,
+            "width": 20.799359999999986,
+            "height": 11.04
+          },
+          {
+            "text": "NO",
+            "x": 493.9,
+            "y": 390.89,
+            "width": 15.890859999999986,
+            "height": 11.04
+          },
+          {
+            "text": "Student(s) attached any supporting evidence as requested to support the request",
+            "x": 77.664,
+            "y": 405.89,
+            "width": 354.5054841599997,
+            "height": 11.04
+          },
+          {
+            "text": "for a credit transfer.",
+            "x": 77.664,
+            "y": 420.40999999999997,
+            "width": 87.42573791999999,
+            "height": 11.04
+          },
+          {
+            "text": "☐",
+            "x": 455.02,
+            "y": 406.72999999999996,
+            "width": 11.04,
+            "height": 11.04
+          },
+          {
+            "text": "☐",
+            "x": 496.3,
+            "y": 406.72999999999996,
+            "width": 11.04,
+            "height": 11.04
+          },
+          {
+            "text": "Student(s) provided supporting evidence that is authentic and truthful.",
+            "x": 77.664,
+            "y": 435.53,
+            "width": 308.23684415999975,
+            "height": 11.04
+          },
+          {
+            "text": "☐",
+            "x": 455.02,
+            "y": 436.36999999999995,
+            "width": 11.04,
+            "height": 11.04
+          },
+          {
+            "text": "☐",
+            "x": 496.3,
+            "y": 436.36999999999995,
+            "width": 11.04,
+            "height": 11.04
+          },
+          {
+            "text": "Student(s) provided information for their USI.",
+            "x": 77.664,
+            "y": 452.34999999999997,
+            "width": 203.4009489599999,
+            "height": 11.04
+          },
+          {
+            "text": "☐",
+            "x": 455.02,
+            "y": 453.18999999999994,
+            "width": 11.04,
+            "height": 11.04
+          },
+          {
+            "text": "☐",
+            "x": 496.3,
+            "y": 453.18999999999994,
+            "width": 11.04,
+            "height": 11.04
+          },
+          {
+            "text": "Student(s) has fulfilled the requirements of the training package of the unit(s) of",
+            "x": 77.664,
+            "y": 469.27,
+            "width": 354.6710068799999,
+            "height": 11.04
+          },
+          {
+            "text": "competency for a credit transfer.",
+            "x": 77.664,
+            "y": 483.78999999999996,
+            "width": 143.28811583999993,
+            "height": 11.04
+          },
+          {
+            "text": "☐",
+            "x": 455.02,
+            "y": 470.10999999999996,
+            "width": 11.04,
+            "height": 11.04
+          },
+          {
+            "text": "☐",
+            "x": 496.3,
+            "y": 470.10999999999996,
+            "width": 11.04,
+            "height": 11.04
+          },
+          {
+            "text": "Outcome of a credit transfer",
+            "x": 71.784,
+            "y": 522.31,
+            "width": 133.83791999999994,
+            "height": 11.04
+          },
+          {
+            "text": ":",
+            "x": 205.61,
+            "y": 522.31,
+            "width": 3.06912,
+            "height": 11.04
+          },
+          {
+            "text": "☐",
+            "x": 211.49,
+            "y": 522.31,
+            "width": 11.04,
+            "height": 11.04
+          },
+          {
+            "text": "Granted",
+            "x": 225.29,
+            "y": 522.31,
+            "width": 35.372137919999965,
+            "height": 11.04
+          },
+          {
+            "text": "☐",
+            "x": 324.07,
+            "y": 522.31,
+            "width": 11.04,
+            "height": 11.04
+          },
+          {
+            "text": "Not Granted",
+            "x": 337.87,
+            "y": 522.31,
+            "width": 54.681142079999944,
+            "height": 11.04
+          },
+          {
+            "text": "Additional Comments: _____________________________________________________________",
+            "x": 72.024,
+            "y": 545.8299999999999,
+            "width": 438.78496559999957,
+            "height": 11.04
+          },
+          {
+            "text": "Officer Signature: _______________",
+            "x": 72.024,
+            "y": 568.39,
+            "width": 165.1459999999999,
+            "height": 11.04
+          },
+          {
+            "text": "Date: ___________________",
+            "x": 72.024,
+            "y": 594.55,
+            "width": 131.18460415999988,
+            "height": 11.04
+          }
+        ],
+        "fields": [
+          {
+            "name": "Additional Comments",
+            "type": "Tx",
+            "x": 175.44,
+            "y": 525.48,
+            "width": 335.4,
+            "height": 21.24000000000001
+          },
+          {
+            "name": "Date",
+            "type": "Tx",
+            "x": 98.64,
+            "y": 574.1999999999999,
+            "width": 104.52,
+            "height": 21.240000000000038
+          },
+          {
+            "name": "Granted",
+            "type": "Btn",
+            "x": 212.491,
+            "y": 515.04,
+            "width": 8.937999999999988,
+            "height": 7.846000000000004
+          },
+          {
+            "name": "Not Granted",
+            "type": "Btn",
+            "x": 325.7,
+            "y": 515.04,
+            "width": 7.8799999999999955,
+            "height": 6.793999999999983
+          },
+          {
+            "name": "Signature1_es_:signer:signature",
+            "type": "Tx",
+            "x": 154.56,
+            "y": 548.04,
+            "width": 82.56,
+            "height": 21.24000000000001
+          },
+          {
+            "name": "Check Box2",
+            "type": "Btn",
+            "x": 456.177,
+            "y": 398.366,
+            "width": 8.539999999999964,
+            "height": 8.540999999999997
+          },
+          {
+            "name": "Check Box3",
+            "type": "Btn",
+            "x": 497.17,
+            "y": 398.366,
+            "width": 8.539999999999964,
+            "height": 8.539999999999964
+          },
+          {
+            "name": "Check Box4",
+            "type": "Btn",
+            "x": 456.702,
+            "y": 428.323,
+            "width": 8.54000000000002,
+            "height": 8.539999999999964
+          },
+          {
+            "name": "Check Box5",
+            "type": "Btn",
+            "x": 456.177,
+            "y": 444.08899999999994,
+            "width": 9.064999999999998,
+            "height": 9.591000000000008
+          },
+          {
+            "name": "Check Box6",
+            "type": "Btn",
+            "x": 455.651,
+            "y": 461.95799999999997,
+            "width": 9.065999999999974,
+            "height": 9.591000000000008
+          },
+          {
+            "name": "Check Box7",
+            "type": "Btn",
+            "x": 496.644,
+            "y": 427.27199999999993,
+            "width": 9.065999999999974,
+            "height": 9.591000000000008
+          },
+          {
+            "name": "Check Box8",
+            "type": "Btn",
+            "x": 497.17,
+            "y": 444.61499999999995,
+            "width": 8.539999999999964,
+            "height": 9.064999999999998
+          },
+          {
+            "name": "Check Box9",
+            "type": "Btn",
+            "x": 496.644,
+            "y": 461.43199999999996,
+            "width": 9.064999999999998,
+            "height": 9.591999999999985
+          },
+          {
+            "name": "Date10_es_:signer:date",
+            "type": "Tx",
+            "x": 98.8033,
+            "y": 252.264,
+            "width": 87.98470000000002,
+            "height": 18.320999999999913
+          },
+          {
+            "name": "Text11",
+            "type": "Tx",
+            "x": 163.971,
+            "y": 227.03699999999992,
+            "width": 198.351,
+            "height": 17.269999999999982
+          },
+          {
+            "name": "Text12",
+            "type": "Tx",
+            "x": 80.9346,
+            "y": 85.13900000000001,
+            "width": 241.97140000000002,
+            "height": 14.641999999999939
+          },
+          {
+            "name": "Text13",
+            "type": "Tx",
+            "x": 128.76,
+            "y": 101.957,
+            "width": 22.290999999999997,
+            "height": 11.488999999999919
+          }
+        ]
+      }
+    ]
+  }
+}

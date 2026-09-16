@@ -1,0 +1,83 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "version": 1,
+  "description": "Database registry for Gravity Form Sources (WordPress & External API instances) and PDF Template Targets (Local files, Google Cloud Storage & CDN URLs).",
+  "lastUpdated": "2026-09-16T14:51:18.028Z",
+  "activeWpConnectionId": "default-localwp",
+  "activePdfTemplateId": "tpl-1789570115170",
+  "gravityFormSources": [
+    {
+      "id": "default-localwp",
+      "name": "LocalWP Tunnel (ngrok)",
+      "type": "wordpress_gravity_forms",
+      "url": "https://tenisha-shapelier-elijah.ngrok-free.dev/wp-json/pdf-generator/v1/forms",
+      "apiKey": "aso107mzNrZId001GebX6ew8",
+      "basicUser": "",
+      "basicPass": "",
+      "notes": "Default WordPress test site running LocalWP with ngrok live tunnel and gravity-forms-reader.php",
+      "isDefault": true
+    },
+    {
+      "id": "staging-wordpress-source",
+      "name": "Staging WordPress Instance",
+      "type": "wordpress_gravity_forms",
+      "url": "https://staging.vconsultancy.com.au/wp-json/pdf-generator/v1/forms",
+      "apiKey": "aso107mzNrZId001GebX6ew8",
+      "basicUser": "",
+      "basicPass": "",
+      "notes": "Staging environment for testing Gravity Form webhook dispatch and live entries",
+      "isDefault": false
+    },
+    {
+      "id": "external-forms-webhook-source",
+      "name": "External Forms REST API",
+      "type": "external_rest",
+      "url": "https://api.vconsultancy.com.au/forms/v1",
+      "apiKey": "secret-api-key-here",
+      "basicUser": "",
+      "basicPass": "",
+      "notes": "External non-WordPress forms provider or microservice",
+      "isDefault": false
+    }
+  ],
+  "pdfTemplates": [
+    {
+      "id": "default-npa",
+      "name": "NPA_Credit Transfer Forms_V2.1.pdf",
+      "filename": "NPA_Credit Transfer Forms_V2.1.pdf",
+      "category": "NPA",
+      "isBuiltin": true,
+      "url": "/@fs/app/applet/NPA_Credit%20Transfer%20Forms_V2.1.pdf",
+      "gcsPath": "pdf-generator/templates/NPA/NPA_Credit Transfer Forms_V2.1.pdf",
+      "gcsUri": "gs://cdn.vconsultancy.com.au/pdf-generator/templates/NPA/NPA_Credit Transfer Forms_V2.1.pdf",
+      "cdnUrl": "https://cdn.vconsultancy.com.au/pdf-generator/templates/NPA/NPA_Credit Transfer Forms_V2.1.pdf",
+      "consoleUrl": "https://console.cloud.google.com/storage/browser/cdn.vconsultancy.com.au/pdf-generator/templates/NPA?project=aibt-244204"
+    },
+    {
+      "id": "tpl-1789552073008",
+      "name": "NPA_Credit Transfer Forms_V2.1.pdf",
+      "filename": "NPA_Credit Transfer Forms_V2.1.pdf",
+      "category": "NPA",
+      "url": "https://cdn.vconsultancy.com.au/pdf-generator/templates/NPA/NPA_Credit_Transfer_Forms_V2.1.pdf",
+      "gcsPath": "pdf-generator/templates/NPA/NPA_Credit_Transfer_Forms_V2.1.pdf",
+      "gcsUri": "gs://cdn.vconsultancy.com.au/pdf-generator/templates/NPA/NPA_Credit_Transfer_Forms_V2.1.pdf",
+      "cdnUrl": "https://cdn.vconsultancy.com.au/pdf-generator/templates/NPA/NPA_Credit_Transfer_Forms_V2.1.pdf",
+      "consoleUrl": "https://console.cloud.google.com/storage/browser/cdn.vconsultancy.com.au/pdf-generator/templates/NPA?project=aibt-244204",
+      "uploadStatus": "synced",
+      "createdAt": "2026-09-16T09:47:53.008Z"
+    },
+    {
+      "id": "tpl-1789570115170",
+      "name": "AIBT Change of Campus V2.2.pdf",
+      "filename": "AIBT_-_Change_of_Campus_V2.2.pdf",
+      "category": "AIBT",
+      "url": "/templates/AIBT/AIBT_-_Change_of_Campus_V2.2.pdf",
+      "sourceUrl": "https://cdn.vconsultancy.com.au/rto/aibt/policies/AIBT%20-%20Change%20of%20Campus%20V2.2.pdf",
+      "gcsPath": "pdf-generator/templates/AIBT/AIBT%20-%20Change%20of%20Campus%20V2.2.pdf",
+      "gcsUri": "gs://cdn.vconsultancy.com.au/pdf-generator/templates/AIBT/AIBT%20-%20Change%20of%20Campus%20V2.2.pdf",
+      "cdnUrl": "https://cdn.vconsultancy.com.au/pdf-generator/templates/AIBT/AIBT%2520-%2520Change%2520of%2520Campus%2520V2.2.pdf",
+      "createdAt": "2026-09-16T14:48:35.170Z",
+      "notes": ""
+    }
+  ]
+}

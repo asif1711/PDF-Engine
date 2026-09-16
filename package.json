@@ -1,0 +1,21 @@
+{
+  "name": "pdf-generator",
+  "version": "1.0.0",
+  "type": "module",
+  "workspaces": [
+    "pdf-mapper"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=pdf-mapper",
+    "build": "npm run build --workspace=pdf-mapper",
+    "start": "node server.js",
+    "preview": "npm run preview --workspace=pdf-mapper",
+    "lint": "npm run lint --workspace=pdf-mapper"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "lucide-react": "^1.46.0",
+    "pdf-lib": "^1.17.1",
+    "pdfjs-dist": "^6.3.289"
+  }
+}
