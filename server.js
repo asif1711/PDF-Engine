@@ -8,6 +8,7 @@ import { analyzePdfBytes } from './analyze-template.js';
 import {
   getFormMappingRecord,
   getPdfTemplateRecord,
+  listPdfTemplateRecords,
   listFormMappingRecords,
   createFormMappingRecord,
   upsertPdfTemplateRecord,
@@ -330,7 +331,10 @@ app.delete('/api/source-connections/:id', async (req, res) => {
 
 app.get('/api/template-records', async (req, res) => {
   const templateId = req.query.templateId;
-  if (!templateId) return res.status(400).json({ error: 'templateId is required' });
+  if (!templateId) {
+    const templates = await listPdfTemplateRecords();
+    return res.json({ templates: templates || [] });
+  }
   if (req.query.formId) {
     const mappingRecord = await getFormMappingRecord(req.query.formId, templateId, req.query.sourceConnectionId || null);
     if (mappingRecord) {
