@@ -1,0 +1,780 @@
+{
+  "template": {
+    "filename": "AIBT_-_Change_of_Campus_V2.2.pdf",
+    "path": "pdf-mapper/public/templates/AIBT/AIBT_-_Change_of_Campus_V2.2.pdf"
+  },
+  "technical": {
+    "pdfType": "PDF",
+    "pages": 2,
+    "hasAcroForm": true,
+    "fieldCount": 22,
+    "fields": [
+      {
+        "name": "Student Number",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Family Name",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Given Name",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Mobile",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Email",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Residential Address",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Current Course",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Course Commencement Date ddmmyy",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Current Campus",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "New Campus",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Reason for applying for a Campus Transfer",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Signature of student Date ddmmyy",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "If the student is under 18 the form is also to be signed by the parentguardian Signature of ParentGuardian Date ddmmyy",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Date Application Received",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Received by",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Approved",
+        "type": "PDFCheckBox"
+      },
+      {
+        "name": "Rejected",
+        "type": "PDFCheckBox"
+      },
+      {
+        "name": "Date processed",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Processed by",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Further comments if required",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Text1",
+        "type": "PDFTextField"
+      },
+      {
+        "name": "Text2",
+        "type": "PDFTextField"
+      }
+    ]
+  },
+  "context": {
+    "pages": [
+      {
+        "page": 1,
+        "size": {
+          "width": 595.32,
+          "height": 841.92
+        },
+        "text": [
+          {
+            "text": "AIBT Change of Campus Form V2.2",
+            "x": 38.16,
+            "y": 791.88,
+            "width": 144.558,
+            "height": 9
+          },
+          {
+            "text": "Page 1 of 2",
+            "x": 513.36,
+            "y": 791.88,
+            "width": 46.16399999999988,
+            "height": 9
+          },
+          {
+            "text": "Application to Change Campus",
+            "x": 178.97,
+            "y": 100.45999999999992,
+            "width": 237.16559999999996,
+            "height": 15.96
+          },
+          {
+            "text": "PLEASE FILL IN ALL FIELDS ON THIS FORM",
+            "x": 169.97,
+            "y": 129.14,
+            "width": 255.312,
+            "height": 12
+          },
+          {
+            "text": "Note:",
+            "x": 54.024,
+            "y": 155.05999999999995,
+            "width": 25.50759984000002,
+            "height": 9.96
+          },
+          {
+            "text": "•",
+            "x": 54.024,
+            "y": 181.33999999999992,
+            "width": 4.581600000000001,
+            "height": 9.96
+          },
+          {
+            "text": "This form is for students who want to change campus across the College’s other locations.",
+            "x": 72.024,
+            "y": 181.33999999999992,
+            "width": 399.52694008000003,
+            "height": 9.96
+          },
+          {
+            "text": "•",
+            "x": 54.024,
+            "y": 193.45999999999992,
+            "width": 4.581600000000001,
+            "height": 9.96
+          },
+          {
+            "text": "Students should check the availability of courses for each campus on the College website.",
+            "x": 72.024,
+            "y": 193.45999999999992,
+            "width": 398.16092015999976,
+            "height": 9.96
+          },
+          {
+            "text": "•",
+            "x": 54.024,
+            "y": 205.69999999999993,
+            "width": 4.581600000000001,
+            "height": 9.96
+          },
+          {
+            "text": "Allow up to 15 working days from lodgement of a full application to be assessed and processed.",
+            "x": 72.024,
+            "y": 205.69999999999993,
+            "width": 422.5230801599999,
+            "height": 9.96
+          },
+          {
+            "text": "•",
+            "x": 54.024,
+            "y": 217.81999999999994,
+            "width": 4.581600000000001,
+            "height": 9.96
+          },
+          {
+            "text": "Whilst an application is being reviewed, students are expected to continue to attend and participate in all",
+            "x": 72.024,
+            "y": 217.81999999999994,
+            "width": 460.2914399999997,
+            "height": 9.96
+          },
+          {
+            "text": "course activities at their current campus.",
+            "x": 72.024,
+            "y": 229.25,
+            "width": 178.82901991999998,
+            "height": 9.96
+          },
+          {
+            "text": "•",
+            "x": 54.024,
+            "y": 241.49,
+            "width": 4.581600000000001,
+            "height": 9.96
+          },
+          {
+            "text": "The completed form and supporting evidence should be submitted via the Student Application Portal",
+            "x": 72.024,
+            "y": 241.49,
+            "width": 443.04122008,
+            "height": 9.96
+          },
+          {
+            "text": "<",
+            "x": 72.024,
+            "y": 252.89,
+            "width": 5.816640000000001,
+            "height": 9.96
+          },
+          {
+            "text": "https://connect.portal.aibtglobal.edu.au/",
+            "x": 77.904,
+            "y": 252.89,
+            "width": 189.63838008000002,
+            "height": 9.96
+          },
+          {
+            "text": "> and emailed to Student Support at",
+            "x": 267.77,
+            "y": 252.89,
+            "width": 160.49884,
+            "height": 9.96
+          },
+          {
+            "text": "studentsupport@aibtglobal.edu.au",
+            "x": 72.024,
+            "y": 264.40999999999997,
+            "width": 165.12585992000004,
+            "height": 9.96
+          },
+          {
+            "text": "Section A – Student Details",
+            "x": 41.64,
+            "y": 292.37,
+            "width": 146.09599999999998,
+            "height": 12
+          },
+          {
+            "text": "Student Number:",
+            "x": 41.64,
+            "y": 305.80999999999995,
+            "width": 83.2195752,
+            "height": 11.04
+          },
+          {
+            "text": "Family Name:",
+            "x": 41.64,
+            "y": 331.60999999999996,
+            "width": 67.84077792,
+            "height": 11.04
+          },
+          {
+            "text": "Given Name:",
+            "x": 303.07,
+            "y": 331.60999999999996,
+            "width": 64.26380687999992,
+            "height": 11.04
+          },
+          {
+            "text": "Mobile:",
+            "x": 41.64,
+            "y": 357.40999999999997,
+            "width": 35.47152,
+            "height": 11.04
+          },
+          {
+            "text": "Email:",
+            "x": 303.07,
+            "y": 357.40999999999997,
+            "width": 30.536617919999998,
+            "height": 11.04
+          },
+          {
+            "text": "Residential Address:",
+            "x": 41.64,
+            "y": 383.22999999999996,
+            "width": 100.99390895999997,
+            "height": 11.04
+          },
+          {
+            "text": "Section B – Course Details and Reason for Transfer",
+            "x": 41.64,
+            "y": 435.18999999999994,
+            "width": 276.962,
+            "height": 12
+          },
+          {
+            "text": "Current Course:",
+            "x": 41.64,
+            "y": 449.34999999999997,
+            "width": 78.27363311999999,
+            "height": 11.04
+          },
+          {
+            "text": "Course Commencement Date (dd/mm/yy)",
+            "x": 41.64,
+            "y": 500.46999999999997,
+            "width": 203.53347311999997,
+            "height": 11.04
+          },
+          {
+            "text": "Current Campus:",
+            "x": 41.64,
+            "y": 551.6199999999999,
+            "width": 83.80462895999999,
+            "height": 11.04
+          },
+          {
+            "text": "New Campus:",
+            "x": 303.07,
+            "y": 551.6199999999999,
+            "width": 69.18766896,
+            "height": 11.04
+          },
+          {
+            "text": "Reason for applying for a Campus Transfer:",
+            "x": 41.64,
+            "y": 602.6199999999999,
+            "width": 214.0676,
+            "height": 11.04
+          }
+        ],
+        "fields": [
+          {
+            "name": "Student Number",
+            "type": "Tx",
+            "x": 124.56,
+            "y": 296.28,
+            "width": 433.68,
+            "height": 24.360000000000014
+          },
+          {
+            "name": "Family Name",
+            "type": "Tx",
+            "x": 109.2,
+            "y": 322.0799999999999,
+            "width": 187.56,
+            "height": 24.360000000000014
+          },
+          {
+            "name": "Given Name",
+            "type": "Tx",
+            "x": 367.08,
+            "y": 322.0799999999999,
+            "width": 191.16000000000003,
+            "height": 24.360000000000014
+          },
+          {
+            "name": "Mobile",
+            "type": "Tx",
+            "x": 76.92,
+            "y": 347.87999999999994,
+            "width": 219.83999999999997,
+            "height": 24.360000000000014
+          },
+          {
+            "name": "Email",
+            "type": "Tx",
+            "x": 333.36,
+            "y": 347.87999999999994,
+            "width": 224.88,
+            "height": 24.360000000000014
+          },
+          {
+            "name": "Residential Address",
+            "type": "Tx",
+            "x": 38.0723,
+            "y": 384.513,
+            "width": 519.8077,
+            "height": 38.966999999999985
+          },
+          {
+            "name": "Current Course",
+            "type": "Tx",
+            "x": 38.1814,
+            "y": 450.09799999999996,
+            "width": 519.6985999999999,
+            "height": 39.50200000000001
+          },
+          {
+            "name": "Course Commencement Date ddmmyy",
+            "type": "Tx",
+            "x": 37.7882,
+            "y": 501.87299999999993,
+            "width": 520.0918,
+            "height": 38.72700000000003
+          },
+          {
+            "name": "Current Campus",
+            "type": "Tx",
+            "x": 37.8105,
+            "y": 553.527,
+            "width": 258.5895,
+            "height": 38.192999999999984
+          },
+          {
+            "name": "New Campus",
+            "type": "Tx",
+            "x": 298.396,
+            "y": 553.527,
+            "width": 259.484,
+            "height": 38.192999999999984
+          },
+          {
+            "name": "Reason for applying for a Campus Transfer",
+            "type": "Tx",
+            "x": 37.8754,
+            "y": 604.6469999999999,
+            "width": 520.0046,
+            "height": 114.15299999999999
+          }
+        ]
+      },
+      {
+        "page": 2,
+        "size": {
+          "width": 595.32,
+          "height": 841.92
+        },
+        "text": [
+          {
+            "text": "AIBT Change of Campus Form V2.2",
+            "x": 38.16,
+            "y": 791.88,
+            "width": 144.558,
+            "height": 9
+          },
+          {
+            "text": "Page 2 of 2",
+            "x": 513.36,
+            "y": 791.88,
+            "width": 46.16399999999988,
+            "height": 9
+          },
+          {
+            "text": "Section C – Student Declaration",
+            "x": 41.64,
+            "y": 97.33999999999992,
+            "width": 170.888,
+            "height": 12
+          },
+          {
+            "text": "•",
+            "x": 59.664,
+            "y": 122.65999999999997,
+            "width": 4.581600000000001,
+            "height": 9.96
+          },
+          {
+            "text": "I have read and understood the above note and relevant College policies.",
+            "x": 77.664,
+            "y": 122.65999999999997,
+            "width": 356.95639727999963,
+            "height": 11.04
+          },
+          {
+            "text": "•",
+            "x": 59.664,
+            "y": 135.26,
+            "width": 4.581600000000001,
+            "height": 9.96
+          },
+          {
+            "text": "I declare that the information provided is accurate and the form is fully completed.",
+            "x": 77.664,
+            "y": 135.26,
+            "width": 396.1484193599997,
+            "height": 11.04
+          },
+          {
+            "text": "•",
+            "x": 59.664,
+            "y": 147.9799999999999,
+            "width": 4.581600000000001,
+            "height": 9.96
+          },
+          {
+            "text": "I acknowledge that the provision of incorrect information or the withholding of relevant information",
+            "x": 77.664,
+            "y": 147.9799999999999,
+            "width": 473.2517793599997,
+            "height": 11.04
+          },
+          {
+            "text": "may delay my application process.",
+            "x": 77.664,
+            "y": 160.57999999999993,
+            "width": 168.15023999999997,
+            "height": 11.04
+          },
+          {
+            "text": "•",
+            "x": 59.664,
+            "y": 173.17999999999995,
+            "width": 4.581600000000001,
+            "height": 9.96
+          },
+          {
+            "text": "I understand that it is my responsibility to update my personal details if my residential address has",
+            "x": 77.664,
+            "y": 173.17999999999995,
+            "width": 475.6916303999998,
+            "height": 11.04
+          },
+          {
+            "text": "been changed.",
+            "x": 77.664,
+            "y": 185.89999999999998,
+            "width": 72.91925519999998,
+            "height": 11.04
+          },
+          {
+            "text": "•",
+            "x": 59.664,
+            "y": 198.5,
+            "width": 4.581600000000001,
+            "height": 9.96
+          },
+          {
+            "text": "I understand that the timetable at the new campus may differ from the timetable at my current",
+            "x": 77.664,
+            "y": 198.5,
+            "width": 453.55641935999967,
+            "height": 11.04
+          },
+          {
+            "text": "campus. All timetables may be subject to change.",
+            "x": 77.664,
+            "y": 211.2199999999999,
+            "width": 241.56628415999992,
+            "height": 11.04
+          },
+          {
+            "text": "•",
+            "x": 59.664,
+            "y": 223.81999999999994,
+            "width": 4.581600000000001,
+            "height": 9.96
+          },
+          {
+            "text": "I understand that placement availabilities may differ from what is arranged at my current campus.",
+            "x": 77.664,
+            "y": 223.81999999999994,
+            "width": 471.3307862399996,
+            "height": 11.04
+          },
+          {
+            "text": "•",
+            "x": 59.664,
+            "y": 236.44999999999993,
+            "width": 4.581600000000001,
+            "height": 9.96
+          },
+          {
+            "text": "I understand it is my responsibility to seek advice from relevant authorities, including the",
+            "x": 77.664,
+            "y": 236.44999999999993,
+            "width": 427.46901247999966,
+            "height": 11.04
+          },
+          {
+            "text": "Department of Home Affairs, regarding the possible impacts on my visa.",
+            "x": 77.664,
+            "y": 249.16999999999996,
+            "width": 350.2661572799998,
+            "height": 11.04
+          },
+          {
+            "text": "Signature of student",
+            "x": 41.64,
+            "y": 274.37,
+            "width": 98.55412415999999,
+            "height": 11.04
+          },
+          {
+            "text": "Date (dd/mm/yy)",
+            "x": 378.54732415999996,
+            "y": 274.37,
+            "width": 81.44498480000003,
+            "height": 11.04
+          },
+          {
+            "text": "If the student is under 18, the form is also to be signed by the parent/guardian",
+            "x": 41.64,
+            "y": 325.49,
+            "width": 407.0228083199997,
+            "height": 11.04
+          },
+          {
+            "text": "Signature of Parent/Guardian:",
+            "x": 41.64,
+            "y": 350.80999999999995,
+            "width": 146.05922208,
+            "height": 11.04
+          },
+          {
+            "text": "Date (dd/mm/yy)",
+            "x": 371.11732415999995,
+            "y": 350.80999999999995,
+            "width": 81.2764027199999,
+            "height": 11.04
+          },
+          {
+            "text": "Office Use Only – Student Support",
+            "x": 41.64,
+            "y": 430.86999999999995,
+            "width": 184.14800000000002,
+            "height": 12
+          },
+          {
+            "text": "Date Application Received:",
+            "x": 41.64,
+            "y": 444.30999999999995,
+            "width": 132.09891311999993,
+            "height": 11.04
+          },
+          {
+            "text": "Received by:",
+            "x": 303.07,
+            "y": 444.30999999999995,
+            "width": 63.678708959999994,
+            "height": 11.04
+          },
+          {
+            "text": "Application Outcome:",
+            "x": 41.64,
+            "y": 482.10999999999996,
+            "width": 104.55986207999996,
+            "height": 11.04
+          },
+          {
+            "text": "Approved",
+            "x": 198.65,
+            "y": 482.10999999999996,
+            "width": 47.173897920000016,
+            "height": 11.04
+          },
+          {
+            "text": "Rejected",
+            "x": 334.03,
+            "y": 482.10999999999996,
+            "width": 43.55284415999998,
+            "height": 11.04
+          },
+          {
+            "text": "Date processed:",
+            "x": 41.64,
+            "y": 533.23,
+            "width": 80.23874207999997,
+            "height": 11.04
+          },
+          {
+            "text": "Processed by:",
+            "x": 303.07,
+            "y": 533.23,
+            "width": 69.77284415999998,
+            "height": 11.04
+          },
+          {
+            "text": "Further comments (if required):",
+            "x": 41.64,
+            "y": 559.06,
+            "width": 151.64545103999995,
+            "height": 11.04
+          }
+        ],
+        "fields": [
+          {
+            "name": "Signature of student Date ddmmyy",
+            "type": "Tx",
+            "x": 37.68,
+            "y": 274.91999999999996,
+            "width": 325.145,
+            "height": 39.60000000000002
+          },
+          {
+            "name": "If the student is under 18 the form is also to be signed by the parentguardian Signature of ParentGuardian Date ddmmyy",
+            "type": "Tx",
+            "x": 37.68,
+            "y": 352.47999999999996,
+            "width": 324.49,
+            "height": 39.60000000000002
+          },
+          {
+            "name": "Date Application Received",
+            "type": "Tx",
+            "x": 175.451,
+            "y": 433.89899999999994,
+            "width": 121.549,
+            "height": 25.341000000000008
+          },
+          {
+            "name": "Received by",
+            "type": "Tx",
+            "x": 368.459,
+            "y": 433.89599999999996,
+            "width": 190.02100000000002,
+            "height": 25.343999999999994
+          },
+          {
+            "name": "Approved",
+            "type": "Btn",
+            "x": 183.6,
+            "y": 472.67999999999995,
+            "width": 11.039999999999992,
+            "height": 11.04000000000002
+          },
+          {
+            "name": "Rejected",
+            "type": "Btn",
+            "x": 319.08,
+            "y": 472.67999999999995,
+            "width": 11.04000000000002,
+            "height": 11.04000000000002
+          },
+          {
+            "name": "Date processed",
+            "type": "Tx",
+            "x": 124.572,
+            "y": 522.816,
+            "width": 172.428,
+            "height": 25.343999999999994
+          },
+          {
+            "name": "Processed by",
+            "type": "Tx",
+            "x": 374.165,
+            "y": 522.816,
+            "width": 184.315,
+            "height": 25.343999999999994
+          },
+          {
+            "name": "Further comments if required",
+            "type": "Tx",
+            "x": 37.68,
+            "y": 559.68,
+            "width": 520.2,
+            "height": 140.76000000000002
+          },
+          {
+            "name": "Text1",
+            "type": "Tx",
+            "x": 376.365,
+            "y": 274.856,
+            "width": 182.33399999999995,
+            "height": 39.59999999999991
+          },
+          {
+            "name": "Text2",
+            "type": "Tx",
+            "x": 371.783,
+            "y": 351.78299999999996,
+            "width": 187.56499999999994,
+            "height": 39.60000000000002
+          }
+        ]
+      }
+    ]
+  }
+}

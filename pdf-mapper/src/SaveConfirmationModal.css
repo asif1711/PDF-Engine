@@ -1,0 +1,342 @@
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(22, 38, 35, 0.65);
+    backdrop-filter: blur(4px);
+    animation: modalFadeIn 0.2s ease-out;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 620px;
+    max-height: 90vh;
+    background: #fbfcfa;
+    border: 1px solid #c9d8d3;
+    border-radius: 4px;
+    box-shadow: 0 24px 60px rgba(18, 37, 33, 0.28);
+    overflow: hidden;
+    animation: modalPop 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalPop {
+    from {
+        transform: scale(0.96) translateY(8px);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 24px 28px 20px;
+    background: #f4f8f5;
+    border-bottom: 1px solid #dbe3e5;
+}
+
+.modal-header-text {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+}
+
+.modal-success-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    background: #176b50;
+    color: white;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(23, 107, 80, 0.3);
+}
+
+.modal-success-badge svg {
+    width: 20px;
+    height: 20px;
+}
+
+.modal-header h2 {
+    margin: 4px 0 3px;
+    font: 600 22px Georgia, serif;
+    color: #18252d;
+}
+
+.modal-kicker {
+    display: block;
+    color: #176b50;
+    font: 700 11px monospace;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.modal-close-btn {
+    border: none;
+    background: transparent;
+    padding: 6px 10px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #70818a;
+    cursor: pointer;
+    border-radius: 3px;
+    line-height: 1;
+}
+
+.modal-close-btn:hover {
+    background: #e8eee9;
+    color: #18252d;
+}
+
+.modal-body {
+    padding: 22px 28px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.modal-summary-card {
+    background: white;
+    border: 1px solid #d4e0dc;
+    border-radius: 3px;
+    padding: 16px 18px;
+    display: grid;
+    gap: 12px;
+}
+
+.pairing-details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #edf1f0;
+}
+
+.pairing-item {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.pairing-label {
+    font: 700 10px monospace;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #70818a;
+}
+
+.pairing-value {
+    font-size: 13px;
+    font-weight: 700;
+    color: #18252d;
+    word-break: break-word;
+}
+
+.pairing-id {
+    font-size: 11px;
+    color: #70818a;
+    font-family: monospace;
+}
+
+.storage-file-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.storage-path-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 8px 12px;
+    background: #1b302e;
+    border-radius: 3px;
+    color: #c9e8dc;
+    font: 600 12px/1.4 Consolas, monospace;
+    word-break: break-all;
+}
+
+.storage-path-badge {
+    background: #274743;
+    color: #78bba1;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 2px;
+    text-transform: uppercase;
+    flex-shrink: 0;
+}
+
+.lifecycle-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.lifecycle-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #18252d;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.lifecycle-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.lifecycle-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 14px;
+    background: #f7faf8;
+    border: 1px solid #e1ebe6;
+    border-radius: 3px;
+}
+
+.lifecycle-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    background: #e3f2ec;
+    color: #176b50;
+    border-radius: 3px;
+    font-size: 12px;
+}
+
+.lifecycle-item-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: 12px;
+    color: #435450;
+    line-height: 1.45;
+}
+
+.lifecycle-item-text strong {
+    color: #18252d;
+}
+
+.json-preview-toggle {
+    border-top: 1px solid #e5ece9;
+    padding-top: 14px;
+}
+
+.toggle-button {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 12px;
+    font-weight: 700;
+    color: #176b50;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.toggle-button:hover {
+    color: #0f4c39;
+}
+
+.modal-json-snippet {
+    margin-top: 10px;
+    max-height: 160px;
+    overflow: auto;
+    background: #1b302e;
+    color: #d2e5dd;
+    padding: 12px 14px;
+    font: 11px/1.5 Consolas, monospace;
+    border-radius: 3px;
+}
+
+.modal-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 16px 28px;
+    background: #f4f8f5;
+    border-top: 1px solid #dbe3e5;
+}
+
+.modal-footer-stats {
+    font: 700 11px monospace;
+    color: #70818a;
+    text-transform: uppercase;
+}
+
+.modal-footer-stats strong {
+    color: #176b50;
+}
+
+.modal-footer-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+}
+
+.modal-action-btn {
+    min-height: 36px;
+    padding: 0 14px;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 3px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.15s ease;
+}
+
+.modal-action-secondary {
+    background: white;
+    border: 1px solid #c6d1d1;
+    color: #18252d;
+}
+
+.modal-action-secondary:hover {
+    background: #eef3f1;
+}
+
+.modal-action-primary {
+    background: #176b50;
+    border: 1px solid #176b50;
+    color: white;
+}
+
+.modal-action-primary:hover {
+    background: #0f4c39;
+}
