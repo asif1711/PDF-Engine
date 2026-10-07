@@ -192,18 +192,7 @@ export default function TemplateIngestionPage({
     // Send to /mapper
     const handleUseInMapper = () => {
         if (onUseTemplateInMapper) {
-            onUseTemplateInMapper({
-                id: currentTemplateId || `tpl-${Date.now()}`,
-                name: currentFilename,
-                filename: currentFilename,
-                category: selectedCategory,
-                url: currentLocalUrl || currentPdfUrl,
-                localUrl: currentLocalUrl,
-                analysis: currentAnalysis,
-                gcsPath: `${GCS_BASE_PATH}/${selectedCategory}/${currentFilename}`,
-                gcsUri: `gs://${GCS_BUCKET}/${GCS_BASE_PATH}/${selectedCategory}/${currentFilename}`,
-                cdnUrl: `https://${GCS_BUCKET}/${GCS_BASE_PATH}/${encodeURIComponent(selectedCategory)}/${encodeURIComponent(currentFilename)}`,
-            });
+            onUseTemplateInMapper();
         }
     };
 

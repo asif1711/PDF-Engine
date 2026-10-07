@@ -1971,12 +1971,7 @@ function App() {
                         const found = forms.find((f) => String(f.id) === String(formId));
                         if (found) setSelectedForm(found);
                     }}
-                    onUseTemplateInMapper={(newTpl) => {
-                        const list = getPdfTemplates();
-                        setPdfTemplatesList(list);
-                        setActivePdfTemplate(newTpl);
-                        setActivePdfTemplateId(newTpl.id);
-                        setSelectedTemplate(toTemplateModel(newTpl));
+                    onUseTemplateInMapper={() => {
                         navigate("/mapper");
                     }}
                 />

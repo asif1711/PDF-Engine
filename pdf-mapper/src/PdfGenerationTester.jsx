@@ -7,8 +7,6 @@ import {
     ExternalLink,
     Paperclip,
     Check,
-    ChevronDown,
-    Settings,
     Loader2
 } from "lucide-react";
 import "./PdfGenerationTester.css";
@@ -50,21 +48,6 @@ export default function PdfGenerationTester({
     const [error, setError] = useState("");
     const [pushNotice, setPushNotice] = useState("");
 
-    // Connection settings state (persisted to localStorage)
-    const [showConnectionConfig, setShowConnectionConfig] = useState(false);
-    const [customFormsUrl, setCustomFormsUrl] = useState(() => {
-        return localStorage.getItem("pfgf_custom_forms_url") || wordpressFormsUrl || "https://fair-land.localsite.io/wp-json/pdf-generator/v1/forms";
-    });
-    const [customApiKey, setCustomApiKey] = useState(() => {
-        return localStorage.getItem("pfgf_custom_api_key") || wordpressApiKey || "";
-    });
-    const [liveLinkUser, setLiveLinkUser] = useState(() => {
-        return localStorage.getItem("pfgf_livelink_user") || "";
-    });
-    const [liveLinkPass, setLiveLinkPass] = useState(() => {
-        return localStorage.getItem("pfgf_livelink_pass") || "";
-    });
-
     // Raw JSON editor state
     const [rawJsonText, setRawJsonText] = useState("");
     const [jsonParseError, setJsonParseError] = useState("");
@@ -103,21 +86,16 @@ export default function PdfGenerationTester({
         };
     }, [isOpen, pdfTemplateUrl, selectedTemplate]);
 
-    // Fetch submissions for the selected form
-    const loadSubmissions = useCallback(async (overrideUrl, overrideKey, overrideUser, overridePass) => {
+    // Fetch submissions for the selected form using global connection props
+    const loadSubmissions = useCallback(async () => {
         if (!selectedForm) return;
         setError("");
-        const urlToUse = overrideUrl !== undefined ? overrideUrl : customFormsUrl;
-        const keyToUse = overrideKey !== undefined ? overrideKey : customApiKey;
-        const userToUse = overrideUser !== undefined ? overrideUser : liveLinkUser;
-        const passToUse = overridePass !== undefined ? overridePass : liveLinkPass;
-
         try {
             const res = await fetchFormSubmissions(
                 selectedForm.id,
-                urlToUse,
-                keyToUse,
-                { basicAuthUser: userToUse, basicAuthPass: passToUse }
+                wordpressFormsUrl,
+                wordpressApiKey,
+                { basicAuthUser: "", basicAuthPass: "" }
             );
             setSubmissionSource({ source: res.source, message: res.message });
             setSubmissions(res.entries || []);
@@ -130,16 +108,16 @@ export default function PdfGenerationTester({
         } catch (err) {
             setError("Error loading submissions: " + err.message);
         }
-    }, [selectedForm, customFormsUrl, customApiKey, liveLinkUser, liveLinkPass]);
+    }, [selectedForm, wordpressFormsUrl, wordpressApiKey]);
 
     useEffect(() => {
         if (!isOpen || !selectedForm) return undefined;
         let isSubscribed = true;
         fetchFormSubmissions(
             selectedForm.id,
-            customFormsUrl,
-            customApiKey,
-            { basicAuthUser: liveLinkUser, basicAuthPass: liveLinkPass }
+            wordpressFormsUrl,
+            wordpressApiKey,
+            { basicAuthUser: "", basicAuthPass: "" }
         ).then((res) => {
             if (!isSubscribed) return;
             setSubmissionSource({ source: res.source, message: res.message });
@@ -157,18 +135,7 @@ export default function PdfGenerationTester({
         return () => {
             isSubscribed = false;
         };
-    }, [isOpen, selectedForm, customFormsUrl, customApiKey, liveLinkUser, liveLinkPass]);
-
-    // Save and re-test connection
-    function handleSaveConnection(e) {
-        e.preventDefault();
-        localStorage.setItem("pfgf_custom_forms_url", customFormsUrl);
-        localStorage.setItem("pfgf_custom_api_key", customApiKey);
-        localStorage.setItem("pfgf_livelink_user", liveLinkUser);
-        localStorage.setItem("pfgf_livelink_pass", liveLinkPass);
-        setShowConnectionConfig(false);
-        loadSubmissions(customFormsUrl, customApiKey, liveLinkUser, liveLinkPass);
-    }
+    }, [isOpen, selectedForm, wordpressFormsUrl, wordpressApiKey]);
 
     // Switch submission
     function handleSubmissionSelect(id) {
@@ -252,22 +219,22 @@ export default function PdfGenerationTester({
         setError("");
 
         try {
-            const result = await generateFilledPdf({
-                templateBytes: pdfBytes,
-                mappings,
-                submission: currentEntry,
-                flatten: flattenPdf,
-                formsUrl: customFormsUrl,
-                apiKey: customApiKey,
-                attachUploadedFiles,
-            });
+const result = await generateFilledPdf({
+                    templateBytes: pdfBytes,
+                    mappings,
+                    submission: currentEntry,
+                    flatten: flattenPdf,
+                    formsUrl: wordpressFormsUrl,
+                    apiKey: wordpressApiKey,
+                    attachUploadedFiles,
+                });
             setGenerationResult(result);
         } catch (err) {
             setError("PDF Generation failed: " + err.message);
         } finally {
             setIsGenerating(false);
         }
-    }, [pdfBytes, currentEntry, mappings, flattenPdf, customFormsUrl, customApiKey, attachUploadedFiles]);
+    }, [pdfBytes, currentEntry, mappings, flattenPdf, wordpressFormsUrl, wordpressApiKey, attachUploadedFiles]);
 
     // Push PDF to WordPress via server-side endpoint (avoids browser CORS)
     const handlePushToWpAndEmail = useCallback(async () => {
@@ -293,8 +260,8 @@ export default function PdfGenerationTester({
                     mappings,
                     submission: currentEntry,
                     flatten: flattenPdf,
-                    formsUrl: customFormsUrl,
-                    apiKey: customApiKey,
+                    formsUrl: wordpressFormsUrl,
+                    apiKey: wordpressApiKey,
                     attachUploadedFiles,
                 });
                 setGenerationResult(result);
@@ -321,20 +288,66 @@ export default function PdfGenerationTester({
 
             if (!pushRes.ok) {
                 const errData = await pushRes.json().catch(() => ({}));
+                const errorType = errData.errorType || 'unknown_error';
                 throw new Error(errData.error || `Push failed (${pushRes.status})`);
             }
 
             const json = await pushRes.json();
-            setPushNotice(
-                `Stored on WordPress: ${json.filename || `entry-${targetEntryId}.pdf`} (${filledCount} fields filled). Email notification dispatched!`
-            );
+
+            // Build accurate success message based on actual WordPress response
+            const pdfStored = json.pdfStored === true;
+            const notificationSent = json.notificationSent === true;
+            const notificationError = json.notificationError || null;
+
+            if (!pdfStored) {
+                setError(`PDF generation succeeded, but WordPress could not confirm the PDF was stored.`);
+                return;
+            }
+
+            let pushNoticeMsg = `PDF stored on WordPress: ${json.filename || `form-${selectedForm?.id}-entry-${targetEntryId}.pdf`} (${json.fileSize || 'unknown'} bytes, ${filledCount} fields filled).`;
+            
+            if (json.notificationRequested) {
+                if (notificationSent) {
+                    pushNoticeMsg += ' Email notification dispatched.';
+                } else if (json.notificationError) {
+                    pushNoticeMsg += ` PDF was saved successfully, but the email notification could not be dispatched: ${notificationError}`;
+                } else {
+                    pushNoticeMsg += ' Email notification dispatch attempted.';
+                }
+            }
+
+            setPushNotice(pushNoticeMsg);
         } catch (err) {
             console.error("Push to WordPress & Email failed:", err);
-            setError(`Failed to push to WordPress & send email: ${err.message}`);
+
+            // Check if the error has an errorType from the server response
+            const errData = err.message ? {} : {}; // We'll need to extract errorType differently
+            // The error message already contains the user-friendly message from server
+            const errorMessage = err.message || 'Failed to push to WordPress & send email';
+
+            // Provide more context based on common error patterns
+            let detailedError = errorMessage;
+            if (errorMessage.includes('authentication failed') || errorMessage.includes('API key')) {
+                detailedError = 'WordPress authentication failed. Check the API key for the selected source connection.';
+            } else if (errorMessage.includes('permission')) {
+                detailedError = 'WordPress rejected the request because the API user/API key does not have permission.';
+            } else if (errorMessage.includes('endpoint not found') || errorMessage.includes('REST endpoint')) {
+                detailedError = 'PDF Generator REST endpoint was not found on WordPress. Check that the plugin is active.';
+            } else if (errorMessage.includes('could not write') || errorMessage.includes('storage_failed') || errorMessage.includes('disk')) {
+                detailedError = 'PDF generation succeeded, but WordPress could not write the PDF to disk.';
+            } else if (errorMessage.includes('invalid PDF') || errorMessage.includes('rejected the generated PDF')) {
+                detailedError = 'WordPress rejected the generated PDF because the uploaded PDF data is invalid.';
+            } else if (errorMessage.includes('Gravity Forms')) {
+                detailedError = 'Gravity Forms is not available on the WordPress site.';
+            } else if (errorMessage.includes('non-JSON') || errorMessage.includes('non_json')) {
+                detailedError = 'WordPress returned an unexpected response (likely HTML error page). Check plugin status.';
+            }
+
+            setError(detailedError);
         } finally {
             setIsPushingToWp(false);
         }
-    }, [currentEntry, generationResult, pdfBytes, mappings, flattenPdf, customFormsUrl, customApiKey, attachUploadedFiles, selectedSubmissionId, selectedForm, selectedTemplate, sourceConnectionId]);
+    }, [currentEntry, generationResult, pdfBytes, mappings, flattenPdf, wordpressFormsUrl, wordpressApiKey, attachUploadedFiles, selectedSubmissionId, selectedForm, selectedTemplate, sourceConnectionId]);
 
     // Close on ESC
     useEffect(() => {
@@ -399,102 +412,12 @@ export default function PdfGenerationTester({
                                 <div><strong>Form:</strong> {selectedForm?.title} (ID #{selectedForm?.id})</div>
                                 <div><strong>Template:</strong> {selectedTemplate?.template?.filename}</div>
                                 <div style={{ fontSize: "11px", color: "#6a7e78" }}>{submissionSource.message}</div>
+</div>
+                            {/* Global connection context (read-only) */}
+                            <div style={{ marginTop: "8px", padding: "8px", background: "#f0f6f4", border: "1px solid #c4ded5", borderRadius: "3px", fontSize: "11px", color: "#176b50" }}>
+                                <div><strong>Source:</strong> {sourceConnectionId ? "Connected" : "No source selected"}</div>
+                                <div><strong>URL:</strong> {wordpressFormsUrl || "—"}</div>
                             </div>
-                            <button
-                                type="button"
-                                onClick={() => setShowConnectionConfig((prev) => !prev)}
-                                style={{
-                                    marginTop: "4px",
-                                    padding: "4px 8px",
-                                    background: "#f0f6f4",
-                                    border: "1px solid #c4ded5",
-                                    borderRadius: "3px",
-                                    color: "#176b50",
-                                    fontSize: "11px",
-                                    fontWeight: "700",
-                                    cursor: "pointer",
-                                    textAlign: "left",
-                                    display: "inline-flex",
-                                    alignItems: "center",
-                                    gap: "4px",
-                                }}
-                            >
-                                {showConnectionConfig ? (
-                                    <>
-                                        <ChevronDown size={12} />
-                                        <span>Hide Connection Settings</span>
-                                    </>
-                                ) : (
-                                    <>
-                                        <Settings size={12} />
-                                        <span>Configure WordPress Connection</span>
-                                    </>
-                                )}
-                            </button>
-                            {showConnectionConfig && (
-                                <form onSubmit={handleSaveConnection} style={{ display: "flex", flexDirection: "column", gap: "8px", marginTop: "6px", padding: "8px", background: "#f8fbfa", border: "1px solid #d2e4de", borderRadius: "3px" }}>
-                                    <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
-                                        <label style={{ fontSize: "10px", fontWeight: "700", textTransform: "uppercase", color: "#506762" }}>WordPress REST URL</label>
-                                        <input
-                                            type="text"
-                                            value={customFormsUrl}
-                                            onChange={(e) => setCustomFormsUrl(e.target.value)}
-                                            placeholder="https://fair-land.localsite.io/wp-json/pdf-generator/v1/forms"
-                                            style={{ fontSize: "11px", padding: "5px 7px", border: "1px solid #c9dcd6", borderRadius: "2px" }}
-                                        />
-                                    </div>
-                                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "6px" }}>
-                                        <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
-                                            <label style={{ fontSize: "10px", fontWeight: "700", textTransform: "uppercase", color: "#506762" }}>Live Link User</label>
-                                            <input
-                                                type="text"
-                                                value={liveLinkUser}
-                                                onChange={(e) => setLiveLinkUser(e.target.value)}
-                                                placeholder="Username in LocalWP"
-                                                style={{ fontSize: "11px", padding: "5px 7px", border: "1px solid #c9dcd6", borderRadius: "2px" }}
-                                            />
-                                        </div>
-                                        <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
-                                            <label style={{ fontSize: "10px", fontWeight: "700", textTransform: "uppercase", color: "#506762" }}>Live Link Password</label>
-                                            <input
-                                                type="password"
-                                                value={liveLinkPass}
-                                                onChange={(e) => setLiveLinkPass(e.target.value)}
-                                                placeholder="Password in LocalWP"
-                                                style={{ fontSize: "11px", padding: "5px 7px", border: "1px solid #c9dcd6", borderRadius: "2px" }}
-                                            />
-                                        </div>
-                                    </div>
-                                    <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
-                                        <label style={{ fontSize: "10px", fontWeight: "700", textTransform: "uppercase", color: "#506762" }}>Plugin API Key (X-PDF-API-Key)</label>
-                                        <input
-                                            type="password"
-                                            value={customApiKey}
-                                            onChange={(e) => setCustomApiKey(e.target.value)}
-                                            placeholder="Optional if admin or defined in wp-config.php"
-                                            style={{ fontSize: "11px", padding: "5px 7px", border: "1px solid #c9dcd6", borderRadius: "2px" }}
-                                        />
-                                    </div>
-                                    <div style={{ fontSize: "10px", color: "#788f89", lineHeight: "1.4" }}>
-                                        LocalWP Live Links use HTTP Basic Auth. Enter the Username and Password shown under <strong>Tools &gt; Live Link</strong> in LocalWP.
-                                    </div>
-                                    <div style={{ display: "flex", gap: "6px", marginTop: "4px" }}>
-                                        <button
-                                            type="submit"
-                                            style={{ flex: 1, padding: "5px 10px", background: "#176b50", color: "white", border: "none", borderRadius: "2px", fontSize: "11px", fontWeight: "700", cursor: "pointer" }}
-                                        >
-                                            Save & Re-test
-                                        </button>
-                                        <button
-                                            type="button"
-                                            onClick={() => setShowConnectionConfig(false)}
-                                            style={{ padding: "5px 10px", background: "white", color: "#425550", border: "1px solid #c9dcd6", borderRadius: "2px", fontSize: "11px", cursor: "pointer" }}
-                                        >
-                                            Cancel
-                                        </button>
-                                    </div>
-                                </form>
-                            )}
                         </div>
 
                         {/* Submission Selector */}

@@ -845,28 +845,70 @@ function pfgf_rest_upload_entry_pdf(WP_REST_Request $request) {
 
     $generated_dir = WP_CONTENT_DIR . '/pdf-generator/generated/';
     if (!file_exists($generated_dir)) {
-        wp_mkdir_p($generated_dir);
+        if (!wp_mkdir_p($generated_dir)) {
+            return new WP_Error('directory_create_failed', 'Could not create PDF storage directory.', array('status' => 500));
+        }
+    }
+
+    // Verify directory is writable
+    if (!is_writable($generated_dir)) {
+        return new WP_Error('directory_not_writable', 'PDF storage directory is not writable.', array('status' => 500));
     }
 
     $pdf_file = $generated_dir . "form-{$form_id}-entry-{$entry_id}.pdf";
-    file_put_contents($pdf_file, $pdf_binary);
+    $bytes_written = @file_put_contents($pdf_file, $pdf_binary);
 
+    // Validate PDF was actually written
+    if ($bytes_written === false) {
+        return new WP_Error('pdf_write_failed', 'PDF was received but could not be written to the WordPress filesystem.', array('status' => 500));
+    }
+
+    if (!file_exists($pdf_file)) {
+        return new WP_Error('pdf_write_failed', 'PDF was received but file does not exist after write attempt.', array('status' => 500));
+    }
+
+    $file_size = filesize($pdf_file);
+    if ($file_size === false || $file_size === 0) {
+        @unlink($pdf_file); // Clean up zero-byte file
+        return new WP_Error('pdf_write_failed', 'PDF file is empty after write attempt.', array('status' => 500));
+    }
+
+    // Verify PDF header
+    $header = @file_get_contents($pdf_file, false, null, 0, 5);
+    if ($header !== '%PDF-') {
+        @unlink($pdf_file);
+        return new WP_Error('invalid_pdf_data', 'Written file does not appear to be a valid PDF.', array('status' => 400));
+    }
+
+    // Handle notification dispatch
     $notification_sent = false;
+    $notification_error = null;
     if ($request->get_param('send_notification')) {
         $form = GFAPI::get_form($form_id);
         if ($form && !is_wp_error($form)) {
-            GFAPI::send_notifications($form, $entry);
-            $notification_sent = true;
+            $notify_result = GFAPI::send_notifications($form, $entry);
+            if (is_wp_error($notify_result)) {
+                $notification_error = $notify_result->get_error_message();
+                $notification_sent = false;
+            } else {
+                $notification_sent = true;
+            }
+        } else {
+            $notification_error = 'Form not found or invalid for notification dispatch.';
+            $notification_sent = false;
         }
     }
 
     return rest_ensure_response(array(
         'success'           => true,
+        'pdf_stored'        => true,
         'entry_id'          => $entry_id,
         'form_id'           => $form_id,
         'filename'          => basename($pdf_file),
-        'file_size'         => filesize($pdf_file),
+        'file_size'         => $file_size,
+        'notification_requested' => $request->get_param('send_notification') ? true : false,
         'notification_sent' => $notification_sent,
+        'notification_error' => $notification_error,
     ));
 }
 

@@ -341,10 +341,57 @@ app.post('/api/push-pdf-to-wp', async (req, res) => {
 
     if (!wpRes.ok) {
       console.warn(`[Server] WordPress upload returned status: ${wpRes.status}, content-type: ${contentType}`);
+
+      // Parse WordPress error if JSON
+      let wpError = null;
+      let errorCode = null;
+      if (isJson) {
+        try {
+          wpError = JSON.parse(responseText);
+          errorCode = wpError.code || null;
+        } catch {}
+      }
+
+      // Map WordPress status codes to user-friendly messages
+      let userMessage = 'WordPress could not process the PDF.';
+      let errorType = 'unknown_error';
+
+      if (wpRes.status === 401) {
+        userMessage = 'WordPress authentication failed. Check the API key for the selected source connection.';
+        errorType = 'auth_failed';
+      } else if (wpRes.status === 403) {
+        userMessage = 'WordPress rejected the request because the API user/API key does not have permission.';
+        errorType = 'permission_denied';
+      } else if (wpRes.status === 404) {
+        userMessage = 'PDF Generator REST endpoint was not found on WordPress. Check that the plugin is active.';
+        errorType = 'endpoint_not_found';
+      } else if (wpRes.status === 400) {
+        if (errorCode === 'invalid_pdf_data') {
+          userMessage = 'WordPress rejected the generated PDF because the uploaded PDF data is invalid.';
+          errorType = 'invalid_pdf';
+        } else {
+          userMessage = 'WordPress rejected the PDF because the PDF data is invalid or incomplete.';
+          errorType = 'bad_request';
+        }
+      } else if (wpRes.status === 500 || wpRes.status === 502 || wpRes.status === 503) {
+        if (errorCode === 'pdf_write_failed' || errorCode === 'directory_create_failed' || errorCode === 'directory_not_writable') {
+          userMessage = 'PDF generation succeeded, but WordPress could not write the PDF to disk.';
+          errorType = 'storage_failed';
+        } else if (errorCode === 'gravity_forms_unavailable') {
+          userMessage = 'Gravity Forms is not available on the WordPress site.';
+          errorType = 'gf_unavailable';
+        } else {
+          userMessage = 'WordPress received the PDF but could not store it on the server.';
+          errorType = 'server_error';
+        }
+      }
+
       return res.status(502).json({
-        error: 'WordPress returned a non-JSON response',
+        error: userMessage,
+        errorType,
         wordpressStatus: wpRes.status,
-        contentType: contentType,
+        wordpressErrorCode: errorCode,
+        contentType,
         responsePreview: responseText.substring(0, 500),
       });
     }
@@ -356,17 +403,38 @@ app.post('/api/push-pdf-to-wp', async (req, res) => {
       console.warn(`[Server] Failed to parse WordPress response as JSON: ${parseErr.message}`);
       return res.status(502).json({
         error: 'WordPress returned a non-JSON response',
+        errorType: 'non_json_response',
         wordpressStatus: wpRes.status,
-        contentType: contentType,
+        contentType,
         responsePreview: responseText.substring(0, 500),
       });
     }
 
-    console.log(`[Server] WordPress accepted PDF and dispatched email notifications successfully!`);
+    // Verify WordPress explicitly confirmed PDF storage
+    const pdfStored = json.pdf_stored === true;
+    const notificationSent = json.notification_sent === true;
+    const notificationRequested = json.notification_requested === true;
+    const notificationError = json.notification_error || null;
+
+    if (!pdfStored) {
+      console.warn(`[Server] WordPress did not confirm PDF storage:`, json);
+      return res.status(502).json({
+        error: 'WordPress did not confirm the PDF was stored.',
+        errorType: 'storage_not_confirmed',
+        wordpressStatus: wpRes.status,
+        wordpressResponse: json,
+      });
+    }
+
+    console.log(`[Server] WordPress accepted PDF (stored: ${pdfStored}, notification: ${notificationSent})`);
     res.json({
       success: true,
+      pdfStored: pdfStored,
       filename: json.filename,
-      notificationSent: json.notification_sent,
+      fileSize: json.file_size,
+      notificationRequested,
+      notificationSent,
+      notificationError,
     });
   } catch (err) {
     console.error('[Server] Push PDF to WordPress error:', err);
