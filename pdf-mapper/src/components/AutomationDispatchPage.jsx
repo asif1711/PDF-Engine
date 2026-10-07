@@ -43,6 +43,16 @@ export default function AutomationDispatchPage({
     sourceConnectionId,
     onOpenTester,
 }) {
+    // Chunked Uint8Array to base64 conversion to avoid Maximum call stack size exceeded
+    function uint8ArrayToBase64(bytes) {
+        let binary = '';
+        const chunkSize = 0x8000;
+        const view = new Uint8Array(bytes);
+        for (let i = 0; i < view.length; i += chunkSize) {
+            binary += String.fromCharCode(...view.subarray(i, i + chunkSize));
+        }
+        return btoa(binary);
+    }
     const [settings, setSettings] = useState(() => getAutomationSettings());
     const [submissions, setSubmissions] = useState([]);
     const [isLoadingSubmissions, setIsLoadingSubmissions] = useState(false);
@@ -136,8 +146,8 @@ export default function AutomationDispatchPage({
         try {
             const result = await buildPdfBytesForEntry(entry);
 
-            // Convert Uint8Array PDF bytes to base64 using browser-compatible API
-            const pdfBytesBase64 = btoa(String.fromCharCode(...new Uint8Array(result.pdfBytes)));
+            // Convert Uint8Array PDF bytes to base64 using browser-compatible API (chunked)
+            const pdfBytesBase64 = uint8ArrayToBase64(result.pdfBytes);
 
             const pushRes = await fetch('/api/push-pdf-to-wp', {
                 method: 'POST',
