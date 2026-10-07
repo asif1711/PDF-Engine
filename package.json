@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "npm run dev --workspace=pdf-mapper",
     "build": "npm run build --workspace=pdf-mapper",
-    "start": "npm run preview --workspace=pdf-mapper",
+    "start": "node server.js",
     "db:migrate": "node scripts/migrate.js",
     "preview": "npm run preview --workspace=pdf-mapper",
     "lint": "npm run lint --workspace=pdf-mapper"
