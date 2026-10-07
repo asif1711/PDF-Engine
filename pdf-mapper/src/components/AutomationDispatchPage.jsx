@@ -40,6 +40,7 @@ export default function AutomationDispatchPage({
     pdfTemplateUrl,
     wordpressFormsUrl,
     wordpressApiKey,
+    sourceConnectionId,
     onOpenTester,
 }) {
     const [settings, setSettings] = useState(() => getAutomationSettings());
@@ -128,65 +129,40 @@ export default function AutomationDispatchPage({
         }
     };
 
-    // Generate & Push directly to WordPress server (stores in wp-content/pdf-generator/generated/ & triggers email)
+    // Generate & Push to WordPress server (stores in wp-content/pdf-generator/generated/ & triggers email)
     const handleGenerateAndPushToWp = async (entry, sendNotification = true) => {
         setPushingEntryId(entry.id);
         setDispatchNotice(`Generating and transmitting filled PDF for Entry #${entry.id} to WordPress...`);
         try {
             const result = await buildPdfBytesForEntry(entry);
-            const rawBase = normalizeWpFormsUrl(wordpressFormsUrl);
-            const restBase = rawBase.replace(/\/forms\/?$/, "");
-            const uploadUrl = `${restBase}/entries/${entry.id}/pdf?send_notification=${sendNotification ? "1" : "0"}`;
 
-            const headers = {
-                "Content-Type": "application/pdf",
-                "ngrok-skip-browser-warning": "1",
-            };
-            if (wordpressApiKey) {
-                headers["X-PDF-API-Key"] = wordpressApiKey;
+            const pdfBytesBase64 = Buffer.from(result.pdfBytes).toString('base64');
+
+            const pushRes = await fetch('/api/push-pdf-to-wp', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    pdfBytesBase64,
+                    formId: selectedForm?.id || '1',
+                    entryId: entry.id,
+                    templateId: activePdfTemplate?.id || null,
+                    sourceConnectionId,
+                    sendNotification,
+                }),
+            });
+
+            if (!pushRes.ok) {
+                const errData = await pushRes.json().catch(() => ({}));
+                throw new Error(errData.error || `Push failed (${pushRes.status})`);
             }
 
-            let wpRes;
-            const isMixedContent = typeof window !== "undefined" && window.location.protocol === "https:" && uploadUrl.startsWith("http:");
-            if (isMixedContent) {
-                let proxyUrl = `/api/wp-proxy?url=${encodeURIComponent(uploadUrl)}`;
-                if (wordpressApiKey) proxyUrl += `&apiKey=${encodeURIComponent(wordpressApiKey)}`;
-                wpRes = await fetch(proxyUrl, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/pdf" },
-                    body: result.pdfBytes,
-                });
-            } else {
-                try {
-                    wpRes = await fetch(uploadUrl, {
-                        method: "POST",
-                        headers,
-                        body: result.pdfBytes,
-                    });
-                } catch {
-                    // Fall back to server proxy in case of CORS restriction
-                    let proxyUrl = `/api/wp-proxy?url=${encodeURIComponent(uploadUrl)}`;
-                    if (wordpressApiKey) proxyUrl += `&apiKey=${encodeURIComponent(wordpressApiKey)}`;
-                    wpRes = await fetch(proxyUrl, {
-                        method: "POST",
-                        headers: { "Content-Type": "application/pdf" },
-                        body: result.pdfBytes,
-                    });
-                }
-            }
-
-            if (!wpRes.ok) {
-                const text = await wpRes.text();
-                throw new Error(`WordPress rejected upload (${wpRes.status}): ${text.substring(0, 150)}`);
-            }
-
-            const json = await wpRes.json();
+            const json = await pushRes.json();
             setPushedEntries((prev) => new Set([...prev, String(entry.id)]));
             processedIdsRef.current.add(String(entry.id));
 
             setDispatchNotice(
                 `Stored on WordPress: ${json.filename || `entry-${entry.id}.pdf`} (${result.filledCount} fields filled). ${
-                    json.notification_sent ? "Email notification with PDF attachment dispatched." : ""
+                    json.notificationSent ? "Email notification with PDF attachment dispatched." : ""
                 }`
             );
         } catch (err) {

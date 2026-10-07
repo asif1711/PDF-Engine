@@ -27,6 +27,7 @@ export default function PdfGenerationTester({
     pdfTemplateUrl,
     wordpressFormsUrl,
     wordpressApiKey,
+    sourceConnectionId,
 }) {
     const [submissions, setSubmissions] = useState([]);
     const [selectedSubmissionId, setSelectedSubmissionId] = useState("");
@@ -258,7 +259,7 @@ export default function PdfGenerationTester({
         }
     }, [pdfBytes, currentEntry, mappings, flattenPdf, customFormsUrl, customApiKey, attachUploadedFiles]);
 
-    // Push PDF directly to WordPress REST endpoint and trigger email notification
+    // Push PDF to WordPress via server-side endpoint (avoids browser CORS)
     const handlePushToWpAndEmail = useCallback(async () => {
         if (!currentEntry) {
             setError("Please select or enter a form submission.");
@@ -292,53 +293,27 @@ export default function PdfGenerationTester({
             }
 
             const targetEntryId = currentEntry.id || selectedSubmissionId || "1";
-            const rawBase = normalizeWpFormsUrl(customFormsUrl || wordpressFormsUrl);
-            const restBase = rawBase.replace(/\/forms\/?$/, "");
-            const uploadUrl = `${restBase}/entries/${targetEntryId}/pdf?send_notification=1`;
+            const pdfBytesBase64 = Buffer.from(bytesToSend).toString('base64');
 
-            const headers = {
-                "Content-Type": "application/pdf",
-                "ngrok-skip-browser-warning": "1",
-            };
-            const apiKeyToUse = customApiKey || wordpressApiKey;
-            if (apiKeyToUse) {
-                headers["X-PDF-API-Key"] = apiKeyToUse;
+            const pushRes = await fetch('/api/push-pdf-to-wp', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    pdfBytesBase64,
+                    formId: selectedForm?.id || '1',
+                    entryId: targetEntryId,
+                    templateId: selectedTemplate?.templateId || null,
+                    sourceConnectionId,
+                    sendNotification: true,
+                }),
+            });
+
+            if (!pushRes.ok) {
+                const errData = await pushRes.json().catch(() => ({}));
+                throw new Error(errData.error || `Push failed (${pushRes.status})`);
             }
 
-            let wpRes;
-            const isMixedContent = typeof window !== "undefined" && window.location.protocol === "https:" && uploadUrl.startsWith("http:");
-            if (isMixedContent) {
-                let proxyUrl = `/api/wp-proxy?url=${encodeURIComponent(uploadUrl)}`;
-                if (apiKeyToUse) proxyUrl += `&apiKey=${encodeURIComponent(apiKeyToUse)}`;
-                wpRes = await fetch(proxyUrl, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/pdf" },
-                    body: bytesToSend,
-                });
-            } else {
-                try {
-                    wpRes = await fetch(uploadUrl, {
-                        method: "POST",
-                        headers,
-                        body: bytesToSend,
-                    });
-                } catch {
-                    let proxyUrl = `/api/wp-proxy?url=${encodeURIComponent(uploadUrl)}`;
-                    if (apiKeyToUse) proxyUrl += `&apiKey=${encodeURIComponent(apiKeyToUse)}`;
-                    wpRes = await fetch(proxyUrl, {
-                        method: "POST",
-                        headers: { "Content-Type": "application/pdf" },
-                        body: bytesToSend,
-                    });
-                }
-            }
-
-            if (!wpRes.ok) {
-                const text = await wpRes.text();
-                throw new Error(`WordPress rejected upload (${wpRes.status}): ${text.substring(0, 150)}`);
-            }
-
-            const json = await wpRes.json();
+            const json = await pushRes.json();
             setPushNotice(
                 `Stored on WordPress: ${json.filename || `entry-${targetEntryId}.pdf`} (${filledCount} fields filled). Email notification dispatched!`
             );
@@ -348,7 +323,7 @@ export default function PdfGenerationTester({
         } finally {
             setIsPushingToWp(false);
         }
-    }, [currentEntry, generationResult, pdfBytes, mappings, flattenPdf, customFormsUrl, customApiKey, attachUploadedFiles, selectedSubmissionId, wordpressFormsUrl, wordpressApiKey]);
+    }, [currentEntry, generationResult, pdfBytes, mappings, flattenPdf, customFormsUrl, customApiKey, attachUploadedFiles, selectedSubmissionId, selectedForm, selectedTemplate, sourceConnectionId]);
 
     // Close on ESC
     useEffect(() => {

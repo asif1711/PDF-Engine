@@ -266,6 +266,88 @@ app.all(['/api/generate-pdf', '/api/generate-pdf/'], async (req, res) => {
   }
 });
 
+// API: Push PDF to WordPress (server-side to avoid browser CORS)
+app.post('/api/push-pdf-to-wp', async (req, res) => {
+  try {
+    const payload = req.body || {};
+    const pdfBytesBase64 = payload.pdfBytesBase64;
+    const formId = String(payload.formId || '1');
+    const entryId = String(payload.entryId || '0');
+    const templateId = payload.templateId || null;
+    const sourceConnectionId = payload.sourceConnectionId || null;
+    const sendNotification = payload.sendNotification !== false; // default true
+
+    if (!pdfBytesBase64) {
+      return res.status(400).json({ error: 'pdfBytesBase64 is required' });
+    }
+    if (!entryId || entryId === '0') {
+      return res.status(400).json({ error: 'entryId is required' });
+    }
+
+    // Load source connection to get WordPress URL and API key
+    let wpFormsUrl = process.env.WORDPRESS_FORMS_URL || '';
+    let apiKey = process.env.WORDPRESS_API_KEY || '';
+
+    if (sourceConnectionId) {
+      const conn = await getSourceConnection(sourceConnectionId);
+      if (conn) {
+        wpFormsUrl = conn.url || wpFormsUrl;
+        apiKey = conn.apiKey || apiKey;
+      }
+    } else if (templateId) {
+      // Fallback: try to find sourceConnectionId from the mapping record
+      const mappingRecords = await listFormMappingRecords(formId, templateId);
+      if (mappingRecords?.length && mappingRecords[0].sourceConnectionId) {
+        const conn = await getSourceConnection(mappingRecords[0].sourceConnectionId);
+        if (conn) {
+          wpFormsUrl = conn.url || wpFormsUrl;
+          apiKey = conn.apiKey || apiKey;
+        }
+      }
+    }
+
+    if (!wpFormsUrl) {
+      return res.status(400).json({ error: 'No WordPress URL configured for this source connection' });
+    }
+
+    const pdfBuffer = Buffer.from(pdfBytesBase64, 'base64');
+
+    const rawBase = wpFormsUrl.replace(/\/$/, '');
+    const restBase = rawBase.endsWith('/forms')
+      ? rawBase.replace(/\/forms$/, '')
+      : rawBase.includes('/wp-json')
+        ? rawBase
+        : `${rawBase}/wp-json/pdf-generator/v1`;
+    const uploadUrl = `${restBase}/entries/${entryId}/pdf?send_notification=${sendNotification ? '1' : '0'}`;
+
+    const headers = { 'Content-Type': 'application/pdf', 'ngrok-skip-browser-warning': '1' };
+    if (apiKey) headers['X-PDF-API-Key'] = apiKey;
+
+    console.log(`[Server] Pushing PDF to WordPress REST: ${uploadUrl}`);
+    const wpRes = await fetch(uploadUrl, { method: 'POST', headers, body: pdfBuffer });
+
+    if (!wpRes.ok) {
+      const text = await wpRes.text();
+      console.warn(`[Server] WordPress upload returned status: ${wpRes.status}`);
+      return res.status(502).json({
+        error: `WordPress rejected upload (${wpRes.status})`,
+        details: text.substring(0, 200),
+      });
+    }
+
+    const json = await wpRes.json();
+    console.log(`[Server] WordPress accepted PDF and dispatched email notifications successfully!`);
+    res.json({
+      success: true,
+      filename: json.filename,
+      notificationSent: json.notification_sent,
+    });
+  } catch (err) {
+    console.error('[Server] Push PDF to WordPress error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // API: Save Mapping
 const handleSaveMapping = async (req, res) => {
   try {

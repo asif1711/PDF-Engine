@@ -2002,6 +2002,7 @@ function App() {
                     pdfTemplateUrl={currentPdfSource}
                     wordpressFormsUrl={activeWpConn?.url || WORDPRESS_FORMS_URL}
                     wordpressApiKey={activeWpConn?.apiKey || WORDPRESS_API_KEY}
+                    sourceConnectionId={activeWpConn?.id || null}
                     onOpenTester={() => setIsTesterOpen(true)}
                 />
             )}
@@ -2233,6 +2234,7 @@ function App() {
             pdfTemplateUrl={currentPdfSource}
             wordpressFormsUrl={activeWpConn?.url || WORDPRESS_FORMS_URL}
             wordpressApiKey={activeWpConn?.apiKey || WORDPRESS_API_KEY}
+            sourceConnectionId={activeWpConn?.id || null}
         />
         <WpSourceModal
             isOpen={isWpSourceModalOpen}
