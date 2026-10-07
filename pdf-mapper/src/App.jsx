@@ -539,7 +539,7 @@ function App() {
         const path = window.location.pathname.toLowerCase();
         if (path.includes("analyze")) return "/analyze";
         if (path.includes("automation")) return "/automation";
-        return "/mapper";
+        return "/analyze";
     });
 
     const navigate = (path) => {
@@ -591,8 +591,6 @@ function App() {
         runCheckDb();
     }, [runCheckDb]);
 
-    const [templates, setTemplates] = useState([]);
-    const [forms, setForms] = useState([]);
     const [selectedTemplate, setSelectedTemplate] = useState(null);
     const [selectedForm, setSelectedForm] = useState(null);
     const [mappings, setMappings] = useState(EMPTY_MAPPING);
@@ -969,8 +967,6 @@ function App() {
 
         const updated = deletePdfTemplate(targetId);
         setPdfTemplatesList(updated);
-        const mapped = updated.map(toTemplateModel).filter(Boolean);
-        setTemplates(mapped);
         if (activePdfTemplate?.id === targetId) {
             setActivePdfTemplate(null);
             setActivePdfTemplateId(null);
@@ -1033,8 +1029,6 @@ function App() {
             const valid = Array.isArray(tpls) ? tpls : [];
             const hydrated = valid.map(ensureTemplateAnalysis);
             setPdfTemplatesList(hydrated);
-            const mapped = hydrated.map(toTemplateModel).filter(Boolean);
-            setTemplates(mapped);
             if (activePdfTemplate?.id) {
                 const found = hydrated.find((t) => t.id === activePdfTemplate.id);
                 if (found) {
@@ -1228,7 +1222,7 @@ function App() {
                 setLoading((current) => ({ ...current, mapping: false }));
             }
         }
-    }, [selectedForm?.id, selectedTemplateId]);
+    }, [selectedForm?.id, selectedTemplateId, activeWpConn?.id]);
 
     useEffect(() => {
         loadAvailableMappings();
@@ -2011,36 +2005,6 @@ function App() {
             {currentRoute === "/mapper" && (
                 <>
                     <section className="configuration">
-                        <label>Source<select value="gravity_forms" readOnly><option value="gravity_forms">Gravity Forms</option></select></label>
-                        <label>Gravity Form<select value={selectedForm?.id || ""} onChange={(event) => setSelectedForm(forms.find((form) => String(form.id) === event.target.value) || null)}><option value="">Select Gravity Form</option>{forms.map((form) => <option key={form.id} value={form.id}>{form.title}</option>)}</select></label>
-                        <label>PDF Template
-                            <select
-                                value={selectedTemplateId}
-                                onChange={(event) => {
-                                    const val = event.target.value;
-                                    const found = templates.find((template) => template.templateId === val || template.id === val);
-                                    setSelectedTemplate(found || null);
-                                    if (found) {
-                                        const matchedRaw = pdfTemplatesList.find((t) => t.id === found.id || t.filename === found.template?.filename || t.filename === found.filename);
-                                        const resolvedRaw = matchedRaw || found;
-                                        setActivePdfTemplate(resolvedRaw);
-                                        setActivePdfTemplateId(resolvedRaw.id);
-                                    }
-                                }}
-                            >
-                                <option value="">Select PDF Template</option>
-                                {templates.map((template, idx) => {
-                                    const optKey = template.id || template.templateId || `tpl-opt-${idx}`;
-                                    const optVal = template.templateId || template.id;
-                                    const optLabel = template.template?.title || template.template?.filename || template.name || template.filename || optVal;
-                                    return (
-                                        <option key={optKey} value={optVal}>
-                                            {optLabel}
-                                        </option>
-                                    );
-                                })}
-                            </select>
-                        </label>
                         <label>Mapping
                             <select
                                 value={activeMappingId || ""}

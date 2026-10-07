@@ -239,7 +239,7 @@ function pfgf_render_admin_page() {
                 </tr>
                 <tr>
                     <td><strong>API Authentication</strong></td>
-                    <td><?php echo pfgf_get_api_key() ? '<span style="color:green;">✓ Configured</span>' : '<span style="color:orange;">⚠ Not configured (optional for admin testing)</span>'; ?></td>
+                    <td><?php echo pfgf_get_api_key() ? '<span style="color:green;">Ã¢Å“â€œ Configured</span>' : '<span style="color:orange;">Ã¢Å¡Â  Not configured (optional for admin testing)</span>'; ?></td>
                 </tr>
                 <tr>
                     <td><strong>PDF Webhook URL</strong></td>
@@ -252,7 +252,7 @@ function pfgf_render_admin_page() {
                                 echo ' <small style="color:#777;">(defined in wp-config.php)</small>';
                             }
                         } else {
-                            echo '<span style="color:#e67e22;">⚠ Not configured</span>';
+                            echo '<span style="color:#e67e22;">Ã¢Å¡Â  Not configured</span>';
                         }
                         ?>
                     </td>
@@ -305,7 +305,7 @@ function pfgf_render_admin_page() {
             if (strpos($current_wh, 'ais-dev-') !== false): 
             ?>
                 <div style="background:#fff3cd; border-left:4px solid #ffba00; padding:12px 16px; margin-bottom:16px;">
-                    <strong style="color:#856404; font-size:14px;">⚠️ Google AI Studio Dev URL Detected:</strong>
+                    <strong style="color:#856404; font-size:14px;">Ã¢Å¡Â Ã¯Â¸Â Google AI Studio Dev URL Detected:</strong>
                     <p style="margin:6px 0; color:#856404; line-height:1.5;">
                         Google AI Studio development containers (<code>ais-dev-*.run.app</code>) block external server-to-server webhook requests with <strong>HTTP 400 (Bad Request)</strong> due to Google authentication proxies.
                     </p>
@@ -314,7 +314,7 @@ function pfgf_render_admin_page() {
                         <ol style="margin:4px 0 0 18px; padding:0; color:#333;">
                             <li>In your project terminal, run: <code style="background:#f4f4f4; padding:2px 6px;">node local-pdf-server.js</code></li>
                             <li>Change the Webhook URL below to: <code style="background:#f4f4f4; padding:2px 6px;">http://127.0.0.1:4000/api/generate-pdf</code> and click <em>Save Webhook URL</em>.</li>
-                            <li>Or open the React App and click <strong>▶ Enable Live Browser Auto-Dispatcher</strong> to generate submissions in real time right in your browser!</li>
+                            <li>Or open the React App and click <strong>Ã¢â€“Â¶ Enable Live Browser Auto-Dispatcher</strong> to generate submissions in real time right in your browser!</li>
                         </ol>
                     </div>
                 </div>
@@ -349,7 +349,7 @@ function pfgf_render_admin_page() {
                     <?php if (!defined('PDF_GENERATOR_WEBHOOK_URL')): ?>
                         <input type="submit" name="pfgf_save_settings" class="button button-primary" value="Save Webhook URL">
                     <?php endif; ?>
-                    <input type="submit" name="pfgf_test_webhook" class="button button-secondary" value="⚡ Test Webhook Connection">
+                    <input type="submit" name="pfgf_test_webhook" class="button button-secondary" value="Ã¢Å¡Â¡ Test Webhook Connection">
                 </p>
             </form>
         </div>
@@ -400,21 +400,21 @@ function pfgf_render_admin_page() {
                             <td><?php echo esc_html($sub_time); ?></td>
                             <td>
                                 <?php if ($has_pdf): ?>
-                                    <span style="color:green; font-weight:bold;">✓ Generated</span> (<?php echo round(filesize($pdf_file) / 1024, 1); ?> KB)
+                                    <span style="color:green; font-weight:bold;">Ã¢Å“â€œ Generated</span> (<?php echo round(filesize($pdf_file) / 1024, 1); ?> KB)
                                 <?php else: ?>
-                                    <span style="color:#e67e22; font-weight:bold;">⚠ Not Generated</span>
+                                    <span style="color:#e67e22; font-weight:bold;">Ã¢Å¡Â  Not Generated</span>
                                 <?php endif; ?>
                             </td>
                             <td>
                                 <div style="display:flex; gap:6px; align-items:center;">
                                     <?php if ($has_pdf): ?>
-                                        <a href="<?php echo esc_url(rest_url("pdf-generator/v1/entries/{$eid}/pdf")); ?>" target="_blank" class="button button-small">📥 View PDF</a>
+                                        <a href="<?php echo esc_url(rest_url("pdf-generator/v1/entries/{$eid}/pdf")); ?>" target="_blank" class="button button-small">Ã°Å¸â€œÂ¥ View PDF</a>
                                     <?php endif; ?>
                                     <form method="post" action="" style="display:inline-block; margin:0;">
                                         <?php wp_nonce_field('pfgf_admin_action'); ?>
                                         <input type="hidden" name="target_entry_id" value="<?php echo esc_attr($eid); ?>">
                                         <button type="submit" name="pfgf_generate_single_entry" class="button button-small <?php echo $has_pdf ? '' : 'button-primary'; ?>">
-                                            ⚡ <?php echo $has_pdf ? 'Regenerate' : 'Generate Now'; ?>
+                                            Ã¢Å¡Â¡ <?php echo $has_pdf ? 'Regenerate' : 'Generate Now'; ?>
                                         </button>
                                     </form>
                                 </div>
@@ -1111,53 +1111,3 @@ function pfgf_dispatch_pdf_generation_webhook($entry_id, $form_id, $pdf_destinat
     }
 }
 
-
-/**
- * 1. Notification Hook: Run generation FIRST so PDF exists before email is dispatched.
- */
-add_filter('gform_notification', 'pfgf_handle_gform_notification', 10, 3);
-
-function pfgf_handle_gform_notification($notification, $form, $entry) {
-
-    if (empty($entry) || empty($form)) {
-        return $notification;
-    }
-
-    // 1. Ensure submission JSON is recorded
-    pfgf_save_submission_json($entry, $form);
-
-    // 2. Ensure PDF is generated before email is formatted
-    $pdf_path = pfgf_get_or_create_pdf_for_entry($entry, $form);
-
-    // 3. Attach generated PDF to notification email
-    if ($pdf_path && file_exists($pdf_path)) {
-        if (!isset($notification['attachments']) || !is_array($notification['attachments'])) {
-            $notification['attachments'] = array();
-        }
-        if (!in_array($pdf_path, $notification['attachments'], true)) {
-            $notification['attachments'][] = $pdf_path;
-        }
-    }
-
-    return $notification;
-}
-
-
-/**
- * 2. Submission Hook: Run after submission to guarantee JSON recording & generation
- *    even when no email notifications are configured for the form.
- */
-add_action('gform_after_submission', 'pfgf_handle_gform_after_submission', 10, 2);
-
-function pfgf_handle_gform_after_submission($entry, $form) {
-
-    if (empty($entry) || empty($form)) {
-        return;
-    }
-
-    // Ensure submission JSON is saved
-    pfgf_save_submission_json($entry, $form);
-
-    // Ensure PDF is generated
-    pfgf_get_or_create_pdf_for_entry($entry, $form);
-}

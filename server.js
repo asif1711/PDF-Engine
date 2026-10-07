@@ -335,16 +335,33 @@ app.post('/api/push-pdf-to-wp', async (req, res) => {
     console.log(`[Server] Pushing PDF to WordPress REST: ${uploadUrl}`);
     const wpRes = await fetch(uploadUrl, { method: 'POST', headers, body: pdfBuffer });
 
+    const responseText = await wpRes.text();
+    const contentType = wpRes.headers.get('content-type') || '';
+    const isJson = contentType.includes('application/json');
+
     if (!wpRes.ok) {
-      const text = await wpRes.text();
-      console.warn(`[Server] WordPress upload returned status: ${wpRes.status}`);
+      console.warn(`[Server] WordPress upload returned status: ${wpRes.status}, content-type: ${contentType}`);
       return res.status(502).json({
-        error: `WordPress rejected upload (${wpRes.status})`,
-        details: text.substring(0, 200),
+        error: 'WordPress returned a non-JSON response',
+        wordpressStatus: wpRes.status,
+        contentType: contentType,
+        responsePreview: responseText.substring(0, 500),
       });
     }
 
-    const json = await wpRes.json();
+    let json;
+    try {
+      json = isJson ? JSON.parse(responseText) : { rawResponse: responseText };
+    } catch (parseErr) {
+      console.warn(`[Server] Failed to parse WordPress response as JSON: ${parseErr.message}`);
+      return res.status(502).json({
+        error: 'WordPress returned a non-JSON response',
+        wordpressStatus: wpRes.status,
+        contentType: contentType,
+        responsePreview: responseText.substring(0, 500),
+      });
+    }
+
     console.log(`[Server] WordPress accepted PDF and dispatched email notifications successfully!`);
     res.json({
       success: true,
