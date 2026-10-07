@@ -592,6 +592,7 @@ function App() {
     }, [runCheckDb]);
 
     const [selectedTemplate, setSelectedTemplate] = useState(null);
+    const [forms, setForms] = useState([]);
     const [selectedForm, setSelectedForm] = useState(null);
     const [mappings, setMappings] = useState(EMPTY_MAPPING);
     const [availableMappings, setAvailableMappings] = useState([]);
