@@ -422,39 +422,47 @@ async function loadGravityForms(options = {}) {
     }
 
     let response;
-    // Attempt via server-side /api/wp-proxy first to bypass ngrok browser warning & CORS
-    try {
-        let proxyQuery = `/api/wp-proxy?url=${encodeURIComponent(targetUrl)}`;
-        if (apiKey) proxyQuery += `&apiKey=${encodeURIComponent(apiKey)}`;
-        if (basicUser) proxyQuery += `&basicUser=${encodeURIComponent(basicUser)}`;
-        if (basicPass) proxyQuery += `&basicPass=${encodeURIComponent(basicPass)}`;
-        
-        const proxyRes = await fetch(proxyQuery);
-        if (proxyRes.ok) {
-            response = proxyRes;
-        }
-    } catch {
-        // Fall back to direct fetch below
+
+try {
+    let proxyQuery =
+        `/api/wp-proxy?url=${encodeURIComponent(targetUrl)}`;
+
+    if (apiKey) {
+        proxyQuery += `&apiKey=${encodeURIComponent(apiKey)}`;
     }
 
-    if (!response) {
-        try {
-            response = await fetch(requestUrl, { headers });
-        } catch (err) {
-            const isMixedContent = typeof window !== "undefined" && window.location.protocol === "https:" && targetUrl.startsWith("http://");
-            const msg = isMixedContent
-                ? `Browser blocked HTTP request to ${targetUrl} (Mixed Content). Use LocalWP Live Link (HTTPS) or a secure tunnel.`
-                : `Could not connect to ${targetUrl} (${err.message}).`;
-            console.warn("Could not connect to WordPress connector:", msg);
-            return {
-                forms: [],
-                source: "network_error",
-                message: msg,
-                url: targetUrl,
-                isLive: false,
-            };
-        }
+    if (basicUser) {
+        proxyQuery += `&basicUser=${encodeURIComponent(basicUser)}`;
     }
+
+    if (basicPass) {
+        proxyQuery += `&basicPass=${encodeURIComponent(basicPass)}`;
+    }
+
+    response = await fetch(proxyQuery);
+
+    if (!response.ok) {
+        throw new Error(
+            `Proxy request failed: ${response.status} ${response.statusText}`
+        );
+    }
+
+} catch (err) {
+    const msg = `Could not connect to WordPress through the server proxy: ${err.message}`;
+
+    console.warn(
+        "Could not connect to WordPress connector:",
+        msg
+    );
+
+    return {
+        forms: [],
+        source: "network_error",
+        message: msg,
+        url: targetUrl,
+        isLive: false,
+    };
+}
 
     if (response.status === 401 || response.status === 403) {
         const msg = `WordPress authentication failed (${response.status}). Check API key or Live Link credentials.`;
