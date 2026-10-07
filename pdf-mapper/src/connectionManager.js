@@ -263,15 +263,8 @@ export async function testWpConnection(conn) {
     }
 
     try {
-        // First try direct fetch
-        let res = null;
-        try {
-            res = await fetch(targetUrl, { headers });
-        } catch {
-            // If CORS/network fails, retry through Vite proxy
-            const proxyUrl = `/api/wp-proxy?url=${encodeURIComponent(targetUrl)}&apiKey=${encodeURIComponent(conn.apiKey || "")}&basicUser=${encodeURIComponent(conn.basicUser || "")}&basicPass=${encodeURIComponent(conn.basicPass || "")}`;
-            res = await fetch(proxyUrl);
-        }
+        const proxyUrl = `/api/wp-proxy?url=${encodeURIComponent(targetUrl)}&apiKey=${encodeURIComponent(conn.apiKey || "")}&basicUser=${encodeURIComponent(conn.basicUser || "")}&basicPass=${encodeURIComponent(conn.basicPass || "")}`;
+        const res = await fetch(proxyUrl, { headers });
 
         if (!res || !res.ok) {
             return {
