@@ -255,16 +255,17 @@ export async function testWpConnection(conn) {
         Accept: "application/json",
         "ngrok-skip-browser-warning": "true",
     };
-    if (conn.apiKey) {
-        headers["X-PDF-API-Key"] = conn.apiKey;
-    }
     if (conn.basicUser || conn.basicPass) {
         const authStr = `${conn.basicUser || ""}:${conn.basicPass || ""}`;
         headers["Authorization"] = `Basic ${btoa(authStr)}`;
     }
 
     try {
-        const proxyUrl = `/api/wp-proxy?url=${encodeURIComponent(targetUrl)}&apiKey=${encodeURIComponent(conn.apiKey || "")}&basicUser=${encodeURIComponent(conn.basicUser || "")}&basicPass=${encodeURIComponent(conn.basicPass || "")}`;
+        const sourceConnectionId = conn.id;
+        let proxyUrl = `/api/wp-proxy?url=${encodeURIComponent(targetUrl)}`;
+        if (sourceConnectionId) proxyUrl += `&sourceConnectionId=${encodeURIComponent(sourceConnectionId)}`;
+        if (conn.basicUser) proxyUrl += `&basicUser=${encodeURIComponent(conn.basicUser)}`;
+        if (conn.basicPass) proxyUrl += `&basicPass=${encodeURIComponent(conn.basicPass)}`;
         const res = await fetch(proxyUrl, { headers });
 
         if (!res || !res.ok) {
@@ -422,7 +423,7 @@ export function resolvePdfUrl(tpl) {
     return tpl.url || null;
 }
 
-export async function fetchPdfBytes(templateOrUrl) {
+export async function fetchPdfBytes(templateOrUrl, sourceConnectionId = null) {
     if (!templateOrUrl) return null;
     if (templateOrUrl instanceof Uint8Array) return { bytes: templateOrUrl, successfulUrl: "" };
     if (templateOrUrl instanceof ArrayBuffer) return { bytes: new Uint8Array(templateOrUrl), successfulUrl: "" };
@@ -431,7 +432,8 @@ export async function fetchPdfBytes(templateOrUrl) {
     if (typeof templateOrUrl === "string") {
         candidates.push(templateOrUrl);
         if (templateOrUrl.startsWith("http://") || templateOrUrl.startsWith("https://")) {
-            candidates.push(`/api/wp-proxy?url=${encodeURIComponent(templateOrUrl)}`);
+            const proxyUrl = `/api/wp-proxy?url=${encodeURIComponent(templateOrUrl)}${sourceConnectionId ? `&sourceConnectionId=${encodeURIComponent(sourceConnectionId)}` : ''}`;
+            candidates.push(proxyUrl);
         }
     } else {
         const tpl = templateOrUrl;
@@ -477,7 +479,7 @@ export async function fetchPdfBytes(templateOrUrl) {
             if (typeof window !== "undefined") {
                 const isExternal = (url.startsWith("http://") || url.startsWith("https://")) && !url.includes(window.location.host);
                 if (isExternal && !url.startsWith("/api/wp-proxy")) {
-                    targetUrl = `/api/wp-proxy?url=${encodeURIComponent(url)}`;
+                    targetUrl = `/api/wp-proxy?url=${encodeURIComponent(url)}${sourceConnectionId ? `&sourceConnectionId=${encodeURIComponent(sourceConnectionId)}` : ''}`;
                 }
             }
             const res = await fetch(targetUrl);
@@ -668,7 +670,7 @@ export async function checkDatabaseConnection() {
 /**
  * Fetch and analyze a PDF from a direct URL (Google Cloud Storage, WordPress media, or web URL).
  */
-export async function ingestPdfFromUrl(url, customName = "") {
+export async function ingestPdfFromUrl(url, customName = "", sourceConnectionId = null) {
     if (!url) throw new Error("No URL provided.");
 
     let buffer = null;
@@ -684,7 +686,7 @@ export async function ingestPdfFromUrl(url, customName = "") {
     }
 
     if (!buffer) {
-        const proxyUrl = `/api/wp-proxy?url=${encodeURIComponent(url)}`;
+        const proxyUrl = `/api/wp-proxy?url=${encodeURIComponent(url)}${sourceConnectionId ? `&sourceConnectionId=${encodeURIComponent(sourceConnectionId)}` : ''}`;
         const proxyRes = await fetch(proxyUrl);
         if (!proxyRes.ok) {
             throw new Error(`Failed to download PDF from URL: HTTP ${proxyRes.status}`);

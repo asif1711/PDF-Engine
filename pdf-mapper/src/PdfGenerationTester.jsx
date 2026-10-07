@@ -24,7 +24,6 @@ export default function PdfGenerationTester({
     mappings,
     pdfTemplateUrl,
     wordpressFormsUrl,
-    wordpressApiKey,
     sourceConnectionId,
 }) {
     // Chunked Uint8Array to base64 conversion to avoid Maximum call stack size exceeded
@@ -67,7 +66,7 @@ export default function PdfGenerationTester({
         let isSubscribed = true;
         const target = pdfTemplateUrl || selectedTemplate;
 
-        fetchPdfBytes(target)
+        fetchPdfBytes(target, sourceConnectionId)
             .then((res) => {
                 if (isSubscribed) {
                     if (res?.bytes) {
@@ -84,7 +83,7 @@ export default function PdfGenerationTester({
         return () => {
             isSubscribed = false;
         };
-    }, [isOpen, pdfTemplateUrl, selectedTemplate]);
+    }, [isOpen, pdfTemplateUrl, selectedTemplate, sourceConnectionId]);
 
     // Fetch submissions for the selected form using global connection props
     const loadSubmissions = useCallback(async () => {
@@ -94,8 +93,8 @@ export default function PdfGenerationTester({
             const res = await fetchFormSubmissions(
                 selectedForm.id,
                 wordpressFormsUrl,
-                wordpressApiKey,
-                { basicAuthUser: "", basicAuthPass: "" }
+                "", // apiKey no longer used; sourceConnectionId is passed in options
+                { basicAuthUser: "", basicAuthPass: "", sourceConnectionId }
             );
             setSubmissionSource({ source: res.source, message: res.message });
             setSubmissions(res.entries || []);
@@ -108,7 +107,7 @@ export default function PdfGenerationTester({
         } catch (err) {
             setError("Error loading submissions: " + err.message);
         }
-    }, [selectedForm, wordpressFormsUrl, wordpressApiKey]);
+    }, [selectedForm, wordpressFormsUrl, sourceConnectionId]);
 
     useEffect(() => {
         if (!isOpen || !selectedForm) return undefined;
@@ -116,8 +115,8 @@ export default function PdfGenerationTester({
         fetchFormSubmissions(
             selectedForm.id,
             wordpressFormsUrl,
-            wordpressApiKey,
-            { basicAuthUser: "", basicAuthPass: "" }
+            "", // apiKey no longer used; sourceConnectionId is passed in options
+            { basicAuthUser: "", basicAuthPass: "", sourceConnectionId }
         ).then((res) => {
             if (!isSubscribed) return;
             setSubmissionSource({ source: res.source, message: res.message });
@@ -135,7 +134,7 @@ export default function PdfGenerationTester({
         return () => {
             isSubscribed = false;
         };
-    }, [isOpen, selectedForm, wordpressFormsUrl, wordpressApiKey]);
+    }, [isOpen, selectedForm, wordpressFormsUrl, sourceConnectionId]);
 
     // Switch submission
     function handleSubmissionSelect(id) {
@@ -204,7 +203,7 @@ export default function PdfGenerationTester({
         return "";
     }
 
-    // Trigger generation
+// Trigger generation
     const runGeneration = useCallback(async () => {
         if (!pdfBytes) {
             setError("PDF template is still loading. Please wait a moment.");
@@ -219,13 +218,11 @@ export default function PdfGenerationTester({
         setError("");
 
         try {
-const result = await generateFilledPdf({
+ const result = await generateFilledPdf({
                     templateBytes: pdfBytes,
                     mappings,
                     submission: currentEntry,
                     flatten: flattenPdf,
-                    formsUrl: wordpressFormsUrl,
-                    apiKey: wordpressApiKey,
                     attachUploadedFiles,
                 });
             setGenerationResult(result);
@@ -234,7 +231,7 @@ const result = await generateFilledPdf({
         } finally {
             setIsGenerating(false);
         }
-    }, [pdfBytes, currentEntry, mappings, flattenPdf, wordpressFormsUrl, wordpressApiKey, attachUploadedFiles]);
+    }, [pdfBytes, currentEntry, mappings, flattenPdf, attachUploadedFiles]);
 
     // Push PDF to WordPress via server-side endpoint (avoids browser CORS)
     const handlePushToWpAndEmail = useCallback(async () => {
@@ -260,8 +257,6 @@ const result = await generateFilledPdf({
                     mappings,
                     submission: currentEntry,
                     flatten: flattenPdf,
-                    formsUrl: wordpressFormsUrl,
-                    apiKey: wordpressApiKey,
                     attachUploadedFiles,
                 });
                 setGenerationResult(result);
@@ -347,7 +342,7 @@ const result = await generateFilledPdf({
         } finally {
             setIsPushingToWp(false);
         }
-    }, [currentEntry, generationResult, pdfBytes, mappings, flattenPdf, wordpressFormsUrl, wordpressApiKey, attachUploadedFiles, selectedSubmissionId, selectedForm, selectedTemplate, sourceConnectionId]);
+    }, [currentEntry, generationResult, pdfBytes, mappings, flattenPdf, attachUploadedFiles, selectedSubmissionId, selectedForm, selectedTemplate, sourceConnectionId]);
 
     // Close on ESC
     useEffect(() => {

@@ -377,13 +377,14 @@ function mappingTargetNames(mapping, pdfFields) {
 async function loadGravityForms(options = {}) {
     const rawTargetUrl = options.url || localStorage.getItem("pfgf_custom_forms_url");
     const targetUrl = normalizeWpFormsUrl(rawTargetUrl);
+    const sourceConnectionId = options.sourceConnectionId || (options.conn?.id) || null;
     const apiKey = options.apiKey !== undefined ? options.apiKey : localStorage.getItem("pfgf_custom_api_key");
     const basicUser = options.basicUser !== undefined ? options.basicUser : (localStorage.getItem("pfgf_livelink_user") || "");
     const basicPass = options.basicPass !== undefined ? options.basicPass : (localStorage.getItem("pfgf_livelink_pass") || "");
 
     console.info("Gravity Forms request configuration", {
         url: targetUrl,
-        apiKeyConfigured: Boolean(apiKey),
+        apiKeyConfigured: Boolean(apiKey) || Boolean(sourceConnectionId),
         hasBasicAuth: Boolean(basicUser || basicPass),
     });
 
@@ -425,8 +426,8 @@ try {
     let proxyQuery =
         `/api/wp-proxy?url=${encodeURIComponent(targetUrl)}`;
 
-    if (apiKey) {
-        proxyQuery += `&apiKey=${encodeURIComponent(apiKey)}`;
+    if (sourceConnectionId) {
+        proxyQuery += `&sourceConnectionId=${encodeURIComponent(sourceConnectionId)}`;
     }
 
     if (basicUser) {
@@ -825,6 +826,7 @@ function App() {
         try {
             const syncResult = await loadGravityForms({
                 url: targetUrl,
+                sourceConnectionId: conn?.id || null,
                 apiKey: targetKey,
                 basicUser: targetUser,
                 basicPass: targetPass,
@@ -1989,7 +1991,6 @@ function App() {
                     mappings={mappings}
                     pdfTemplateUrl={currentPdfSource}
                     wordpressFormsUrl={activeWpConn?.url}
-                    wordpressApiKey={activeWpConn?.apiKey}
                     sourceConnectionId={activeWpConn?.id || null}
                     onOpenTester={() => setIsTesterOpen(true)}
                 />
@@ -2160,7 +2161,7 @@ function App() {
             syncInfo={wpSyncInfo}
             isChecking={isCheckingWp}
             onSaveAndFetch={(opts) => {
-                handleRefreshWp(opts);
+                handleRefreshWp({ ...opts, sourceConnectionId: activeWpConn?.id || null });
             }}
         />
         <WpConnectionManagerModal
@@ -2191,7 +2192,6 @@ function App() {
                     mappings={mappings}
                     pdfTemplateUrl={currentPdfSource}
                     wordpressFormsUrl={activeWpConn?.url}
-                    wordpressApiKey={activeWpConn?.apiKey}
                     sourceConnectionId={activeWpConn?.id || null}
                     onOpenTester={() => setIsTesterOpen(true)}
                 />

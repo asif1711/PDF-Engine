@@ -165,6 +165,8 @@ export async function fetchFormSubmissions(formId, formsUrl, apiKey, options = {
         };
     }
 
+    const sourceConnectionId = options.sourceConnectionId || null;
+
     // Compute entries endpoint: replace `/forms` with `/forms/{formId}/entries`
     const normalizedFormsUrl = normalizeWpFormsUrl(formsUrl);
     let entriesUrl = normalizedFormsUrl.replace(/\/forms\/?$/, `/forms/${formId}/entries`);
@@ -178,10 +180,6 @@ export async function fetchFormSubmissions(formId, formsUrl, apiKey, options = {
     const headers = {
         Accept: "application/json",
     };
-
-    if (apiKey) {
-        headers["X-PDF-API-Key"] = apiKey;
-    }
 
     const basicUser = options.basicAuthUser || "";
     const basicPass = options.basicAuthPass || "";
@@ -197,7 +195,7 @@ export async function fetchFormSubmissions(formId, formsUrl, apiKey, options = {
     // Attempt via server-side /api/wp-proxy first to bypass ngrok browser warning & CORS
     try {
         let proxyQuery = `/api/wp-proxy?url=${encodeURIComponent(entriesUrl)}`;
-        if (apiKey) proxyQuery += `&apiKey=${encodeURIComponent(apiKey)}`;
+        if (sourceConnectionId) proxyQuery += `&sourceConnectionId=${encodeURIComponent(sourceConnectionId)}`;
         if (basicUser) proxyQuery += `&basicUser=${encodeURIComponent(basicUser)}`;
         if (basicPass) proxyQuery += `&basicPass=${encodeURIComponent(basicPass)}`;
 

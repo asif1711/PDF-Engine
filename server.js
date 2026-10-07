@@ -775,12 +775,44 @@ app.post('/api/analyze-template', async (req, res) => {
 app.all('/api/wp-proxy', async (req, res) => {
   try {
     const targetUrl = req.query.url;
-    const apiKey = req.query.apiKey || '';
+    const sourceConnectionId = req.query.sourceConnectionId || null;
+    const apiKeyFromQuery = req.query.apiKey || '';
     const basicUser = req.query.basicUser || '';
     const basicPass = req.query.basicPass || '';
 
     if (!targetUrl) {
       return res.status(400).json({ error: 'Missing url parameter' });
+    }
+
+    // Validate URL - only allow same-origin or known WordPress endpoints
+    let parsedTarget;
+    try {
+      parsedTarget = new URL(targetUrl);
+    } catch {
+      return res.status(400).json({ error: 'Invalid target URL' });
+    }
+
+    // Security: block private/internal IPs
+    const hostname = parsedTarget.hostname;
+    if (hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '0.0.0.0' ||
+        hostname.endsWith('.local') || hostname.startsWith('10.') ||
+        hostname.startsWith('192.168.') || hostname.match(/^172\.(1[6-9]|2[0-9]|3[0-1])\./)) {
+      return res.status(400).json({ error: 'Blocked: private/internal URL not allowed' });
+    }
+
+    let apiKey = apiKeyFromQuery;
+
+    // If sourceConnectionId provided, resolve API key from DB
+    if (sourceConnectionId) {
+      const conn = await getSourceConnection(sourceConnectionId);
+      if (!conn) {
+        return res.status(404).json({ error: 'Source connection not found' });
+      }
+      const dbApiKey = await getSourceConnectionApiKey(sourceConnectionId);
+      if (!dbApiKey) {
+        return res.status(401).json({ error: 'API key not configured for this source connection', errorType: 'api_key_not_configured' });
+      }
+      apiKey = dbApiKey;
     }
 
     const headers = {

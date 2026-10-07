@@ -38,8 +38,6 @@ export default function AutomationDispatchPage({
     activePdfTemplate,
     mappings,
     pdfTemplateUrl,
-    wordpressFormsUrl,
-    wordpressApiKey,
     sourceConnectionId,
     onOpenTester,
 }) {
@@ -71,7 +69,8 @@ export default function AutomationDispatchPage({
             const res = await fetchFormSubmissions(
                 selectedForm.id,
                 wordpressFormsUrl,
-                wordpressApiKey
+                "", // apiKey no longer used; sourceConnectionId is passed in options
+                { basicAuthUser: "", basicAuthPass: "", sourceConnectionId }
             );
             const list = Array.isArray(res?.entries) ? res.entries : [];
             setSubmissions(list);
@@ -101,12 +100,12 @@ export default function AutomationDispatchPage({
         return () => {
             isCancelled = true;
         };
-    }, [selectedForm, wordpressFormsUrl, wordpressApiKey]);
+    }, [selectedForm, wordpressFormsUrl, sourceConnectionId]);
 
     // Generate PDF bytes helper
     const buildPdfBytesForEntry = async (entry) => {
         const target = activePdfTemplate || pdfTemplateUrl;
-        const result = await fetchPdfBytes(target);
+        const result = await fetchPdfBytes(target, sourceConnectionId);
         if (!result?.bytes) {
             throw new Error("Could not load template PDF bytes.");
         }
@@ -116,8 +115,6 @@ export default function AutomationDispatchPage({
             mappings,
             submission: entry,
             flatten: false,
-            formsUrl: wordpressFormsUrl,
-            apiKey: wordpressApiKey,
             attachUploadedFiles: true,
         });
     };
