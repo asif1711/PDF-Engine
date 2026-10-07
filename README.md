@@ -120,8 +120,6 @@ Edit `.env` as needed:
 PORT=3000
 
 # Optional: Default WordPress Connection
-VITE_WORDPRESS_FORMS_URL=https://your-wordpress-site.com
-VITE_WORDPRESS_API_KEY=your_secret_api_key
 
 # Optional: Google Cloud Storage Template Sync
 GCS_BUCKET_NAME=cdn.vconsultancy.com.au
@@ -256,10 +254,8 @@ PDF Engine is fully architected to deploy as a **single Render Web Service** wit
    - **Build Command**: `npm install && npm run build`
    - **Start Command**: `npm start`
 4. **Environment Variables**:
-   - `NODE_VERSION`: `22`
-   - *(Optional)* `WORDPRESS_FORMS_URL`: your live WordPress base URL
-   - *(Optional)* `WORDPRESS_API_KEY`: your secret API key
-   - *(Optional)* `GCS_SERVICE_ACCOUNT_JSON`: for Google Cloud Storage sync
+    - `NODE_VERSION`: `22`
+    - *(Optional)* `GCS_SERVICE_ACCOUNT_JSON`: for Google Cloud Storage sync
 5. **Persistent Disk (Optional)**:
    - If creating new mappings live on Render without committing them to Git, attach a Render Persistent Disk mounted at `/app/mappings`.
 

@@ -24,11 +24,16 @@ function WpSourceModalDialog({ connection, onClose, onSave }) {
     const isEdit = Boolean(connection && connection.id);
     const [name, setName] = useState(connection?.name || (isEdit ? "" : "New WordPress Source"));
     const [url, setUrl] = useState(connection?.url || (isEdit ? "" : "https://your-domain.com/wp-json/pdf-generator/v1/forms"));
-    const [apiKey, setApiKey] = useState(connection?.apiKey || "aso107mzNrZId001GebX6ew8");
+    const [apiKey, setApiKey] = useState("");
+    const [apiKeyConfigured, setApiKeyConfigured] = useState(connection?.apiKeyConfigured || false);
     const [basicUser, setBasicUser] = useState(connection?.basicUser || "");
     const [basicPass, setBasicPass] = useState(connection?.basicPass || "");
     const [isTesting, setIsTesting] = useState(false);
     const [testResult, setTestResult] = useState(null);
+
+    // For editing: if API key is already configured, don't pre-fill the input
+    // For testing connection, we'll need the actual key from user input
+    const [testApiKey, setTestApiKey] = useState("");
 
     const handleTest = async () => {
         if (!url.trim()) return;
@@ -37,7 +42,7 @@ function WpSourceModalDialog({ connection, onClose, onSave }) {
         try {
             const res = await testWpConnection({
                 url: url.trim(),
-                apiKey: apiKey.trim(),
+                apiKey: testApiKey.trim(),
                 basicUser: basicUser.trim(),
                 basicPass: basicPass.trim(),
             });
@@ -57,7 +62,8 @@ function WpSourceModalDialog({ connection, onClose, onSave }) {
             id: connection?.id || `wp-conn-${Date.now()}`,
             name: name.trim() || "WordPress Source",
             url: url.trim(),
-            apiKey: apiKey.trim(),
+            // Only include API key if user entered a new one (to replace existing)
+            ...(apiKey.trim() ? { apiKey: apiKey.trim() } : {}),
             basicUser: basicUser.trim(),
             basicPass: basicPass.trim(),
         };
@@ -118,12 +124,52 @@ function WpSourceModalDialog({ connection, onClose, onSave }) {
                             <label style={{ display: "block", fontSize: 12, fontWeight: 700, color: "#244038", marginBottom: 5 }}>
                                 API Key / Bearer Secret
                             </label>
+                            {apiKeyConfigured ? (
+                                <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                                    <span style={{ 
+                                        width: "100%", 
+                                        padding: "8px 12px", 
+                                        border: "1px solid #cbd5e1", 
+                                        borderRadius: 4, 
+                                        fontSize: 12, 
+                                        fontFamily: "monospace",
+                                        background: "#f0fdf4",
+                                        color: "#166534",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        gap: 8,
+                                    }}>
+                                        <span style={{ fontSize: 14 }}>✓</span>
+                                        <span style={{ fontWeight: 600 }}>API key configured</span>
+                                        <span style={{ fontSize: 10, color: "#15803d", marginLeft: "auto" }}>
+                                            Enter a new key to replace it
+                                        </span>
+                                    </span>
+                                </div>
+                            ) : (
+                                <input
+                                    type="text"
+                                    value={apiKey}
+                                    onChange={(e) => setApiKey(e.target.value)}
+                                    placeholder="aso107mzNrZId001GebX6ew8"
+                                    style={{ width: "100%", padding: "8px 12px", border: "1px solid #cbd5e1", borderRadius: 4, fontSize: 12, fontFamily: "monospace" }}
+                                />
+                            )}
                             <input
                                 type="text"
-                                value={apiKey}
-                                onChange={(e) => setApiKey(e.target.value)}
-                                placeholder="aso107mzNrZId001GebX6ew8"
-                                style={{ width: "100%", padding: "8px 12px", border: "1px solid #cbd5e1", borderRadius: 4, fontSize: 12, fontFamily: "monospace" }}
+                                value={testApiKey}
+                                onChange={(e) => setTestApiKey(e.target.value)}
+                                placeholder="Enter API key to test connection"
+                                style={{ 
+                                    width: "100%", 
+                                    padding: "8px 12px", 
+                                    border: "1px solid #cbd5e1", 
+                                    borderRadius: 4, 
+                                    fontSize: 12, 
+                                    fontFamily: "monospace",
+                                    marginTop: apiKeyConfigured ? 8 : 0,
+                                    display: apiKeyConfigured ? "block" : "none",
+                                }}
                             />
                         </div>
 

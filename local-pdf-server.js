@@ -699,8 +699,21 @@ const server = http.createServer((req, res) => {
           }
 
           // 3. Generate filled PDF using exact same mechanism as "Push PDF to WP & Email" button
-          const wpFormsUrl = payload.wordpress_url || payload.forms_url || process.env.WORDPRESS_FORMS_URL || "";
-          const apiKey = payload.wordpress_api_key || payload.api_key || req.headers['x-pdf-api-key'] || process.env.WORDPRESS_API_KEY || "";
+          // Use source connection from mapping record for multi-source architecture
+          let wpFormsUrl = "";
+          let apiKey = "";
+
+          if (templateId) {
+            const mappingRecords = await listFormMappingRecords(formId, templateId);
+            if (mappingRecords?.length && mappingRecords[0].sourceConnectionId) {
+              const conn = await getSourceConnection(mappingRecords[0].sourceConnectionId);
+              if (conn) {
+                wpFormsUrl = conn.url || "";
+                const dbApiKey = await getSourceConnectionApiKey(mappingRecords[0].sourceConnectionId);
+                if (dbApiKey) apiKey = dbApiKey;
+              }
+            }
+          }
 
           const result = await generateFilledPdf({
             templateBytes: new Uint8Array(templateBytes),

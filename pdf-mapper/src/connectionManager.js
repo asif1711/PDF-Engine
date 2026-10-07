@@ -187,7 +187,8 @@ export async function restorePersistedWpConnections() {
     const localById = new Map(local.map((conn) => [conn.id, conn]));
     const restored = data.connections.map((saved) => ({
         ...saved,
-        apiKey: localById.get(saved.id)?.apiKey || "",
+        // API key is now server-side (encrypted in DB); use apiKeyConfigured from server
+        // Only Basic Auth credentials remain in localStorage
         basicUser: localById.get(saved.id)?.basicUser || "",
         basicPass: localById.get(saved.id)?.basicPass || "",
     }));

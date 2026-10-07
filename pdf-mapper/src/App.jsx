@@ -60,8 +60,6 @@ import {
 } from "./mappingUtils";
 
 const EMPTY_MAPPING = {};
-const WORDPRESS_FORMS_URL = import.meta.env.VITE_WORDPRESS_FORMS_URL || "https://tenisha-shapelier-elijah.ngrok-free.dev/wp-json/pdf-generator/v1/forms";
-const WORDPRESS_API_KEY = import.meta.env.VITE_WORDPRESS_API_KEY || "aso107mzNrZId001GebX6ew8";
 
 function templateId(template, fallback = "") {
     const raw =
@@ -377,9 +375,9 @@ function mappingTargetNames(mapping, pdfFields) {
 }
 
 async function loadGravityForms(options = {}) {
-    const rawTargetUrl = options.url || localStorage.getItem("pfgf_custom_forms_url") || WORDPRESS_FORMS_URL;
+    const rawTargetUrl = options.url || localStorage.getItem("pfgf_custom_forms_url");
     const targetUrl = normalizeWpFormsUrl(rawTargetUrl);
-    const apiKey = options.apiKey !== undefined ? options.apiKey : (localStorage.getItem("pfgf_custom_api_key") || WORDPRESS_API_KEY);
+    const apiKey = options.apiKey !== undefined ? options.apiKey : localStorage.getItem("pfgf_custom_api_key");
     const basicUser = options.basicUser !== undefined ? options.basicUser : (localStorage.getItem("pfgf_livelink_user") || "");
     const basicPass = options.basicPass !== undefined ? options.basicPass : (localStorage.getItem("pfgf_livelink_pass") || "");
 
@@ -622,7 +620,7 @@ function App() {
     const [wpSyncInfo, setWpSyncInfo] = useState({
         source: "empty",
         message: "",
-        url: WORDPRESS_FORMS_URL,
+        url: "",
         isLive: false,
     });
     const [isCheckingWp, setIsCheckingWp] = useState(false);
@@ -762,8 +760,8 @@ function App() {
         let isSubscribed = true;
         setIsLoadingSubmissions(true);
 
-        const customUrl = localStorage.getItem("pfgf_custom_forms_url") || WORDPRESS_FORMS_URL;
-        const customKey = localStorage.getItem("pfgf_custom_api_key") || WORDPRESS_API_KEY;
+        const customUrl = localStorage.getItem("pfgf_custom_forms_url");
+        const customKey = localStorage.getItem("pfgf_custom_api_key");
         const liveUser = localStorage.getItem("pfgf_livelink_user") || "";
         const livePass = localStorage.getItem("pfgf_livelink_pass") || "";
 
@@ -819,8 +817,8 @@ function App() {
         }
 
         setLoading({ templates: false, forms: true, mapping: false });
-        const targetUrl = options.url || conn?.url || WORDPRESS_FORMS_URL;
-        const targetKey = options.apiKey !== undefined ? options.apiKey : (conn?.apiKey || WORDPRESS_API_KEY);
+        const targetUrl = options.url || conn?.url || localStorage.getItem("pfgf_custom_forms_url");
+        const targetKey = options.apiKey !== undefined ? options.apiKey : (conn?.apiKey || localStorage.getItem("pfgf_custom_api_key"));
         const targetUser = options.basicUser !== undefined ? options.basicUser : (conn?.basicUser || "");
         const targetPass = options.basicPass !== undefined ? options.basicPass : (conn?.basicPass || "");
 
@@ -999,7 +997,7 @@ function App() {
             setWpSyncInfo({
                 source: "error",
                 message: err.message,
-                url: WORDPRESS_FORMS_URL,
+                url: "",
                 isLive: false,
             });
         } finally {
@@ -1990,8 +1988,8 @@ function App() {
                     activePdfTemplate={activePdfTemplate}
                     mappings={mappings}
                     pdfTemplateUrl={currentPdfSource}
-                    wordpressFormsUrl={activeWpConn?.url || WORDPRESS_FORMS_URL}
-                    wordpressApiKey={activeWpConn?.apiKey || WORDPRESS_API_KEY}
+                    wordpressFormsUrl={activeWpConn?.url}
+                    wordpressApiKey={activeWpConn?.apiKey}
                     sourceConnectionId={activeWpConn?.id || null}
                     onOpenTester={() => setIsTesterOpen(true)}
                 />
@@ -2157,8 +2155,8 @@ function App() {
         <WpConnectionModal
             isOpen={showWpConfig}
             onClose={() => setShowWpConfig(false)}
-            currentUrl={WORDPRESS_FORMS_URL}
-            currentApiKey={WORDPRESS_API_KEY}
+            currentUrl={activeWpConn?.url || ""}
+            currentApiKey=""
             syncInfo={wpSyncInfo}
             isChecking={isCheckingWp}
             onSaveAndFetch={(opts) => {
@@ -2185,17 +2183,18 @@ function App() {
                 setSelectedTemplate(toTemplateModel(newTpl));
             }}
         />
-        <PdfGenerationTester
-            isOpen={isTesterOpen}
-            onClose={() => setIsTesterOpen(false)}
-            selectedForm={selectedForm}
-            selectedTemplate={selectedTemplate || activePdfTemplate?.analysis}
-            mappings={mappings}
-            pdfTemplateUrl={currentPdfSource}
-            wordpressFormsUrl={activeWpConn?.url || WORDPRESS_FORMS_URL}
-            wordpressApiKey={activeWpConn?.apiKey || WORDPRESS_API_KEY}
-            sourceConnectionId={activeWpConn?.id || null}
-        />
+<pdfGenerationTester
+                    isOpen={isTesterOpen}
+                    onClose={() => setIsTesterOpen(false)}
+                    selectedForm={selectedForm}
+                    selectedTemplate={selectedTemplate || activePdfTemplate?.analysis}
+                    mappings={mappings}
+                    pdfTemplateUrl={currentPdfSource}
+                    wordpressFormsUrl={activeWpConn?.url}
+                    wordpressApiKey={activeWpConn?.apiKey}
+                    sourceConnectionId={activeWpConn?.id || null}
+                    onOpenTester={() => setIsTesterOpen(true)}
+                />
         <WpSourceModal
             isOpen={isWpSourceModalOpen}
             onClose={() => setIsWpSourceModalOpen(false)}

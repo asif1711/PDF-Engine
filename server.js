@@ -8,15 +8,15 @@ import { analyzePdfBytes } from './analyze-template.js';
 import {
   getFormMappingRecord,
   getPdfTemplateRecord,
+  getSourceConnection,
+  getSourceConnectionApiKey,
   listPdfTemplateRecords,
   listFormMappingRecords,
-  createFormMappingRecord,
-  upsertPdfTemplateRecord,
-  getSourceConnection,
   listSourceConnections,
   upsertSourceConnection,
-  upsertSourceForms,
+  createFormMappingRecord,
   archiveSourceConnection,
+  upsertSourceForms,
 } from './database.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -221,8 +221,21 @@ app.all(['/api/generate-pdf', '/api/generate-pdf/'], async (req, res) => {
     }
 
     // If WordPress forms URL is known and entry is valid, also push to WordPress REST and trigger email
-    const wpFormsUrl = payload.wordpress_url || payload.forms_url || process.env.WORDPRESS_FORMS_URL || "";
-    const apiKey = payload.wordpress_api_key || payload.api_key || req.headers['x-pdf-api-key'] || process.env.WORDPRESS_API_KEY || "";
+    // Use source connection from mapping record for multi-source architecture
+    let wpFormsUrl = "";
+    let apiKey = "";
+
+    if (templateId) {
+      const mappingRecords = await listFormMappingRecords(formId, templateId);
+      if (mappingRecords?.length && mappingRecords[0].sourceConnectionId) {
+        const conn = await getSourceConnection(mappingRecords[0].sourceConnectionId);
+        if (conn) {
+          wpFormsUrl = conn.url || "";
+          const dbApiKey = await getSourceConnectionApiKey(mappingRecords[0].sourceConnectionId);
+          if (dbApiKey) apiKey = dbApiKey;
+        }
+      }
+    }
     if (wpFormsUrl && entryId && entryId !== '0') {
       try {
         const rawBase = wpFormsUrl.replace(/\/$/, "");
@@ -284,15 +297,19 @@ app.post('/api/push-pdf-to-wp', async (req, res) => {
       return res.status(400).json({ error: 'entryId is required' });
     }
 
-    // Load source connection to get WordPress URL and API key
-    let wpFormsUrl = process.env.WORDPRESS_FORMS_URL || '';
-    let apiKey = process.env.WORDPRESS_API_KEY || '';
+    // Load source connection to get WordPress URL
+    let wpFormsUrl = "";
+    let apiKey = "";
 
     if (sourceConnectionId) {
       const conn = await getSourceConnection(sourceConnectionId);
       if (conn) {
-        wpFormsUrl = conn.url || wpFormsUrl;
-        apiKey = conn.apiKey || apiKey;
+        wpFormsUrl = conn.url || "";
+        // Use DB-backed encrypted API key
+        const dbApiKey = await getSourceConnectionApiKey(sourceConnectionId);
+        if (dbApiKey) {
+          apiKey = dbApiKey;
+        }
       }
     } else if (templateId) {
       // Fallback: try to find sourceConnectionId from the mapping record
@@ -301,13 +318,27 @@ app.post('/api/push-pdf-to-wp', async (req, res) => {
         const conn = await getSourceConnection(mappingRecords[0].sourceConnectionId);
         if (conn) {
           wpFormsUrl = conn.url || wpFormsUrl;
-          apiKey = conn.apiKey || apiKey;
+          const dbApiKey = await getSourceConnectionApiKey(mappingRecords[0].sourceConnectionId);
+          if (dbApiKey) {
+            apiKey = dbApiKey;
+          }
         }
       }
     }
 
     if (!wpFormsUrl) {
       return res.status(400).json({ error: 'No WordPress URL configured for this source connection' });
+    }
+
+    // Check if API key is available for the selected source
+    if (!apiKey) {
+      // If we got here without a DB-backed key, it's not configured
+      if (sourceConnectionId) {
+        return res.status(400).json({
+          error: 'API key not configured for this source connection',
+          errorType: 'api_key_not_configured',
+        });
+      }
     }
 
     const pdfBuffer = Buffer.from(pdfBytesBase64, 'base64');

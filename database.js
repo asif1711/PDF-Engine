@@ -3,6 +3,7 @@ import pg from 'pg';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { encryptCredential, decryptCredential, isEncryptedCredential } from './server/credentialEncryption.js';
 
 const { Pool } = pg;
 const rootDir = path.dirname(fileURLToPath(import.meta.url));
@@ -247,41 +248,85 @@ export async function createFormMappingRecord({ formId, templateId, name, mappin
 }
 
 function sourceConnectionRecord(row) {
-  return {
-    id: row.id,
-    name: row.name,
-    type: row.connection_type,
-    url: row.site_url,
-    ...((row.config_json && typeof row.config_json === 'object') ? row.config_json : {}),
-    createdAt: row.created_at,
-    updatedAt: row.updated_at,
-  };
+    const hasApiKey = row.encrypted_api_key && isEncryptedCredential(row.encrypted_api_key);
+    return {
+        id: row.id,
+        name: row.name,
+        type: row.connection_type,
+        url: row.site_url,
+        apiKeyConfigured: hasApiKey,
+        ...((row.config_json && typeof row.config_json === 'object') ? row.config_json : {}),
+        createdAt: row.created_at,
+        updatedAt: row.updated_at,
+    };
 }
 
-// Intentionally accept only non-secret connection metadata. API keys and Basic
-// Auth credentials continue to use the existing local browser storage.
+// Intentionally accept only non-secret connection metadata. API keys are encrypted
+// and stored server-side. Basic Auth credentials continue to use the existing local browser storage.
 export async function upsertSourceConnection(record = {}) {
-  const id = String(record.id || '').trim();
-  const name = String(record.name || '').trim();
-  const url = String(record.url || record.siteUrl || '').trim();
-  if (!id || !name || !url) return null;
-  const config = {};
-  if (typeof record.isDefault === 'boolean') config.isDefault = record.isDefault;
+    const id = String(record.id || '').trim();
+    const name = String(record.name || '').trim();
+    const url = String(record.url || record.siteUrl || '').trim();
+    if (!id || !name || !url) return null;
+    const config = {};
+    if (typeof record.isDefault === 'boolean') config.isDefault = record.isDefault;
 
-  const result = await queryRuntime(
-    `INSERT INTO source_connections (id, name, connection_type, site_url, config_json)
-     VALUES ($1, $2, $3, $4, $5::jsonb)
-     ON CONFLICT (id) DO UPDATE SET
-       name = EXCLUDED.name,
-       connection_type = EXCLUDED.connection_type,
-       site_url = EXCLUDED.site_url,
-       config_json = EXCLUDED.config_json,
-       archived_at = NULL,
-       updated_at = now()
-     RETURNING id, name, connection_type, site_url, config_json, created_at, updated_at`,
-    [id, name, String(record.type || record.connectionType || 'wordpress'), url, config],
-  );
-  return result?.rows[0] ? sourceConnectionRecord(result.rows[0]) : null;
+    // Encrypt API key if provided
+    let encryptedApiKey = null;
+    if (record.apiKey && typeof record.apiKey === 'string' && record.apiKey.trim()) {
+        try {
+            encryptedApiKey = encryptCredential(record.apiKey.trim());
+        } catch (err) {
+            console.error('[DB] Failed to encrypt API key:', err.message);
+            throw new Error('Failed to encrypt API key. Check CREDENTIAL_ENCRYPTION_KEY configuration.');
+        }
+    }
+
+    const result = await queryRuntime(
+        `INSERT INTO source_connections (id, name, connection_type, site_url, config_json, encrypted_api_key)
+         VALUES ($1, $2, $3, $4, $5::jsonb, $6)
+         ON CONFLICT (id) DO UPDATE SET
+           name = EXCLUDED.name,
+           connection_type = EXCLUDED.connection_type,
+           site_url = EXCLUDED.site_url,
+           config_json = EXCLUDED.config_json,
+           encrypted_api_key = COALESCE(EXCLUDED.encrypted_api_key, source_connections.encrypted_api_key),
+           archived_at = NULL,
+           updated_at = now()
+         RETURNING id, name, connection_type, site_url, config_json, encrypted_api_key, created_at, updated_at`,
+        [id, name, String(record.type || record.connectionType || 'wordpress'), url, config, encryptedApiKey],
+    );
+    return result?.rows[0] ? sourceConnectionRecord(result.rows[0]) : null;
+}
+
+export async function getSourceConnection(id) {
+    const result = await queryRuntime(
+        `SELECT id, name, connection_type, site_url, config_json, encrypted_api_key, created_at, updated_at
+         FROM source_connections WHERE id = $1 AND archived_at IS NULL`,
+        [String(id)],
+    );
+    return result?.rows[0] ? sourceConnectionRecord(result.rows[0]) : null;
+}
+
+/**
+ * Get the decrypted API key for a source connection.
+ * Only for server-side use (e.g., /api/push-pdf-to-wp).
+ * Returns null if no key is configured or decryption fails.
+ */
+export async function getSourceConnectionApiKey(id) {
+    const result = await queryRuntime(
+        `SELECT encrypted_api_key FROM source_connections WHERE id = $1 AND archived_at IS NULL`,
+        [String(id)],
+    );
+    const row = result?.rows[0];
+    if (!row || !row.encrypted_api_key) return null;
+
+    try {
+        return decryptCredential(row.encrypted_api_key);
+    } catch (err) {
+        console.error(`[DB] Failed to decrypt API key for source ${id}:`, err.message);
+        return null;
+    }
 }
 
 export async function listSourceConnections() {
@@ -290,15 +335,6 @@ export async function listSourceConnections() {
      FROM source_connections WHERE archived_at IS NULL ORDER BY updated_at DESC, name ASC`,
   );
   return result ? result.rows.map(sourceConnectionRecord) : null;
-}
-
-export async function getSourceConnection(id) {
-  const result = await queryRuntime(
-    `SELECT id, name, connection_type, site_url, config_json, created_at, updated_at
-     FROM source_connections WHERE id = $1 AND archived_at IS NULL`,
-    [String(id)],
-  );
-  return result?.rows[0] ? sourceConnectionRecord(result.rows[0]) : null;
 }
 
 export async function archiveSourceConnection(id) {
