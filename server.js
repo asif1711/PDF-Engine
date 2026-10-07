@@ -312,6 +312,15 @@ app.post('/api/push-pdf-to-wp', async (req, res) => {
 
     const pdfBuffer = Buffer.from(pdfBytesBase64, 'base64');
 
+    // Validate PDF header
+    const header = pdfBuffer.subarray(0, 5).toString('ascii');
+    if (header !== '%PDF-') {
+      return res.status(400).json({
+        error: 'Invalid PDF data: missing %PDF- header',
+        receivedHeader: header,
+      });
+    }
+
     const rawBase = wpFormsUrl.replace(/\/$/, '');
     const restBase = rawBase.endsWith('/forms')
       ? rawBase.replace(/\/forms$/, '')

@@ -136,7 +136,8 @@ export default function AutomationDispatchPage({
         try {
             const result = await buildPdfBytesForEntry(entry);
 
-            const pdfBytesBase64 = Buffer.from(result.pdfBytes).toString('base64');
+            // Convert Uint8Array PDF bytes to base64 using browser-compatible API
+            const pdfBytesBase64 = btoa(String.fromCharCode(...new Uint8Array(result.pdfBytes)));
 
             const pushRes = await fetch('/api/push-pdf-to-wp', {
                 method: 'POST',

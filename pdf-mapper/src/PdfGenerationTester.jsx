@@ -293,7 +293,8 @@ export default function PdfGenerationTester({
             }
 
             const targetEntryId = currentEntry.id || selectedSubmissionId || "1";
-            const pdfBytesBase64 = Buffer.from(bytesToSend).toString('base64');
+            // Convert Uint8Array PDF bytes to base64 using browser-compatible API
+            const pdfBytesBase64 = btoa(String.fromCharCode(...new Uint8Array(bytesToSend)));
 
             const pushRes = await fetch('/api/push-pdf-to-wp', {
                 method: 'POST',
