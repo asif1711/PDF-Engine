@@ -23,8 +23,6 @@ const VERSION = 'v1';
 
 function getMasterKey() {
     const keyEnv = process.env.CREDENTIAL_ENCRYPTION_KEY;
-    // TEMPORARY DIAGNOSTIC: log key string length (not the value itself)
-    console.log('[DIAG] CREDENTIAL_ENCRYPTION_KEY runtime length:', keyEnv?.length ?? 'not set (null/undefined)');
     if (!keyEnv) {
         throw new Error('CREDENTIAL_ENCRYPTION_KEY environment variable is not set. Cannot encrypt/decrypt credentials.');
     }
