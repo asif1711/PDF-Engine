@@ -8,6 +8,8 @@ import { encryptCredential, decryptCredential, isEncryptedCredential } from './s
 const { Pool } = pg;
 const rootDir = path.dirname(fileURLToPath(import.meta.url));
 dotenv.config({ path: path.join(rootDir, '.env'), override: false, quiet: true });
+// TEMPORARY DIAGNOSTIC: log CREDENTIAL_ENCRYPTION_KEY runtime length at module load
+console.log('[DIAG] CREDENTIAL_ENCRYPTION_KEY runtime length at startup:', process.env.CREDENTIAL_ENCRYPTION_KEY?.length ?? 'not set (null/undefined)');
 
 let runtimePool;
 let schemaInitialized = false;
