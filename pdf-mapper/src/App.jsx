@@ -770,7 +770,7 @@ function App() {
             selectedForm.id,
             customUrl,
             customKey,
-            { basicAuthUser: liveUser, basicAuthPass: livePass }
+            { basicAuthUser: liveUser, basicAuthPass: livePass, sourceConnectionId: activeWpConn?.id || null }
         ).then((res) => {
             if (!isSubscribed) return;
             const entries = res.entries || [];
