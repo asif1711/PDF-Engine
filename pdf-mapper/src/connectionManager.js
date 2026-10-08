@@ -437,10 +437,6 @@ export async function fetchPdfBytes(templateOrUrl, sourceConnectionId = null) {
     const candidates = [];
     if (typeof templateOrUrl === "string") {
         candidates.push(templateOrUrl);
-        if (templateOrUrl.startsWith("http://") || templateOrUrl.startsWith("https://")) {
-            const proxyUrl = `/api/wp-proxy?url=${encodeURIComponent(templateOrUrl)}${sourceConnectionId ? `&sourceConnectionId=${encodeURIComponent(sourceConnectionId)}` : ''}`;
-            candidates.push(proxyUrl);
-        }
     } else {
         const tpl = templateOrUrl;
         const category = tpl.category || "AIBT";
@@ -481,18 +477,11 @@ export async function fetchPdfBytes(templateOrUrl, sourceConnectionId = null) {
     for (const url of candidates) {
         if (!url) continue;
         try {
-            let targetUrl = url;
-            if (typeof window !== "undefined") {
-                const isExternal = (url.startsWith("http://") || url.startsWith("https://")) && !url.includes(window.location.host);
-                if (isExternal && !url.startsWith("/api/wp-proxy")) {
-                    targetUrl = `/api/wp-proxy?url=${encodeURIComponent(url)}${sourceConnectionId ? `&sourceConnectionId=${encodeURIComponent(sourceConnectionId)}` : ''}`;
-                }
-            }
-            const res = await fetch(targetUrl);
+            const res = await fetch(url);
             if (res.ok) {
                 const buf = await res.arrayBuffer();
                 if (buf && buf.byteLength > 100) {
-                    return { bytes: new Uint8Array(buf), successfulUrl: targetUrl };
+                    return { bytes: new Uint8Array(buf), successfulUrl: url };
                 }
             }
         } catch {
