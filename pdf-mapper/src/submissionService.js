@@ -180,6 +180,9 @@ export async function fetchFormSubmissions(formId, formsUrl, apiKey, options = {
     const headers = {
         Accept: "application/json",
     };
+    if (apiKey) {
+        headers["X-PDF-API-Key"] = apiKey;
+    }
 
     const basicUser = options.basicAuthUser || "";
     const basicPass = options.basicAuthPass || "";
