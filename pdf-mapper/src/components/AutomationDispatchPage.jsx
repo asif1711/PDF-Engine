@@ -38,6 +38,7 @@ export default function AutomationDispatchPage({
     activePdfTemplate,
     mappings,
     pdfTemplateUrl,
+    wordpressFormsUrl,
     sourceConnectionId,
     onOpenTester,
 }) {

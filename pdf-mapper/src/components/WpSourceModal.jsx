@@ -151,7 +151,7 @@ function WpSourceModalDialog({ connection, onClose, onSave }) {
                                     type="text"
                                     value={apiKey}
                                     onChange={(e) => setApiKey(e.target.value)}
-                                    placeholder="aso107mzNrZId001GebX6ew8"
+                                    placeholder=""
                                     style={{ width: "100%", padding: "8px 12px", border: "1px solid #cbd5e1", borderRadius: 4, fontSize: 12, fontFamily: "monospace" }}
                                 />
                             )}

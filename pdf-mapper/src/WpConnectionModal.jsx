@@ -115,7 +115,7 @@ export default function WpConnectionModal({
                             type="text"
                             value={apiKey}
                             onChange={(e) => setApiKey(e.target.value)}
-                            placeholder="e.g. aso107mzNrZId001GebX6ew8"
+                            placeholder=""
                         />
                         <small>Defined in <code>wp-config.php</code> as <code>PFGF_API_KEY</code></small>
                     </label>

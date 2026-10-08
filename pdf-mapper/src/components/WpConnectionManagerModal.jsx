@@ -26,7 +26,7 @@ export default function WpConnectionManagerModal({
             id: "",
             name: "New WordPress Site",
             url: "https://your-domain.com/wp-json/pdf-generator/v1/forms",
-            apiKey: "aso107mzNrZId001GebX6ew8",
+            apiKey: "",
             basicUser: "",
             basicPass: "",
         });
@@ -198,7 +198,7 @@ export default function WpConnectionManagerModal({
                                         type="text"
                                         value={editingConn.apiKey}
                                         onChange={(e) => setEditingConn({ ...editingConn, apiKey: e.target.value })}
-                                        placeholder="aso107mzNrZId001GebX6ew8"
+                                        placeholder=""
                                     />
                                 </label>
 
