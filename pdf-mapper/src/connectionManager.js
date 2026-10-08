@@ -148,19 +148,25 @@ export function saveWpConnection(conn) {
     return list;
 }
 
-function nonSecretConnectionMetadata(conn) {
+function connectionMetadataForServer(conn) {
     if (!conn) return null;
-    return {
+    const metadata = {
         id: conn.id,
         name: conn.name,
         type: "wordpress",
         url: conn.url,
         isDefault: Boolean(conn.isDefault),
     };
+    // Include the API key so the server can encrypt and persist it in encrypted_api_key.
+    // When omitted (empty/undefined), the server preserves any existing encrypted key via COALESCE.
+    if (conn.apiKey && typeof conn.apiKey === 'string' && conn.apiKey.trim()) {
+        metadata.apiKey = conn.apiKey.trim();
+    }
+    return metadata;
 }
 
 export async function persistWpConnection(conn) {
-    const metadata = nonSecretConnectionMetadata(conn);
+    const metadata = connectionMetadataForServer(conn);
     if (!metadata?.id || !metadata.name || !metadata.url) return false;
     const res = await fetch("/api/source-connections", {
         method: "POST",

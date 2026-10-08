@@ -45,6 +45,7 @@ function wpProxyPlugin() {
           const parsed = new URL(req.url, 'http://localhost:3000')
           const targetUrl = parsed.searchParams.get('url')
           const apiKey = parsed.searchParams.get('apiKey') || ''
+          const sourceConnectionId = parsed.searchParams.get('sourceConnectionId') || ''
           const basicUser = parsed.searchParams.get('basicUser') || ''
           const basicPass = parsed.searchParams.get('basicPass') || ''
 
@@ -55,13 +56,25 @@ function wpProxyPlugin() {
             return
           }
 
+          // Resolve API key from sourceConnectionId (Dev mode DB lookup)
+          let resolvedApiKey = apiKey
+          if (sourceConnectionId) {
+            try {
+              const { getSourceConnectionApiKey } = await import('../database.js')
+              const dbKey = await getSourceConnectionApiKey(sourceConnectionId)
+              if (dbKey) resolvedApiKey = dbKey
+            } catch (dbErr) {
+              console.error('[wp-proxy] Failed to resolve API key from source connection:', dbErr.message)
+            }
+          }
+
           const headers = {
             Accept: '*/*',
             'ngrok-skip-browser-warning': 'true',
             'User-Agent': 'PDFMapper/1.0',
           }
-          if (apiKey) {
-            headers['X-PDF-API-Key'] = apiKey
+          if (resolvedApiKey) {
+            headers['X-PDF-API-Key'] = resolvedApiKey
           }
           if (basicUser || basicPass) {
             headers['Authorization'] = `Basic ${Buffer.from(`${basicUser}:${basicPass}`).toString('base64')}`
