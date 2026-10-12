@@ -2184,7 +2184,7 @@ function App() {
                 setSelectedTemplate(toTemplateModel(newTpl));
             }}
         />
-<pdfGenerationTester
+<PdfGenerationTester
                     isOpen={isTesterOpen}
                     onClose={() => setIsTesterOpen(false)}
                     selectedForm={selectedForm}

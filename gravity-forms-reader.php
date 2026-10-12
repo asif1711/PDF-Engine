@@ -627,6 +627,44 @@ function pfgf_rest_permission_check(WP_REST_Request $request) {
     return true;
 }
 
+/**
+ * Attach generated PDF to Gravity Forms notifications.
+ * Hook: gform_notification_attachments (Gravity Forms 2.5+)
+ * Callback signature: function($attachments, $notification, $entry, $form)
+ * Runs when any notification is sent for a form with PDF Generator integration.
+ */
+add_filter('gform_notification_attachments', 'pfgf_attach_generated_pdf_to_notification', 10, 4);
+
+function pfgf_attach_generated_pdf_to_notification($attachments, $notification, $entry, $form) {
+    $entry_id = isset($entry['id']) ? absint($entry['id']) : 0;
+    $form_id  = isset($form['id']) ? absint($form['id']) : 0;
+
+    if (!$entry_id || !$form_id) {
+        return $attachments;
+    }
+
+    // Expected PDF path (matches pfgf_rest_upload_entry_pdf and pfgf_get_or_create_pdf_for_entry)
+    $generated_dir = WP_CONTENT_DIR . '/pdf-generator/generated/';
+    $pdf_file = $generated_dir . "form-{$form_id}-entry-{$entry_id}.pdf";
+
+    // Attach only if file exists, is readable, non-empty, and has valid PDF header
+    if (file_exists($pdf_file) && is_readable($pdf_file) && filesize($pdf_file) > 0) {
+        $header = @file_get_contents($pdf_file, false, null, 0, 5);
+        if ($header === '%PDF-') {
+            // Avoid duplicate attachments
+            if (!in_array($pdf_file, $attachments, true)) {
+                $attachments[] = $pdf_file;
+            }
+        } else {
+            error_log("[PDF Generator] Notification attachment skipped for Entry #{$entry_id} (Form #{$form_id}): Invalid PDF header at {$pdf_file}");
+        }
+    } else {
+        error_log("[PDF Generator] Notification attachment skipped for Entry #{$entry_id} (Form #{$form_id}): PDF not found, unreadable, or empty at {$pdf_file}");
+    }
+
+    return $attachments;
+}
+
 
 /**
  * REST callback for forms schema.
