@@ -163,9 +163,8 @@ function isRepeatCountField(field) {
 
 function isMappableField(field) {
     if (!field) return false;
-    const type = String(field.type || "").toLowerCase();
-    const visibility = String(field.visibility || "").toLowerCase();
-    if (type === "hidden" || visibility === "hidden" || visibility === "administrative") return false;
+    // Allow all field types including hidden, administrative, etc.
+    // Hidden fields often contain dynamically populated values needed for PDF generation.
     return true;
 }
 

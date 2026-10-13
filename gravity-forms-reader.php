@@ -1003,10 +1003,8 @@ function pfgf_build_forms_data() {
             $field_type = isset($field->type) ? (string) $field->type : '';
             $visibility = isset($field->visibility) ? (string) $field->visibility : '';
 
-            // Do not pass hidden or administrative fields
-            if ($field_type === 'hidden' || $visibility === 'hidden' || $visibility === 'administrative') {
-                continue;
-            }
+            // Include all fields (hidden, administrative, etc.) so they can be mapped.
+            // Hidden fields often contain dynamically populated values that are needed for PDF generation.
 
             $field_id          = isset($field->id) ? (string) $field->id : '';
             $field_label       = isset($field->label) ? (string) $field->label : '';
@@ -1017,6 +1015,7 @@ function pfgf_build_forms_data() {
                 'label'      => $field_label,
                 'adminLabel' => $field_admin_label,
                 'type'       => $field_type,
+                'visibility' => $visibility,
                 'required'   => !empty($field->isRequired),
             );
 
