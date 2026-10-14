@@ -633,7 +633,14 @@ export async function generateFilledPdf({
             const image = isPng ? await pdfDoc.embedPng(bytes) : await pdfDoc.embedJpg(bytes);
             const field = form.getField(targetName);
             const placements = field.acroField.getWidgets().map((w) => ({ rect: w.getRectangle(), page: findWidgetPage(pdfDoc, w) }));
-            form.removeField(field);
+            // Neutralize the widget instead of removing it. Some templates (e.g. Adobe Sign tag fields) have an /AP with no /N,
+            // which makes form.removeField() and form.updateFieldAppearances() throw.
+            for (const w of field.acroField.getWidgets()) {
+                const r = w.getRectangle();
+                const blank = pdfDoc.context.stream("", { Type: "XObject", Subtype: "Form", BBox: [0, 0, r.width, r.height] });
+                w.setNormalAppearance(pdfDoc.context.register(blank));
+            }
+            filledPdfFieldNames.add(targetName); // locks it read-only with the other filled fields
             const pad = 2;
             for (const { rect, page } of placements) {
                 const { width, height } = image.scaleToFit(rect.width - pad * 2, rect.height - pad * 2);
