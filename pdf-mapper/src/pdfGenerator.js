@@ -603,6 +603,9 @@ export async function generateFilledPdf({
             const sourceFieldId = item.sourceFieldId || item.gravityFieldId || item.source?.fieldId;
             const sourceInputId = item.sourceInputId || item.source?.inputId;
             let val = extractEntryValue(submission, sourceFieldId, sourceInputId);
+            if (/signature/i.test(String(targetPdfField) + String(item.gravityFieldLabel) + String(item.gravityFieldType))) {
+                console.log("SIGDEBUG", JSON.stringify({ targetPdfField, sourceFieldId, sourceInputId, gravityFieldType: item.gravityFieldType, gravityFieldLabel: item.gravityFieldLabel, val, entryKeys: Object.keys(submission).filter((k) => k === String(sourceFieldId).split(".")[0] || k.startsWith(String(sourceFieldId).split(".")[0] + ".")) }));
+            }
 
             // Format dates if gravity field type is date
             let finalVal = val;
