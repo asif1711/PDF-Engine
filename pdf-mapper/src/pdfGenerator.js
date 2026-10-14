@@ -524,6 +524,100 @@ export async function generateFilledPdf({
         ? mappings
         : Object.values(mappings || {}).filter(Boolean);
 
+    function fillAcroField(targetName, value, meta) {
+        const field = form.getField(targetName);
+        if (!field) {
+            auditLog.push({
+                targetName,
+                value: String(value),
+                status: "not_found_in_pdf",
+                meta,
+            });
+            return;
+        }
+
+        if (field instanceof PDFTextField) {
+            field.setText(String(value));
+            filledPdfFieldNames.add(targetName);
+
+            const standardFontSize = 10;
+            let calculatedFontSize = standardFontSize;
+            try {
+                const widgets = field.acroField?.getWidgets?.() || [];
+                if (widgets.length > 0 && value) {
+                    const rect = widgets[0].getRectangle();
+                    const availableWidth = rect.width - 4;
+                    const textWidthAt10 = helveticaFont.widthOfTextAtSize(String(value), standardFontSize);
+                    if (textWidthAt10 > availableWidth && availableWidth > 15) {
+                        calculatedFontSize = Math.max(6.5, Math.floor((availableWidth / textWidthAt10) * standardFontSize * 10) / 10);
+                    }
+                }
+            } catch {
+                calculatedFontSize = standardFontSize;
+            }
+            try {
+                field.setFontSize(calculatedFontSize);
+            } catch {
+            }
+
+            auditLog.push({
+                targetName,
+                value: String(value),
+                fieldType: "Text",
+                status: "filled",
+                fontSize: calculatedFontSize,
+                meta,
+            });
+        } else if (field instanceof PDFCheckBox) {
+            const isChecked = String(value) === "1" || String(value).toLowerCase() === "true" || String(value).toLowerCase() === "yes" || String(value).toLowerCase() === "on";
+            if (isChecked) {
+                field.check();
+                filledPdfFieldNames.add(targetName);
+            }
+            auditLog.push({
+                targetName,
+                value: isChecked ? "Checked" : "Untouched",
+                fieldType: "CheckBox",
+                status: isChecked ? "filled" : "untouched_empty",
+                meta,
+            });
+        } else if (field instanceof PDFDropdown) {
+            try {
+                field.select(String(value));
+                filledPdfFieldNames.add(targetName);
+            } catch {
+            }
+            auditLog.push({
+                targetName,
+                value: String(value),
+                fieldType: "Dropdown",
+                status: "filled",
+                meta,
+            });
+        } else if (field instanceof PDFRadioGroup) {
+            try {
+                field.select(String(value));
+                filledPdfFieldNames.add(targetName);
+            } catch {
+            }
+            auditLog.push({
+                targetName,
+                value: String(value),
+                fieldType: "Radio",
+                status: "filled",
+                meta,
+            });
+        } else {
+            auditLog.push({
+                targetName,
+                value: String(value),
+                fieldType: field.constructor.name,
+                status: "unsupported_field_type",
+                meta,
+            });
+        }
+    }
+
     async function drawSignature({ targetName, value, meta }) {
         const log = (status, extra = {}) => {
             console.log("SIGAUDIT", JSON.stringify({ targetName, value, status, ...extra }));
@@ -548,133 +642,6 @@ export async function generateFilledPdf({
             log("filled", { url });
         } catch (err) {
             log("error", { error: err.message });
-        }
-    }
-
-    for (const item of mappingList) {
-        if (!targetName) return;
-        mappedPdfFieldNames.add(targetName);
-
-        const strVal = value !== undefined && value !== null ? String(value).trim() : "";
-
-        // Exception 2: If field is empty or unmapped or hidden, keep that field untouched in the PDF template,
-        // so it stays fillable even after generated.
-        if (!strVal) {
-            auditLog.push({
-                targetName,
-                value: "",
-                status: "untouched_empty",
-                meta,
-            });
-            return;
-        }
-
-        try {
-            const field = form.getField(targetName);
-            if (!field) {
-                auditLog.push({
-                    targetName,
-                    value: strVal,
-                    status: "not_found_in_pdf",
-                    meta,
-                });
-                return;
-            }
-
-            if (field instanceof PDFTextField) {
-                field.setText(strVal);
-                filledPdfFieldNames.add(targetName);
-
-                // Enforce uniform font size across all filled text fields.
-                // Standard font size is 10pt (prevents oversized tall fields like USI from blowing up to 24pt).
-                const standardFontSize = 10;
-                let calculatedFontSize = standardFontSize;
-                try {
-                    const widgets = field.acroField?.getWidgets?.() || [];
-                    if (widgets.length > 0 && strVal) {
-                        const rect = widgets[0].getRectangle();
-                        const availableWidth = rect.width - 4;
-                        const textWidthAt10 = helveticaFont.widthOfTextAtSize(strVal, standardFontSize);
-                        if (textWidthAt10 > availableWidth && availableWidth > 15) {
-                            // Proportionally scale down narrow table columns / long text so it never clips
-                            calculatedFontSize = Math.max(6.5, Math.floor((availableWidth / textWidthAt10) * standardFontSize * 10) / 10);
-                        }
-                    }
-                } catch {
-                    calculatedFontSize = standardFontSize;
-                }
-                try {
-                    field.setFontSize(calculatedFontSize);
-                } catch {
-                    // Ignore if font size cannot be set
-                }
-
-                auditLog.push({
-                    targetName,
-                    value: strVal,
-                    fieldType: "Text",
-                    status: "filled",
-                    fontSize: calculatedFontSize,
-                    meta,
-                });
-            } else if (field instanceof PDFCheckBox) {
-                const isChecked = strVal === "1" || strVal.toLowerCase() === "true" || strVal.toLowerCase() === "yes" || strVal.toLowerCase() === "on";
-                if (isChecked) {
-                    field.check();
-                    filledPdfFieldNames.add(targetName);
-                }
-                auditLog.push({
-                    targetName,
-                    value: isChecked ? "Checked" : "Untouched",
-                    fieldType: "CheckBox",
-                    status: isChecked ? "filled" : "untouched_empty",
-                    meta,
-                });
-            } else if (field instanceof PDFDropdown) {
-                try {
-                    field.select(strVal);
-                    filledPdfFieldNames.add(targetName);
-                } catch {
-                    // If option doesn't exist in predefined list, try setting text
-                }
-                auditLog.push({
-                    targetName,
-                    value: strVal,
-                    fieldType: "Dropdown",
-                    status: "filled",
-                    meta,
-                });
-            } else if (field instanceof PDFRadioGroup) {
-                try {
-                    field.select(strVal);
-                    filledPdfFieldNames.add(targetName);
-                } catch {
-                    // Ignore radio mismatch
-                }
-                auditLog.push({
-                    targetName,
-                    value: strVal,
-                    fieldType: "Radio",
-                    status: "filled",
-                    meta,
-                });
-            } else {
-                auditLog.push({
-                    targetName,
-                    value: strVal,
-                    fieldType: field.constructor.name,
-                    status: "unsupported_field_type",
-                    meta,
-                });
-            }
-        } catch (err) {
-            auditLog.push({
-                targetName,
-                value: strVal,
-                status: "error",
-                error: err.message,
-                meta,
-            });
         }
     }
 
@@ -772,7 +739,7 @@ export async function generateFilledPdf({
                 const oneBasedIndex = rowIndex + 1;
                 children.forEach((child) => {
                     const targetName = String(child.targetPattern || "").replace("{index}", oneBasedIndex);
-                    
+
                     // Match value by input label or row keys
                     let val = "";
                     if (typeof row === "object" && row !== null) {
