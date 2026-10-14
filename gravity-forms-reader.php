@@ -628,41 +628,244 @@ function pfgf_rest_permission_check(WP_REST_Request $request) {
 }
 
 /**
- * Attach generated PDF to Gravity Forms notifications.
- * Hook: gform_notification_attachments (Gravity Forms 2.5+)
- * Callback signature: function($attachments, $notification, $entry, $form)
- * Runs when any notification is sent for a form with PDF Generator integration.
+ * ============================================================
+ * "PDF Generated" NOTIFICATION EVENT
+ * ============================================================
+ * 1. Adds "PDF Generated" to the Event dropdown on every form's notification screen.
+ * 2. Notifications that use that event get the entry's PDF attached.
+ * 3. The event is fired automatically after a submission (PDF built through the
+ *    configured webhook) and by the REST upload route when send_notification is set.
+ * Note: Gravity Forms does NOT send notifications assigned to a custom event at submission;
+ * they are only sent when this plugin triggers the event.
  */
-add_filter('gform_notification_attachments', 'pfgf_attach_generated_pdf_to_notification', 10, 4);
 
-function pfgf_attach_generated_pdf_to_notification($attachments, $notification, $entry, $form) {
-    $entry_id = isset($entry['id']) ? absint($entry['id']) : 0;
-    $form_id  = isset($form['id']) ? absint($form['id']) : 0;
+if (!defined('PFGF_EVENT_PDF_GENERATED')) {
+    define('PFGF_EVENT_PDF_GENERATED', 'pfgf_pdf_generated');
+}
 
-    if (!$entry_id || !$form_id) {
-        return $attachments;
+add_filter('gform_notification_events', 'pfgf_register_pdf_notification_event', 10, 2);
+
+function pfgf_register_pdf_notification_event($events, $form = array()) {
+    $events[PFGF_EVENT_PDF_GENERATED] = 'PDF Generated';
+    return $events;
+}
+
+
+/**
+ * Return the absolute path of a valid generated PDF for an entry, or false.
+ */
+function pfgf_get_entry_pdf_path($form_id, $entry_id) {
+
+    $form_id  = absint($form_id);
+    $entry_id = absint($entry_id);
+    if (!$form_id || !$entry_id) {
+        return false;
     }
 
-    // Expected PDF path (matches pfgf_rest_upload_entry_pdf and pfgf_get_or_create_pdf_for_entry)
-    $generated_dir = WP_CONTENT_DIR . '/pdf-generator/generated/';
-    $pdf_file = $generated_dir . "form-{$form_id}-entry-{$entry_id}.pdf";
+    $pdf_file = WP_CONTENT_DIR . "/pdf-generator/generated/form-{$form_id}-entry-{$entry_id}.pdf";
 
-    // Attach only if file exists, is readable, non-empty, and has valid PDF header
-    if (file_exists($pdf_file) && is_readable($pdf_file) && filesize($pdf_file) > 0) {
-        $header = @file_get_contents($pdf_file, false, null, 0, 5);
-        if ($header === '%PDF-') {
-            // Avoid duplicate attachments
-            if (!in_array($pdf_file, $attachments, true)) {
-                $attachments[] = $pdf_file;
+    if (!file_exists($pdf_file) || !is_readable($pdf_file) || filesize($pdf_file) <= 0) {
+        return false;
+    }
+
+    if (@file_get_contents($pdf_file, false, null, 0, 5) !== '%PDF-') {
+        return false;
+    }
+
+    return $pdf_file;
+}
+
+
+/**
+ * Attach the PDF, but only to notifications whose Event is "PDF Generated".
+ */
+add_filter('gform_notification', 'pfgf_attach_pdf_to_pdf_event_notification', 10, 3);
+
+function pfgf_attach_pdf_to_pdf_event_notification($notification, $form, $entry) {
+
+    if (rgar($notification, 'event') !== PFGF_EVENT_PDF_GENERATED) {
+        return $notification;
+    }
+
+    $form_id  = isset($form['id']) ? $form['id'] : 0;
+    $entry_id = isset($entry['id']) ? $entry['id'] : 0;
+    $pdf_file = pfgf_get_entry_pdf_path($form_id, $entry_id);
+
+    if (!$pdf_file) {
+        error_log("[PDF Generator] 'PDF Generated' notification for Entry #{$entry_id} (Form #{$form_id}) has no valid PDF to attach.");
+        return $notification;
+    }
+
+    $attachments = rgar($notification, 'attachments', array());
+    if (!is_array($attachments)) {
+        $attachments = empty($attachments) ? array() : array($attachments);
+    }
+    if (!in_array($pdf_file, $attachments, true)) {
+        $attachments[] = $pdf_file;
+    }
+    $notification['attachments'] = $attachments;
+
+    return $notification;
+}
+
+
+/**
+ * Safety net: never send a "PDF Generated" email that would go out without its PDF
+ * (for example from the Gravity Forms "Resend Notifications" screen).
+ */
+add_filter('gform_disable_notification', 'pfgf_block_pdf_event_without_pdf', 10, 4);
+
+function pfgf_block_pdf_event_without_pdf($is_disabled, $notification, $form, $entry) {
+
+    if (rgar($notification, 'event') !== PFGF_EVENT_PDF_GENERATED) {
+        return $is_disabled;
+    }
+
+    $form_id  = isset($form['id']) ? $form['id'] : 0;
+    $entry_id = isset($entry['id']) ? $entry['id'] : 0;
+
+    if (!pfgf_get_entry_pdf_path($form_id, $entry_id)) {
+        error_log("[PDF Generator] 'PDF Generated' notification blocked for Entry #{$entry_id} (Form #{$form_id}): no valid PDF on disk.");
+        return true;
+    }
+
+    return $is_disabled;
+}
+
+
+/**
+ * Count active notifications on a form that use the "PDF Generated" event.
+ */
+function pfgf_count_pdf_event_notifications($form) {
+
+    $count = 0;
+    if (!empty($form['notifications']) && is_array($form['notifications'])) {
+        foreach ($form['notifications'] as $notification) {
+            if (rgar($notification, 'event') === PFGF_EVENT_PDF_GENERATED && rgar($notification, 'isActive', true) !== false) {
+                $count++;
             }
-        } else {
-            error_log("[PDF Generator] Notification attachment skipped for Entry #{$entry_id} (Form #{$form_id}): Invalid PDF header at {$pdf_file}");
         }
-    } else {
-        error_log("[PDF Generator] Notification attachment skipped for Entry #{$entry_id} (Form #{$form_id}): PDF not found, unreadable, or empty at {$pdf_file}");
+    }
+    return $count;
+}
+
+
+/**
+ * Single entry point used by BOTH triggers (submission flow and REST upload route).
+ * Fires the "PDF Generated" event once the PDF is on disk.
+ * A 60 second lock per entry prevents duplicate emails when both triggers fire close together.
+ * Returns the number of notifications configured for the event, or WP_Error.
+ */
+function pfgf_send_pdf_generated_notifications($form, $entry) {
+
+    if (!class_exists('GFAPI')) {
+        return new WP_Error('gravity_forms_unavailable', 'Gravity Forms is not available.');
     }
 
-    return $attachments;
+    $form_id  = isset($form['id']) ? absint($form['id']) : 0;
+    $entry_id = isset($entry['id']) ? absint($entry['id']) : 0;
+
+    if (!pfgf_get_entry_pdf_path($form_id, $entry_id)) {
+        return new WP_Error('pdf_missing', "No valid PDF on disk for Entry #{$entry_id}; notification not sent.");
+    }
+
+    $configured = pfgf_count_pdf_event_notifications($form);
+    if ($configured === 0) {
+        return new WP_Error('no_pdf_notification', "Form #{$form_id} has no active notification set to the 'PDF Generated' event.");
+    }
+
+    $lock_key = "pfgf_pdf_notified_{$entry_id}";
+    if (get_transient($lock_key)) {
+        return new WP_Error('duplicate_suppressed', "A 'PDF Generated' notification for Entry #{$entry_id} was already sent in the last 60 seconds.");
+    }
+    set_transient($lock_key, 1, 60);
+
+    $result = GFAPI::send_notifications($form, $entry, PFGF_EVENT_PDF_GENERATED);
+    if (is_wp_error($result)) {
+        delete_transient($lock_key);
+        return $result;
+    }
+
+    return $configured;
+}
+
+
+/**
+ * ============================================================
+ * TRIGGER 1: AUTOMATIC GENERATION ON SUBMISSION
+ * ============================================================
+ * Runs in the background (WP-Cron) so the visitor is not kept waiting for the PDF engine.
+ * Disable with define('PFGF_AUTO_GENERATE_ON_SUBMIT', false); in wp-config.php, or per form with the
+ * 'pfgf_auto_generate_on_submit' filter. Run inline instead of in the background with
+ * define('PFGF_GENERATE_SYNC', true);
+ */
+add_action('gform_after_submission', 'pfgf_on_form_submission', 20, 2);
+
+function pfgf_on_form_submission($entry, $form) {
+
+    if (defined('PFGF_AUTO_GENERATE_ON_SUBMIT') && !PFGF_AUTO_GENERATE_ON_SUBMIT) {
+        return;
+    }
+
+    if (!apply_filters('pfgf_auto_generate_on_submit', true, $entry, $form)) {
+        return;
+    }
+
+    if (pfgf_get_webhook_url() === '') {
+        return; // No PDF engine webhook configured, nothing to call.
+    }
+
+    if (rgar($entry, 'status') === 'spam') {
+        return;
+    }
+
+    $entry_id = isset($entry['id']) ? absint($entry['id']) : 0;
+    if (!$entry_id) {
+        return;
+    }
+
+    if (defined('PFGF_GENERATE_SYNC') && PFGF_GENERATE_SYNC) {
+        pfgf_process_entry_pdf($entry_id);
+        return;
+    }
+
+    if (!wp_next_scheduled('pfgf_process_entry_pdf_event', array($entry_id))) {
+        wp_schedule_single_event(time(), 'pfgf_process_entry_pdf_event', array($entry_id));
+        spawn_cron();
+    }
+}
+
+add_action('pfgf_process_entry_pdf_event', 'pfgf_process_entry_pdf', 10, 1);
+
+function pfgf_process_entry_pdf($entry_id) {
+
+    if (!class_exists('GFAPI')) {
+        return;
+    }
+
+    $entry_id = absint($entry_id);
+    $entry    = GFAPI::get_entry($entry_id);
+    if (is_wp_error($entry) || empty($entry)) {
+        error_log("[PDF Generator] Auto-generation skipped: Entry #{$entry_id} not found.");
+        return;
+    }
+
+    $form = GFAPI::get_form($entry['form_id']);
+    if (!$form || is_wp_error($form)) {
+        error_log("[PDF Generator] Auto-generation skipped: Form #{$entry['form_id']} not found.");
+        return;
+    }
+
+    $pdf = pfgf_get_or_create_pdf_for_entry($entry, $form);
+    if (!$pdf) {
+        error_log("[PDF Generator] Auto-generation failed for Entry #{$entry_id} (Form #{$entry['form_id']}). See 'Last Webhook Dispatch' on the plugin admin page.");
+        return;
+    }
+
+    $result = pfgf_send_pdf_generated_notifications($form, $entry);
+    if (is_wp_error($result) && !in_array($result->get_error_code(), array('no_pdf_notification', 'duplicate_suppressed'), true)) {
+        error_log("[PDF Generator] 'PDF Generated' notification failed for Entry #{$entry_id}: " . $result->get_error_message());
+    }
 }
 
 
@@ -918,22 +1121,21 @@ function pfgf_rest_upload_entry_pdf(WP_REST_Request $request) {
         return new WP_Error('invalid_pdf_data', 'Written file does not appear to be a valid PDF.', array('status' => 400));
     }
 
-    // Handle notification dispatch
-    $notification_sent = false;
+    // TRIGGER 2: notification dispatch (fires the custom "PDF Generated" event only)
+    $send_notification  = rest_sanitize_boolean($request->get_param('send_notification'));
+    $notification_sent  = false;
     $notification_error = null;
-    if ($request->get_param('send_notification')) {
+    if ($send_notification) {
         $form = GFAPI::get_form($form_id);
         if ($form && !is_wp_error($form)) {
-            $notify_result = GFAPI::send_notifications($form, $entry);
+            $notify_result = pfgf_send_pdf_generated_notifications($form, $entry);
             if (is_wp_error($notify_result)) {
                 $notification_error = $notify_result->get_error_message();
-                $notification_sent = false;
             } else {
                 $notification_sent = true;
             }
         } else {
             $notification_error = 'Form not found or invalid for notification dispatch.';
-            $notification_sent = false;
         }
     }
 
@@ -944,7 +1146,7 @@ function pfgf_rest_upload_entry_pdf(WP_REST_Request $request) {
         'form_id'           => $form_id,
         'filename'          => basename($pdf_file),
         'file_size'         => $file_size,
-        'notification_requested' => $request->get_param('send_notification') ? true : false,
+        'notification_requested' => $send_notification,
         'notification_sent' => $notification_sent,
         'notification_error' => $notification_error,
     ));
