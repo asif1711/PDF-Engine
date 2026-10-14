@@ -691,6 +691,15 @@ export async function generateFilledPdf({
                 console.log("SIGDEBUG", JSON.stringify({ targetPdfField, sourceFieldId, sourceInputId, gravityFieldType: item.gravityFieldType, gravityFieldLabel: item.gravityFieldLabel, val, entryKeys: Object.keys(submission).filter((k) => k === String(sourceFieldId).split(".")[0] || k.startsWith(String(sourceFieldId).split(".")[0] + ".")) }));
             }
 
+            const isSignature = String(item.gravityFieldType || "").toLowerCase() === "signature" || /signature/i.test(item.gravityFieldLabel || "");
+            if (isSignature) {
+                mappedPdfFieldNames.add(targetPdfField);
+                if (val) {
+                    pendingSignatures.push({ targetName: targetPdfField, value: val, meta: { sourceLabel: item.gravityFieldLabel || `Field ${sourceFieldId}`, sourceId: sourceInputId || sourceFieldId, type: "signature" } });
+                }
+                continue;
+            }
+
             // Format dates if gravity field type is date
             let finalVal = val;
             if (item.gravityFieldType === "date" && val) {
