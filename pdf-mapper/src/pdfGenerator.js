@@ -438,6 +438,62 @@ export function resolvePreviewValue(rawSubmission, mapping) {
     return val !== undefined && val !== null ? String(val) : "";
 }
 
+export function resolveSignatureUrl(value, formsUrl = "") {
+    const v = String(value || "").trim();
+    if (!v) return "";
+    if (v.startsWith("data:image/")) return v;
+    if (/^https?:\/\//i.test(v)) {
+        if (formsUrl) {
+            try {
+                const parsed = new URL(v);
+                return new URL(formsUrl).origin + parsed.pathname + parsed.search;
+            } catch {
+                return v;
+            }
+        }
+        return v;
+    }
+    if (!formsUrl) return "";
+    try {
+        return `${new URL(formsUrl).origin}/wp-content/uploads/gravity_forms/signatures/${encodeURIComponent(v)}`;
+    } catch {
+        return "";
+    }
+}
+
+async function fetchImageBytes(url, apiKey) {
+    if (url.startsWith("data:")) {
+        const res = await fetch(url);
+        return new Uint8Array(await res.arrayBuffer());
+    }
+    const proxyTarget = `/api/wp-proxy?url=${encodeURIComponent(url)}${apiKey ? `&apiKey=${encodeURIComponent(apiKey)}` : ""}`;
+    let res;
+    try {
+        res = await fetch(proxyTarget);
+    } catch {
+        res = await fetch(url);
+    }
+    if (!res || !res.ok) throw new Error(`HTTP ${res?.status || "unavailable"} fetching signature`);
+    return new Uint8Array(await res.arrayBuffer());
+}
+
+function findWidgetPage(pdfDoc, widget) {
+    const pages = pdfDoc.getPages();
+    const pRef = widget.P?.();
+    if (pRef) {
+        const hit = pages.find((pg) => pg.ref.toString() === pRef.toString());
+        if (hit) return hit;
+    }
+    for (const pg of pages) {
+        const annots = pg.node.Annots();
+        if (!annots) continue;
+        for (let i = 0; i < annots.size(); i++) {
+            if (annots.lookup(i) === widget.dict) return pg;
+        }
+    }
+    return pages[0];
+}
+
 /**
  * Generate a filled PDF using the template, active mappings, and submission entry.
  */
