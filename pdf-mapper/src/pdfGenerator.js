@@ -517,13 +517,41 @@ export async function generateFilledPdf({
     const auditLog = [];
     const mappedPdfFieldNames = new Set();
     const filledPdfFieldNames = new Set();
+    const pendingSignatures = [];
 
-    // Normalize mapping entries into a unified list
+    // Normalize mapping entries into a unifiedCCs into a unified list
     const mappingList = Array.isArray(mappings)
         ? mappings
         : Object.values(mappings || {}).filter(Boolean);
 
-    function fillAcroField(targetName, value, meta) {
+    async function drawSignature({ targetName, value, meta }) {
+        const log = (status, extra = {}) => {
+            console.log("SIGAUDIT", JSON.stringify({ targetName, value, status, ...extra }));
+            auditLog.push({ targetName, value, fieldType: "Signature", status, meta, ...extra });
+        };
+        try {
+            const url = resolveSignatureUrl(value, formsUrl);
+            if (!url) return log("signature_url_unresolved");
+            const bytes = await fetchImageBytes(url, apiKey);
+            const isPng = bytes[0] === 0x89 && bytes[1] === 0x50;
+            const isJpg = bytes[0] === 0xff && bytes[1] === 0xd8;
+            if (!isPng && !isJpg) return log("signature_not_an_image", { url });
+            const image = isPng ? await pdfDoc.embedPng(bytes) : await pdfDoc.embedJpg(bytes);
+            const field = form.getField(targetName);
+            const placements = field.acroField.getWidgets().map((w) => ({ rect: w.getRectangle(), page: findWidgetPage(pdfDoc, w) }));
+            form.removeField(field);
+            const pad = 2;
+            for (const { rect, page } of placements) {
+                const { width, height } = image.scaleToFit(rect.width - pad * 2, rect.height - pad * 2);
+                page.drawImage(image, { x: rect.x + (rect.width - width) / 2, y: rect.y + (rect.height - height) / 2, width, height });
+            }
+            log("filled", { url });
+        } catch (err) {
+            log("error", { error: err.message });
+        }
+    }
+
+    for (const item of mappingList) {
         if (!targetName) return;
         mappedPdfFieldNames.add(targetName);
 
@@ -769,6 +797,11 @@ export async function generateFilledPdf({
                 });
             });
         }
+    }
+
+    // Draw queued signature images (async), before read-only locking and flattening
+    for (const sig of pendingSignatures) {
+        await drawSignature(sig);
     }
 
     // Requirement: Only fields actually filled with data become read-only.
