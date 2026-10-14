@@ -620,7 +620,6 @@ export async function generateFilledPdf({
 
     async function drawSignature({ targetName, value, meta }) {
         const log = (status, extra = {}) => {
-            console.log("SIGAUDIT", JSON.stringify({ targetName, value, status, ...extra }));
             auditLog.push({ targetName, value, fieldType: "Signature", status, meta, ...extra });
         };
         try {
@@ -653,28 +652,25 @@ export async function generateFilledPdf({
     }
 
     for (const item of mappingList) {
-        if (!item) continue;
+         if (!item) continue;
 
-        // DIRECT MAPPING
-        if (item.type === "direct" || (!item.type && (item.pdfField || item.pdfFieldName || item.targetField || item.target?.fieldName))) {
-            const targetPdfField = item.pdfField || item.target?.fieldName || item.targetField || item.pdfFieldName;
-            const sourceFieldId = item.sourceFieldId || item.gravityFieldId || item.source?.fieldId;
-            const sourceInputId = item.sourceInputId || item.source?.inputId;
-            let val = extractEntryValue(submission, sourceFieldId, sourceInputId);
-            if (/signature/i.test(String(targetPdfField) + String(item.gravityFieldLabel) + String(item.gravityFieldType))) {
-                console.log("SIGDEBUG", JSON.stringify({ targetPdfField, sourceFieldId, sourceInputId, gravityFieldType: item.gravityFieldType, gravityFieldLabel: item.gravityFieldLabel, val, entryKeys: Object.keys(submission).filter((k) => k === String(sourceFieldId).split(".")[0] || k.startsWith(String(sourceFieldId).split(".")[0] + ".")) }));
-            }
+         // DIRECT MAPPING
+         if (item.type === "direct" || (!item.type && (item.pdfField || item.pdfFieldName || item.targetField || item.target?.fieldName))) {
+             const targetPdfField = item.pdfField || item.target?.fieldName || item.targetField || item.pdfFieldName;
+             const sourceFieldId = item.sourceFieldId || item.gravityFieldId || item.source?.fieldId;
+             const sourceInputId = item.sourceInputId || item.source?.inputId;
+             let val = extractEntryValue(submission, sourceFieldId, sourceInputId);
 
-            const isSignature = String(item.gravityFieldType || "").toLowerCase() === "signature" || /signature/i.test(item.gravityFieldLabel || "");
-            if (isSignature) {
-                mappedPdfFieldNames.add(targetPdfField);
-                if (val) {
-                    pendingSignatures.push({ targetName: targetPdfField, value: val, meta: { sourceLabel: item.gravityFieldLabel || `Field ${sourceFieldId}`, sourceId: sourceInputId || sourceFieldId, type: "signature" } });
-                }
-                continue;
-            }
+             const isSignature = String(item.gravityFieldType || "").toLowerCase() === "signature" || /signature/i.test(item.gravityFieldLabel || "");
+             if (isSignature) {
+                 mappedPdfFieldNames.add(targetPdfField);
+                 if (val) {
+                     pendingSignatures.push({ targetName: targetPdfField, value: val, meta: { sourceLabel: item.gravityFieldLabel || `Field ${sourceFieldId}`, sourceId: sourceInputId || sourceFieldId, type: "signature" } });
+                 }
+                 continue;
+             }
 
-            // Format dates if gravity field type is date
+             // Format dates if gravity field type is date
             let finalVal = val;
             if (item.gravityFieldType === "date" && val) {
                 finalVal = formatDate(val);
