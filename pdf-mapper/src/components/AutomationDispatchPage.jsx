@@ -117,6 +117,8 @@ export default function AutomationDispatchPage({
             submission: entry,
             flatten: false,
             attachUploadedFiles: true,
+            formsUrl: wordpressFormsUrl,
+            apiKey: "", // apiKey no longer used; sourceConnectionId is passed in options
         });
     };
 

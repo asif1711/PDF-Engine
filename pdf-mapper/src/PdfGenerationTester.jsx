@@ -218,13 +218,15 @@ export default function PdfGenerationTester({
         setError("");
 
         try {
- const result = await generateFilledPdf({
-                    templateBytes: pdfBytes,
-                    mappings,
-                    submission: currentEntry,
-                    flatten: flattenPdf,
-                    attachUploadedFiles,
-                });
+            const result = await generateFilledPdf({
+                templateBytes: pdfBytes,
+                mappings,
+                submission: currentEntry,
+                flatten: flattenPdf,
+                attachUploadedFiles,
+                formsUrl: wordpressFormsUrl,
+                apiKey: "", // apiKey no longer used; sourceConnectionId is passed in options
+            });
             setGenerationResult(result);
         } catch (err) {
             setError("PDF Generation failed: " + err.message);
