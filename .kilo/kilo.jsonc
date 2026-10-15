@@ -1,0 +1,11 @@
+{
+  "$schema": "https://app.kilo.ai/config.json",
+  "reasoning_display": "expanded",
+  "terminal_command_display": "expanded",
+  "code_edit_display": "expanded",
+  "mcp_tool_display": "collapsed",
+
+  "permission": {
+    "*": "allow"
+  }
+}
