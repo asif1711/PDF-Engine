@@ -13,6 +13,7 @@ import {
   listPdfTemplateRecords,
   listFormMappingRecords,
   listSourceConnections,
+  upsertPdfTemplateRecord,
   upsertSourceConnection,
   createFormMappingRecord,
   archiveSourceConnection,
@@ -560,8 +561,13 @@ app.get('/api/template-records', async (req, res) => {
 });
 
 app.post('/api/template-records', async (req, res) => {
-  const saved = await upsertPdfTemplateRecord(req.body || {});
-  res.json({ success: true, databasePersisted: saved });
+  try {
+    const saved = await upsertPdfTemplateRecord(req.body || {});
+    res.json({ success: true, databasePersisted: saved });
+  } catch (err) {
+    console.error('POST /api/template-records failed:', err);
+    res.status(500).json({ error: err.message || 'Failed to persist template record' });
+  }
 });
 
 app.get('/api/mappings', async (req, res) => {
