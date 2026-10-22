@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <defs>
+    <linearGradient id="pdfBody" x1="4" y1="2" x2="28" y2="30" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#EF4444"/>
+      <stop offset="1" stop-color="#B91C1C"/>
+    </linearGradient>
+    <linearGradient id="pdfFold" x1="19.5" y1="2" x2="28" y2="10.5" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FECACA"/>
+      <stop offset="1" stop-color="#F87171"/>
+    </linearGradient>
+  </defs>
+  <!-- Document Sheet -->
+  <path d="M7 2C5.34315 2 4 3.34315 4 5V27C4 28.6569 5.34315 30 7 30H25C26.6569 30 28 28.6569 28 27V10.5L19.5 2H7Z" fill="url(#pdfBody)"/>
+  <!-- Fold Corner Shadow -->
+  <path d="M19.5 2V8.5C19.5 9.60457 20.3954 10.5 21.5 10.5H28L19.5 2Z" fill="#7F1D1D" fill-opacity="0.35"/>
+  <!-- Fold Flap -->
+  <path d="M19.5 2L28 10.5H21.5C20.3954 10.5 19.5 9.60457 19.5 8.5V2Z" fill="url(#pdfFold)"/>
+  <!-- Document Header Line -->
+  <rect x="7.5" y="7" width="8" height="1.8" rx="0.9" fill="#FFFFFF" fill-opacity="0.5"/>
+  <!-- Letters PDF -->
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 13.5H10.7C12.1 13.5 13 14.4 13 15.8V16.1C13 17.5 12.1 18.4 10.7 18.4H9.3V22.5H7.5V13.5ZM9.3 16.9H10.6C11.1 16.9 11.3 16.6 11.3 16.1V16C11.3 15.5 11.1 15.2 10.6 15.2H9.3V16.9Z" fill="#FFFFFF"/>
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M13.7 13.5H16.6C18.2 13.5 19.4 14.6 19.4 16.3V18.7C19.4 20.4 18.2 21.5 16.6 21.5H13.7V13.5ZM15.5 19.8H16.6C17.3 19.8 17.7 19.3 17.7 18.5V16.4C17.7 15.6 17.3 15.1 16.6 15.1H15.5V19.8Z" fill="#FFFFFF"/>
+  <path d="M20.3 13.5H24.7V15.1H22.1V17.3H24.3V18.9H22.1V22.5H20.3V13.5Z" fill="#FFFFFF"/>
+  <!-- Document Footer Line -->
+  <rect x="7.5" y="25" width="17" height="1.6" rx="0.8" fill="#FFFFFF" fill-opacity="0.4"/>
+</svg>
