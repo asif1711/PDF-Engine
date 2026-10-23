@@ -157,10 +157,13 @@ export async function fetchGcsGeneratedPdfs() {
     try {
         const creds = getGcsCredentials();
         const headers = {};
-        if (creds.accessToken) headers["x-gcs-token"] = creds.accessToken;
-        if (creds.serviceAccountKey) headers["x-gcs-sa-key"] = creds.serviceAccountKey;
+        // Only attach access token if clean single-line string; service account key is securely managed server-side
+        if (creds.accessToken && typeof creds.accessToken === "string" && !creds.accessToken.includes("\n") && !creds.accessToken.includes("\r")) {
+            headers["x-gcs-token"] = creds.accessToken.trim();
+        }
 
-        const res = await fetch("/api/gcs-generated-pdfs", { headers });
+        const options = Object.keys(headers).length > 0 ? { headers } : undefined;
+        const res = await fetch("/api/gcs-generated-pdfs", options);
         if (res.ok) {
             return await res.json();
         }
