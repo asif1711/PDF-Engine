@@ -47,6 +47,7 @@ import {
     persistPdfTemplateRecord,
     checkDatabaseConnection,
     fetchGcsStatus,
+    fetchGcpSettingsFromDb,
 } from "./connectionManager";
 import { analyzePdfBytes } from "./templateAnalyzer";
 import { extractEntryValue, resolvePreviewValue, formatDate, parseListRows } from "./pdfGenerator";
@@ -609,6 +610,7 @@ function App() {
     useEffect(() => {
         runCheckDb();
         loadGcsStatus();
+        fetchGcpSettingsFromDb().catch(() => {});
     }, [runCheckDb, loadGcsStatus]);
 
     const [selectedTemplate, setSelectedTemplate] = useState(null);

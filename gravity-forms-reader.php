@@ -645,6 +645,81 @@ function pfgf_rest_permission_check(WP_REST_Request $request) {
     return true;
 }
 
+
+/**
+ * ============================================================
+ * WPO360 (Microsoft 365 SSO) Compatibility & Whitelisting
+ * ============================================================
+ * When WPO360 protects the WordPress site, it intercepts REST
+ * API and frontend requests unless explicitly bypassed or
+ * authenticated with the PDF Generator API key.
+ */
+
+// 1. Bypass WPO360 authorization check if request is for pdf-generator and has valid API key or header
+add_filter('wpo360/bypass_authorization', 'pfgf_wpo360_bypass_authorization', 10, 2);
+function pfgf_wpo360_bypass_authorization($bypass, $request = null) {
+    $uri = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
+    if (strpos($uri, 'pdf-generator/v1') !== false) {
+        $provided_key = isset($_SERVER['HTTP_X_PDF_API_KEY']) ? $_SERVER['HTTP_X_PDF_API_KEY'] : '';
+        $configured_key = pfgf_get_api_key();
+        if ($configured_key !== '' && $provided_key !== '' && hash_equals($configured_key, $provided_key)) {
+            return true;
+        }
+        // Allow OPTIONS preflight
+        if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+            return true;
+        }
+    }
+    return $bypass;
+}
+
+// 2. Add pdf-generator routes to WPO360 REST whitelist
+add_filter('wpo360/rest/whitelist', 'pfgf_wpo360_rest_whitelist', 10, 1);
+function pfgf_wpo360_rest_whitelist($whitelist) {
+    if (!is_array($whitelist)) {
+        $whitelist = array();
+    }
+    $whitelist[] = '/pdf-generator/v1';
+    $whitelist[] = 'pdf-generator/v1';
+    $whitelist[] = '/pdf-generator/v1/entries';
+    $whitelist[] = '/pdf-generator/v1/forms';
+    return $whitelist;
+}
+
+// 3. Exclude pdf-generator paths from WPO360 redirect
+add_filter('wpo360/pages/exclude', 'pfgf_wpo360_pages_exclude', 10, 1);
+function pfgf_wpo360_pages_exclude($excluded) {
+    if (!is_array($excluded)) {
+        $excluded = array();
+    }
+    $excluded[] = 'wp-json/pdf-generator/v1';
+    $excluded[] = 'rest_route=/pdf-generator/v1';
+    return $excluded;
+}
+
+// 4. Prevent WPO360 from redirecting pdf-generator REST calls
+add_filter('wpo360/should_redirect', 'pfgf_wpo360_should_redirect', 10, 1);
+function pfgf_wpo360_should_redirect($should_redirect) {
+    $uri = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
+    if (strpos($uri, 'pdf-generator/v1') !== false) {
+        return false;
+    }
+    return $should_redirect;
+}
+
+// 5. Early REST auth filter before WPO360 blocks anonymous REST requests
+add_filter('rest_authentication_errors', 'pfgf_rest_early_auth_check', 5, 1);
+function pfgf_rest_early_auth_check($result) {
+    $uri = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
+    if (strpos($uri, 'pdf-generator/v1') !== false) {
+        if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+            return true;
+        }
+    }
+    return $result;
+}
+
+
 /**
  * ============================================================
  * "PDF Generated" NOTIFICATION EVENT & SELECTIVE ATTACHMENT

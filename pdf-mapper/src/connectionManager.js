@@ -23,17 +23,18 @@ export const GCS_CATEGORY_OPTIONS = [
     "Others",
 ];
 
-export const GCS_BUCKET = "cdn.vconsultancy.com.au";
+export const GCS_BUCKET = "vc-pdf-generator-storage";
 export const GCS_PROJECT_ID = "aibt-244204";
-export const GCS_BASE_PATH = "pdf-generator/templates";
-export const GCS_CONSOLE_BASE_URL = `https://console.cloud.google.com/storage/browser/${GCS_BUCKET}/${GCS_BASE_PATH}?pageState=(%22StorageObjectListTable%22:(%22f%22:%22%255B%255D%22))&forceOnBucketsSortingFiltering=true&project=${GCS_PROJECT_ID}`;
+export const GCS_BASE_PATH = "templates";
+export const GCS_GENERATED_PATH = "generated";
+export const GCS_CONSOLE_BASE_URL = `https://console.cloud.google.com/storage/browser/${GCS_BUCKET}/${GCS_GENERATED_PATH}?forceOnBucketsSortingFiltering=true&project=${GCS_PROJECT_ID}`;
 
 export function getGcsConsoleCategoryUrl(category = "AIBT") {
     return `https://console.cloud.google.com/storage/browser/${GCS_BUCKET}/${GCS_BASE_PATH}/${encodeURIComponent(category)}?project=${GCS_PROJECT_ID}`;
 }
 
 export function getGcsPublicCdnUrl(category = "AIBT", filename = "template.pdf") {
-    return `https://${GCS_BUCKET}/${GCS_BASE_PATH}/${encodeURIComponent(category)}/${encodeURIComponent(filename)}`;
+    return `https://storage.googleapis.com/${GCS_BUCKET}/${GCS_BASE_PATH}/${encodeURIComponent(category)}/${encodeURIComponent(filename)}`;
 }
 
 export function getGcsStorageUri(category = "AIBT", filename = "template.pdf") {
@@ -58,10 +59,10 @@ export const DEFAULT_PDF_TEMPLATE = {
     isBuiltin: true,
     url: defaultPdfBytesUrl,
     analysis: templateAnalysis,
-    gcsPath: "pdf-generator/templates/NPA/NPA_Credit Transfer Forms_V2.1.pdf",
-    gcsUri: "gs://cdn.vconsultancy.com.au/pdf-generator/templates/NPA/NPA_Credit Transfer Forms_V2.1.pdf",
-    cdnUrl: "https://cdn.vconsultancy.com.au/pdf-generator/templates/NPA/NPA_Credit Transfer Forms_V2.1.pdf",
-    consoleUrl: "https://console.cloud.google.com/storage/browser/cdn.vconsultancy.com.au/pdf-generator/templates/NPA?project=aibt-244204",
+    gcsPath: "templates/NPA/NPA_Credit Transfer Forms_V2.1.pdf",
+    gcsUri: "gs://vc-pdf-generator-storage/templates/NPA/NPA_Credit Transfer Forms_V2.1.pdf",
+    cdnUrl: "https://storage.googleapis.com/vc-pdf-generator-storage/templates/NPA/NPA_Credit Transfer Forms_V2.1.pdf",
+    consoleUrl: "https://console.cloud.google.com/storage/browser/vc-pdf-generator-storage/templates/NPA?project=aibt-244204",
 };
 
 export function getGcsCredentials() {
@@ -94,8 +95,93 @@ export function saveGcsCredentials(creds) {
         bucket: creds?.bucket || GCS_BUCKET,
         projectId: creds?.projectId || GCS_PROJECT_ID,
     };
-    localStorage.setItem(GCS_CREDENTIALS_KEY, JSON.stringify(updated));
+    try {
+        localStorage.setItem(GCS_CREDENTIALS_KEY, JSON.stringify(updated));
+    } catch (err) {
+        void err;
+    }
+
+    // Auto-sync with server and persist to PostgreSQL database
+    saveGcpSettingsToDb(updated).catch(() => {});
     return updated;
+}
+
+export async function fetchGcpSettingsFromDb() {
+    try {
+        const res = await fetch("/api/gcp-settings");
+        if (res.ok) {
+            const data = await res.json();
+            if (data.success) {
+                // If local storage has no SA key but DB has it configured, sync local
+                const currentLocal = getGcsCredentials();
+                const next = {
+                    ...currentLocal,
+                    bucket: data.bucket || GCS_BUCKET,
+                    projectId: data.projectId || GCS_PROJECT_ID,
+                };
+                if (!next.serviceAccountKey && data.clientEmail) {
+                    next.serviceAccountClientEmail = data.clientEmail;
+                }
+                localStorage.setItem(GCS_CREDENTIALS_KEY, JSON.stringify(next));
+                return data;
+            }
+        }
+    } catch (err) {
+        console.warn("Could not fetch GCP settings from DB:", err);
+    }
+    return null;
+}
+
+export async function saveGcpSettingsToDb(creds) {
+    try {
+        const res = await fetch("/api/gcp-settings", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                bucket: creds.bucket || GCS_BUCKET,
+                projectId: creds.projectId || GCS_PROJECT_ID,
+                serviceAccountKey: creds.serviceAccountKey || undefined,
+                accessToken: creds.accessToken || undefined,
+            }),
+        });
+        if (res.ok) {
+            return await res.json();
+        }
+    } catch (err) {
+        console.warn("Could not save GCP settings to DB:", err);
+    }
+    return null;
+}
+
+export async function fetchGcsGeneratedPdfs() {
+    try {
+        const creds = getGcsCredentials();
+        const headers = {};
+        if (creds.accessToken) headers["x-gcs-token"] = creds.accessToken;
+        if (creds.serviceAccountKey) headers["x-gcs-sa-key"] = creds.serviceAccountKey;
+
+        const res = await fetch("/api/gcs-generated-pdfs", { headers });
+        if (res.ok) {
+            return await res.json();
+        }
+    } catch (err) {
+        console.warn("Could not fetch GCS generated PDFs:", err);
+    }
+    return { success: false, items: [] };
+}
+
+export async function deleteGcsGeneratedPdf(objectPath, filename) {
+    try {
+        const res = await fetch(`/api/gcs-generated-pdfs?objectPath=${encodeURIComponent(objectPath || "")}&filename=${encodeURIComponent(filename || "")}`, {
+            method: "DELETE",
+        });
+        if (res.ok) {
+            return await res.json();
+        }
+    } catch (err) {
+        console.warn("Could not delete GCS generated PDF:", err);
+    }
+    return { success: false };
 }
 
 export async function fetchGcsStatus() {

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import {
     Send,
     Mail,
@@ -16,7 +16,8 @@ import {
     Info,
     Sparkles,
     Check,
-    Loader2
+    Loader2,
+    Eye,
 } from "lucide-react";
 import {
     fetchPdfBytes,
@@ -26,7 +27,12 @@ import {
     fetchWpDispatchLogs,
     clearWpDispatchLogs,
     fetchWpAutomationSettings,
-    saveWpAutomationSettingsRemote
+    saveWpAutomationSettingsRemote,
+    fetchGcsGeneratedPdfs,
+    deleteGcsGeneratedPdf,
+    GCS_BUCKET,
+    GCS_PROJECT_ID,
+    GCS_GENERATED_PATH,
 } from "../connectionManager";
 import { fetchFormSubmissions } from "../submissionService";
 import { generateFilledPdf } from "../pdfGenerator";
@@ -66,6 +72,109 @@ export default function WordPressIntegrationPage({
 
     // Custom Entry Direct Dispatch
     const [customEntryId, setCustomEntryId] = useState("");
+
+    // Google Cloud Storage Generated PDFs State
+    const [gcsPdfs, setGcsPdfs] = useState([]);
+    const [isLoadingGcsPdfs, setIsLoadingGcsPdfs] = useState(false);
+    const [gcsPdfsSearch, setGcsPdfsSearch] = useState("");
+    const [gcsPdfsInfo, setGcsPdfsInfo] = useState(null);
+    const [pushingGcsFilename, setPushingGcsFilename] = useState(null);
+    const [deletingGcsFilename, setDeletingGcsFilename] = useState(null);
+
+    const loadGcsGeneratedPdfs = useCallback(async () => {
+        setIsLoadingGcsPdfs(true);
+        try {
+            const data = await fetchGcsGeneratedPdfs();
+            if (data?.items) {
+                setGcsPdfs(data.items);
+                setGcsPdfsInfo({
+                    bucket: data.bucket || GCS_BUCKET,
+                    folder: data.folder || GCS_GENERATED_PATH,
+                    count: data.count || data.items.length,
+                    consoleUrl: data.consoleUrl,
+                    status: data.gcsStatus,
+                });
+            }
+        } catch (err) {
+            console.warn("Could not load GCS generated PDFs:", err);
+        } finally {
+            setIsLoadingGcsPdfs(false);
+        }
+    }, []);
+
+    useEffect(() => {
+        let isCancelled = false;
+        queueMicrotask(() => {
+            if (!isCancelled) {
+                loadGcsGeneratedPdfs();
+            }
+        });
+        return () => { isCancelled = true; };
+    }, [loadGcsGeneratedPdfs]);
+
+    const handlePushGcsPdfToWp = async (item) => {
+        if (!item) return;
+        const entryId = item.entryId || "1";
+        const formId = item.formId || selectedForm?.id || "1";
+        setPushingGcsFilename(item.filename);
+
+        try {
+            setNotice({ type: "info", text: `Pushing ${item.filename} (Entry #${entryId}) from GCP to WordPress...` });
+            const result = await pushPdfToWordPress({
+                formId,
+                entryId,
+                pdfUrl: item.publicUrl || item.localUrl,
+                wordpressUrl: targetWpUrl,
+                sourceConnectionId,
+                sendNotification: sendNotifications,
+                cleanAfterSend: true,
+                deleteDelaySeconds: cleanupDelaySeconds,
+                action: "manual_gcs_dispatch",
+            });
+
+            if (result.success) {
+                setNotice({
+                    type: "success",
+                    text: `Success! ${item.filename} pushed to WordPress. ${result.notificationSent ? "Gravity Forms notification email sent with PDF attached!" : ""}`
+                });
+                loadLogs();
+            } else {
+                setNotice({
+                    type: "error",
+                    text: `WordPress push failed: ${result.error || "Unknown error"}`
+                });
+            }
+        } catch (err) {
+            setNotice({ type: "error", text: `Dispatch error: ${err.message}` });
+        } finally {
+            setPushingGcsFilename(null);
+        }
+    };
+
+    const handleDeleteGcsPdf = async (item) => {
+        if (!item || !window.confirm(`Delete ${item.filename} from Google Cloud Storage?`)) return;
+        setDeletingGcsFilename(item.filename);
+        try {
+            const res = await deleteGcsGeneratedPdf(item.name, item.filename);
+            if (res.success) {
+                setNotice({ type: "success", text: `Deleted ${item.filename} successfully.` });
+                loadGcsGeneratedPdfs();
+            } else {
+                setNotice({ type: "error", text: `Failed to delete ${item.filename}` });
+            }
+        } catch (err) {
+            setNotice({ type: "error", text: `Delete error: ${err.message}` });
+        } finally {
+            setDeletingGcsFilename(null);
+        }
+    };
+
+    // Filter GCS PDFs by search
+    const filteredGcsPdfs = useMemo(() => {
+        if (!gcsPdfsSearch.trim()) return gcsPdfs;
+        const q = gcsPdfsSearch.toLowerCase();
+        return gcsPdfs.filter((p) => p.filename.toLowerCase().includes(q) || String(p.entryId).includes(q));
+    }, [gcsPdfs, gcsPdfsSearch]);
 
     // Tracking processed submissions during polling to avoid duplicate dispatches
     const processedSubmissionIdsRef = useRef(new Set());
@@ -385,12 +494,12 @@ export default function WordPressIntegrationPage({
                         className="wp-btn wp-btn-secondary"
                         title="Download the updated custom plugin for your WordPress sites"
                     >
-                        <Download size={14} /> Download Plugin v1.4.0 (ZIP)
+                        <Download size={14} /> Download Plugin v1.5.0 (ZIP)
                     </a>
                     <button
                         type="button"
                         className="wp-btn wp-btn-secondary"
-                        onClick={() => { loadLogs(); loadSubmissions(); }}
+                        onClick={() => { loadLogs(); loadSubmissions(); loadGcsGeneratedPdfs(); }}
                         disabled={isLoadingLogs || isLoadingSubmissions}
                     >
                         <RefreshCw size={14} className={isLoadingLogs ? "animate-spin" : ""} /> Refresh Status
@@ -405,7 +514,7 @@ export default function WordPressIntegrationPage({
                 </div>
                 <div className="wp-arch-flow">
                     <div className="wp-arch-step is-cloud">
-                        <Cloud size={14} /> 1. GCP Bucket (Permanent Archive)
+                        <Cloud size={14} /> 1. GCP ({GCS_BUCKET}/generated)
                     </div>
                     <span className="wp-arch-arrow">➔</span>
                     <div className="wp-arch-step is-temp">
@@ -938,6 +1047,191 @@ export default function WordPressIntegrationPage({
                     </div>
                 </div>
 
+                {/* SECTION 3: Google Cloud Storage Archive (vc-pdf-generator-storage/generated) */}
+                <div className="wp-section-card">
+                    <div className="wp-section-header">
+                        <div className="wp-section-title-wrap">
+                            <span className="wp-section-kicker">Section 3</span>
+                            <h3>Google Cloud Storage Archive (<code>{gcsPdfsInfo?.bucket || GCS_BUCKET}/{gcsPdfsInfo?.folder || GCS_GENERATED_PATH}</code>)</h3>
+                        </div>
+                        <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+                            {gcsPdfsInfo?.consoleUrl && (
+                                <a
+                                    href={gcsPdfsInfo.consoleUrl}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="wp-btn wp-btn-secondary wp-btn-sm"
+                                    style={{ textDecoration: "none" }}
+                                >
+                                    <ExternalLink size={12} /> Open GCP Bucket Console
+                                </a>
+                            )}
+                            <button
+                                type="button"
+                                className="wp-btn wp-btn-secondary wp-btn-sm"
+                                onClick={loadGcsGeneratedPdfs}
+                                disabled={isLoadingGcsPdfs}
+                            >
+                                <RefreshCw size={12} className={isLoadingGcsPdfs ? "animate-spin" : ""} /> Refresh GCP Files
+                            </button>
+                        </div>
+                    </div>
+
+                    <div className="wp-section-body">
+                        {/* Search & Stats Bar */}
+                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px", flexWrap: "wrap", gap: "10px" }}>
+                            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                                <input
+                                    type="text"
+                                    placeholder="Search generated PDFs by filename or Entry ID..."
+                                    value={gcsPdfsSearch}
+                                    onChange={(e) => setGcsPdfsSearch(e.target.value)}
+                                    style={{ width: "320px", padding: "6px 12px", border: "1px solid #cbd5e1", borderRadius: "6px", fontSize: "13px" }}
+                                />
+                                <span style={{ fontSize: "12px", color: "#64748b" }}>
+                                    Showing {filteredGcsPdfs.length} of {gcsPdfs.length} files in <code>{GCS_BUCKET}/generated/</code>
+                                </span>
+                            </div>
+                            <div style={{ fontSize: "12px", color: "#0369a1", display: "flex", alignItems: "center", gap: "6px" }}>
+                                <ShieldCheck size={14} color="#059669" /> Default Bucket: <strong>{gcsPdfsInfo?.bucket || GCS_BUCKET}</strong> (Project: {GCS_PROJECT_ID})
+                            </div>
+                        </div>
+
+                        {/* GCS PDFs Table */}
+                        <div className="wp-table-container">
+                            {filteredGcsPdfs.length === 0 ? (
+                                <div className="wp-empty-state">
+                                    <Cloud size={28} style={{ opacity: 0.4 }} />
+                                    <p>
+                                        {isLoadingGcsPdfs
+                                            ? "Scanning Google Cloud Storage bucket..."
+                                            : `No generated PDFs found in ${GCS_BUCKET}/generated/. Generate a PDF using the mapping tool or Gravity Forms submission to see it archived here.`}
+                                    </p>
+                                </div>
+                            ) : (
+                                <table className="wp-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Filename &amp; Location</th>
+                                            <th>Entry ID</th>
+                                            <th>Size</th>
+                                            <th>Created / Modified</th>
+                                            <th>Storage Tier</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {filteredGcsPdfs.map((item) => {
+                                            const isPushing = pushingGcsFilename === item.filename;
+                                            const isDeleting = deletingGcsFilename === item.filename;
+                                            const sizeKb = Math.round((item.size || 0) / 1024);
+                                            const formattedDate = item.updated ? new Date(item.updated).toLocaleString() : "Recent";
+
+                                            return (
+                                                <tr key={item.id || item.filename}>
+                                                    <td>
+                                                        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                                                            <FileText size={15} color="#0284c7" />
+                                                            <div>
+                                                                <strong style={{ fontSize: "13px", color: "#0f172a" }}>
+                                                                    {item.filename}
+                                                                </strong>
+                                                                <div style={{ fontSize: "11px", color: "#64748b" }}>
+                                                                    {item.gcsUri || `gs://${GCS_BUCKET}/${item.name}`}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        {item.entryId ? (
+                                                            <span className="wp-badge wp-badge-neutral">
+                                                                #{item.entryId}
+                                                            </span>
+                                                        ) : (
+                                                            <span style={{ fontSize: "12px", color: "#94a3b8" }}>—</span>
+                                                        )}
+                                                    </td>
+                                                    <td style={{ fontSize: "12px", color: "#475569" }}>
+                                                        {sizeKb > 0 ? `${sizeKb} KB` : "—"}
+                                                    </td>
+                                                    <td style={{ fontSize: "12px", color: "#64748b", whiteSpace: "nowrap" }}>
+                                                        {formattedDate}
+                                                    </td>
+                                                    <td>
+                                                        {item.source === "gcs" ? (
+                                                            <span className="wp-badge wp-badge-success" title="Permanent Google Cloud Storage Archive">
+                                                                <Cloud size={10} /> GCP Active
+                                                            </span>
+                                                        ) : (
+                                                            <span className="wp-badge wp-badge-info" title="Cached locally on server">
+                                                                Local Cache
+                                                            </span>
+                                                        )}
+                                                    </td>
+                                                    <td>
+                                                        <div style={{ display: "flex", gap: "6px", alignItems: "center" }}>
+                                                            {/* View PDF */}
+                                                            <a
+                                                                href={`/api/wp-proxy?url=${encodeURIComponent(item.publicUrl || item.mediaLink || item.localUrl)}`}
+                                                                target="_blank"
+                                                                rel="noreferrer"
+                                                                className="wp-btn wp-btn-secondary wp-btn-sm"
+                                                                title="View PDF directly in browser"
+                                                            >
+                                                                <Eye size={11} /> View
+                                                            </a>
+
+                                                            {/* Download */}
+                                                            <a
+                                                                href={`/api/wp-proxy?url=${encodeURIComponent(item.publicUrl || item.mediaLink || item.localUrl)}`}
+                                                                download={item.filename}
+                                                                className="wp-btn wp-btn-secondary wp-btn-sm"
+                                                                title="Download file to computer"
+                                                            >
+                                                                <Download size={11} />
+                                                            </a>
+
+                                                            {/* Push to WP & Email */}
+                                                            <button
+                                                                type="button"
+                                                                className="wp-btn wp-btn-primary wp-btn-sm"
+                                                                disabled={isPushing}
+                                                                onClick={() => handlePushGcsPdfToWp(item)}
+                                                                title="Stage on WordPress, attach to Gravity Forms notification email, and auto-purge"
+                                                            >
+                                                                {isPushing ? (
+                                                                    <><Loader2 size={11} className="animate-spin" /> Pushing...</>
+                                                                ) : (
+                                                                    <><Send size={11} /> Push &amp; Mail</>
+                                                                )}
+                                                            </button>
+
+                                                            {/* Delete */}
+                                                            <button
+                                                                type="button"
+                                                                className="wp-btn wp-btn-danger wp-btn-sm"
+                                                                disabled={isDeleting}
+                                                                onClick={() => handleDeleteGcsPdf(item)}
+                                                                title="Delete file permanently"
+                                                            >
+                                                                {isDeleting ? (
+                                                                    <Loader2 size={11} className="animate-spin" />
+                                                                ) : (
+                                                                    <Trash2 size={11} />
+                                                                )}
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            );
+                                        })}
+                                    </tbody>
+                                </table>
+                            )}
+                        </div>
+                    </div>
+                </div>
+
                 {/* Plugin Deployment & Integration Guide */}
                 <div className="wp-section-card" style={{ background: "#f8fafc" }}>
                     <div className="wp-section-header">
@@ -948,10 +1242,10 @@ export default function WordPressIntegrationPage({
                     </div>
                     <div className="wp-section-body">
                         <p style={{ fontSize: "13px", color: "#475569", margin: "0 0 16px" }}>
-                            The custom <strong>Gravity Forms Reader v1.4.0</strong> plugin connects your WordPress sites directly to this PDF Generator system. It supports real-time entry extraction, synchronous PDF attachment to Gravity Forms notifications, and automatic purge of temporary files.
+                            The custom <strong>Gravity Forms Reader v1.5.0</strong> plugin connects your WordPress sites directly to this PDF Generator system. It supports real-time entry extraction, synchronous PDF attachment to Gravity Forms notifications, and automatic purge of temporary files.
                         </p>
 
-                        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "16px" }}>
+                        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "16px" }}>
                             <div style={{ background: "#ffffff", padding: "16px", borderRadius: "8px", border: "1px solid #e2e8f0" }}>
                                 <strong style={{ fontSize: "13px", color: "#0f172a", display: "block", marginBottom: "6px" }}>
                                     1. Install Updated Plugin
@@ -964,7 +1258,7 @@ export default function WordPressIntegrationPage({
                                     download="gravity-forms-reader.zip"
                                     className="wp-btn wp-btn-secondary wp-btn-sm"
                                 >
-                                    <Download size={12} /> Download Plugin v1.4.0 (.zip)
+                                    <Download size={12} /> Download Plugin v1.5.0 (.zip)
                                 </a>
                             </div>
 
@@ -985,7 +1279,22 @@ export default function WordPressIntegrationPage({
                                     3. Temporary Storage Verification
                                 </strong>
                                 <p style={{ fontSize: "12px", color: "#64748b", margin: 0 }}>
-                                    Temporary PDFs are placed in <code>wp-content/pdf-generator/generated/</code> only while Gravity Forms delivers the notification email, then purged automatically. Permanent archives remain safe in Google Cloud Storage.
+                                    Temporary PDFs are placed in <code>wp-content/pdf-generator/generated/</code> only while Gravity Forms delivers the notification email, then purged automatically. Permanent archives remain safe in Google Cloud Storage at <code>{GCS_BUCKET}/generated/</code>.
+                                </p>
+                            </div>
+
+                            <div style={{ background: "#ffffff", padding: "16px", borderRadius: "8px", border: "1px solid #e2e8f0" }}>
+                                <strong style={{ fontSize: "13px", color: "#0f172a", display: "block", marginBottom: "6px" }}>
+                                    4. Microsoft 365 / WPO360 Auth Layer
+                                </strong>
+                                <p style={{ fontSize: "12px", color: "#64748b", margin: "0 0 8px" }}>
+                                    If your site is protected with <strong>WPO360</strong>, add this path to WPO360 &gt; User Registration &gt; Excluded Paths / REST API whitelist:
+                                </p>
+                                <code style={{ fontSize: "11px", display: "block", background: "#f1f5f9", padding: "6px 8px", borderRadius: "4px" }}>
+                                    /wp-json/pdf-generator/v1/*
+                                </code>
+                                <p style={{ fontSize: "11px", color: "#64748b", margin: "6px 0 0" }}>
+                                    Plugin v1.5.0 automatically hooks into <code>wpo360/bypass_authorization</code> when a valid <code>X-PDF-API-Key</code> is provided.
                                 </p>
                             </div>
                         </div>

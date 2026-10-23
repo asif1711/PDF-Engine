@@ -2,10 +2,10 @@ import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 
-const GCS_BUCKET = process.env.GCS_BUCKET_NAME || 'cdn.vconsultancy.com.au';
+const GCS_BUCKET = (process.env.GCS_BUCKET_NAME && process.env.GCS_BUCKET_NAME !== 'cdn.vconsultancy.com.au') ? process.env.GCS_BUCKET_NAME : 'vc-pdf-generator-storage';
 const GCS_PROJECT_ID = process.env.GCS_PROJECT_ID || 'aibt-244204';
-const GCS_BASE_PATH = 'pdf-generator/templates';
-const GCS_GENERATED_PATH = 'pdf-generator/generated';
+const GCS_BASE_PATH = 'templates';
+const GCS_GENERATED_PATH = 'generated';
 
 let customBucket = null;
 let customProjectId = null;
@@ -40,7 +40,9 @@ export function setInMemoryServiceAccountKey(key) {
 }
 
 export function getGcsConfig(overrideBucket = null, overrideProjectId = null) {
-  const bucket = overrideBucket || customBucket || process.env.GCS_BUCKET_NAME || 'cdn.vconsultancy.com.au';
+  const envBucket = process.env.GCS_BUCKET_NAME;
+  const defaultBucket = (!envBucket || envBucket === 'cdn.vconsultancy.com.au') ? 'vc-pdf-generator-storage' : envBucket;
+  const bucket = overrideBucket || customBucket || defaultBucket;
   const projectId = overrideProjectId || customProjectId || process.env.GCS_PROJECT_ID || 'aibt-244204';
   const hasEnvToken = Boolean(process.env.GCS_ACCESS_TOKEN);
   const hasEnvSa = Boolean(process.env.GCS_SERVICE_ACCOUNT_KEY || process.env.GOOGLE_APPLICATION_CREDENTIALS);
@@ -225,3 +227,49 @@ export async function uploadBufferToGcs({
     return { ok: false, status: res.status, errorText };
   }
 }
+
+/**
+ * List objects from Google Cloud Storage in a specific folder/prefix.
+ */
+export async function listGcsFolderObjects({
+  bucket = GCS_BUCKET,
+  prefix = GCS_GENERATED_PATH,
+  token = null,
+}) {
+  const cleanPrefix = prefix.replace(/^\/+/, '').replace(/\/+$/, '') + '/';
+  const url = `https://storage.googleapis.com/storage/v1/b/${encodeURIComponent(bucket)}/o?prefix=${encodeURIComponent(cleanPrefix)}`;
+  const headers = {};
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`;
+  }
+
+  const res = await fetch(url, { headers });
+  if (!res.ok) {
+    const errorText = await res.text();
+    return { ok: false, status: res.status, error: errorText, items: [] };
+  }
+
+  const data = await res.json();
+  const items = Array.isArray(data.items) ? data.items : [];
+  return { ok: true, items };
+}
+
+/**
+ * Delete an object from Google Cloud Storage.
+ */
+export async function deleteGcsObject({
+  bucket = GCS_BUCKET,
+  objectPath,
+  token = null,
+}) {
+  const cleanPath = objectPath.replace(/^\/+/, '');
+  const url = `https://storage.googleapis.com/storage/v1/b/${encodeURIComponent(bucket)}/o/${encodeURIComponent(cleanPath)}`;
+  const headers = {};
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`;
+  }
+
+  const res = await fetch(url, { method: 'DELETE', headers });
+  return { ok: res.ok, status: res.status };
+}
+

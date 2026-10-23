@@ -1,4 +1,41 @@
+# Dependencies
 node_modules/
+.pnp
+.pnp.js
+
+# Environment and Credentials (Blocks GitHub Secret Scanning push rejection)
 .env
+.env.*
+!.env.example
+.gcp-settings.json
+*.pem
+*.key
+*.cert
+*.crt
+
+# Build outputs
+dist/
+dist-ssr/
+build/
+pdf-mapper/dist/
+.cache/
+
+# Generated files and logs
 generated/
 *.class
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Backups and archives
+*_backup.zip
+*.tar.gz
+
+# OS and IDE files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo

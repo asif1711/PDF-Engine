@@ -25,12 +25,16 @@ import {
   clearWpDispatchLogs,
   getWpAutomationSettings,
   saveWpAutomationSettings,
+  getGcpSettingsRecord,
+  saveGcpSettingsRecord,
 } from './database.js';
 
 import {
   getGoogleAccessToken,
   getGcsConfig,
   uploadBufferToGcs,
+  listGcsFolderObjects,
+  deleteGcsObject,
   setInMemoryServiceAccountKey,
   setGcsBucket,
   setGcsProjectId,
@@ -42,10 +46,28 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = 3000;
 
-const GCS_BUCKET = process.env.GCS_BUCKET_NAME || 'cdn.vconsultancy.com.au';
+const GCS_BUCKET = (process.env.GCS_BUCKET_NAME && process.env.GCS_BUCKET_NAME !== 'cdn.vconsultancy.com.au') ? process.env.GCS_BUCKET_NAME : 'vc-pdf-generator-storage';
 const GCS_PROJECT_ID = process.env.GCS_PROJECT_ID || 'aibt-244204';
-const GCS_BASE_PATH = 'pdf-generator/templates';
+const GCS_BASE_PATH = 'templates';
+const GCS_GENERATED_PATH = 'generated';
 const ALLOWED_CATEGORIES = ['AIBT', 'AIBT-I', 'AVTA', 'NPA', 'BIC', 'REACH', 'HJ', 'Pivot', 'Profound', 'Others'];
+
+// Hydrate GCP settings from PostgreSQL / Disk on server initialization
+async function initGcpFromDb() {
+  try {
+    const record = await getGcpSettingsRecord();
+    if (record) {
+      if (record.bucket) setGcsBucket(record.bucket);
+      if (record.projectId) setGcsProjectId(record.projectId);
+      if (record.serviceAccountKey) setInMemoryServiceAccountKey(record.serviceAccountKey);
+      console.log(`[Server] Hydrated GCP settings from database (Bucket: ${record.bucket || GCS_BUCKET}, Project: ${record.projectId || GCS_PROJECT_ID}, SA configured: ${Boolean(record.serviceAccountKey)})`);
+    }
+  } catch (err) {
+    console.warn('[Server] Could not hydrate GCP settings from DB:', err.message);
+  }
+}
+initGcpFromDb();
+
 
 // CORS and Preflight
 app.use((req, res, next) => {
@@ -454,8 +476,9 @@ async function resolvePdfBufferFromPayload(payload, reqHeaders = {}) {
 
   // If GCS or remote URL
   if (pdfUrl.startsWith('http://') || pdfUrl.startsWith('https://')) {
+    const cleanUrl = pdfUrl.replace(/([^:]\/)\/+/g, '$1');
     const headers = {};
-    if (pdfUrl.includes('storage.googleapis.com')) {
+    if (cleanUrl.includes('storage.googleapis.com') || cleanUrl.includes('vconsultancy.com.au')) {
       const explicitToken = reqHeaders['x-gcs-token'] || payload.customToken;
       const saKey = reqHeaders['x-gcs-sa-key'] || payload.serviceAccountKey;
       const token = await getGoogleAccessToken(explicitToken, saKey);
@@ -463,12 +486,33 @@ async function resolvePdfBufferFromPayload(payload, reqHeaders = {}) {
         headers['Authorization'] = `Bearer ${token}`;
       }
     }
-    const resp = await fetch(pdfUrl, { headers });
-    if (!resp.ok) {
-      throw new Error(`Failed to fetch PDF from ${pdfUrl} (HTTP ${resp.status})`);
+    let resp = await fetch(cleanUrl, { headers });
+    if (!resp.ok && (resp.status === 403 || resp.status === 404) && !cleanUrl.toLowerCase().endsWith('.pdf')) {
+      try {
+        const retry = await fetch(`${cleanUrl}.pdf`, { headers });
+        if (retry.ok) resp = retry;
+      } catch {}
     }
-    const arrayBuf = await resp.arrayBuffer();
-    return Buffer.from(arrayBuf);
+
+    if (resp.ok) {
+      const arrayBuf = await resp.arrayBuffer();
+      return Buffer.from(arrayBuf);
+    }
+
+    // Check if filename exists locally in generated/
+    const parsedName = path.basename(decodeURIComponent(new URL(cleanUrl).pathname));
+    const localCandidates = [
+      path.join(__dirname, 'generated', parsedName),
+      path.join(__dirname, 'generated', `${parsedName}.pdf`),
+      path.join(__dirname, 'generated', `form-${payload.formId || '1'}-entry-${payload.entryId || '0'}.pdf`),
+    ];
+    for (const cand of localCandidates) {
+      if (fs.existsSync(cand) && fs.statSync(cand).isFile()) {
+        return fs.readFileSync(cand);
+      }
+    }
+
+    throw new Error(`Failed to fetch PDF from ${cleanUrl} (HTTP ${resp.status})`);
   }
 
   throw new Error(`Unable to resolve PDF buffer from URL: ${pdfUrl}`);
@@ -526,7 +570,8 @@ app.post('/api/push-pdf-to-wp', async (req, res) => {
       queryParams.set('delete_delay_seconds', String(deleteDelaySeconds));
     }
 
-    const wpEndpoint = `${cleanWpUrl}/wp-json/pdf-generator/v1/entries/${encodeURIComponent(entryId)}/pdf?${queryParams.toString()}`;
+    const primaryWpEndpoint = `${cleanWpUrl}/wp-json/pdf-generator/v1/entries/${encodeURIComponent(entryId)}/pdf?${queryParams.toString()}`;
+    const fallbackWpEndpoint = `${cleanWpUrl}/?rest_route=/pdf-generator/v1/entries/${encodeURIComponent(entryId)}/pdf&${queryParams.toString()}`;
 
     const headers = {
       'Content-Type': 'application/json',
@@ -536,18 +581,39 @@ app.post('/api/push-pdf-to-wp', async (req, res) => {
       headers['X-PDF-API-Key'] = apiKey;
     }
 
-    console.log(`[Server] Pushing PDF for Entry #${entryId} to WordPress: ${wpEndpoint}`);
+    console.log(`[Server] Pushing PDF for Entry #${entryId} to WordPress: ${primaryWpEndpoint}`);
 
-    const wpResponse = await fetch(wpEndpoint, {
+    let wpResponse = await fetch(primaryWpEndpoint, {
       method: 'POST',
       headers,
       body: JSON.stringify({ pdfBytesBase64 }),
     });
 
-    const wpData = await wpResponse.json().catch(() => ({}));
+    let wpData = await wpResponse.json().catch(() => ({}));
+
+    // If 404 or rest_no_route, try the plain permalink fallback (?rest_route=)
+    if (!wpResponse.ok && (wpResponse.status === 404 || wpData?.code === 'rest_no_route')) {
+      console.log(`[Server] Primary route returned 404 / rest_no_route. Attempting Plain permalink fallback: ${fallbackWpEndpoint}`);
+      const fallbackRes = await fetch(fallbackWpEndpoint, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({ pdfBytesBase64 }),
+      });
+      const fallbackData = await fallbackRes.json().catch(() => ({}));
+      if (fallbackRes.ok || fallbackRes.status !== 404) {
+        wpResponse = fallbackRes;
+        wpData = fallbackData;
+      }
+    }
 
     if (!wpResponse.ok) {
-      const errMsg = wpData.message || wpData.error || `WordPress rejected PDF push (HTTP ${wpResponse.status})`;
+      let errMsg = wpData.message || wpData.error || `WordPress rejected PDF push (HTTP ${wpResponse.status})`;
+      if (wpResponse.status === 404 || wpData?.code === 'rest_no_route') {
+        errMsg += ' — Route not found on WordPress. Please verify that the "Gravity Forms Reader" plugin v1.5.0 is installed and activated. If using Microsoft login (WPO360), ensure /wp-json/pdf-generator/v1/* is added to WPO360 path exclusions.';
+      } else if (wpResponse.status === 401 || wpResponse.status === 403) {
+        errMsg += ' — Authorization rejected. Check your X-PDF-API-Key in wp-config.php or exclude /wp-json/pdf-generator/v1/* in WPO360 plugin settings.';
+      }
+
       // Log failure
       await addWpDispatchLog({
         formId,
@@ -600,10 +666,17 @@ app.post('/api/push-pdf-to-wp', async (req, res) => {
       setTimeout(async () => {
         try {
           const deleteUrl = `${cleanWpUrl}/wp-json/pdf-generator/v1/entries/${encodeURIComponent(entryId)}/pdf`;
-          const delRes = await fetch(deleteUrl, {
+          let delRes = await fetch(deleteUrl, {
             method: 'DELETE',
             headers: apiKey ? { 'X-PDF-API-Key': apiKey } : {},
           });
+          if (!delRes.ok && delRes.status === 404) {
+            const fallbackDeleteUrl = `${cleanWpUrl}/?rest_route=/pdf-generator/v1/entries/${encodeURIComponent(entryId)}/pdf`;
+            delRes = await fetch(fallbackDeleteUrl, {
+              method: 'DELETE',
+              headers: apiKey ? { 'X-PDF-API-Key': apiKey } : {},
+            });
+          }
           const delData = await delRes.json().catch(() => ({}));
           console.log(`[Server] Automated cleanup for Entry #${entryId} on WP:`, delData?.message || delRes.status);
           await updateWpDispatchLog(logEntry.id, {
@@ -662,10 +735,17 @@ app.delete('/api/cleanup-wp-pdf', async (req, res) => {
 
     const cleanWpUrl = targetWpUrl.replace(/\/+$/, '');
     const deleteUrl = `${cleanWpUrl}/wp-json/pdf-generator/v1/entries/${encodeURIComponent(entryId)}/pdf`;
-    const delRes = await fetch(deleteUrl, {
+    let delRes = await fetch(deleteUrl, {
       method: 'DELETE',
       headers: targetApiKey ? { 'X-PDF-API-Key': targetApiKey } : {},
     });
+    if (!delRes.ok && delRes.status === 404) {
+      const fallbackDeleteUrl = `${cleanWpUrl}/?rest_route=/pdf-generator/v1/entries/${encodeURIComponent(entryId)}/pdf`;
+      delRes = await fetch(fallbackDeleteUrl, {
+        method: 'DELETE',
+        headers: targetApiKey ? { 'X-PDF-API-Key': targetApiKey } : {},
+      });
+    }
 
     const delData = await delRes.json().catch(() => ({}));
     return res.json({
@@ -930,7 +1010,211 @@ app.get('/api/gcs-status', (req, res) => {
   });
 });
 
-// API: Validate GCS Credentials
+// API: GCP Settings Persistence (Get from Database)
+app.get('/api/gcp-settings', async (req, res) => {
+  try {
+    const record = await getGcpSettingsRecord();
+    const config = getGcsConfig();
+    let clientEmail = '';
+    if (record?.serviceAccountKey) {
+      try {
+        const parsed = typeof record.serviceAccountKey === 'string' ? JSON.parse(record.serviceAccountKey) : record.serviceAccountKey;
+        clientEmail = parsed.client_email || '';
+      } catch {}
+    }
+    res.json({
+      success: true,
+      bucket: record?.bucket || config.bucket,
+      projectId: record?.projectId || config.projectId,
+      basePath: record?.basePath || config.basePath,
+      generatedPath: record?.generatedPath || config.generatedPath,
+      hasServiceAccount: Boolean(record?.serviceAccountKey),
+      clientEmail,
+      hasAccessToken: Boolean(record?.accessToken),
+      credentialsType: config.credentialsType,
+      updatedAt: record?.updatedAt,
+      databasePersisted: true,
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// API: GCP Settings Persistence (Save to Database)
+app.post('/api/gcp-settings', async (req, res) => {
+  try {
+    const payload = req.body || {};
+    if (payload.bucket) setGcsBucket(payload.bucket);
+    if (payload.projectId) setGcsProjectId(payload.projectId);
+    if (payload.serviceAccountKey) setInMemoryServiceAccountKey(payload.serviceAccountKey);
+
+    const saved = await saveGcpSettingsRecord({
+      bucket: payload.bucket,
+      projectId: payload.projectId,
+      basePath: payload.basePath,
+      generatedPath: payload.generatedPath,
+      serviceAccountKey: payload.serviceAccountKey,
+      accessToken: payload.accessToken,
+    });
+
+    const config = getGcsConfig();
+    res.json({
+      success: true,
+      message: `Google Cloud settings saved to database! Bucket: ${saved.bucket}`,
+      bucket: saved.bucket,
+      projectId: saved.projectId,
+      credentialsType: config.credentialsType,
+      updatedAt: saved.updatedAt,
+      databasePersisted: true,
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// API: List Generated PDFs from Google Cloud Storage (Bucket: vc-pdf-generator-storage/generated)
+app.get('/api/gcs-generated-pdfs', async (req, res) => {
+  try {
+    const config = getGcsConfig();
+    const explicitToken = req.headers['x-gcs-token'] || req.query.customToken || '';
+    const serviceAccountKey = req.headers['x-gcs-sa-key'] || null;
+    const token = await getGoogleAccessToken(explicitToken, serviceAccountKey);
+
+    const gcsResult = await listGcsFolderObjects({
+      bucket: config.bucket,
+      prefix: config.generatedPath,
+      token,
+    });
+
+    const items = [];
+    if (gcsResult.ok && Array.isArray(gcsResult.items)) {
+      for (const obj of gcsResult.items) {
+        if (!obj.name || obj.name.endsWith('/')) continue;
+        const filename = path.basename(obj.name);
+        const matchEntry = filename.match(/entry[_-](\d+)/i) || filename.match(/form-(\d+)-entry-(\d+)/i);
+        const entryId = matchEntry ? (matchEntry[2] || matchEntry[1]) : '';
+        const formId = matchEntry && matchEntry[2] ? matchEntry[1] : '';
+
+        items.push({
+          id: obj.id || obj.name,
+          name: obj.name,
+          filename,
+          size: Number(obj.size) || 0,
+          updated: obj.updated || obj.timeCreated,
+          timeCreated: obj.timeCreated,
+          contentType: obj.contentType || 'application/pdf',
+          mediaLink: obj.mediaLink,
+          gcsUri: `gs://${config.bucket}/${obj.name}`,
+          publicUrl: `https://storage.googleapis.com/${config.bucket}/${obj.name}`,
+          consoleUrl: `https://console.cloud.google.com/storage/browser/${config.bucket}/${obj.name}?project=${config.projectId}`,
+          entryId,
+          formId,
+          source: 'gcs',
+        });
+      }
+    }
+
+    // Also include any local generated files from generated/
+    const localDir = path.join(__dirname, 'generated');
+    if (fs.existsSync(localDir)) {
+      try {
+        const files = fs.readdirSync(localDir);
+        for (const file of files) {
+          if (!file.endsWith('.pdf')) continue;
+          const stat = fs.statSync(path.join(localDir, file));
+          const existing = items.find((it) => it.filename === file);
+          if (existing) {
+            existing.hasLocalCopy = true;
+          } else {
+            const matchEntry = file.match(/entry[_-](\d+)/i) || file.match(/form-(\d+)-entry-(\d+)/i);
+            const entryId = matchEntry ? (matchEntry[2] || matchEntry[1]) : '';
+            const formId = matchEntry && matchEntry[2] ? matchEntry[1] : '';
+            items.push({
+              id: `local-${file}`,
+              name: `${config.generatedPath}/${file}`,
+              filename: file,
+              size: stat.size,
+              updated: stat.mtime.toISOString(),
+              timeCreated: stat.birthtime.toISOString(),
+              contentType: 'application/pdf',
+              localUrl: `/generated/${encodeURIComponent(file)}`,
+              gcsUri: `gs://${config.bucket}/${config.generatedPath}/${file}`,
+              publicUrl: `https://storage.googleapis.com/${config.bucket}/${config.generatedPath}/${file}`,
+              consoleUrl: `https://console.cloud.google.com/storage/browser/${config.bucket}/${config.generatedPath}?project=${config.projectId}`,
+              entryId,
+              formId,
+              source: 'local_cached',
+            });
+          }
+        }
+      } catch {}
+    }
+
+    // Sort descending by updated time
+    items.sort((a, b) => new Date(b.updated).getTime() - new Date(a.updated).getTime());
+
+    res.json({
+      success: true,
+      bucket: config.bucket,
+      projectId: config.projectId,
+      folder: config.generatedPath,
+      consoleUrl: config.consoleUrl,
+      count: items.length,
+      items,
+      gcsStatus: gcsResult.ok ? 'connected' : (token ? 'empty_or_error' : 'unauthenticated'),
+      gcsError: gcsResult.error || null,
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// API: Delete Generated PDF from GCS & Local Storage
+app.delete('/api/gcs-generated-pdfs', async (req, res) => {
+  try {
+    const objectPath = req.query.objectPath || req.body?.objectPath;
+    const filename = req.query.filename || req.body?.filename;
+    const config = getGcsConfig();
+    const token = await getGoogleAccessToken();
+
+    const targetPath = objectPath || `${config.generatedPath}/${filename}`;
+    if (!targetPath) {
+      return res.status(400).json({ error: 'objectPath or filename required' });
+    }
+
+    let gcsDeleted = false;
+    if (token) {
+      const del = await deleteGcsObject({
+        bucket: config.bucket,
+        objectPath: targetPath,
+        token,
+      });
+      gcsDeleted = del.ok;
+    }
+
+    // Also remove from local generated/ folder if present
+    const baseName = path.basename(targetPath);
+    const localFile = path.join(__dirname, 'generated', baseName);
+    let localDeleted = false;
+    if (fs.existsSync(localFile)) {
+      try {
+        fs.unlinkSync(localFile);
+        localDeleted = true;
+      } catch {}
+    }
+
+    res.json({
+      success: true,
+      gcsDeleted,
+      localDeleted,
+      message: `Successfully deleted ${baseName}`,
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// API: Validate GCS Credentials & Auto-Persist to Database
 app.post('/api/gcs-validate', async (req, res) => {
   try {
     const payload = req.body || {};
@@ -952,13 +1236,25 @@ app.post('/api/gcs-validate', async (req, res) => {
     const gcsConfig = getGcsConfig(payload.bucket, payload.projectId);
 
     if (token) {
+      // Auto-persist valid credentials to database!
+      try {
+        await saveGcpSettingsRecord({
+          bucket: gcsConfig.bucket,
+          projectId: gcsConfig.projectId,
+          serviceAccountKey: serviceAccountKey || undefined,
+          accessToken: explicitToken || undefined,
+        });
+      } catch (dbErr) {
+        console.warn('[Server] Could not auto-persist validated GCP credentials to DB:', dbErr.message);
+      }
+
       return res.json({
         ok: true,
         authenticated: true,
         bucket: gcsConfig.bucket,
         projectId: gcsConfig.projectId,
         credentialsType: serviceAccountKey ? 'service_account' : (explicitToken ? 'access_token' : gcsConfig.credentialsType),
-        message: `Authentication successful! Connected to Google Cloud Storage bucket ${gcsConfig.bucket} (Project: ${gcsConfig.projectId}).`,
+        message: `Authentication successful! Connected to Google Cloud Storage bucket ${gcsConfig.bucket} (Project: ${gcsConfig.projectId}) and persisted to database.`,
       });
     }
 
@@ -1085,23 +1381,26 @@ app.post('/api/analyze-template', async (req, res) => {
   }
 });
 
-// API: WordPress Proxy
+// API: WordPress Proxy & Remote Asset Proxy (with GCS Auth & URL Normalization)
 app.all('/api/wp-proxy', async (req, res) => {
   try {
-    const targetUrl = req.query.url;
+    const rawTargetUrl = req.query.url;
     const sourceConnectionId = req.query.sourceConnectionId || null;
     const apiKeyFromQuery = req.query.apiKey || '';
     const basicUser = req.query.basicUser || '';
     const basicPass = req.query.basicPass || '';
 
-    if (!targetUrl) {
+    if (!rawTargetUrl) {
       return res.status(400).json({ error: 'Missing url parameter' });
     }
 
-    // Validate URL - only allow same-origin or known WordPress endpoints
+    // Clean up double slashes in URL pathname (e.g. templates//AVTA -> templates/AVTA)
+    let cleanTargetUrl = rawTargetUrl.replace(/([^:]\/)\/+/g, '$1');
+
+    // Validate URL - only allow same-origin or known external endpoints
     let parsedTarget;
     try {
-      parsedTarget = new URL(targetUrl);
+      parsedTarget = new URL(cleanTargetUrl);
     } catch {
       return res.status(400).json({ error: 'Invalid target URL' });
     }
@@ -1139,6 +1438,17 @@ app.all('/api/wp-proxy', async (req, res) => {
       headers['Authorization'] = `Basic ${Buffer.from(`${basicUser}:${basicPass}`).toString('base64')}`;
     }
 
+    // If proxying to GCS / Cloud storage bucket, inject Bearer token
+    if (cleanTargetUrl.includes('storage.googleapis.com') || cleanTargetUrl.includes('vconsultancy.com.au')) {
+      try {
+        const explicitToken = req.headers['x-gcs-token'] || '';
+        const token = await getGoogleAccessToken(explicitToken);
+        if (token) {
+          headers['Authorization'] = `Bearer ${token}`;
+        }
+      } catch {}
+    }
+
     let body = undefined;
     if (req.method === 'POST' || req.method === 'PUT') {
       if (req.body && Buffer.isBuffer(req.body)) {
@@ -1154,11 +1464,68 @@ app.all('/api/wp-proxy', async (req, res) => {
       }
     }
 
-    const upstreamRes = await fetch(targetUrl, {
+    let upstreamRes = await fetch(cleanTargetUrl, {
       method: req.method,
       headers,
       body,
     });
+
+    // Fallback 1: If 403 or 404, check if appending .pdf resolves the template
+    if (!upstreamRes.ok && (upstreamRes.status === 403 || upstreamRes.status === 404) && !cleanTargetUrl.toLowerCase().endsWith('.pdf')) {
+      const pdfCandidateUrl = `${cleanTargetUrl}.pdf`;
+      try {
+        const retryRes = await fetch(pdfCandidateUrl, { method: req.method, headers, body });
+        if (retryRes.ok) {
+          upstreamRes = retryRes;
+        }
+      } catch {}
+    }
+
+    // Fallback 2: Check local templates folder if remote returns 403/404 for a template
+    if (!upstreamRes.ok && (upstreamRes.status === 403 || upstreamRes.status === 404)) {
+      const urlPathname = decodeURIComponent(parsedTarget.pathname);
+      const urlFilename = path.basename(urlPathname);
+      const possibleFilenames = [
+        urlFilename,
+        `${urlFilename}.pdf`,
+        urlFilename.replace(/ /g, '_'),
+        `${urlFilename.replace(/ /g, '_')}.pdf`,
+      ];
+
+      const templateDirs = [
+        path.join(__dirname, 'pdf-mapper', 'public', 'templates'),
+        path.join(__dirname, 'pdf-mapper', 'dist', 'templates'),
+        path.join(__dirname, 'generated'),
+      ];
+
+      for (const tDir of templateDirs) {
+        if (!fs.existsSync(tDir)) continue;
+        for (const fName of possibleFilenames) {
+          // Check direct or in subcategory folders
+          const directFile = path.join(tDir, fName);
+          if (fs.existsSync(directFile) && fs.statSync(directFile).isFile()) {
+            const buf = fs.readFileSync(directFile);
+            res.status(200);
+            res.setHeader('Content-Type', 'application/pdf');
+            return res.end(buf);
+          }
+          // Scan category folders
+          try {
+            const subdirs = fs.readdirSync(tDir);
+            for (const sub of subdirs) {
+              const subPath = path.join(tDir, sub, fName);
+              if (fs.existsSync(subPath) && fs.statSync(subPath).isFile()) {
+                const buf = fs.readFileSync(subPath);
+                res.status(200);
+                res.setHeader('Content-Type', 'application/pdf');
+                return res.end(buf);
+              }
+            }
+          } catch {}
+        }
+      }
+    }
+
     const contentType = upstreamRes.headers.get('content-type') || 'application/octet-stream';
     const arrayBuffer = await upstreamRes.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);

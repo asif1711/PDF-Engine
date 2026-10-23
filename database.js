@@ -977,3 +977,116 @@ export function saveWpAutomationSettings(settings) {
   };
   return { ...memWpAutomationSettings };
 }
+
+// =========================================================
+// GCP Settings & Credentials Persistence (PostgreSQL + Disk Cache)
+// =========================================================
+const GCP_SETTINGS_FILE = path.join(rootDir, '.gcp-settings.json');
+let memGcpSettings = {
+  id: 'default',
+  bucket: (process.env.GCS_BUCKET_NAME && process.env.GCS_BUCKET_NAME !== 'cdn.vconsultancy.com.au') ? process.env.GCS_BUCKET_NAME : 'vc-pdf-generator-storage',
+  projectId: process.env.GCS_PROJECT_ID || 'aibt-244204',
+  basePath: 'templates',
+  generatedPath: 'generated',
+  serviceAccountKey: process.env.GCS_SERVICE_ACCOUNT_KEY || null,
+  accessToken: process.env.GCS_ACCESS_TOKEN || null,
+};
+
+function initGcpSettingsOnDisk() {
+  try {
+    if (fsSync.existsSync(GCP_SETTINGS_FILE)) {
+      const parsed = JSON.parse(fsSync.readFileSync(GCP_SETTINGS_FILE, 'utf8'));
+      if (parsed && typeof parsed === 'object') {
+        memGcpSettings = { ...memGcpSettings, ...parsed };
+      }
+    }
+  } catch (err) {
+    console.warn('[DB] Could not load .gcp-settings.json:', err.message);
+  }
+}
+initGcpSettingsOnDisk();
+
+export async function getGcpSettingsRecord() {
+  try {
+    const res = await queryRuntime(`SELECT * FROM gcp_settings WHERE id = 'default' LIMIT 1`);
+    if (res && res.rows && res.rows.length > 0) {
+      const row = res.rows[0];
+      let saKey = row.service_account_key;
+      if (row.encrypted_service_account_key) {
+        try {
+          saKey = decryptCredential(row.encrypted_service_account_key);
+        } catch {}
+      }
+      const rawBucket = row.bucket;
+      const effectiveBucket = (!rawBucket || rawBucket === 'cdn.vconsultancy.com.au') ? 'vc-pdf-generator-storage' : rawBucket;
+      memGcpSettings = {
+        id: row.id,
+        bucket: effectiveBucket,
+        projectId: row.project_id || memGcpSettings.projectId,
+        basePath: row.base_path || memGcpSettings.basePath,
+        generatedPath: row.generated_path || memGcpSettings.generatedPath,
+        serviceAccountKey: saKey || memGcpSettings.serviceAccountKey,
+        accessToken: row.access_token || memGcpSettings.accessToken,
+        updatedAt: row.updated_at,
+      };
+      return { ...memGcpSettings };
+    } else {
+      // First boot: seed DB with default settings and active SA key if available
+      if (memGcpSettings.serviceAccountKey || memGcpSettings.bucket === 'vc-pdf-generator-storage') {
+        await saveGcpSettingsRecord(memGcpSettings).catch(() => {});
+      }
+    }
+  } catch (err) {
+    // In-memory fallback
+  }
+  return { ...memGcpSettings };
+}
+
+export async function saveGcpSettingsRecord(settings = {}) {
+  const bucket = settings.bucket || memGcpSettings.bucket || 'vc-pdf-generator-storage';
+  const projectId = settings.projectId || memGcpSettings.projectId || 'aibt-244204';
+  const basePath = settings.basePath || memGcpSettings.basePath || 'templates';
+  const generatedPath = settings.generatedPath || memGcpSettings.generatedPath || 'generated';
+  const saKey = settings.serviceAccountKey !== undefined ? settings.serviceAccountKey : memGcpSettings.serviceAccountKey;
+  const accessToken = settings.accessToken !== undefined ? settings.accessToken : memGcpSettings.accessToken;
+
+  memGcpSettings = {
+    id: 'default',
+    bucket,
+    projectId,
+    basePath,
+    generatedPath,
+    serviceAccountKey: saKey,
+    accessToken,
+    updatedAt: new Date().toISOString(),
+  };
+
+  // Sync to disk for durability across process restarts
+  try {
+    fsSync.writeFileSync(GCP_SETTINGS_FILE, JSON.stringify(memGcpSettings, null, 2), 'utf8');
+  } catch {}
+
+  // Sync to PostgreSQL
+  try {
+    const encryptedSa = saKey ? encryptCredential(typeof saKey === 'object' ? JSON.stringify(saKey) : String(saKey)) : null;
+    await queryRuntime(
+      `INSERT INTO gcp_settings (id, bucket, project_id, base_path, generated_path, service_account_key, encrypted_service_account_key, access_token, updated_at)
+       VALUES ('default', $1, $2, $3, $4, $5, $6, $7, NOW())
+       ON CONFLICT (id) DO UPDATE SET
+         bucket = EXCLUDED.bucket,
+         project_id = EXCLUDED.project_id,
+         base_path = EXCLUDED.base_path,
+         generated_path = EXCLUDED.generated_path,
+         service_account_key = EXCLUDED.service_account_key,
+         encrypted_service_account_key = EXCLUDED.encrypted_service_account_key,
+         access_token = EXCLUDED.access_token,
+         updated_at = NOW()`,
+      [bucket, projectId, basePath, generatedPath, saKey ? (typeof saKey === 'object' ? JSON.stringify(saKey) : String(saKey)) : null, encryptedSa, accessToken || null]
+    );
+  } catch (err) {
+    console.warn('[DB] Could not persist GCP settings to PostgreSQL:', err.message);
+  }
+
+  return { ...memGcpSettings };
+}
+

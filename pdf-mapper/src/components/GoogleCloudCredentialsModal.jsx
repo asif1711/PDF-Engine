@@ -50,10 +50,26 @@ export default function GoogleCloudCredentialsModal({ isOpen, onClose, selectedC
         let isMounted = true;
         const fetchStatus = async () => {
             try {
-                const res = await fetch("/api/gcs-status");
-                if (res.ok && isMounted) {
-                    const data = await res.json();
+                // Fetch server status and database-persisted credentials
+                const [statusRes, dbRes] = await Promise.all([
+                    fetch("/api/gcs-status").catch(() => null),
+                    fetch("/api/gcp-settings").catch(() => null),
+                ]);
+
+                if (isMounted && statusRes && statusRes.ok) {
+                    const data = await statusRes.json();
                     setServerStatus(data);
+                }
+
+                if (isMounted && dbRes && dbRes.ok) {
+                    const dbData = await dbRes.json();
+                    if (dbData.success) {
+                        setCreds((prev) => ({
+                            ...prev,
+                            bucket: dbData.bucket || prev.bucket || GCS_BUCKET,
+                            projectId: dbData.projectId || prev.projectId || GCS_PROJECT_ID,
+                        }));
+                    }
                 }
             } catch (err) {
                 console.warn("Could not check GCS status:", err);
@@ -80,9 +96,9 @@ export default function GoogleCloudCredentialsModal({ isOpen, onClose, selectedC
         setCreds(next);
     };
 
-    const handleSave = () => {
+    const handleSave = async () => {
         const updated = saveGcsCredentials(creds);
-        setTestResult({ ok: true, message: `Credentials saved! Connected to bucket: ${updated.bucket || GCS_BUCKET}` });
+        setTestResult({ ok: true, message: `Credentials saved & persisted to database! Connected to bucket: ${updated.bucket || GCS_BUCKET}` });
         setTimeout(() => setTestResult(null), 3500);
     };
 
