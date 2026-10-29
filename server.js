@@ -123,7 +123,12 @@ try {
   console.warn('[Server] Could not initialize PostgreSQL session store:', err.message);
 }
 
-const isProduction = process.env.NODE_ENV === 'production';
+const isHttpsEnvironment = Boolean(
+  process.env.NODE_ENV === 'production' ||
+  process.env.K_SERVICE ||
+  process.env.APP_URL?.startsWith('https') ||
+  process.env.RENDER
+);
 const sessionSecret = process.env.SESSION_SECRET || 'pdf-generator-secure-admin-session-secret-default-key-change-in-prod';
 
 app.use(session({
@@ -132,13 +137,31 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   name: 'pdf_admin_sid',
+  proxy: true,
   cookie: {
     httpOnly: true,
-    secure: isProduction,
-    sameSite: isProduction ? 'lax' : 'lax',
+    secure: 'auto',
+    sameSite: 'lax',
     maxAge: 24 * 60 * 60 * 1000, // 24 hours
   },
 }));
+
+// Ensure session cookie on incoming HTTPS requests uses SameSite=None and Secure
+// so cookies persist across cross-origin iframe embedding in the AI Studio environment,
+// while allowing standard sameSite: 'lax' on plain HTTP dev connections.
+app.use((req, res, next) => {
+  if (req.session && req.session.cookie) {
+    const isReqHttps = req.secure || req.headers['x-forwarded-proto'] === 'https';
+    if (isReqHttps) {
+      req.session.cookie.secure = true;
+      req.session.cookie.sameSite = 'none';
+    } else {
+      req.session.cookie.secure = false;
+      req.session.cookie.sameSite = 'lax';
+    }
+  }
+  next();
+});
 
 // CSRF Protection for state-changing requests
 app.use(validateCsrf);
@@ -180,6 +203,15 @@ app.post('/api/auth/login', loginRateLimiter, async (req, res) => {
       if (err) {
         console.error('[Auth] Session regeneration failed:', err);
         return res.status(500).json({ error: 'Failed to create authenticated session.' });
+      }
+
+      const isReqHttps = req.secure || req.headers['x-forwarded-proto'] === 'https';
+      if (isReqHttps) {
+        req.session.cookie.secure = true;
+        req.session.cookie.sameSite = 'none';
+      } else {
+        req.session.cookie.secure = false;
+        req.session.cookie.sameSite = 'lax';
       }
 
       req.session.userId = admin.id;

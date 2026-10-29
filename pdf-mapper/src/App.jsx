@@ -612,10 +612,11 @@ function App() {
     }, []);
 
     useEffect(() => {
+        if (!isAuthenticated) return;
         runCheckDb();
         loadGcsStatus();
         fetchGcpSettingsFromDb().catch(() => {});
-    }, [runCheckDb, loadGcsStatus]);
+    }, [isAuthenticated, runCheckDb, loadGcsStatus]);
 
     const [selectedTemplate, setSelectedTemplate] = useState(null);
     const [forms, setForms] = useState([]);
@@ -1034,23 +1035,32 @@ function App() {
         }
     }
 
-    useEffect(() => {
-        if (isAuthenticated) {
-            loadData();
-        }
-    }, [isAuthenticated]);
-
     // Load persisted source connections and PDF templates directly from PostgreSQL / Neon
     useEffect(() => {
         if (!isAuthenticated) return;
         let active = true;
+
         restorePersistedWpConnections().then((connections) => {
             if (!active) return;
             const valid = Array.isArray(connections) ? connections : [];
             setWpConnections(valid);
-            if (activeWpConn?.id) {
-                const found = valid.find((conn) => conn.id === activeWpConn.id);
-                if (found) setActiveWpConn(found);
+
+            // Determine active connection
+            const activeId = activeWpConn?.id || localStorage.getItem("pfgf_active_wp_conn_id");
+            const targetConn = (activeId && valid.find((c) => c.id === activeId)) || valid.find((c) => c.isDefault) || valid[0] || null;
+            if (targetConn) {
+                setActiveWpConn(targetConn);
+                setActiveWpConnectionId(targetConn.id);
+                loadData({ conn: targetConn });
+                testWpConnection(targetConn).then((res) => {
+                    if (!active) return;
+                    setWpConnStatus({
+                        ok: res.ok,
+                        loading: false,
+                        formsCount: res.formsCount ?? 0,
+                        message: res.message,
+                    });
+                }).catch(() => {});
             }
         }).catch((err) => {
             console.error("Failed to load source connections from PostgreSQL:", err);
@@ -1062,12 +1072,14 @@ function App() {
             const valid = Array.isArray(tpls) ? tpls : [];
             const hydrated = valid.map(ensureTemplateAnalysis);
             setPdfTemplatesList(hydrated);
-            if (activePdfTemplate?.id) {
-                const found = hydrated.find((t) => t.id === activePdfTemplate.id);
-                if (found) {
-                    setActivePdfTemplate(found);
-                    setSelectedTemplate(toTemplateModel(found));
-                }
+
+            // Determine active PDF template
+            const activeTplId = activePdfTemplate?.id || localStorage.getItem("pfgf_active_pdf_tpl_id");
+            const targetTpl = (activeTplId && hydrated.find((t) => t.id === activeTplId)) || hydrated.find((t) => t.isBuiltin) || hydrated[0] || null;
+            if (targetTpl) {
+                setActivePdfTemplate(targetTpl);
+                setActivePdfTemplateId(targetTpl.id);
+                setSelectedTemplate(toTemplateModel(targetTpl));
             }
         }).catch((err) => {
             console.error("Failed to load PDF templates from PostgreSQL:", err);
@@ -1075,7 +1087,7 @@ function App() {
         });
 
         return () => { active = false; };
-    }, []);
+    }, [isAuthenticated]);
 
     const rawPdfFields = useMemo(() => selectedTemplate?.technical?.fields || [], [selectedTemplate]);
     const contextFields = useMemo(() => Object.fromEntries((selectedTemplate?.context?.pages || []).flatMap((page) => (page.fields || []).map((field) => [field.name, { page: page.page }]))), [selectedTemplate]);

@@ -118,10 +118,20 @@ export function validateCsrf(req, res, next) {
   const referer = req.headers['referer'] || '';
   const host = req.headers['x-forwarded-host'] || req.headers['host'] || '';
 
+  const allowedHosts = [
+    host,
+    req.headers['x-forwarded-host'],
+    req.headers['host'],
+    process.env.NG_ALLOWED_HOSTS,
+    process.env.APP_URL ? new URL(process.env.APP_URL).host : null,
+  ].filter(Boolean);
+
   if (origin) {
     try {
       const originHost = new URL(origin).host;
-      if (originHost && host && originHost !== host && !origin.includes('localhost') && !origin.includes('127.0.0.1')) {
+      const isAllowed = allowedHosts.some((h) => h && (originHost === h || originHost.endsWith(h) || h.endsWith(originHost))) ||
+        origin.includes('localhost') || origin.includes('127.0.0.1') || originHost.endsWith('.run.app') || originHost.endsWith('.onrender.com');
+      if (!isAllowed) {
         return res.status(403).json({ error: 'CSRF validation failed: Origin mismatch.' });
       }
     } catch {
@@ -130,7 +140,9 @@ export function validateCsrf(req, res, next) {
   } else if (referer) {
     try {
       const refererHost = new URL(referer).host;
-      if (refererHost && host && refererHost !== host && !referer.includes('localhost') && !referer.includes('127.0.0.1')) {
+      const isAllowed = allowedHosts.some((h) => h && (refererHost === h || refererHost.endsWith(h) || h.endsWith(refererHost))) ||
+        referer.includes('localhost') || referer.includes('127.0.0.1') || refererHost.endsWith('.run.app') || refererHost.endsWith('.onrender.com');
+      if (!isAllowed) {
         return res.status(403).json({ error: 'CSRF validation failed: Referer mismatch.' });
       }
     } catch {
