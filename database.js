@@ -103,7 +103,7 @@ function getConnectionString() {
   return process.env.DATABASE_URL || process.env.DATABASE_URL_POOLED || process.env.DIRECT_DATABASE_URL;
 }
 
-function getRuntimePool() {
+export function getRuntimePool() {
   const connectionString = getConnectionString();
   if (!connectionString) {
     return null;
@@ -1089,4 +1089,156 @@ export async function saveGcpSettingsRecord(settings = {}) {
 
   return { ...memGcpSettings };
 }
+
+// =========================================================
+// Administrator Authentication & Session Persistence
+// =========================================================
+const memAdmins = new Map();
+
+export async function getAdminByEmail(rawEmail) {
+  const email = String(rawEmail || '').trim().toLowerCase();
+  if (!email) return null;
+
+  try {
+    const res = await queryRuntime(
+      `SELECT id, email, password_hash, role, is_active, created_at, updated_at
+       FROM admin_users
+       WHERE LOWER(TRIM(email)) = $1
+       LIMIT 1`,
+      [email]
+    );
+    if (res && res.rows && res.rows.length > 0) {
+      const row = res.rows[0];
+      return {
+        id: row.id,
+        email: row.email,
+        passwordHash: row.password_hash,
+        role: row.role || 'admin',
+        isActive: Boolean(row.is_active),
+        createdAt: row.created_at,
+        updatedAt: row.updated_at,
+      };
+    }
+  } catch (err) {
+    console.warn('[DB] getAdminByEmail query failed, checking memory:', err.message);
+  }
+
+  // In-memory fallback
+  for (const admin of memAdmins.values()) {
+    if (admin.email.toLowerCase() === email) {
+      return { ...admin };
+    }
+  }
+  return null;
+}
+
+export async function getAdminById(id) {
+  if (!id) return null;
+
+  try {
+    const res = await queryRuntime(
+      `SELECT id, email, role, is_active, created_at, updated_at
+       FROM admin_users
+       WHERE id = $1
+       LIMIT 1`,
+      [id]
+    );
+    if (res && res.rows && res.rows.length > 0) {
+      const row = res.rows[0];
+      return {
+        id: row.id,
+        email: row.email,
+        role: row.role || 'admin',
+        isActive: Boolean(row.is_active),
+        createdAt: row.created_at,
+        updatedAt: row.updated_at,
+      };
+    }
+  } catch (err) {
+    console.warn('[DB] getAdminById query failed, checking memory:', err.message);
+  }
+
+  const mem = memAdmins.get(id);
+  if (mem) {
+    const { passwordHash, ...sanitized } = mem;
+    void passwordHash;
+    return { ...sanitized };
+  }
+  return null;
+}
+
+export async function countAdmins() {
+  try {
+    const res = await queryRuntime(`SELECT COUNT(*)::int as count FROM admin_users`);
+    if (res && res.rows && res.rows.length > 0) {
+      return parseInt(res.rows[0].count, 10) || 0;
+    }
+  } catch (err) {
+    console.warn('[DB] countAdmins query failed:', err.message);
+  }
+  return memAdmins.size;
+}
+
+export async function createAdminUser({ id, email, passwordHash, role = 'admin', isActive = true }) {
+  const normalizedEmail = String(email || '').trim().toLowerCase();
+  const adminId = id || `admin-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+
+  const adminRecord = {
+    id: adminId,
+    email: normalizedEmail,
+    passwordHash,
+    role,
+    isActive,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  };
+
+  try {
+    await queryRuntime(
+      `INSERT INTO admin_users (id, email, password_hash, role, is_active, created_at, updated_at)
+       VALUES ($1, $2, $3, $4, $5, NOW(), NOW())`,
+      [adminId, normalizedEmail, passwordHash, role, isActive]
+    );
+  } catch (err) {
+    console.warn('[DB] createAdminUser DB insert failed, storing in memory:', err.message);
+    if (!getConnectionString()) {
+      // In-memory mode
+      memAdmins.set(adminId, adminRecord);
+      return { id: adminId, email: normalizedEmail, role, isActive };
+    }
+    throw err;
+  }
+
+  memAdmins.set(adminId, adminRecord);
+  return { id: adminId, email: normalizedEmail, role, isActive };
+}
+
+export async function validateWebhookApiKey(providedKey) {
+  if (!providedKey) return false;
+  const cleanKey = String(providedKey).trim();
+  if (!cleanKey) return false;
+
+  // 1. Check if matches any configured source connection API key
+  try {
+    const connections = await listSourceConnections();
+    if (Array.isArray(connections)) {
+      for (const conn of connections) {
+        if (conn && conn.id) {
+          const key = await getSourceConnectionApiKey(conn.id);
+          if (key && key.trim() === cleanKey) {
+            return true;
+          }
+        }
+      }
+    }
+  } catch {}
+
+  // 2. Check in-memory keys
+  for (const key of memApiKeys.values()) {
+    if (key && key.trim() === cleanKey) return true;
+  }
+
+  return false;
+}
+
 

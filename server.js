@@ -27,7 +27,21 @@ import {
   saveWpAutomationSettings,
   getGcpSettingsRecord,
   saveGcpSettingsRecord,
+  getAdminByEmail,
+  getAdminById,
+  getRuntimePool,
 } from './database.js';
+
+import session from 'express-session';
+import connectPgSimple from 'connect-pg-simple';
+import bcrypt from 'bcryptjs';
+import {
+  requireAuth,
+  requireAdmin,
+  validateWebhookAuth,
+  validateCsrf,
+  loginRateLimiter,
+} from './server/authMiddleware.js';
 
 import {
   getGoogleAccessToken,
@@ -69,11 +83,20 @@ async function initGcpFromDb() {
 initGcpFromDb();
 
 
-// CORS and Preflight
+// Trust proxy for Render deployment topology (HTTPS termination and secure cookies)
+app.set('trust proxy', 1);
+
+// CORS and Preflight configuration (supports credentials)
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  const origin = req.headers.origin;
+  if (origin) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  } else {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+  }
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-PDF-API-Key, ngrok-skip-browser-warning, x-gcs-token, x-gcs-sa-key');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-PDF-API-Key, X-Webhook-Secret, ngrok-skip-browser-warning, x-gcs-token, x-gcs-sa-key');
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
   }
@@ -84,14 +107,155 @@ app.use((req, res, next) => {
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
-// Health check
+// PostgreSQL-backed Session Store
+const PgSession = connectPgSimple(session);
+let sessionStore = undefined;
+try {
+  const pgPool = getRuntimePool();
+  if (pgPool) {
+    sessionStore = new PgSession({
+      pool: pgPool,
+      tableName: 'session',
+      createTableIfMissing: false,
+    });
+  }
+} catch (err) {
+  console.warn('[Server] Could not initialize PostgreSQL session store:', err.message);
+}
+
+const isProduction = process.env.NODE_ENV === 'production';
+const sessionSecret = process.env.SESSION_SECRET || 'pdf-generator-secure-admin-session-secret-default-key-change-in-prod';
+
+app.use(session({
+  store: sessionStore,
+  secret: sessionSecret,
+  resave: false,
+  saveUninitialized: false,
+  name: 'pdf_admin_sid',
+  cookie: {
+    httpOnly: true,
+    secure: isProduction,
+    sameSite: isProduction ? 'lax' : 'lax',
+    maxAge: 24 * 60 * 60 * 1000, // 24 hours
+  },
+}));
+
+// CSRF Protection for state-changing requests
+app.use(validateCsrf);
+
+// -------------------------------------------------------------
+// Public Monitoring & Authentication Endpoints
+// -------------------------------------------------------------
+
+// Health check (public for Render deployment monitoring)
 app.get(['/health', '/api/health'], (req, res) => {
   res.json({ status: 'ok', service: 'pdf-generator', time: new Date().toISOString() });
 });
 
-// API: Generate PDF (Webhook & On-Demand Dispatch)
-// Supports GET (test/ping) and POST (generate)
-app.all(['/api/generate-pdf', '/api/generate-pdf/'], async (req, res) => {
+// Administrator Login
+app.post('/api/auth/login', loginRateLimiter, async (req, res) => {
+  try {
+    const { email, password } = req.body || {};
+    if (!email || !password) {
+      return res.status(400).json({ error: 'Email and password are required.' });
+    }
+
+    const cleanEmail = String(email).trim().toLowerCase();
+    const admin = await getAdminByEmail(cleanEmail);
+    if (!admin) {
+      return res.status(401).json({ error: 'Invalid email or password.' });
+    }
+
+    if (!admin.isActive) {
+      return res.status(403).json({ error: 'Account has been deactivated. Please contact an administrator.' });
+    }
+
+    const isMatch = await bcrypt.compare(password, admin.passwordHash);
+    if (!isMatch) {
+      return res.status(401).json({ error: 'Invalid email or password.' });
+    }
+
+    // Regenerate session ID to prevent session fixation attacks
+    req.session.regenerate((err) => {
+      if (err) {
+        console.error('[Auth] Session regeneration failed:', err);
+        return res.status(500).json({ error: 'Failed to create authenticated session.' });
+      }
+
+      req.session.userId = admin.id;
+      req.session.userEmail = admin.email;
+      req.session.userRole = admin.role || 'admin';
+
+      return res.json({
+        success: true,
+        user: {
+          id: admin.id,
+          email: admin.email,
+          role: admin.role,
+        },
+      });
+    });
+  } catch (err) {
+    console.error('[Auth] Login error:', err);
+    return res.status(500).json({ error: 'An unexpected error occurred during login.' });
+  }
+});
+
+// Check Current Session Status
+app.get('/api/auth/me', (req, res) => {
+  if (!req.session || !req.session.userId) {
+    return res.status(401).json({ error: 'Not authenticated.', authenticated: false });
+  }
+  return res.json({
+    authenticated: true,
+    user: {
+      id: req.session.userId,
+      email: req.session.userEmail,
+      role: req.session.userRole || 'admin',
+    },
+  });
+});
+
+// Logout and Destroy Session
+app.post('/api/auth/logout', (req, res) => {
+  if (!req.session) {
+    res.clearCookie('pdf_admin_sid');
+    return res.json({ success: true, message: 'Logged out successfully.' });
+  }
+
+  req.session.destroy((err) => {
+    if (err) {
+      console.warn('[Auth] Session destruction warning:', err);
+    }
+    res.clearCookie('pdf_admin_sid');
+    return res.json({ success: true, message: 'Logged out successfully.' });
+  });
+});
+
+// -------------------------------------------------------------
+// Global API Guard: Protect all /api/* routes except public endpoints
+// Note: /api/generate-pdf uses dedicated validateWebhookAuth
+// -------------------------------------------------------------
+app.use('/api', (req, res, next) => {
+  const publicApiPaths = [
+    '/health',
+    '/api/health',
+    '/auth/login',
+    '/api/auth/login',
+    '/auth/logout',
+    '/api/auth/logout',
+    '/auth/me',
+    '/api/auth/me',
+  ];
+  if (publicApiPaths.includes(req.path) || req.path === '/generate-pdf' || req.path === '/generate-pdf/') {
+    return next();
+  }
+  return requireAuth(req, res, next);
+});
+
+// API: Generate PDF (WordPress Webhook & Test Ping)
+// Protected by validateWebhookAuth (supports X-PDF-API-Key, WEBHOOK_SECRET, and admin session)
+app.all(['/api/generate-pdf', '/api/generate-pdf/'], validateWebhookAuth, async (req, res) => {
   if (req.method === 'GET') {
     return res.json({
       status: 'ready',

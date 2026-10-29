@@ -7,13 +7,71 @@ import {
     RefreshCw,
     FileText,
     Globe,
-    Layers,
-    Send,
     Database,
     Cloud,
-    Mail,
+    LogOut,
 } from "lucide-react";
 import "./TopNavigation.css";
+
+function StepOneIcon({ size = 12, className = "" }) {
+    return (
+        <svg
+            width={size}
+            height={size}
+            viewBox="0 0 16 16"
+            fill="currentColor"
+            className={className}
+            aria-hidden="true"
+        >
+            <path d="M7.2 3.2h2.2v9.6H7.2V5.6L5.6 6.6V4.8l1.6-1.6z" />
+        </svg>
+    );
+}
+
+function StepTwoIcon({ size = 12, className = "" }) {
+    return (
+        <svg
+            width={size}
+            height={size}
+            viewBox="0 0 16 16"
+            fill="currentColor"
+            className={className}
+            aria-hidden="true"
+        >
+            <path d="M5.2 5.2c0-1.5 1.2-2.5 2.8-2.5s2.8 1 2.8 2.4c0 1.3-.8 2.3-1.8 3.3L7 10.4h4v1.8H5v-1.6l3.2-3.1c.8-.8 1.2-1.4 1.2-2.2 0-.7-.5-1.1-1.2-1.1-.7 0-1.2.4-1.2 1.1H5.2z" />
+        </svg>
+    );
+}
+
+function StepThreeIcon({ size = 12, className = "" }) {
+    return (
+        <svg
+            width={size}
+            height={size}
+            viewBox="0 0 16 16"
+            fill="currentColor"
+            className={className}
+            aria-hidden="true"
+        >
+            <path d="M5.5 4.8c.3-1.2 1.3-2 2.6-2 1.5 0 2.5.9 2.5 2.2 0 .9-.5 1.6-1.3 1.9 1 .3 1.6 1.1 1.6 2.2 0 1.5-1.2 2.6-2.8 2.6-1.5 0-2.6-.9-2.8-2.3h2c.2.6.6.9 1.1.9.7 0 1.2-.4 1.2-1.1s-.5-1.1-1.3-1.1H7.1V6.9h.9c.7 0 1.1-.4 1.1-1 0-.5-.4-.9-1-.9-.5 0-.9.3-1.1.8H5.5z" />
+        </svg>
+    );
+}
+
+function StepFourIcon({ size = 12, className = "" }) {
+    return (
+        <svg
+            width={size}
+            height={size}
+            viewBox="0 0 16 16"
+            fill="currentColor"
+            className={className}
+            aria-hidden="true"
+        >
+            <path d="M9.6 3v6.2h1.6V11H9.6v2.2H7.6V11H4.4V9.2L9.2 3h.4zm-3.4 6.2h1.4V5.4L6.2 9.2z" />
+        </svg>
+    );
+}
 
 export default function TopNavigation({
     currentRoute,
@@ -42,6 +100,8 @@ export default function TopNavigation({
     onOpenDbConfig,
     gcsStatus,
     onOpenGcsModal,
+    user,
+    onLogout,
 }) {
     const [isChecking, setIsChecking] = useState(false);
 
@@ -104,7 +164,7 @@ export default function TopNavigation({
                         className={`nav-tab-item ${currentRoute === "/analyze" ? "is-active" : ""}`}
                         onClick={() => onNavigate("/analyze")}
                     >
-                        <span className="tab-step-num"><FileText size={13} /></span>
+                        <span className="tab-step-num"><StepOneIcon size={12} /></span>
                         <span className="tab-title">PDF Ingestion</span>
                     </button>
 
@@ -114,7 +174,7 @@ export default function TopNavigation({
                         className={`nav-tab-item ${currentRoute === "/mapper" ? "is-active" : ""}`}
                         onClick={() => onNavigate("/mapper")}
                     >
-                        <span className="tab-step-num"><Layers size={13} /></span>
+                        <span className="tab-step-num"><StepTwoIcon size={12} /></span>
                         <span className="tab-title">Field Mapper</span>
                     </button>
 
@@ -124,7 +184,7 @@ export default function TopNavigation({
                         className={`nav-tab-item ${currentRoute === "/automation" ? "is-active" : ""}`}
                         onClick={() => onNavigate("/automation")}
                     >
-                        <span className="tab-step-num"><Send size={13} /></span>
+                        <span className="tab-step-num"><StepThreeIcon size={12} /></span>
                         <span className="tab-title">Automation & Dispatch</span>
                     </button>
 
@@ -134,10 +194,27 @@ export default function TopNavigation({
                         className={`nav-tab-item ${currentRoute === "/wp-integration" ? "is-active" : ""}`}
                         onClick={() => onNavigate("/wp-integration")}
                     >
-                        <span className="tab-step-num"><Mail size={13} /></span>
+                        <span className="tab-step-num"><StepFourIcon size={12} /></span>
                         <span className="tab-title">WP Integration & Mail</span>
                     </button>
                 </nav>
+
+                {onLogout && (
+                    <div className="top-nav-user-actions">
+                        <div className="nav-admin-badge" title={`Authenticated Administrator: ${user?.email || 'admin'}`}>
+                            <span className="nav-admin-dot" aria-hidden="true" />
+                            <span className="nav-admin-email">{user?.email || 'Admin'}</span>
+                        </div>
+                        <button
+                            type="button"
+                            className="nav-logout-btn"
+                            onClick={onLogout}
+                            title="Sign out of PDF Generator"
+                        >
+                            <LogOut size={12} /> Sign Out
+                        </button>
+                    </div>
+                )}
             </div>
 
             {/* Secondary row: Dynamic Source & Template Selectors & Database */}
@@ -353,78 +430,81 @@ export default function TopNavigation({
                     </div>
                 </div>
 
-                {/* Right side: Database Status & Config */}
-                <div className="nav-selector-cluster cluster-db">
-                    <div className="cluster-header-row">
-                        <span className="cluster-eyebrow">
-                            <Database size={12} style={{ display: "inline-block", marginRight: "4px", verticalAlign: "middle" }} />
-                            Database
-                        </span>
-                    </div>
-
-                    <div className="selector-group">
-                        <div
-                            className={`nav-status-pill ${dbStatus?.status === "connected" ? "is-ok" : dbStatus?.status === "checking" ? "is-loading" : "is-error"}`}
-                            title={dbStatus?.message || "PostgreSQL / Neon database connection"}
-                        >
-                            <span className="status-indicator-dot" />
-                            <span className="status-text">
-                                {dbStatus?.status === "checking"
-                                    ? "Checking..."
-                                    : dbStatus?.status === "connected"
-                                    ? "Connected"
-                                    : "Disconnected"}
+                {/* Right side: Database & Cloud Storage stacked in two rows */}
+                <div className="nav-right-stacked-clusters">
+                    {/* Row 1: Database Status & Config */}
+                    <div className="nav-selector-cluster cluster-db">
+                        <div className="cluster-header-row">
+                            <span className="cluster-eyebrow">
+                                <Database size={11} style={{ display: "inline-block", marginRight: "4px", verticalAlign: "middle" }} />
+                                Database
                             </span>
+                        </div>
+
+                        <div className="selector-group">
+                            <div
+                                className={`nav-status-pill ${dbStatus?.status === "connected" ? "is-ok" : dbStatus?.status === "checking" ? "is-loading" : "is-error"}`}
+                                title={dbStatus?.message || "PostgreSQL / Neon database connection"}
+                            >
+                                <span className="status-indicator-dot" />
+                                <span className="status-text">
+                                    {dbStatus?.status === "checking"
+                                        ? "Checking..."
+                                        : dbStatus?.status === "connected"
+                                        ? "Connected"
+                                        : "Disconnected"}
+                                </span>
+                                <button
+                                    type="button"
+                                    className="status-retry-btn"
+                                    onClick={onCheckDb}
+                                    disabled={dbStatus?.status === "checking"}
+                                    title="Check connection"
+                                >
+                                    <RefreshCw size={11} className={dbStatus?.status === "checking" ? "animate-spin" : ""} />
+                                </button>
+                            </div>
+
                             <button
                                 type="button"
-                                className="status-retry-btn"
-                                onClick={onCheckDb}
-                                disabled={dbStatus?.status === "checking"}
-                                title="Check connection"
+                                className="nav-action-btn"
+                                onClick={onOpenDbConfig}
+                                title="Configure Database"
                             >
-                                <RefreshCw size={11} className={dbStatus?.status === "checking" ? "animate-spin" : ""} />
+                                <Settings size={11} /> Config
                             </button>
                         </div>
-
-                        <button
-                            type="button"
-                            className="nav-action-btn"
-                            onClick={onOpenDbConfig}
-                            title="Configure Database"
-                        >
-                            <Settings size={12} /> Config
-                        </button>
-                    </div>
-                </div>
-
-                {/* Cloud Storage: GCP Credentials & Target */}
-                <div className="nav-selector-cluster cluster-gcs">
-                    <div className="cluster-header-row">
-                        <span className="cluster-eyebrow">
-                            <Cloud size={12} style={{ display: "inline-block", marginRight: "4px", verticalAlign: "middle" }} />
-                            Cloud Storage
-                        </span>
                     </div>
 
-                    <div className="selector-group">
-                        <div
-                            className={`nav-status-pill ${gcsStatus?.hasEnvCredentials || gcsStatus?.authenticated ? "is-ok" : "is-warning"}`}
-                            title={gcsStatus?.hasEnvCredentials || gcsStatus?.authenticated ? `Active bucket: gs://${gcsStatus.bucket || "cdn.vconsultancy.com.au"}` : "No active GCP credentials configured"}
-                        >
-                            <span className="status-indicator-dot" />
-                            <span className="status-text">
-                                {gcsStatus?.hasEnvCredentials || gcsStatus?.authenticated ? "GCP Ready" : "Local Cache"}
+                    {/* Row 2: Cloud Storage GCP Credentials & Target */}
+                    <div className="nav-selector-cluster cluster-gcs">
+                        <div className="cluster-header-row">
+                            <span className="cluster-eyebrow">
+                                <Cloud size={11} style={{ display: "inline-block", marginRight: "4px", verticalAlign: "middle" }} />
+                                Cloud Storage
                             </span>
                         </div>
 
-                        <button
-                            type="button"
-                            className="nav-action-btn"
-                            onClick={onOpenGcsModal}
-                            title="Configure Google Cloud Storage Service Account"
-                        >
-                            <Cloud size={12} /> GCP Keys
-                        </button>
+                        <div className="selector-group">
+                            <div
+                                className={`nav-status-pill ${gcsStatus?.hasEnvCredentials || gcsStatus?.authenticated ? "is-ok" : "is-warning"}`}
+                                title={gcsStatus?.hasEnvCredentials || gcsStatus?.authenticated ? `Active bucket: gs://${gcsStatus.bucket || "vc-pdf-generator-storage"}` : "No active GCP credentials configured"}
+                            >
+                                <span className="status-indicator-dot" />
+                                <span className="status-text">
+                                    {gcsStatus?.hasEnvCredentials || gcsStatus?.authenticated ? "GCP Ready" : "Local Cache"}
+                                </span>
+                            </div>
+
+                            <button
+                                type="button"
+                                className="nav-action-btn"
+                                onClick={onOpenGcsModal}
+                                title="Configure Google Cloud Storage Service Account"
+                            >
+                                <Cloud size={11} /> GCP Keys
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -19,6 +19,8 @@ import SaveConfirmationModal from "./SaveConfirmationModal";
 import PdfGenerationTester from "./PdfGenerationTester";
 import WpConnectionModal from "./WpConnectionModal";
 import TopNavigation from "./components/TopNavigation";
+import { useAuth } from "./auth/useAuth.js";
+import Login from "./auth/Login.jsx";
 import TemplateIngestionPage from "./components/TemplateIngestionPage";
 import AutomationDispatchPage from "./components/AutomationDispatchPage";
 import WordPressIntegrationPage from "./components/WordPressIntegrationPage";
@@ -536,6 +538,8 @@ try {
 }
 
 function App() {
+    const { user, isLoading: isAuthLoading, isAuthenticated, logout } = useAuth();
+
     // 4-page routing state (/analyze, /mapper, /automation, /wp-integration)
     const [currentRoute, setCurrentRoute] = useState(() => {
         const path = window.location.pathname.toLowerCase();
@@ -1030,10 +1034,15 @@ function App() {
         }
     }
 
-    useEffect(() => { loadData(); }, []);
+    useEffect(() => {
+        if (isAuthenticated) {
+            loadData();
+        }
+    }, [isAuthenticated]);
 
     // Load persisted source connections and PDF templates directly from PostgreSQL / Neon
     useEffect(() => {
+        if (!isAuthenticated) return;
         let active = true;
         restorePersistedWpConnections().then((connections) => {
             if (!active) return;
@@ -1936,9 +1945,26 @@ function App() {
         </div>;
     }
 
+    if (isAuthLoading) {
+        return (
+            <div className="app-loading-screen" style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: "#0d1918", color: "#e5f4ef", fontFamily: "system-ui, sans-serif" }}>
+                <div style={{ textAlign: "center" }}>
+                    <div style={{ width: "36px", height: "36px", border: "3px solid #23433e", borderTopColor: "#2dd48f", borderRadius: "50%", animation: "spin 0.8s linear infinite", margin: "0 auto 16px" }} />
+                    <div style={{ fontSize: "13px", fontWeight: 700, letterSpacing: "0.08em", color: "#c1e2d7" }}>AUTHENTICATING ADMIN SESSION...</div>
+                </div>
+            </div>
+        );
+    }
+
+    if (!isAuthenticated) {
+        return <Login />;
+    }
+
     return <div className="app">
         {/* Global 3-page Top Navigation Bar */}
         <TopNavigation
+            user={user}
+            onLogout={logout}
             currentRoute={currentRoute}
             onNavigate={navigate}
             wpConnections={wpConnections}
