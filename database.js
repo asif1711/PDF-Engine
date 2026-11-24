@@ -83,6 +83,33 @@ export async function upsertPdfTemplateRecord(record = {}) {
   const templateId = String(record.templateId || record.id || '').trim();
   if (!templateId) return false;
 
+  // Preserve existing analysis_json if not provided in new record
+  const existingRecord = await getPdfTemplateRecord(templateId);
+  const preserveAnalysis = !record.analysis || typeof record.analysis !== 'object' || !existingRecord?.analysis;
+  
+  const analysisToStore = preserveAnalysis && existingRecord?.analysis ? existingRecord.analysis : (record.analysis && typeof record.analysis === 'object' ? record.analysis : null);
+
+  // Get existing metadata_json for merging
+  const existingMetadata = existingRecord?.metadata || {};
+  const newMetadata = templateMetadata(record);
+  
+  // Merge metadata: protect only the immutable keys from empty/null values
+  const mergedMetadata = { ...existingMetadata };
+  const IMMUTABLE_KEYS = ['sourceUrl', 'gcsPath', 'gcsUri', 'createdAt', 'isBuiltin'];
+  
+  for (const [key, newValue] of Object.entries(newMetadata)) {
+    // For immutable keys: only update if new value is NOT null/undefined/empty string
+    if (IMMUTABLE_KEYS.includes(key)) {
+      if (newValue !== null && newValue !== undefined && newValue !== '') {
+        mergedMetadata[key] = newValue;
+      }
+    } else {
+      // For editable keys: update if key exists in new metadata (even if empty string)
+      // This allows user to clear fields like name, category, notes, cdnUrl
+      mergedMetadata[key] = newValue;
+    }
+  }
+
   const result = await queryRuntime(
     `INSERT INTO pdf_templates (id, filename, pdf_template_url, analysis_json, metadata_json)
      VALUES ($1, $2, $3, $4::jsonb, $5::jsonb)
@@ -96,8 +123,8 @@ export async function upsertPdfTemplateRecord(record = {}) {
       templateId,
       String(record.filename || ''),
       persistableUrl(record),
-      record.analysis && typeof record.analysis === 'object' ? record.analysis : null,
-      templateMetadata(record),
+      analysisToStore,
+      JSON.stringify(mergedMetadata),
     ],
   );
 
@@ -376,6 +403,81 @@ export async function listSourceForms(sourceConnectionId) {
     snapshot: row.form_snapshot_json,
     updatedAt: row.updated_at,
   }));
+}
+
+/**
+ * Delete a PDF template record.
+ * Checks for dependents in form_mappings table before deleting.
+ * Uses SELECT ... FOR UPDATE to lock the template row and prevent race conditions.
+ * Returns:
+ *   { deleted: true } if successfully deleted
+ *   { deleted: false, reason: 'not_found' } if template doesn't exist
+ *   { deleted: false, reason: 'in_use', dependents: [{ type, id, name }] } if template is in use
+ */
+export async function deletePdfTemplateRecord(templateId) {
+  const normalizedTemplateId = String(templateId || '').trim();
+  if (!normalizedTemplateId) {
+    return { deleted: false, reason: 'invalid_id' };
+  }
+
+  // Start transaction: lock the template row to prevent race conditions
+  const client = await getRuntimePool().connect();
+  try {
+    await client.query('BEGIN');
+
+    // Lock the template row to prevent concurrent modifications/deletes
+    const lockResult = await client.query(
+      'SELECT id FROM pdf_templates WHERE id = $1 FOR UPDATE',
+      [normalizedTemplateId],
+    );
+
+    if (lockResult.rows.length === 0) {
+      await client.query('ROLLBACK');
+      return { deleted: false, reason: 'not_found' };
+    }
+
+    // Check for dependents in form_mappings
+    const dependentsResult = await client.query(
+      'SELECT id, name, form_id, source_connection_id FROM form_mappings WHERE template_id = $1',
+      [normalizedTemplateId],
+    );
+
+    if (dependentsResult.rows.length > 0) {
+      const dependents = dependentsResult.rows.map((row) => ({
+        type: 'form_mapping',
+        id: row.id,
+        name: row.name || row.form_id,
+        formId: row.form_id,
+        sourceConnectionId: row.source_connection_id,
+      }));
+
+      await client.query('ROLLBACK');
+      return {
+        deleted: false,
+        reason: 'in_use',
+        dependents,
+      };
+    }
+
+    // Delete the template record
+    const deleteResult = await client.query(
+      'DELETE FROM pdf_templates WHERE id = $1 RETURNING id',
+      [normalizedTemplateId],
+    );
+
+    await client.query('COMMIT');
+
+    if (deleteResult.rows.length === 0) {
+      return { deleted: false, reason: 'not_found' };
+    }
+
+    return { deleted: true };
+  } catch (err) {
+    await client.query('ROLLBACK');
+    throw err;
+  } finally {
+    client.release();
+  }
 }
 
 export async function runDatabaseMigrations() {

@@ -18,6 +18,7 @@ import {
   createFormMappingRecord,
   archiveSourceConnection,
   upsertSourceForms,
+  deletePdfTemplateRecord,
 } from './database.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -532,9 +533,22 @@ app.post('/api/source-connections/:id/forms', async (req, res) => {
   res.json({ success: true, databasePersisted: saved });
 });
 
-app.delete('/api/source-connections/:id', async (req, res) => {
-  const archived = await archiveSourceConnection(req.params.id);
-  res.json({ success: true, databasePersisted: archived });
+app.delete('/api/template-records/:id', async (req, res) => {
+  const result = await deletePdfTemplateRecord(req.params.id);
+
+  if (result.deleted) {
+    return res.json({ success: true, templateId: req.params.id });
+  }
+
+  if (result.reason === 'not_found') {
+    return res.status(404).json({ error: 'Template not found' });
+  }
+
+  if (result.reason === 'in_use') {
+    return res.status(409).json({ error: 'Template is in use', dependents: result.dependents });
+  }
+
+  return res.status(500).json({ error: 'Unknown error deleting template' });
 });
 
 app.get('/api/template-records', async (req, res) => {
@@ -568,6 +582,24 @@ app.post('/api/template-records', async (req, res) => {
     console.error('POST /api/template-records failed:', err);
     res.status(500).json({ error: err.message || 'Failed to persist template record' });
   }
+});
+
+app.delete('/api/template-records/:id', async (req, res) => {
+  const result = await deletePdfTemplateRecord(req.params.id);
+
+  if (result.deleted) {
+    return res.json({ success: true, templateId: req.params.id });
+  }
+
+  if (result.reason === 'not_found') {
+    return res.status(404).json({ error: 'Template not found' });
+  }
+
+  if (result.reason === 'in_use') {
+    return res.status(409).json({ error: 'Template is in use', dependents: result.dependents });
+  }
+
+  return res.status(500).json({ error: 'Unknown error deleting template' });
 });
 
 app.get('/api/mappings', async (req, res) => {
